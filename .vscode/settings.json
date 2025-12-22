@@ -1,0 +1,4 @@
+{
+    "chatgpt.openOnStartup": false,
+    "dotnet.defaultSolution": "disable"
+}
