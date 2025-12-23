@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Goal Bulk Operations API
+  description: API endpoints for bulk operations on goals (delete, status change)
+  version: 2.0.0
+
+servers:
+  - url: https://api-crm.local.com/api
+    description: Local development
+
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+
+paths:
+  /goals/bulk-delete:
+    post:
+      summary: Bulk delete goals
+      description: Delete multiple goals at once (max 50 per request, FR-021)
+      tags: [Goals - Bulk Operations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeleteGoalsRequest'
+      responses:
+        '200':
+          description: Bulk operation completed (may have partial failures)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationResultResponse'
+        '400':
+          description: Validation error (e.g., exceeds 50 goal limit)
+
+  /goals/bulk-status-change:
+    post:
+      summary: Bulk status change
+      description: Change status for multiple goals (max 50 per request, FR-021)
+      tags: [Goals - Bulk Operations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkStatusChangeRequest'
+      responses:
+        '200':
+          description: Bulk operation completed (may have partial failures)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationResultResponse'
+        '400':
+          description: Validation error
+
+  /goals/{id}/comments:
+    get:
+      summary: Get goal comments
+      description: Retrieve all comments for a goal
+      tags: [Goals - Comments]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoalCommentResponse'
+
+    post:
+      summary: Add goal comment
+      description: Add a comment to a goal (FR-017)
+      tags: [Goals - Comments]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGoalCommentRequest'
+      responses:
+        '201':
+          description: Comment added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalCommentResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: XApiKey
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    BulkDeleteGoalsRequest:
+      type: object
+      required: [goalIds, confirmation]
+      properties:
+        goalIds:
+          type: array
+          items:
+            type: integer
+          maxItems: 50
+          minItems: 1
+        confirmation:
+          type: boolean
+          description: Must be true to confirm deletion
+          enum: [true]
+
+    BulkStatusChangeRequest:
+      type: object
+      required: [goalIds, newStatus]
+      properties:
+        goalIds:
+          type: array
+          items:
+            type: integer
+          maxItems: 50
+          minItems: 1
+        newStatus:
+          type: string
+          enum: [active, cancelled]
+          description: Can only bulk change to active or cancelled
+
+    BulkOperationResultResponse:
+      type: object
+      properties:
+        totalRequested:
+          type: integer
+        succeeded:
+          type: array
+          items:
+            type: integer
+          description: Goal IDs that succeeded
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              goalId:
+                type: integer
+              error:
+                type: string
+                description: Reason for failure (e.g., "Forbidden", "Not found")
+
+    AddGoalCommentRequest:
+      type: object
+      required: [commentText]
+      properties:
+        commentText:
+          type: string
+          minLength: 1
+          maxLength: 5000
+
+    GoalCommentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        goalId:
+          type: integer
+        commentText:
+          type: string
+        createdBy:
+          type: integer
+        createdByName:
+          type: string
+        createdByEmail:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        updatedOn:
+          type: string
+          format: date-time

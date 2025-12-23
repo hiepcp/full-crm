@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Goal Templates API
+  description: API endpoints for managing goal templates
+  version: 2.0.0
+
+servers:
+  - url: https://api-crm.local.com/api
+    description: Local development
+
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+
+paths:
+  /goals/templates:
+    get:
+      summary: List goal templates
+      description: Retrieve system and custom goal templates
+      tags: [Goals - Templates]
+      parameters:
+        - name: includeSystem
+          in: query
+          schema:
+            type: boolean
+            default: true
+        - name: includeCustom
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoalTemplateResponse'
+
+    post:
+      summary: Create custom goal template
+      description: Create a custom goal template (user-specific)
+      tags: [Goals - Templates]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGoalTemplateRequest'
+      responses:
+        '201':
+          description: Template created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalTemplateResponse'
+        '400':
+          description: Validation error
+
+  /goals/templates/{id}:
+    get:
+      summary: Get template by ID
+      tags: [Goals - Templates]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalTemplateResponse'
+
+    put:
+      summary: Update custom template
+      description: Update custom template (system templates cannot be updated)
+      tags: [Goals - Templates]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGoalTemplateRequest'
+      responses:
+        '200':
+          description: Template updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalTemplateResponse'
+        '403':
+          description: Cannot update system template
+
+    delete:
+      summary: Delete custom template
+      description: Soft delete custom template (system templates cannot be deleted)
+      tags: [Goals - Templates]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Template deleted successfully
+        '403':
+          description: Cannot delete system template
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: XApiKey
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    CreateGoalTemplateRequest:
+      type: object
+      required: [name, goalType, timeframe, ownerType]
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        goalType:
+          type: string
+          enum: [revenue, deals, activities, tasks, performance]
+        timeframe:
+          type: string
+          enum: [this_week, this_month, this_quarter, this_year, custom]
+        ownerType:
+          type: string
+          enum: [individual, team, company]
+        suggestedTargetValue:
+          type: number
+        recurring:
+          type: boolean
+          default: false
+
+    UpdateGoalTemplateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        suggestedTargetValue:
+          type: number
+        recurring:
+          type: boolean
+
+    GoalTemplateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        goalType:
+          type: string
+        timeframe:
+          type: string
+        ownerType:
+          type: string
+        suggestedTargetValue:
+          type: number
+        recurring:
+          type: boolean
+        isSystemTemplate:
+          type: boolean
+        createdBy:
+          type: integer
+        createdOn:
+          type: string
+          format: date-time

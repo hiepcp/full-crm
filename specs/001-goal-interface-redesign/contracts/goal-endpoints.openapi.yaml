@@ -1,0 +1,686 @@
+openapi: 3.0.3
+info:
+  title: Goal Management API - Core Endpoints
+  description: API endpoints for core goal CRUD operations, queries, and auto-calculation
+  version: 2.0.0
+  contact:
+    name: CRM API Team
+servers:
+  - url: https://api-crm.local.com/api
+    description: Local development
+  - url: https://api-crm-dev.response.com.vn/api
+    description: Development environment
+
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+
+paths:
+  /goals:
+    get:
+      summary: Query goals with pagination and filtering
+      description: Retrieve goals with complex filtering. Uses POST /goals/query for complex filters.
+      tags: [Goals - Core]
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: ownerType
+          in: query
+          schema:
+            type: string
+            enum: [individual, team, company]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [draft, active, completed, cancelled]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoalResponse'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+    post:
+      summary: Create a new goal
+      description: Create a goal from scratch or from a template
+      tags: [Goals - Core]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGoalRequest'
+      responses:
+        '201':
+          description: Goal created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /goals/{id}:
+    get:
+      summary: Get goal by ID
+      description: Retrieve detailed goal information including forecast and hierarchy context
+      tags: [Goals - Core]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalDetailResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      summary: Update goal
+      description: Update goal properties. Auto-calculated goals can be manually overridden with justification.
+      tags: [Goals - Core]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateGoalRequest'
+      responses:
+        '200':
+          description: Goal updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      summary: Delete goal
+      description: Delete goal (hard delete with cascade to related entities)
+      tags: [Goals - Core]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+      responses:
+        '204':
+          description: Goal deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /goals/query:
+    post:
+      summary: Advanced goal query
+      description: Query goals with complex filtering criteria (POST for complex filters)
+      tags: [Goals - Core]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoalQueryRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GoalResponse'
+                  pagination:
+                    $ref: '#/components/schemas/PaginationInfo'
+
+  /goals/{id}/progress-history:
+    get:
+      summary: Get goal progress history
+      description: Retrieve timestamped progress snapshots for trend analysis
+      tags: [Goals - Progress]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+            maximum: 1000
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoalProgressHistoryResponse'
+
+  /goals/{id}/forecast:
+    get:
+      summary: Get goal completion forecast
+      description: Calculate velocity-based forecast for goal completion
+      tags: [Goals - Progress]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalForecastResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          description: Insufficient data for forecast (< 2 data points)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /goals/{id}/recalculate:
+    post:
+      summary: Trigger manual progress recalculation
+      description: Force recalculation of auto-calculated goal progress from CRM data
+      tags: [Goals - Progress]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+      responses:
+        '200':
+          description: Recalculation successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  previousProgress:
+                    type: number
+                  newProgress:
+                    type: number
+                  calculatedAt:
+                    type: string
+                    format: date-time
+                  dataSourcesSummary:
+                    type: object
+                    description: Summary of data used (e.g., deal count, revenue sum)
+        '400':
+          description: Goal is not auto-calculated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Calculation failed (CRM data unavailable)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /goals/{id}/manual-adjustment:
+    post:
+      summary: Manually adjust goal progress
+      description: Override auto-calculated progress with manual value (requires justification per FR-018)
+      tags: [Goals - Progress]
+      parameters:
+        - $ref: '#/components/parameters/GoalId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualProgressAdjustmentRequest'
+      responses:
+        '200':
+          description: Manual adjustment successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalResponse'
+        '400':
+          $ref: '#/components/responses/ValidationError'
+
+  /goals/metrics:
+    get:
+      summary: Get aggregate goal metrics
+      description: Calculate and return aggregate metrics (existing endpoint, extended)
+      tags: [Goals - Analytics]
+      parameters:
+        - name: ownerType
+          in: query
+          schema:
+            type: string
+            enum: [individual, team, company]
+        - name: ownerId
+          in: query
+          schema:
+            type: integer
+        - name: timeframe
+          in: query
+          schema:
+            type: string
+            enum: [this_week, this_month, this_quarter, this_year, custom]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalMetricsResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: XApiKey
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    GoalId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: Goal ID
+
+  schemas:
+    CreateGoalRequest:
+      type: object
+      required: [name, targetValue, ownerType, type, timeframe, status]
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        targetValue:
+          type: number
+          minimum: 0.01
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        ownerType:
+          type: string
+          enum: [individual, team, company]
+        ownerId:
+          type: integer
+          description: Required if ownerType is 'individual'
+        type:
+          type: string
+          enum: [revenue, deals, activities, tasks, performance]
+        timeframe:
+          type: string
+          enum: [this_week, this_month, this_quarter, this_year, custom]
+        recurring:
+          type: boolean
+          default: false
+        status:
+          type: string
+          enum: [draft, active]
+        templateId:
+          type: integer
+          description: Optional - create from template
+        parentGoalId:
+          type: integer
+          description: Optional - link to parent goal for hierarchy
+
+    UpdateGoalRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        targetValue:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [draft, active, completed, cancelled]
+        progress:
+          type: number
+          description: Manual progress update (triggers validation if auto-calculated)
+
+    ManualProgressAdjustmentRequest:
+      type: object
+      required: [newProgress, justification]
+      properties:
+        newProgress:
+          type: number
+          minimum: 0
+        justification:
+          type: string
+          minLength: 10
+          description: Required explanation for manual override (FR-018)
+
+    GoalQueryRequest:
+      type: object
+      properties:
+        ownerType:
+          type: string
+          enum: [individual, team, company]
+        ownerId:
+          type: integer
+        status:
+          type: string
+          enum: [draft, active, completed, cancelled]
+        type:
+          type: string
+          enum: [revenue, deals, activities, tasks, performance]
+        timeframe:
+          type: string
+          enum: [this_week, this_month, this_quarter, this_year, custom]
+        calculationSource:
+          type: string
+          enum: [manual, auto_calculated]
+        startDateFrom:
+          type: string
+          format: date
+        startDateTo:
+          type: string
+          format: date
+        endDateFrom:
+          type: string
+          format: date
+        endDateTo:
+          type: string
+          format: date
+        progressMin:
+          type: number
+        progressMax:
+          type: number
+        searchTerm:
+          type: string
+          description: Search in name and description
+        sortBy:
+          type: string
+          enum: [name, targetValue, progress, startDate, endDate, updatedOn]
+          default: updatedOn
+        sortOrder:
+          type: string
+          enum: [asc, desc]
+          default: desc
+        page:
+          type: integer
+          default: 1
+        pageSize:
+          type: integer
+          default: 20
+          maximum: 100
+
+    GoalResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        targetValue:
+          type: number
+        progress:
+          type: number
+        progressPercentage:
+          type: number
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        ownerType:
+          type: string
+        ownerId:
+          type: integer
+        type:
+          type: string
+        timeframe:
+          type: string
+        recurring:
+          type: boolean
+        status:
+          type: string
+        parentGoalId:
+          type: integer
+        calculationSource:
+          type: string
+          enum: [manual, auto_calculated]
+        lastCalculatedAt:
+          type: string
+          format: date-time
+        calculationFailed:
+          type: boolean
+        createdBy:
+          type: integer
+        createdOn:
+          type: string
+          format: date-time
+        updatedBy:
+          type: integer
+        updatedOn:
+          type: string
+          format: date-time
+
+    GoalDetailResponse:
+      allOf:
+        - $ref: '#/components/schemas/GoalResponse'
+        - type: object
+          properties:
+            forecast:
+              $ref: '#/components/schemas/GoalForecastResponse'
+            hierarchy:
+              type: object
+              properties:
+                parent:
+                  $ref: '#/components/schemas/GoalResponse'
+                children:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/GoalResponse'
+            recentComments:
+              type: array
+              items:
+                $ref: '#/components/schemas/GoalCommentResponse'
+              description: Last 5 comments
+
+    GoalProgressHistoryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        goalId:
+          type: integer
+        progressValue:
+          type: number
+        targetValue:
+          type: number
+        progressPercentage:
+          type: number
+        snapshotSource:
+          type: string
+          enum: [significant_change, daily_snapshot, manual_adjustment, status_change]
+        snapshotTimestamp:
+          type: string
+          format: date-time
+        createdBy:
+          type: integer
+        notes:
+          type: string
+
+    GoalForecastResponse:
+      type: object
+      properties:
+        currentProgress:
+          type: number
+        targetValue:
+          type: number
+        daysRemaining:
+          type: integer
+        progressPercentage:
+          type: number
+        velocity:
+          type: number
+          description: Progress per day based on recent history
+        projectedCompletionDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [on_track, ahead, behind, at_risk]
+        confidence:
+          type: string
+          enum: [high, medium, low]
+          description: Based on data points available
+
+    GoalMetricsResponse:
+      type: object
+      properties:
+        totalGoals:
+          type: integer
+        activeGoals:
+          type: integer
+        completedGoals:
+          type: integer
+        totalTargetValue:
+          type: number
+        totalProgress:
+          type: number
+        averageProgress:
+          type: number
+        completionRate:
+          type: number
+          description: Percentage of goals completed
+        atRiskCount:
+          type: integer
+          description: Goals with <50% progress and <50% time remaining
+        overdueCount:
+          type: integer
+
+    GoalCommentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        goalId:
+          type: integer
+        commentText:
+          type: string
+        createdBy:
+          type: integer
+        createdByName:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+
+    PaginationInfo:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalItems:
+          type: integer
+        totalPages:
+          type: integer
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+
+  responses:
+    Unauthorized:
+      description: Unauthorized - Invalid or missing API key or JWT token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    Forbidden:
+      description: Forbidden - Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+    ValidationError:
+      description: Validation error - Invalid request data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
