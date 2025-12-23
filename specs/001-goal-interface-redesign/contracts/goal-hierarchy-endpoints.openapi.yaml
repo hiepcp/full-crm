@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: Goal Hierarchy API
+  description: API endpoints for managing goal hierarchies and cascading objectives
+  version: 2.0.0
+
+servers:
+  - url: https://api-crm.local.com/api
+    description: Local development
+
+security:
+  - ApiKeyAuth: []
+  - BearerAuth: []
+
+paths:
+  /goals/{id}/hierarchy:
+    get:
+      summary: Get goal hierarchy
+      description: Retrieve full hierarchy tree (ancestors and descendants) for a goal
+      tags: [Goals - Hierarchy]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoalHierarchyResponse'
+
+  /goals/{id}/link-parent:
+    post:
+      summary: Link goal to parent
+      description: Create parent-child hierarchy link
+      tags: [Goals - Hierarchy]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            description: Child goal ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkGoalToParentRequest'
+      responses:
+        '200':
+          description: Link created successfully
+        '400':
+          description: Validation error (circular dependency, max depth exceeded)
+
+  /goals/{id}/unlink-parent:
+    post:
+      summary: Unlink goal from parent
+      description: Remove parent-child hierarchy link (orphan the goal)
+      tags: [Goals - Hierarchy]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Link removed successfully
+
+  /goals/{id}/children:
+    get:
+      summary: Get child goals
+      description: Retrieve all direct children of a goal
+      tags: [Goals - Hierarchy]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoalResponse'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: XApiKey
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LinkGoalToParentRequest:
+      type: object
+      required: [parentGoalId]
+      properties:
+        parentGoalId:
+          type: integer
+        contributionWeight:
+          type: number
+          default: 1.0
+          description: Weight for weighted average roll-up (future use)
+
+    GoalHierarchyResponse:
+      type: object
+      properties:
+        goal:
+          $ref: '#/components/schemas/GoalResponse'
+        ancestors:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoalResponse'
+          description: Path from root to this goal
+        descendants:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoalHierarchyNode'
+          description: Tree of child goals
+
+    GoalHierarchyNode:
+      type: object
+      properties:
+        goal:
+          $ref: '#/components/schemas/GoalResponse'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoalHierarchyNode'
+
+    GoalResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        progressPercentage:
+          type: number
+        targetValue:
+          type: number
+        ownerType:
+          type: string
+        status:
+          type: string
