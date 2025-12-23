@@ -7,7 +7,14 @@
       "Bash(dotnet restore:*)",
       "Bash(Select-String:*)",
       "Bash(dir:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Skill(speckit.specify)",
+      "Skill(speckit.specify:*)",
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(git checkout:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(test:*)"
     ]
   }
 }

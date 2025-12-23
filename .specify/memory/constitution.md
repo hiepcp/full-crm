@@ -1,18 +1,11 @@
 <!--
 Sync Impact Report
 ==================
-Version: 0.1.0 → 1.0.0 (MAJOR - Initial constitution ratification)
-Modified Principles: N/A (initial version)
+Version: 1.0.0 → 1.1.0 (MINOR - New file preview principle added)
+Modified Principles: N/A
 Added Sections:
-  - I. Clean Architecture (Mandatory)
-  - II. Security-First Development
-  - III. API-Driven Design
-  - IV. Testing Discipline
-  - V. Observability & Audit Trail
-  - Development Workflow
-  - Quality Standards
-  - Governance
-Removed Sections: N/A (initial version)
+  - VI. File Management & Preview (New principle)
+Removed Sections: N/A
 Templates Requiring Updates:
   ✅ .specify/templates/plan-template.md - Constitution Check section aligns with principles
   ✅ .specify/templates/spec-template.md - Requirements sections align with security and functional needs
@@ -169,6 +162,45 @@ Follow-up TODOs: None
   - Frontend SHOULD log client-side errors to a central service (future enhancement)
 
 - **Rationale**: CRM systems require detailed audit trails for compliance, debugging, and understanding user behavior. Structured logs enable queryable diagnostics and troubleshooting.
+
+### VI. File Management & Preview
+
+**File attachments MUST support preview functionality for common document and image formats.**
+
+- **Activity Attachments**:
+  - Activity attachments MUST be stored in `crm_activity_attachment` table with `IdRef` reference
+  - `IdRef` field MUST uniquely identify the file for retrieval and preview
+  - MUST support file metadata: `FileName`, `FilePath`, `FileSize`, `MimeType`
+  - MUST provide computed properties: `FileExtension`, `IsImage`, `IsDocument`, `DisplaySize`, `DisplayName`
+
+- **File Preview Component**:
+  - MUST use `FilePreviewer` component (or equivalent) for rendering file previews
+  - MUST support preview of common formats:
+    - **PDF**: Display inline using `<iframe>` or PDF viewer
+    - **Images**: Display inline with responsive sizing
+    - **Word documents (.docx)**: Render using `docx-preview` library
+    - **Excel files (.xlsx)**: Render using LuckySheet or similar library
+  - MUST handle unsupported file types gracefully with user-friendly messages
+  - MUST show loading states during file fetch and render
+  - MUST show error states when file preview fails
+
+- **File Retrieval**:
+  - MUST implement file retrieval by `IdRef` through dedicated use case or API endpoint
+  - MUST return file content as base64-encoded string with metadata (`content`, `contentType`, `fileName`)
+  - MUST validate file access permissions before serving content
+  - MUST handle large files appropriately (consider streaming for very large files)
+
+- **Integration Points**:
+  - Activity attachment list components MUST integrate preview functionality (e.g., preview icon/button)
+  - MUST support both inline preview (modal/dialog) and external link opening
+  - Preview component MUST be reusable across different entity types (activities, deals, customers, etc.)
+
+- **Performance Considerations**:
+  - SHOULD cache file content for repeated previews within same session
+  - SHOULD lazy-load preview components to reduce initial bundle size
+  - MUST provide option to download file instead of preview for large documents
+
+- **Rationale**: File preview enhances user experience by allowing quick document review without downloading. Consistent preview patterns across the CRM improve usability and reduce context switching. Using `IdRef` as the file identifier ensures flexibility with external storage systems (SharePoint, file system, cloud storage).
 
 ## Development Workflow
 
@@ -327,4 +359,4 @@ Follow-up TODOs: None
 - Use feature-specific README files for critical business logic documentation
 - Use `.specify/templates/` for consistent feature planning and task breakdown
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-22 | **Last Amended**: 2025-12-22
+**Version**: 1.1.0 | **Ratified**: 2025-12-22 | **Last Amended**: 2025-12-23
