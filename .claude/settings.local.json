@@ -14,7 +14,27 @@
       "Bash(ls:*)",
       "Bash(git checkout:*)",
       "Bash(git rev-parse:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(node:*)",
+      "Bash(npm --version)",
+      "Bash(git --version)",
+      "Bash(npm install)",
+      "Bash(npx eslint \"src/presentation/pages/user/UserSaleRegistration.jsx\" \"src/app/routes/groups/MainRoutes.jsx\")",
+      "Bash(npx eslint \"src/presentation/pages/user/UserSaleRegistration.jsx\")",
+      "Bash(find:*)",
+      "Bash(npm run build)",
+      "Bash(powershell -ExecutionPolicy Bypass -File:*)",
+      "Bash(npx eslint:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -Command:*)",
+      "Bash(Select-Object:*)",
+      "Bash(grep:*)",
+      "Bash(curl:*)",
+      "Bash(npx eslint src/utils/constants.js src/presentation/components/common/ActivityFeed/ActivityFeed.jsx)",
+      "Bash(taskkill /F /PID:*)",
+      "Bash(taskkill:*)",
+      "Bash(Stop-Process:*)",
+      "Skill(speckit.plan)",
+      "Skill(speckit.plan:*)"
     ]
   }
 }
