@@ -35,7 +35,10 @@
       "Bash(Stop-Process:*)",
       "Skill(speckit.plan)",
       "Skill(speckit.plan:*)",
-      "Bash(dotnet run:*)"
+      "Bash(dotnet run:*)",
+      "Bash(git stash:*)",
+      "Bash(git worktree add:*)",
+      "Bash(git worktree:*)"
     ]
   }
 }
