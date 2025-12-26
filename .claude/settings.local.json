@@ -38,7 +38,14 @@
       "Bash(dotnet run:*)",
       "Bash(git stash:*)",
       "Bash(git worktree add:*)",
-      "Bash(git worktree:*)"
+      "Bash(git worktree:*)",
+      "Bash(git branch:*)",
+      "Bash(rm:*)",
+      "Bash(if not exist \"database\\\\migrations\" mkdir databasemigrations)",
+      "Bash(cat:*)",
+      "Bash(git submodule status:*)",
+      "Bash(git submodule:*)",
+      "Bash(git apply:*)"
     ]
   }
 }

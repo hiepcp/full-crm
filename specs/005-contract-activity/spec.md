@@ -2,40 +2,44 @@
 
 **Feature Branch**: `005-contract-activity`
 **Created**: 2025-12-24
+**Updated**: 2025-12-25
 **Status**: Draft
-**Input**: User description: "thêm type contract để quản lý hợp đồng" (Add contract activity type to manage contract-related activities)
+**Input**: User description: "activity type contract thêm (ngày hợp đồng, giá trị hợp đồng) để phục vụ việc thiết lập goal sau này" (Add contract activity type with contract date and contract value fields to support future goal-setting)
 
 ## User Scenarios & Testing *(mandatory)*
 
-### User Story 1 - Create Contract Activities (Priority: P1)
+### User Story 1 - Create Contract Activities with Contract-Specific Fields (Priority: P1)
 
-Sales representatives need to track contract-related activities (signing, renewals, amendments, cancellations) alongside other activity types (emails, calls, meetings) in the CRM system.
+Sales representatives need to track contract-related activities (signing, renewals, amendments, cancellations) with specific contract details including contract date and contract value. These fields will later support goal-setting and revenue tracking.
 
-**Why this priority**: This is the core functionality that enables contract tracking. Without it, users cannot create or record contract activities, making the feature non-functional.
+**Why this priority**: This is the core functionality that enables contract tracking with essential business data. Without contract date and value fields, users cannot track key contract metrics needed for revenue goals and performance analysis.
 
-**Independent Test**: Can be fully tested by creating a new activity and selecting "Contract" as the activity type, verifying it saves correctly and appears in activity lists. Delivers immediate value by allowing contract event tracking.
+**Independent Test**: Can be fully tested by creating a new activity and selecting "Contract" as the activity type, entering contract date and contract value, verifying it saves correctly and displays in activity lists. Delivers immediate value by allowing contract event tracking with financial metrics.
 
 **Acceptance Scenarios**:
 
 1. **Given** a user is on the activity creation form, **When** they select activity type dropdown, **Then** they see "📄 Contract" as an available option
-2. **Given** a user selects "Contract" as activity type, **When** they fill in subject, body, and related entity (customer, lead, deal), **Then** the contract activity is created and saved with type "contract"
-3. **Given** a contract activity exists, **When** user views the activity list/feed, **Then** the contract activity displays with appropriate contract icon (📄) and contract-specific color scheme
+2. **Given** a user selects "Contract" as activity type, **When** the form displays, **Then** they see two additional required fields: "Contract Date" (date picker) and "Contract Value" (currency input)
+3. **Given** a user fills in subject, body, contract date, contract value, and related entity (customer, lead, deal), **When** they submit the form, **Then** the contract activity is created and saved with type "contract" and the contract-specific fields
+4. **Given** a contract activity exists, **When** user views the activity list/feed, **Then** the contract activity displays with contract icon (📄), contract-specific color scheme, contract date, and contract value
+5. **Given** a user tries to create a contract activity without contract date or contract value, **When** they submit the form, **Then** validation errors prevent submission with clear messages indicating required fields
 
 ---
 
-### User Story 2 - Filter and View Contract Activities (Priority: P2)
+### User Story 2 - Filter and View Contract Activities with Financial Details (Priority: P2)
 
-Users need to filter activity lists to show only contract-related activities, enabling focused review of contract history and status.
+Users need to filter activity lists to show only contract-related activities and view contract dates and values, enabling focused review of contract history, timelines, and revenue tracking.
 
-**Why this priority**: Once contract activities can be created, users need to efficiently find and review them. This builds on P1 functionality and enhances usability.
+**Why this priority**: Once contract activities can be created with date and value fields, users need to efficiently find and review them with full financial context. This builds on P1 functionality and enhances usability for goal tracking.
 
-**Independent Test**: Can be tested by creating multiple contract activities and using the activity filter/category selector to show only contract activities. Delivers value by improving activity discoverability.
+**Independent Test**: Can be tested by creating multiple contract activities with different dates and values, using the activity filter to show only contract activities, and verifying contract date and value display correctly. Delivers value by improving activity discoverability and revenue visibility.
 
 **Acceptance Scenarios**:
 
-1. **Given** multiple activities of different types exist, **When** user applies "Contract" category filter, **Then** only contract activities are displayed
-2. **Given** user is viewing a customer/lead/deal detail page, **When** they view the activity feed, **Then** contract activities are grouped/categorized correctly with other activities
-3. **Given** user views activity feed, **When** a contract activity is displayed, **Then** it shows distinct visual styling (icon, color) that differentiates it from other activity types
+1. **Given** multiple activities of different types exist, **When** user applies "Contract" category filter, **Then** only contract activities are displayed with their contract dates and values
+2. **Given** user is viewing a customer/lead/deal detail page, **When** they view the activity feed, **Then** contract activities show contract date and contract value alongside standard activity information
+3. **Given** user views activity feed, **When** a contract activity is displayed, **Then** it shows distinct visual styling (icon, color) and prominently displays contract date and contract value
+4. **Given** user views activity detail/popup, **When** opening a contract activity, **Then** contract date and contract value are clearly labeled and formatted (date as locale-appropriate format, value as currency)
 
 ---
 
