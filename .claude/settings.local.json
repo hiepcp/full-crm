@@ -7,7 +7,26 @@
       "Bash(dotnet restore:*)",
       "Bash(Select-String:*)",
       "Bash(dir:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Skill(speckit.specify)",
+      "Skill(speckit.specify:*)",
+      "Bash(git fetch:*)",
+      "Bash(ls:*)",
+      "Bash(git checkout:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(test:*)",
+      "Bash(git submodule:*)",
+      "Bash(cat:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(if [ -d \"crm-system-client/node_modules\" ])",
+      "Bash(then echo \"INSTALLED\")",
+      "Bash(else echo \"NOT_INSTALLED\")",
+      "Bash(fi)",
+      "Bash(npm install)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node:*)",
+      "Bash(echo:*)"
     ]
   }
 }
