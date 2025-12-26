@@ -22,7 +22,11 @@
       "Bash(then echo \"INSTALLED\")",
       "Bash(else echo \"NOT_INSTALLED\")",
       "Bash(fi)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node:*)",
+      "Bash(echo:*)"
     ]
   }
 }
