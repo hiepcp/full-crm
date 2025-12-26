@@ -1,0 +1,404 @@
+import React, { useState } from 'react';
+import {
+  Grid,
+  TextField,
+  Typography,
+  FormControl,
+  Select,
+  MenuItem,
+  Autocomplete,
+  Chip,
+  Box,
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import EventIcon from '@mui/icons-material/Event';
+
+// Generate 30-minute intervals for time selection
+const TIME_SLOTS = Array.from({ length: 48 }, (_, i) => {
+  const hour = Math.floor(i / 2).toString().padStart(2, '0');
+  const minute = i % 2 === 0 ? '00' : '30';
+  return `${hour}:${minute}`;
+});
+
+/**
+ * Component for rendering category-specific fields (email, meeting, etc.)
+ */
+const ActivityCategoryFields = ({
+  formData,
+  updateFormData,
+  emailOptions,
+  disabled = false
+}) => {
+  const theme = useTheme();
+  const [emailError, setEmailError] = useState('');
+
+  // Email validation function
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+
+  // Meeting fields (online/offline)
+  const isMeetingOnline = formData.activityCategory === 'meeting-online';
+  const isMeetingOffline = formData.activityCategory === 'meeting-offline';
+
+  if (isMeetingOnline || isMeetingOffline) {
+    return (
+      <Box>
+        {/* Start Time Section */}
+        <Box sx={{ mb: 2 }}>
+          <Box display="flex" alignItems="center" sx={{ mb: 1 }}>
+            <EventIcon sx={{ mr: 0.5, fontSize: 18, color: theme.palette.primary.main }} />
+            <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+              Start Time
+            </Typography>
+          </Box>
+          <Grid container spacing={1}>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <TextField
+                type="date"
+                label="Date"
+                value={formData.appointmentDate || ''}
+                disabled={disabled}
+                onChange={(e) => {
+                  const newDate = e.target.value;
+                  const updates = { appointmentDate: newDate };
+
+                  // Auto-calculate end time based on start time and duration
+                  try {
+                    if (newDate && formData.appointmentTime && formData.appointmentDuration) {
+                      const start = new Date(`${newDate}T${formData.appointmentTime}:00`);
+                      const end = new Date(start.getTime() + parseInt(formData.appointmentDuration) * 60 * 1000);
+                      updates.appointmentEndDate = end.toISOString().split('T')[0];
+                      updates.appointmentEndTime = end.toTimeString().slice(0, 5);
+                    }
+                  } catch { }
+
+                  updateFormData(updates);
+                }}
+                InputLabelProps={{ shrink: true }}
+                fullWidth
+                size="small"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Autocomplete
+                options={TIME_SLOTS}
+                value={formData.appointmentTime || null}
+                disabled={disabled}
+                onChange={(event, newValue) => {
+                  const rawTime = newValue;
+                  const updates = { appointmentTime: rawTime };
+
+                  // Auto-calculate end time
+                  try {
+                    if (formData.appointmentDate && rawTime && formData.appointmentDuration) {
+                      const start = new Date(`${formData.appointmentDate}T${rawTime}:00`);
+                      const end = new Date(start.getTime() + parseInt(formData.appointmentDuration) * 60 * 1000);
+                      updates.appointmentEndDate = end.toISOString().split('T')[0];
+                      updates.appointmentEndTime = end.toTimeString().slice(0, 5);
+                    }
+                  } catch { }
+
+                  updateFormData(updates);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Time"
+                    InputLabelProps={{ shrink: true }}
+                    fullWidth
+                    size="small"
+                    variant="outlined"
+                  />
+                )}
+                disableClearable
+              />
+            </Grid>
+          </Grid>
+        </Box>
+
+        {/* End Time Section */}
+        <Box>
+          <Box display="flex" alignItems="center" sx={{ mb: 1 }}>
+            <ScheduleIcon sx={{ mr: 0.5, fontSize: 18, color: theme.palette.secondary.main }} />
+            <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+              End Time & Duration
+            </Typography>
+          </Box>
+          <Grid container spacing={1}>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <TextField
+                type="date"
+                label="End Date"
+                value={formData.appointmentEndDate || formData.appointmentDate || ''}
+                onChange={(e) => updateFormData({ appointmentEndDate: e.target.value })}
+                InputLabelProps={{ shrink: true }}
+                disabled={disabled}
+                fullWidth
+                size="small"
+                variant="outlined"
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <Autocomplete
+                options={TIME_SLOTS}
+                value={formData.appointmentEndTime || null}
+                disabled={disabled}
+                onChange={(event, newValue) => {
+                  const rawTime = newValue;
+                  const updates = { appointmentEndTime: rawTime };
+
+                  // Derive duration in minutes if possible
+                  try {
+                    const sDate = formData.appointmentDate || '';
+                    const eDate = formData.appointmentEndDate || sDate;
+                    if (sDate && formData.appointmentTime && eDate && rawTime) {
+                      const start = new Date(`${sDate}T${formData.appointmentTime}:00`);
+                      const end = new Date(`${eDate}T${rawTime}:00`);
+                      const diff = Math.max(0, Math.round((end - start) / (1000 * 60)));
+                      if (isFinite(diff)) {
+                        updates.appointmentDuration = String(diff);
+                      }
+                    }
+                  } catch { }
+
+                  updateFormData(updates);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="End Time"
+                    InputLabelProps={{ shrink: true }}
+                    fullWidth
+                    size="small"
+                    variant="outlined"
+                  />
+                )}
+                disableClearable
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 4 }}>
+              <FormControl fullWidth size="small">
+                <Select
+                  value={formData.appointmentDuration || '30'}
+                  disabled={disabled}
+                  onChange={(e) => {
+                    const duration = e.target.value;
+                    const updates = { appointmentDuration: duration };
+
+                    // Auto-calculate end time
+                    try {
+                      if (formData.appointmentDate && formData.appointmentTime) {
+                        const start = new Date(`${formData.appointmentDate}T${formData.appointmentTime}:00`);
+                        const end = new Date(start.getTime() + parseInt(duration) * 60 * 1000);
+                        updates.appointmentEndDate = end.toISOString().split('T')[0];
+                        updates.appointmentEndTime = end.toTimeString().slice(0, 5);
+                      }
+                    } catch { }
+
+                    updateFormData(updates);
+                  }}
+                  sx={{ height: 40 }}
+                >
+                  <MenuItem value="15">15 min</MenuItem>
+                  <MenuItem value="30">30 min</MenuItem>
+                  <MenuItem value="60">1 hour</MenuItem>
+                  <MenuItem value="90">1.5 hr</MenuItem>
+                  <MenuItem value="120">2 hr</MenuItem>
+                  <MenuItem value="180">3 hr</MenuItem>
+                  <MenuItem value="240">4 hr</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+        </Box>
+
+        {/* Location (offline only) */}
+        {isMeetingOffline && (
+          <Box sx={{ mt: 2 }}>
+            <Typography variant="subtitle2" sx={{ fontWeight: 600, mb: 1 }}>
+              Location (optional)
+            </Typography>
+            <TextField
+              fullWidth
+              size="small"
+              disabled={disabled}
+              label="Meeting location"
+              placeholder="E.g. Da Nang Meeting Room"
+              value={formData.appointmentLocation || ''}
+              onChange={(e) => updateFormData({ appointmentLocation: e.target.value })}
+            />
+          </Box>
+        )}
+      </Box>
+    );
+  }
+  // Contract fields
+  if (formData.activityCategory === 'contract') {
+    return (
+      <Box>
+        {/* Contract Details Section */}
+        <Box sx={{ mb: 2 }}>
+          <Box display="flex" alignItems="center" sx={{ mb: 1 }}>
+            <EventIcon sx={{ mr: 0.5, fontSize: 18, color: theme.palette.primary.main }} />
+            <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
+              Contract Information
+            </Typography>
+          </Box>
+          <Grid container spacing={2}>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField
+                type="date"
+                label="Contract Date"
+                value={formData.contractDate || ''}
+                disabled={disabled}
+                onChange={(e) => updateFormData({ contractDate: e.target.value })}
+                InputLabelProps={{ shrink: true }}
+                fullWidth
+                size="small"
+                variant="outlined"
+                helperText="Date when contract was signed or becomes effective"
+              />
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <TextField
+                type="number"
+                label="Contract Value"
+                value={formData.contractValue || ''}
+                disabled={disabled}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Validate non-negative
+                  if (value === '' || parseFloat(value) >= 0) {
+                    updateFormData({ contractValue: value });
+                  }
+                }}
+                InputLabelProps={{ shrink: true }}
+                inputProps={{
+                  min: 0,
+                  step: 0.01,
+                  max: 999999999999.99
+                }}
+                fullWidth
+                size="small"
+                variant="outlined"
+                helperText="Financial value of the contract (optional)"
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    );
+  }
+
+  // Email fields
+  if (formData.activityCategory === 'email') {
+    return (
+      <Grid container spacing={2}>
+        <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
+          <TextField
+            fullWidth
+            label="From"
+            value={formData.emailFrom}
+            disabled
+            sx={{
+              minWidth: 200,
+              '& .MuiInputBase-input.Mui-disabled': {
+                WebkitTextFillColor: theme.palette.text.primary,
+              }
+            }}
+            helperText="Sender email address (automatically set)"
+          />
+        </Grid>
+        <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
+          <Autocomplete
+            multiple
+            freeSolo
+            options={emailOptions}
+            getOptionLabel={(option) => typeof option === 'string' ? option : option.email}
+            disabled={disabled}
+            value={formData.emailRecipient.map(email => {
+              const option = emailOptions.find(opt => opt.email === email);
+              return option || email;
+            })}
+            onChange={(event, newValue) => {
+              const emails = newValue.map(item => typeof item === 'string' ? item : item.email);
+              // Validate all emails before updating
+              const validEmails = [];
+              let hasInvalidEmail = false;
+
+              emails.forEach(email => {
+                const trimmedEmail = email.trim();
+                if (isValidEmail(trimmedEmail)) {
+                  validEmails.push(trimmedEmail);
+                } else {
+                  hasInvalidEmail = true;
+                }
+              });
+
+              if (hasInvalidEmail) {
+                setEmailError('Invalid email format detected. Only valid email addresses are allowed.');
+              } else {
+                setEmailError('');
+              }
+
+              updateFormData({ emailRecipient: validEmails });
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Recipient Email"
+                placeholder="Select email recipients..."
+                error={!!emailError}
+                helperText={emailError || "Enter valid email addresses only"}
+              />
+            )}
+            renderOption={(props, option) => {
+              if (typeof option === 'string') {
+                return <Box component="li" {...props}>{option}</Box>;
+              }
+              return (
+                <Box component="li" {...props}>
+                  <Box>
+                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                      {option.email}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {option.name} ({option.type})
+                    </Typography>
+                  </Box>
+                </Box>
+              );
+            }}
+            renderTags={(tagValue, getTagProps) =>
+              tagValue.map((option, index) => {
+                const label = typeof option === 'string' ? option : option.email;
+                const { key, ...chipProps } = getTagProps({ index });
+                return (
+                  <Chip
+                    key={key}
+                    label={label}
+                    {...chipProps}
+                    size="small"
+                  />
+                );
+              })
+            }
+            sx={{
+              minWidth: 200,
+            }}
+          />
+        </Grid>
+      </Grid>
+    );
+  }
+
+  return null;
+};
+
+export default ActivityCategoryFields;
+
