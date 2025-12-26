@@ -123,13 +123,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T042 [P] [US2] Add Download button to ExcelPreview.jsx using Material-UI IconButton with DownloadIcon
-- [ ] T043 [P] [US2] Position download button in ExcelPreview.jsx header/toolbar area (top-right corner of preview)
-- [ ] T044 [US2] Implement handleDownload() function in ExcelPreview.jsx that calls onDownload prop callback
-- [ ] T045 [US2] Update FilePreviewModal.jsx to pass handleDownload callback to ExcelPreview component
-- [ ] T046 [US2] Add download tooltip in ExcelPreview.jsx ("Download original Excel file")
-- [ ] T047 [US2] Verify download preserves original filename in ExcelPreview.jsx/FilePreviewModal.jsx integration
-- [ ] T048 [US2] Test download functionality works from error state in ExcelPreview.jsx (fallback option when preview fails)
+- [X] T042 [P] [US2] Add Download button to ExcelPreview.jsx using Material-UI IconButton with DownloadIcon
+- [X] T043 [P] [US2] Position download button in ExcelPreview.jsx header/toolbar area (top-right corner of preview)
+- [X] T044 [US2] Implement handleDownload() function in ExcelPreview.jsx that calls onDownload prop callback
+- [X] T045 [US2] Update FilePreviewModal.jsx to pass handleDownload callback to ExcelPreview component
+- [X] T046 [US2] Add download tooltip in ExcelPreview.jsx ("Download original Excel file")
+- [X] T047 [US2] Verify download preserves original filename in ExcelPreview.jsx/FilePreviewModal.jsx integration
+- [X] T048 [US2] Test download functionality works from error state in ExcelPreview.jsx (fallback option when preview fails)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work - Preview + Download functionality complete
 
@@ -143,20 +143,20 @@
 
 ### Implementation for User Story 3
 
-- [ ] T049 [P] [US3] Create detectUnsupportedFeatures() function in ExcelPreview.jsx to analyze workbook for charts, macros, pivot tables
-- [ ] T050 [P] [US3] Add warnings state array in ExcelPreview.jsx to track detected unsupported features
-- [ ] T051 [US3] Implement macro detection in ExcelPreview.jsx (check workbook.vbaProject existence)
-- [ ] T052 [US3] Implement chart detection in ExcelPreview.jsx (check worksheet['!charts'] property per research.md)
-- [ ] T053 [US3] Implement pivot table detection in ExcelPreview.jsx (check worksheet['!pivots'] property)
-- [ ] T054 [US3] Implement external link detection in ExcelPreview.jsx (check workbook.Workbook.ExternalReferences)
-- [ ] T055 [US3] Add Material-UI Alert component in ExcelPreview.jsx to display warnings with WarningIcon
-- [ ] T056 [US3] Create warning messages in ExcelPreview.jsx for each unsupported feature type:
+- [X] T049 [P] [US3] Create detectUnsupportedFeatures() function in ExcelPreview.jsx to analyze workbook for charts, macros, pivot tables
+- [X] T050 [P] [US3] Add warnings state array in ExcelPreview.jsx to track detected unsupported features
+- [X] T051 [US3] Implement macro detection in ExcelPreview.jsx (check workbook.vbaProject existence)
+- [X] T052 [US3] Implement chart detection in ExcelPreview.jsx (check worksheet['!charts'] property per research.md)
+- [X] T053 [US3] Implement pivot table detection in ExcelPreview.jsx (check worksheet['!pivots'] property)
+- [X] T054 [US3] Implement external link detection in ExcelPreview.jsx (check workbook.Workbook.ExternalReferences)
+- [X] T055 [US3] Add Material-UI Alert component in ExcelPreview.jsx to display warnings with WarningIcon
+- [X] T056 [US3] Create warning messages in ExcelPreview.jsx for each unsupported feature type:
   - "Charts are not supported in preview. Download the file to view all content."
   - "This file contains macros that will not execute in preview mode."
   - "Pivot tables are not fully supported in preview."
   - "External links may not display correctly."
-- [ ] T057 [US3] Add download button link in warning messages in ExcelPreview.jsx for easy access to full file
-- [ ] T058 [US3] Style warning Alert in ExcelPreview.jsx with severity="warning" and proper spacing
+- [X] T057 [US3] Add download button link in warning messages in ExcelPreview.jsx for easy access to full file
+- [X] T058 [US3] Style warning Alert in ExcelPreview.jsx with severity="warning" and proper spacing
 
 **Checkpoint**: All user stories should now be independently functional - Preview, Download, and Warnings all work
 
@@ -170,18 +170,18 @@
 
 ### Implementation for Backend Caching
 
-- [ ] T059 [P] Create ExcelPreviewCacheMiddleware.cs in crm-system/src/CRM.Api/Middleware/ with RequestDelegate and IMemoryCache dependencies
-- [ ] T060 [P] Create ExcelPreviewCacheOptions.cs in crm-system/src/CRM.Api/Configuration/ with MaxCacheSizeBytes, SlidingExpiration, CompactionPercentage properties
-- [ ] T061 Add InvokeAsync() method in ExcelPreviewCacheMiddleware.cs to intercept /api/files/{idRef}/content requests
-- [ ] T062 Implement cache key generation in ExcelPreviewCacheMiddleware.cs using format "excel_preview_{idRef}_{userId}" per data-model.md
-- [ ] T063 Add cache hit logic in ExcelPreviewCacheMiddleware.cs with TryGetValue() and X-Cache-Hit: true header
-- [ ] T064 Add cache miss logic in ExcelPreviewCacheMiddleware.cs to call next middleware and capture response
-- [ ] T065 Implement cache Set() in ExcelPreviewCacheMiddleware.cs with MemoryCacheEntryOptions (15-minute sliding expiration, size tracking)
-- [ ] T066 Add PostEvictionCallback in ExcelPreviewCacheMiddleware.cs for logging cache evictions
-- [ ] T067 Register MemoryCache in Program.cs with options (SizeLimit: 100MB, CompactionPercentage: 0.25)
-- [ ] T068 Register ExcelPreviewCacheMiddleware in Program.cs before app.UseAuthentication()
-- [ ] T069 Add Serilog logging in ExcelPreviewCacheMiddleware.cs for cache hits/misses (NFR-001)
-- [ ] T070 Add Serilog logging in ExcelPreviewCacheMiddleware.cs for cache evictions and performance metrics (NFR-003)
+- [X] T059 [P] Create ExcelPreviewCacheMiddleware.cs in crm-system/src/CRM.Api/Middleware/ with RequestDelegate and IMemoryCache dependencies
+- [X] T060 [P] Create ExcelPreviewCacheOptions.cs in crm-system/src/CRM.Api/Configuration/ with MaxCacheSizeBytes, SlidingExpiration, CompactionPercentage properties
+- [X] T061 Add InvokeAsync() method in ExcelPreviewCacheMiddleware.cs to intercept /api/files/{idRef}/content requests
+- [X] T062 Implement cache key generation in ExcelPreviewCacheMiddleware.cs using format "excel_preview_{idRef}_{userId}" per data-model.md
+- [X] T063 Add cache hit logic in ExcelPreviewCacheMiddleware.cs with TryGetValue() and X-Cache-Hit: true header
+- [X] T064 Add cache miss logic in ExcelPreviewCacheMiddleware.cs to call next middleware and capture response
+- [X] T065 Implement cache Set() in ExcelPreviewCacheMiddleware.cs with MemoryCacheEntryOptions (15-minute sliding expiration, size tracking)
+- [X] T066 Add PostEvictionCallback in ExcelPreviewCacheMiddleware.cs for logging cache evictions
+- [X] T067 Register MemoryCache in Program.cs with options (SizeLimit: 100MB, CompactionPercentage: 0.25)
+- [X] T068 Register ExcelPreviewCacheMiddleware in Program.cs before app.UseAuthentication()
+- [X] T069 Add Serilog logging in ExcelPreviewCacheMiddleware.cs for cache hits/misses (NFR-001)
+- [X] T070 Add Serilog logging in ExcelPreviewCacheMiddleware.cs for cache evictions and performance metrics (NFR-003)
 
 **Checkpoint**: Server-side caching complete - Repeat previews significantly faster (500ms vs 2-3 seconds)
 
@@ -195,12 +195,12 @@
 
 ### Implementation for Logging
 
-- [ ] T071 [P] Add preview attempt logging in FileRetrievalService.cs when Excel files are retrieved (log idRef, fileName, fileSize, userId, timestamp)
-- [ ] T072 [P] Add error logging in FileRetrievalService.cs for SharePoint retrieval failures (log idRef, error type, stack trace per data-model.md)
-- [ ] T073 Add file size validation logging in FilesController.cs when files exceed 20MB (log rejection with FR-009 reference)
-- [ ] T074 Add performance metrics logging in ExcelPreviewCacheMiddleware.cs (log processing time, render time, cache status)
-- [ ] T075 Update Serilog configuration in Program.cs to include Excel preview context properties (IdRef, FileName, FileSize)
-- [ ] T076 Add structured logging for cache statistics in ExcelPreviewCacheMiddleware.cs (cache hit rate, eviction count)
+- [X] T071 [P] Add preview attempt logging in FileRetrievalService.cs when Excel files are retrieved (log idRef, fileName, fileSize, userId, timestamp)
+- [X] T072 [P] Add error logging in FileRetrievalService.cs for SharePoint retrieval failures (log idRef, error type, stack trace per data-model.md)
+- [X] T073 Add file size validation logging in FilesController.cs when files exceed 20MB (log rejection with FR-009 reference)
+- [X] T074 Add performance metrics logging in ExcelPreviewCacheMiddleware.cs (log processing time, render time, cache status)
+- [X] T075 Update Serilog configuration in Program.cs to include Excel preview context properties (IdRef, FileName, FileSize)
+- [X] T076 Add structured logging for cache statistics in ExcelPreviewCacheMiddleware.cs (cache hit rate, eviction count)
 
 **Checkpoint**: Comprehensive logging in place - Operations team can monitor Excel preview usage and troubleshoot issues
 
@@ -210,24 +210,24 @@
 
 **Purpose**: Final improvements, documentation, and validation
 
-- [ ] T077 [P] Run npm run lint in crm-system-client and fix any linting errors in ExcelPreview.jsx and fileUtils.js
-- [ ] T078 [P] Run npm run prettier in crm-system-client to format all modified files
-- [ ] T079 [P] Run dotnet build in crm-system to verify backend compiles without errors
-- [ ] T080 [P] Add JSDoc comments to exported functions in ExcelPreview.jsx and fileUtils.js
-- [ ] T081 [P] Add XML documentation comments to public methods in ExcelPreviewCacheMiddleware.cs
-- [ ] T082 Update crm-system-client/README.md with Excel preview feature description and usage instructions
-- [ ] T083 Update crm-system/README.md with cache middleware configuration documentation
-- [ ] T084 Verify all acceptance scenarios from spec.md pass manually using quickstart.md test checklist
-- [ ] T085 Test Excel preview on mobile device (tablet and phone) per quickstart.md mobile testing section
-- [ ] T086 Test Excel preview with sample files from crm-system-client/test-files/excel/ directory
-- [ ] T087 Verify performance targets met per spec.md Success Criteria (SC-001 through SC-010)
-- [ ] T088 Test error handling with corrupted, password-protected, and oversized Excel files
-- [ ] T089 Verify cache expiration works correctly (15-minute sliding window)
-- [ ] T090 Test concurrent user access to same Excel file (verify independent cache entries per data-model.md)
-- [ ] T091 [P] Code cleanup: Remove any console.log statements from ExcelPreview.jsx
-- [ ] T092 [P] Code cleanup: Remove any TODO comments from implementation files
-- [ ] T093 Final build verification: npm run build in crm-system-client succeeds without warnings
-- [ ] T094 Final build verification: dotnet build -c Release in crm-system succeeds
+- [X] T077 [P] Run npm run lint in crm-system-client and fix any linting errors in ExcelPreview.jsx and fileUtils.js
+- [X] T078 [P] Run npm run prettier in crm-system-client to format all modified files
+- [X] T079 [P] Run dotnet build in crm-system to verify backend compiles without errors
+- [X] T080 [P] Add JSDoc comments to exported functions in ExcelPreview.jsx and fileUtils.js
+- [X] T081 [P] Add XML documentation comments to public methods in ExcelPreviewCacheMiddleware.cs
+- [X] T082 Update crm-system-client/README.md with Excel preview feature description and usage instructions
+- [X] T083 Update crm-system/README.md with cache middleware configuration documentation
+- [~] T084 Verify all acceptance scenarios from spec.md pass manually using quickstart.md test checklist
+- [~] T085 Test Excel preview on mobile device (tablet and phone) per quickstart.md mobile testing section
+- [~] T086 Test Excel preview with sample files from crm-system-client/test-files/excel/ directory
+- [~] T087 Verify performance targets met per spec.md Success Criteria (SC-001 through SC-010)
+- [~] T088 Test error handling with corrupted, password-protected, and oversized Excel files
+- [~] T089 Verify cache expiration works correctly (15-minute sliding window)
+- [~] T090 Test concurrent user access to same Excel file (verify independent cache entries per data-model.md)
+- [X] T091 [P] Code cleanup: Remove any console.log statements from ExcelPreview.jsx
+- [X] T092 [P] Code cleanup: Remove any TODO comments from implementation files
+- [~] T093 Final build verification: npm run build in crm-system-client succeeds without warnings
+- [~] T094 Final build verification: dotnet build -c Release in crm-system succeeds
 
 ---
 
