@@ -3,23 +3,23 @@
   "spec": "001-database-migration-strategy-and-tooling",
   "state": "building",
   "subtasks": {
-    "completed": 5,
+    "completed": 6,
     "total": 18,
     "in_progress": 1,
     "failed": 0
   },
   "phase": {
-    "current": "Infrastructure Setup",
+    "current": "Convert SQL Scripts to Migrations",
     "id": null,
-    "total": 6
+    "total": 4
   },
   "workers": {
     "active": 0,
     "max": 1
   },
   "session": {
-    "number": 6,
+    "number": 7,
     "started_at": "2025-12-27T13:00:27.988201"
   },
-  "last_update": "2025-12-27T13:16:26.331488"
+  "last_update": "2025-12-27T13:18:28.522697"
 }
