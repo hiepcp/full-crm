@@ -245,6 +245,18 @@ app.UseHangfireDashboard("/hangfire", new DashboardOptions
     Authorization = new[] { new HangfireAuthorizationFilter() }
 });
 
+// Schedule recurring Dynamics 365 category sync job
+var scheduleCron = builder.Configuration["Dynamics365Sync:ScheduleCron"] ?? "0 */6 * * *";
+var syncEnabled = builder.Configuration.GetValue<bool>("Dynamics365Sync:Enabled", true);
+
+if (syncEnabled)
+{
+    RecurringJob.AddOrUpdate<CRMSys.Infrastructure.BackgroundServices.Dynamics365CategorySyncJob>(
+        "dynamics365-category-sync",
+        job => job.ExecuteAsync(CancellationToken.None),
+        scheduleCron);
+}
+
 app.UseHttpsRedirection();
 app.UseCors("Spa");
 

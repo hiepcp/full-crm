@@ -3,23 +3,23 @@
   "spec": "003-dynamics-365-category-synchronization",
   "state": "building",
   "subtasks": {
-    "completed": 11,
+    "completed": 12,
     "total": 19,
     "in_progress": 1,
     "failed": 0
   },
   "phase": {
-    "current": "Hangfire Background Job Setup",
+    "current": "Scheduled Sync Job",
     "id": null,
-    "total": 3
+    "total": 1
   },
   "workers": {
     "active": 0,
     "max": 1
   },
   "session": {
-    "number": 15,
+    "number": 16,
     "started_at": "2025-12-27T21:25:04.880837"
   },
-  "last_update": "2025-12-28T00:56:13.811526"
+  "last_update": "2025-12-28T00:57:54.041360"
 }
