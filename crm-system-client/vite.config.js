@@ -7,6 +7,11 @@ import jsconfigPaths from 'vite-jsconfig-paths';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// SSL cert paths
+const certKeyPath = path.resolve(__dirname, 'certs/_wildcard.local.com-key.pem');
+const certPath = path.resolve(__dirname, 'certs/_wildcard.local.com.pem');
+const certsExist = fs.existsSync(certKeyPath) && fs.existsSync(certPath);
+
 export default defineConfig({
   plugins: [
     react(),
@@ -27,10 +32,10 @@ export default defineConfig({
     host: 'crm.local.com',
     port: 3000,
     strictPort: true,
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'certs/_wildcard.local.com-key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'certs/_wildcard.local.com.pem')),
-    },
+    https: certsExist ? {
+      key: fs.readFileSync(certKeyPath),
+      cert: fs.readFileSync(certPath),
+    } : false,
     open: true
   },
   preview: {
