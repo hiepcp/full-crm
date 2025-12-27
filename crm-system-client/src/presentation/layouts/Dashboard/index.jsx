@@ -45,23 +45,30 @@ export default function DashboardLayout() {
   if (menuMasterLoading || roleProfileLoading) return <Loader />;
 
   return (
-    <Box sx={{ display: 'flex', width: '100%', height: 'calc(100vh - 70px)' }}>
+    <Box sx={{ display: 'flex', width: '100%', minHeight: '100vh' }}>
       <Header />
       <Drawer />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
+          flexShrink: 1,
+          flexBasis: 0,
+          display: 'flex',
+          flexDirection: 'column',
           p: { xs: 1, sm: 2 },
-          width: {
-            xs: '100%',
-            lg: drawerOpen ? `calc(100% - ${drawerWidth}px)` : '100%'
-          },
-          height: '100%',
-          transition: theme.transitions.create('width', {
+          width: 'auto',
+          minWidth: 0,
+          maxWidth: '100%',
+          transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen
-          })
+          }),
+          marginLeft: {
+            xs: 0,
+            lg: drawerOpen ? 0 : 0
+          },
+          overflow: 'auto'
         }}
       >
         <Toolbar />
