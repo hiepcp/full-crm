@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS crm_deal (
+  Id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  CustomerId BIGINT NULL,
+  OwnerId BIGINT NULL,
+  LeadId BIGINT NULL,
+  Name VARCHAR(255) NOT NULL,
+  Description TEXT NULL,
+  Stage ENUM('Prospecting','Quotation','Proposal','Negotiation','Closed Won','Closed Lost','On Hold') NOT NULL DEFAULT 'Prospecting',
+  ExpectedRevenue DECIMAL(15,2) NULL,
+  ActualRevenue DECIMAL(15,2) NULL,
+  CloseDate DATE NULL,
+  ContactId BIGINT NULL,
+  Note TEXT NULL,
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NULL,
+  UpdatedOn DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255) NULL,
+
+  INDEX idx_crm_deal_customer_id (CustomerId),
+  INDEX idx_crm_deal_owner_id (OwnerId),
+  INDEX idx_crm_deal_lead_id (LeadId),
+  INDEX idx_crm_deal_stage (Stage),
+  INDEX idx_crm_deal_close_date (CloseDate),
+  INDEX idx_crm_deal_contact_id (ContactId),
+  INDEX idx_crm_deal_expected_revenue (ExpectedRevenue),
+  INDEX idx_crm_deal_created_on (CreatedOn),
+  INDEX idx_crm_deal_updated_on (UpdatedOn),
+
+  FOREIGN KEY (CustomerId) REFERENCES crm_customer(Id) ON DELETE SET NULL,
+  FOREIGN KEY (LeadId) REFERENCES crm_lead(Id) ON DELETE SET NULL,
+  FOREIGN KEY (ContactId) REFERENCES crm_contact(Id) ON DELETE SET NULL
+);

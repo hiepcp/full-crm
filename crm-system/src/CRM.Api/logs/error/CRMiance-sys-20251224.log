@@ -1,0 +1,558 @@
+2025-12-24 09:25:31.405 +07:00 [ERR] GetAllAsync - Failed to retrieve ReferenceTypes records (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.GetAllAsync(CancellationToken cancellationToken)
+2025-12-24 09:28:09.563 +07:00 [ERR] GetAllAsync - Failed to retrieve ReferenceTypes records (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.GetAllAsync(CancellationToken cancellationToken)
+2025-12-24 09:38:21.641 +07:00 [ERR] GetAllAsync - Failed to retrieve ReferenceTypes records (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.GetAllAsync(CancellationToken cancellationToken)
+2025-12-24 09:38:24.821 +07:00 [ERR] GetAllAsync - Failed to retrieve ReferenceTypes records (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.GetAllAsync(CancellationToken cancellationToken)
+2025-12-24 09:38:27.344 +07:00 [ERR] Error getting active lead score rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules/active, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetActiveAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 46
+   at CRMSys.Application.Services.LeadScoreService.GetActiveRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 55
+2025-12-24 09:38:27.431 +07:00 [ERR] Error fetching active rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules/active, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetActiveAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 46
+   at CRMSys.Application.Services.LeadScoreService.GetActiveRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 55
+   at CRMSys.Api.Controllers.LeadScoreController.GetActiveRules(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadScoreController.cs:line 61
+2025-12-24 09:38:27.858 +07:00 [ERR] QueryWithDomain - Error querying leads with domain filter (User=hiepcp@response.com.vn, Path=/api/leads/query-domain, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.LeadRepository.QueryAsync(LeadQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadRepository.cs:line 59
+   at CRMSys.Application.Services.LeadService.QueryAsync(LeadQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadService.cs:line 76
+   at CRMSys.Api.Controllers.LeadController.QueryWithDomain(Int32 page, Int32 pageSize, String sortColumn, String sortOrder, Nullable`1 type, LeadDomainQueryWrapper body, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadController.cs:line 265
+2025-12-24 09:38:27.942 +07:00 [ERR] QueryWithDomain - Error querying leads with domain filter (User=hiepcp@response.com.vn, Path=/api/leads/query-domain, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.LeadRepository.QueryAsync(LeadQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadRepository.cs:line 59
+   at CRMSys.Application.Services.LeadService.QueryAsync(LeadQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadService.cs:line 76
+   at CRMSys.Api.Controllers.LeadController.QueryWithDomain(Int32 page, Int32 pageSize, String sortColumn, String sortOrder, Nullable`1 type, LeadDomainQueryWrapper body, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadController.cs:line 265
+2025-12-24 09:38:31.380 +07:00 [ERR] GetCustomers - Error querying customers (User=hiepcp@response.com.vn, Path=/api/customers, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.CustomerRepository.QueryAsync(CustomerQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\CustomerRepository.cs:line 54
+   at CRMSys.Application.Services.CustomerService.QueryAsync(CustomerQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CustomerService.cs:line 45
+   at CRMSys.Api.Controllers.CustomerController.GetCustomers(CustomerQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\CustomerController.cs:line 66
+2025-12-24 09:38:31.486 +07:00 [ERR] QueryWithDomain - Error querying deals with domain filter (User=hiepcp@response.com.vn, Path=/api/deals/query-domain, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.DealRepository.QueryAsync(DealQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\DealRepository.cs:line 54
+   at CRMSys.Application.Services.DealService.QueryAsync(DealQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 51
+   at CRMSys.Api.Controllers.DealController.QueryWithDomain(Int32 page, Int32 pageSize, String sortColumn, String sortOrder, DealDomainQueryWrapper body, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 210
+2025-12-24 09:38:31.548 +07:00 [ERR] QueryWithDomain - Error querying deals with domain filter (User=hiepcp@response.com.vn, Path=/api/deals/query-domain, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.DealRepository.QueryAsync(DealQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\DealRepository.cs:line 54
+   at CRMSys.Application.Services.DealService.QueryAsync(DealQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 51
+   at CRMSys.Api.Controllers.DealController.QueryWithDomain(Int32 page, Int32 pageSize, String sortColumn, String sortOrder, DealDomainQueryWrapper body, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 210
+2025-12-24 09:39:26.981 +07:00 [ERR] GetCustomers - Error querying customers (User=hiepcp@response.com.vn, Path=/api/customers, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.CustomerRepository.QueryAsync(CustomerQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\CustomerRepository.cs:line 54
+   at CRMSys.Application.Services.CustomerService.QueryAsync(CustomerQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CustomerService.cs:line 45
+   at CRMSys.Api.Controllers.CustomerController.GetCustomers(CustomerQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\CustomerController.cs:line 66
+2025-12-24 09:39:27.102 +07:00 [ERR] Error in QueryWithDomain for contacts (User=hiepcp@response.com.vn, Path=/api/contacts/query-domain, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Retrieval of the RSA public key is not enabled for insecure connections
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.GeneratePassword()
+   at MySql.Data.MySqlClient.Authentication.CachingSha2AuthenticationPlugin.MoreDataAsync(Byte[] data, Boolean execAsync)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.ContinueAuthenticationAsync(Boolean execAsync, Byte[] data)
+   at MySql.Data.MySqlClient.Authentication.MySqlAuthenticationPlugin.AuthenticateAsync(Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.AuthenticateAsync(String authMethod, Boolean reset, Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at UnitOfWork.get_Connection()
+   at Shared.Dapper.Repositories.BaseRepository`2.get_Connection()
+   at CRMSys.Infrastructure.Repositories.ContactRepository.QueryAsync(ContactQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\ContactRepository.cs:line 54
+   at CRMSys.Application.Services.ContactService.QueryAsync(ContactQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ContactService.cs:line 47
+   at CRMSys.Api.Controllers.ContactController.QueryWithDomain(Int32 page, Int32 pageSize, String sortColumn, String sortOrder, ContactDomainQueryWrapper body, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ContactController.cs:line 138
+2025-12-24 11:28:54.794 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:29:07.251 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:29:21.958 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:30:03.978 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:49:59.318 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:53:06.588 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:53:28.076 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:54:20.055 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 11:58:23.040 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 12:19:50.857 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 12:20:19.199 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 12:21:10.898 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 12:21:23.381 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 12:23:40.125 +07:00 [ERR] [User: Unknown] Requested file DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg - Failure: Unexpected error (User=Unknown, Path=/api/files/DEV%2FCRM%2FActivities%2Flead%2F17%2F857c71eb-dd51-4e9f-9b49-29c02df1f04f_20251224024128_cb03fc.jpg, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Failed to retrieve file URL: Response status code does not indicate success: 400 (Bad Request).
+ ---> System.Net.Http.HttpRequestException: Response status code does not indicate success: 400 (Bad Request).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.SharepointService.ReadFileInfoAsync(String fileId)
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 38
+   --- End of inner exception stack trace ---
+   at CRMSys.Application.Services.FileRetrievalService.GetFileUrlAsync(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\FileRetrievalService.cs:line 71
+   at CRMSys.Api.Controllers.FilesController.GetFileUrl(String idRef, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\FilesController.cs:line 45
+2025-12-24 13:03:15.103 +07:00 [ERR] AddAsync - Failed to add Activity (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+2025-12-24 13:03:15.429 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 259
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 394
+   at CRMSys.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-24 13:03:53.274 +07:00 [ERR] AddAsync - Failed to add Activity (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+2025-12-24 13:03:53.432 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 259
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 394
+   at CRMSys.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-24 13:05:15.313 +07:00 [ERR] AddAsync - Failed to add Activity (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+2025-12-24 13:05:15.454 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 259
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 394
+   at CRMSys.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-24 13:05:25.905 +07:00 [ERR] AddAsync - Failed to add Activity (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+2025-12-24 13:05:26.053 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'ActivityType' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at Dapper.SimpleCRUD.InsertAsync[TKey,TEntity](IDbConnection connection, TEntity entityToInsert, IDbTransaction transaction, Nullable`1 commandTimeout)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 259
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 394
+   at CRMSys.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-24 14:50:37.931 +07:00 [ERR] UpdateAsync - Failed to update Activity with Id=21 (User=hiepcp@response.com.vn, Path=/api/activities/21, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Transaction already started. Commit or rollback the current transaction before starting a new one.
+   at UnitOfWork.BeginTransactionAsync(IsolationLevel isolationLevel)
+   at CRMSys.Application.Services.BaseService`3.UpdateAsync(TKey id, TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 200
+   at CRMSys.Application.Services.BaseService`3.UpdateAsync(TKey id, TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 212
+2025-12-24 14:50:38.043 +07:00 [ERR] Error updating activity with id: 21 (User=hiepcp@response.com.vn, Path=/api/activities/21, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: No active transaction to rollback. Call BeginTransactionAsync first.
+   at UnitOfWork.RollbackAsync()
+   at CRMSys.Application.Services.ActivityService.UpdateAsync(Int64 id, UpdateActivityRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 204
+   at CRMSys.Api.Controllers.ActivityController.Update(Int64 id, UpdateActivityRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 189

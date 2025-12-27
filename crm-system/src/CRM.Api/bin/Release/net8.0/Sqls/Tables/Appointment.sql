@@ -1,0 +1,45 @@
+CREATE TABLE IF NOT EXISTS crm_appointment (
+  Id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  MailId VARCHAR(255) NULL,
+  ICalUId VARCHAR(255) NULL,
+  ConversationId VARCHAR(255) NULL,
+  Subject VARCHAR(500) NULL,
+  BodyPreview TEXT NULL,
+  BodyContent LONGTEXT NULL,
+  BodyContentType VARCHAR(50) DEFAULT 'html',
+  OrganizerName VARCHAR(255) NULL,
+  OrganizerAddress VARCHAR(320) NULL,
+  Attendees TEXT NULL,
+  StartDateTime DATETIME NOT NULL,
+  EndDateTime DATETIME NULL,
+  StartTimeZone VARCHAR(100) NULL,
+  EndTimeZone VARCHAR(100) NULL,
+  DurationMinutes INT NULL,
+  LocationName VARCHAR(255) NULL,
+  LocationAddress VARCHAR(500) NULL,
+  IsOnlineMeeting TINYINT(1) NOT NULL DEFAULT 0,
+  JoinUrl VARCHAR(1000) NULL,
+  Platform VARCHAR(100) NULL,
+  ShowAs VARCHAR(50) NULL,
+  Importance VARCHAR(20) DEFAULT 'normal',
+  Status VARCHAR(50) NULL,
+  HasAttachments TINYINT(1) NOT NULL DEFAULT 0,
+  LastModifiedDateTime DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  ActivityId BIGINT NULL,
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NULL,
+  UpdatedOn DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255) NULL,
+
+  INDEX idx_crm_appointment_mail_id (MailId),
+  INDEX idx_crm_appointment_ical_uid (ICalUId),
+  INDEX idx_crm_appointment_conversation (ConversationId),
+  INDEX idx_crm_appointment_start (StartDateTime),
+  INDEX idx_crm_appointment_end (EndDateTime),
+  INDEX idx_crm_appointment_activity (ActivityId),
+
+  FOREIGN KEY (ActivityId) REFERENCES crm_activity(Id) ON DELETE SET NULL
+);
+
+
+

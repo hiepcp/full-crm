@@ -1,0 +1,8 @@
+2025-12-23 15:03:41.801 +07:00 [ERR] UpdateAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/goals/1003/manual-adjustment, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-23 15:03:41.914 +07:00 [ERR] Error manually adjusting progress for goal 1003 (User=hiepcp@response.com.vn, Path=/api/goals/1003/manual-adjustment, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: UpdateAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.UpdateAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Infrastructure.Repositories.GoalRepository.UpdateAsync(Goal goal, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalRepository.cs:line 74
+   at CRMSys.Application.Services.GoalService.ManualAdjustProgressAsync(Int64 id, ManualProgressAdjustmentRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 351
+   at CRMSys.Api.Controllers.GoalController.ManualAdjustProgress(Int64 id, ManualProgressAdjustmentRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 244

@@ -1,0 +1,85 @@
+2025-12-16 16:34:58.281 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 16:34:58.399 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 101
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 16:41:43.815 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: No active transaction to rollback. Call BeginTransactionAsync first.
+   at UnitOfWork.RollbackAsync()
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 112
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 16:44:49.952 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: No active transaction to rollback. Call BeginTransactionAsync first.
+   at UnitOfWork.RollbackAsync()
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 112
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 16:51:42.891 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 16:54:07.208 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 16:54:07.352 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 99
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 16:54:32.055 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 16:54:36.131 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 99
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 16:54:51.568 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:02:17.345 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:02:17.456 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct)
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct)
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 21:02:26.352 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:02:27.610 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct)
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct)
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 21:02:40.338 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:03:01.513 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct)
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct)
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 21:20:15.723 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:20:23.326 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 95
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 21:20:47.453 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:20:47.518 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 95
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 21:33:33.578 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-16 21:33:39.972 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 95
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-16 21:40:50.143 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)

@@ -1,0 +1,251 @@
+2025-12-15 10:22:05.074 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 453 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'ComplianceSysApi.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:22:08.638 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 28 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'ComplianceSysApi.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:23:13.934 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 10 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'ComplianceSysApi.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:23:24.989 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 17 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'ComplianceSysApi.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:23:34.127 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 9 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'ComplianceSysApi.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:24:27.112 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 408 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'CRM.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:25:13.796 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 8 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'CRM.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:26:31.808 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 7 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'CRM.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 10:27:08.672 +07:00 [ERR] Request POST /api/all-crms/get-dynamics failed after 18 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/all-crms/get-dynamics, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IAllCRMService' while attempting to activate 'CRM.Api.Controllers.AllCRMController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-15 13:59:09.405 +07:00 [ERR] Error getting active lead score rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules/active, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'FieldName' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetActiveAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 46
+   at CRMSys.Application.Services.LeadScoreService.GetActiveRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 55
+2025-12-15 13:59:09.629 +07:00 [ERR] Error fetching active rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules/active, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'FieldName' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetActiveAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 46
+   at CRMSys.Application.Services.LeadScoreService.GetActiveRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 55
+   at CRM.Api.Controllers.LeadScoreController.GetActiveRules(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadScoreController.cs:line 61
+2025-12-15 13:59:24.753 +07:00 [ERR] Error getting active lead score rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules/active, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'FieldName' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetActiveAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 46
+   at CRMSys.Application.Services.LeadScoreService.GetActiveRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 55
+2025-12-15 13:59:24.832 +07:00 [ERR] Error fetching active rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules/active, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'FieldName' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetActiveAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 46
+   at CRMSys.Application.Services.LeadScoreService.GetActiveRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 55
+   at CRM.Api.Controllers.LeadScoreController.GetActiveRules(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadScoreController.cs:line 61
+2025-12-15 14:23:22.696 +07:00 [ERR] Error getting all lead score rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'FieldName' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetAllAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 31
+   at CRMSys.Application.Services.LeadScoreService.GetAllRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 38
+2025-12-15 14:23:22.831 +07:00 [ERR] Error fetching all rules (User=hiepcp@response.com.vn, Path=/api/lead-score/rules, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'FieldName' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.LeadScoreRuleRepository.GetAllAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadScoreRuleRepository.cs:line 31
+   at CRMSys.Application.Services.LeadScoreService.GetAllRulesAsync(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadScoreService.cs:line 38
+   at CRM.Api.Controllers.LeadScoreController.GetAllRules(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadScoreController.cs:line 40
+2025-12-15 15:46:09.103 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-15 15:46:09.264 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 194
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-15 15:47:04.210 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-15 15:47:04.271 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 194
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-15 15:48:41.893 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-15 15:49:38.690 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 194
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-15 15:50:23.833 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-15 15:51:29.783 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 194
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273

@@ -1,0 +1,2003 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CRM.Api</name>
+    </assembly>
+    <members>
+        <member name="T:CRMSys.Api.Controllers.ActivityAttachmentsController">
+            <summary>
+            ActivityAttachmentsController
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityAttachmentsController.#ctor(CRMSys.Application.Interfaces.Services.IActivityAttachmentService)">
+            <summary>
+            ActivityAttachmentsController
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityAttachmentsController.Get(CRMSys.Application.Dtos.Request.ActivityAttachmentQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Get
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityAttachmentsController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            GetById
+            </summary>
+            <param name="id"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityAttachmentsController.Create(CRMSys.Application.Dtos.Request.CreateActivityAttachmentRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityAttachmentsController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateActivityAttachmentRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update
+            </summary>
+            <param name="id"></param>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityAttachmentsController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete
+            </summary>
+            <param name="id"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.ActivityController">
+            <summary>
+            Controller for managing Activities (CRM Activities management) with CRUD and advanced query
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.#ctor(CRMSys.Application.Interfaces.Services.IActivityService)">
+            <summary>
+            Init ActivityController
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.GetActivities(CRMSys.Application.Dtos.Request.ActivityQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Lấy Paginated list of activities và filtering
+            </summary>
+            <param name="request">Activity query request với các tham số filtering</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of activities</returns>
+            <response code="200">Successfully returned List of activities</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.QueryWithDomain(System.Int32,System.Int32,System.String,System.String,CRMSys.Application.Dtos.Request.ActivityDomainQueryWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Query activities with advanced domain filter (JSON expression) and field selection
+            </summary>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Records per page (default: 10, max: 100)</param>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="body">Domain filter wrapper containing filter conditions</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of activities</returns>
+            <response code="200">Successfully returned activities list</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get activity by ID
+            </summary>
+            <param name="id">Activity ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Activity details</returns>
+            <response code="200">Successfully returned activity details</response>
+            <response code="404">Activity not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.Create(CRMSys.Application.Dtos.Request.CreateActivityRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new activity
+            </summary>
+            <param name="request">Activity information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created activity</returns>
+            <response code="201">Successfully created activity, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateActivityRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update activity
+            </summary>
+            <param name="id">Activity ID to update</param>
+            <param name="request">Activity information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Updated activity information</returns>
+            <response code="200">Successfully updated activity</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">Activity not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(System.Threading.CancellationToken)">
+            <summary>
+            Create new activity with participants and attachments
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created activity</returns>
+            <response code="201">Successfully created activity with participants and attachments</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete activity
+            </summary>
+            <param name="id">Activity ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Successfully deleted activity</response>
+            <response code="404">Activity not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.ActivityParticipantsController">
+            <summary>
+            Controller for managing Activity Participants
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityParticipantsController.#ctor(CRMSys.Application.Interfaces.Services.IActivityParticipantService)">
+            <summary>
+            Init ActivityParticipantsController
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityParticipantsController.Get(CRMSys.Application.Dtos.Request.ActivityParticipantQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query activity participants with pagination and filtering
+            </summary>
+            <param name="request">Activity participant query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of activity participants</returns>
+            <response code="200">Successfully returned List of participants</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityParticipantsController.Create(CRMSys.Application.Dtos.Request.CreateActivityParticipantRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new activity participant
+            </summary>
+            <param name="request">participant information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created participant</returns>
+            <response code="201">Successfully created participant, returns ID</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityParticipantsController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get activity participant by ID
+            </summary>
+            <param name="id">Participant ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>participant</returns>
+            <response code="200">Successfully returned participant details</response>
+            <response code="404">participant</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityParticipantsController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateActivityParticipantRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update activity participant
+            </summary>
+            <param name="id">Participant ID to update</param>
+            <param name="request">participant information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update participant thành công</response>
+            <response code="404">participant</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ActivityParticipantsController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete activity participant
+            </summary>
+            <param name="id">Participant ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete participant thành công</response>
+            <response code="404">participant</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.AddressController">
+            <summary>
+            Controller for managing addresses (Lead and Customer addresses)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AddressController.#ctor(CRMSys.Application.Interfaces.Services.IAddressService)">
+            <summary>
+            Init
+            </summary>
+            <param name="addressService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AddressController.GetByRelation(System.String,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get addresses by relation (e.g., all addresses for a specific lead or customer)
+            </summary>
+            <param name="relationType">Loại relation (lead, customer, ...)</param>
+            <param name="relationId">ID của relation</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of addresses của relation</returns>
+            <response code="200">Successfully returned List of addresses</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.AllCRMController">
+            <summary>
+            Controller quản lý AllCRM API.
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AllCRMController.#ctor(CRMSys.Application.Interfaces.Services.IReferenceTypesService,CRMSys.Application.Interfaces.Services.IAllCRMService,Shared.ExternalServices.Interfaces.ISharepointService,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.IServiceProvider)">
+            <summary>
+            AllCRMController
+            </summary>
+            <param name="referenceTypesService"></param>
+            <param name="allCRMService"></param>
+            <param name="sharepointService"></param>
+            <param name="memoryCache"></param>
+            <param name="serviceProvider"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AllCRMController.Get365(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest})">
+            <summary>
+            Get365
+            </summary>
+            <param name="refType"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortOrder"></param>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AllCRMController.GetByModalName(System.String,System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest})">
+            <summary>
+            GetByModalName
+            </summary>
+            <param name="modalName"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortOrder"></param>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.AppointmentController">
+            <summary>
+            AppointmentController
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.#ctor(CRMSys.Application.Interfaces.Services.IAppointmentService)">
+            <summary>
+            Init AppointmentController
+            </summary>
+            <param name="appointmentService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.GetAppointments(CRMSys.Application.Dtos.Request.AppointmentQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            GetAppointments
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            GetById
+            </summary>
+            <param name="id"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.GetByMailId(System.String,System.Threading.CancellationToken)">
+            <summary>
+            GetByMailId
+            </summary>
+            <param name="mailId"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.Create(CRMSys.Application.Dtos.Request.CreateAppointmentRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateAppointmentRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update
+            </summary>
+            <param name="id"></param>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AppointmentController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete
+            </summary>
+            <param name="id"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.AssigneesController">
+            <summary>
+            Controller for managing Assignees (User assignments to entities) with CRUD and advanced query
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.#ctor(CRMSys.Application.Interfaces.Services.IAssigneeService)">
+            <summary>
+            Init
+            </summary>
+            <param name="assigneeService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.GetAssignees(CRMSys.Application.Dtos.Request.AssigneeQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query assignees với pagination, filtering, ordering, top N và field selection.
+            Sử dụng query parameters cho simple filters và domain filters.
+            </summary>
+            <param name="request">Assignee query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of assignees</returns>
+            <response code="200">Successfully returned List of assignees</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get assignee by ID
+            </summary>
+            <param name="id">Assignee ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>assignee</returns>
+            <response code="200">Successfully returned assignee details</response>
+            <response code="404">assignee</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.Create(CRMSys.Application.Dtos.Request.CreateAssigneeRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new assignee
+            </summary>
+            <param name="request">assignee information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created assignee</returns>
+            <response code="201">Successfully created assignee, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateAssigneeRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update assignee
+            </summary>
+            <param name="id">Assignee ID to update</param>
+            <param name="request">assignee information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update assignee thành công</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">assignee</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete assignee
+            </summary>
+            <param name="id">Assignee ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete assignee thành công</response>
+            <response code="404">assignee</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.AssigneesController.GetByRelation(System.String,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy assignees theo relation (ví dụ: tất cả assignees của một lead)
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.ContactController">
+            <summary>
+            Controller for managing Contacts (CRM Contacts management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.#ctor(CRMSys.Application.Interfaces.Services.IContactService)">
+            <summary>
+            ContactController
+            </summary>
+            <param name="contactService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.GetContacts(CRMSys.Application.Dtos.Request.ContactQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query contacts with pagination and filtering
+            </summary>
+            <param name="request">Contact query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of contacts</returns>
+            <response code="200">Successfully returned contacts list</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.QueryWithDomain(System.Int32,System.Int32,System.String,System.String,CRMSys.Application.Dtos.Request.ContactDomainQueryWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Query contacts with advanced domain filter (JSON expression) and field selection
+            </summary>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Records per page (default: 10, max: 100)</param>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="body">Domain filter wrapper containing filter conditions</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of contacts</returns>
+            <response code="200">Successfully returned contacts list</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get contact by ID
+            </summary>
+            <param name="id">Contact ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Contact details</returns>
+            <response code="200">Successfully returned contact details</response>
+            <response code="404">Contact not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.Create(CRMSys.Application.Dtos.Request.CreateContactRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new contact
+            </summary>
+            <param name="request">Contact information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created contact</returns>
+            <response code="201">Successfully created contact, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateContactRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update contact
+            </summary>
+            <param name="id">Contact ID to update</param>
+            <param name="request">Contact information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Successfully updated contact</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">Contact not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete contact
+            </summary>
+            <param name="id">Contact ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Successfully deleted contact</response>
+            <response code="404">Contact not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.GetDealsByContact(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get deals by Contact
+            </summary>
+            <param name="contactId">Contact ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of deals for the contact</returns>
+            <response code="200">Successfully returned list of deals</response>
+            <response code="404">No deals found for contact</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.GetActivitiesByContact(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get activities by Contact
+            </summary>
+            <param name="contactId">Contact ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of activities for the contact</returns>
+            <response code="200">Successfully returned list of activities</response>
+            <response code="404">No activities found for contact</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.ContactController.SetAsPrimary(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Set contact as primary for its customer
+            </summary>
+            <param name="id">Contact ID to set as primary</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Success response</returns>
+            <response code="200">Successfully set as primary</response>
+            <response code="404">Contact not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.CustomerAddressController">
+            <summary>
+            Controller for managing Customer Addresses (CRM Customer Addresses management) with CRUD and advanced query
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.#ctor(CRMSys.Application.Interfaces.Services.ICustomerAddressService)">
+            <summary>
+            Init CustomerAddressController
+            </summary>
+            <param name="customerAddressService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.GetCustomerAddresses(CRMSys.Application.Dtos.Request.CustomerAddressQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query customer addresses với pagination, filtering, ordering, top N và field selection.
+            Sử dụng query parameters cho simple filters.
+            </summary>
+            <param name="request">Customer address query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of customer addresses</returns>
+            <response code="200">Successfully returned List of customer addresses</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.GetByCustomerId(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get all addresses for a specific customer
+            </summary>
+            <param name="customerId">Customer ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of addresses của customer</returns>
+            <response code="200">Successfully returned List of addresses</response>
+            <response code="404">addresses</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get customer address by ID
+            </summary>
+            <param name="id">Customer address ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>customer address</returns>
+            <response code="200">Successfully returned customer address details</response>
+            <response code="404">customer address</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.Create(CRMSys.Application.Dtos.Request.CreateCustomerAddressRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new customer address
+            </summary>
+            <param name="request">customer address information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created customer address</returns>
+            <response code="201">Successfully created customer address, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateCustomerAddressRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update customer address
+            </summary>
+            <param name="id">Customer address ID to update</param>
+            <param name="request">customer address information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update customer address thành công</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">customer address</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete customer address
+            </summary>
+            <param name="id">Customer address ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete customer address thành công</response>
+            <response code="404">customer address</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerAddressController.SetAsPrimary(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Set address as primary for its type
+            </summary>
+            <param name="id">Customer address ID cần set làm primary</param>
+            <param name="ct">Cancellation token</param>
+            <returns>set primary</returns>
+            <response code="200">Set primary thành công</response>
+            <response code="404">customer address</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.CustomerController">
+            <summary>
+            Controller quản lý Customer (CRM Customers management) với CRUD và query nâng cao
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.#ctor(CRMSys.Application.Interfaces.Services.ICustomerService)">
+            <summary>
+            Init CustomerController
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.GetCustomers(CRMSys.Application.Dtos.Request.CustomerQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query customers với pagination, filtering, ordering, top N và field selection.
+            Sử dụng query parameters cho simple filters và domain filters.
+            </summary>
+            <param name="request">Customer query request với các tham số filtering</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of customers</returns>
+            <response code="200">Successfully returned List of customers</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.QueryWithDomain(CRMSys.Application.Dtos.Request.CustomerQueryRequest,System.String,System.String,CRMSys.Application.Dtos.Request.CustomerDomainQueryWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Query customers with advanced domain filter (JSON expression) và field selection.
+            Sử dụng CustomerQueryRequest trong body để truyền domain filter và fields.
+            </summary>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="requestTemp"></param>
+            <param name="body">Domain filter wrapper containing filter conditions</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of customers</returns>
+            <response code="200">Successfully returned List of customers</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get customer by ID
+            </summary>
+            <param name="id">Customer ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>customer</returns>
+            <response code="200">Successfully returned customer details</response>
+            <response code="404">customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.GetDealsByCustomer(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy deal theo Customer
+            </summary>
+            <param name="customerId">Customer ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of deals của customer</returns>
+            <response code="200">Successfully returned List of deals</response>
+            <response code="404">deals cho customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.GetLeadsByCustomer(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy lead theo Customer
+            </summary>
+            <param name="customerId">Customer ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of leads của customer</returns>
+            <response code="200">Successfully returned List of leads</response>
+            <response code="404">leads cho customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.GetActivitiesByCustomer(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy activities theo Customer
+            </summary>
+            <param name="customerId">Customer ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of activities của customer</returns>
+            <response code="200">Successfully returned List of activities</response>
+            <response code="404">activities cho customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.GetContactsByCustomer(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy contacts theo Customer
+            </summary>
+            <param name="customerId">Customer ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of contacts của customer</returns>
+            <response code="200">Successfully returned List of contacts</response>
+            <response code="404">contacts cho customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.Create(CRMSys.Application.Dtos.Request.CreateCustomerRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new customer
+            </summary>
+            <param name="request">customer information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created customer</returns>
+            <response code="201">Successfully created customer, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateCustomerRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update customer
+            </summary>
+            <param name="id">Customer ID to update</param>
+            <param name="request">customer information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update customer thành công</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.CustomerController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete customer
+            </summary>
+            <param name="id">Customer ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete customer thành công</response>
+            <response code="404">customer</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.DealController">
+            <summary>
+            Controller for managing Deals (CRM Deals management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.#ctor(CRMSys.Application.Interfaces.Services.IDealService,CRMSys.Application.Interfaces.Services.IDealQuotationStatusService)">
+            <summary>
+            Init DealController
+            </summary>
+            <param name="dealService"></param>
+            <param name="dealQuotationStatusService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.GetDeals(CRMSys.Application.Dtos.Request.DealQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query deals with pagination and filtering
+            </summary>
+            <param name="request">Deal query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of deals</returns>
+            <response code="200">Successfully returned deals list</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get deal by ID
+            </summary>
+            <param name="id">Deal ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deal details</returns>
+            <response code="200">Successfully returned deal details</response>
+            <response code="404">Deal not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.QueryWithDomain(System.Int32,System.Int32,System.String,System.String,CRMSys.Application.Dtos.Request.DealDomainQueryWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Query deals with advanced domain filter (JSON expression) và field selection.
+            Sử dụng DealQueryRequest trong body để truyền domain filter và fields.
+            </summary>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Records per page (default: 10, max: 100)</param>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="body">Domain filter wrapper containing filter conditions</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of deals</returns>
+            <response code="200">Successfully returned List of deals</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.Create(CRMSys.Application.Dtos.Request.CreateDealRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new deal
+            </summary>
+            <param name="request">deal information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created deal</returns>
+            <response code="201">Successfully created deal, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateDealRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update deal
+            </summary>
+            <param name="id">Deal ID to update</param>
+            <param name="request">deal information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Updated deal details</returns>
+            <response code="200">Successfully updated deal, returns updated deal data</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">deal</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete deal
+            </summary>
+            <param name="id">Deal ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete deal thành công</response>
+            <response code="404">deal</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealController.EvaluatePipeline(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Evaluate and update deal pipeline based on Dynamics 365 quotation statuses
+            </summary>
+            <param name="dealId">The deal ID to evaluate</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Success response</returns>
+            <response code="200">Pipeline evaluated successfully</response>
+            <response code="400">Invalid deal ID</response>
+            <response code="404">Deal not found</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.DealQuotationController">
+            <summary>
+            Controller quản lý Deal-Quotation links (CRM Deal Quotation management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.#ctor(CRMSys.Application.Interfaces.Services.IDealQuotationService)">
+            <summary>
+            Init DealQuotationController
+            </summary>
+            <param name="dealQuotationService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.GetDealQuotations(CRMSys.Application.Dtos.Request.DealQuotationQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query deal quotations với pagination và filtering
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.GetDealQuotation(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get deal quotation by ID
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.CreateDealQuotation(CRMSys.Application.Dtos.Request.CreateDealQuotationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new deal quotation link
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.BulkCreateDealQuotations(System.Collections.Generic.IEnumerable{CRMSys.Application.Dtos.Request.CreateDealQuotationRequest},System.Threading.CancellationToken)">
+            <summary>
+            Bulk create deal quotation links
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.UpdateDealQuotation(System.Int64,CRMSys.Application.Dtos.Request.UpdateDealQuotationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update deal quotation link
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.DeleteDealQuotation(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete deal quotation link
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.GetDealQuotationsByDealId(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get deal quotations by deal ID
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.GetDealQuotationsByQuotationNumber(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get deal quotations by quotation number
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.DeleteDealQuotationsByDealId(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete all deal quotations for a deal
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DealQuotationController.GetQuotationsWithDynamicsDataByDealId(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy danh sách quotations của deal kèm thông tin chi tiết từ Dynamics 365
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.DynController">
+            <summary>
+            Controller for Dynamics 365 integration
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.#ctor(Shared.ExternalServices.Utilities.DynamicsParameterManager,Shared.ExternalServices.Utilities.ODataFilterParser{Shared.ExternalServices.Models.Dynamics.RSVNEcoResCategories},Shared.ExternalServices.Interfaces.IDynamicService,CRMSys.Application.Interfaces.Services.ICRMDynamicsService)">
+            <summary>
+            Init
+            </summary>
+            <param name="paramManager"></param>
+            <param name="parser"></param>
+            <param name="dynamicService"></param>
+            <param name="CRMDynamicsService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.ReferenceData(System.Int32,System.Int32,System.String,System.String,System.Int32,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest},System.Threading.CancellationToken)">
+            <summary>
+            Query Dynamics reference data with pagination and filtering
+            </summary>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Số records mỗi trang (mặc định: 10)</param>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="refType">Loại reference data (mặc định: 1)</param>
+            <param name="filters">List of filters</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of reference data</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.FactoryDataArea(System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest})">
+            <summary>
+            FactoryDataArea
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortOrder"></param>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNInventTables(System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest})">
+            <summary>
+            RSVNInventTables
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortOrder"></param>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.SalesQuotationHeadersV2(System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest})">
+            <summary>
+            SalesQuotationHeadersV2
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <param name="sortColumn"></param>
+            <param name="sortOrder"></param>
+            <param name="filters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.Range(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Range
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.ProductType(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            ProductType
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNProductMasters(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            RSVNProductMasters
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNProductVariants(CRMSys.Application.Dtos.ODataQueryParameters)">
+            <summary>
+            RSVNProductVariants
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.GetProspect(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            GetProspect
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.Groups(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Groups
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.DataArea(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            DataArea
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNHcmWorkers(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            RSVNHcmWorkers
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.InventTable(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            InventTable
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.ProductVariantAttributes(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            ProductVariantAttributes
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNAttributeTypeValueAlls(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            RSVNAttributeTypeValueAlls
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNSalesOrderOpenInvoiceCogs(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            RSVNSalesOrderOpenInvoiceCogs
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.DynController.RSVNSalesLineOpenInvoiceCogs(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            RSVNSalesLineOpenInvoiceCogs
+            </summary>
+            <param name="skip"></param>
+            <param name="top"></param>
+            <param name="filter"></param>
+            <param name="orderBy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.EmailController">
+            <summary>
+            Controller for managing Emails (CRM Emails management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailController.#ctor(CRMSys.Application.Interfaces.Services.IEmailService)">
+            <summary>
+            Init EmailController
+            </summary>
+            <param name="emailService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailController.GetEmails(CRMSys.Application.Dtos.Request.EmailQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query emails with pagination and filtering
+            </summary>
+            <param name="request">Email query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of emails</returns>
+            <response code="200">Successfully returned List of emails</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get email by ID
+            </summary>
+            <param name="id">Email ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>email</returns>
+            <response code="200">Successfully returned email details</response>
+            <response code="404">email</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailController.Create(CRMSys.Application.Dtos.Request.CreateEmailRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new email
+            </summary>
+            <param name="request">email information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created email</returns>
+            <response code="201">Successfully created email, returns ID</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateEmailRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update email
+            </summary>
+            <param name="id">Email ID to update</param>
+            <param name="request">email information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update email thành công</response>
+            <response code="404">email</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete email
+            </summary>
+            <param name="id">Email ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete email thành công</response>
+            <response code="404">email</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.EmailTemplateController">
+            <summary>
+            Controller for managing Email Templates
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.#ctor(CRMSys.Application.Interfaces.Services.IEmailTemplateService)">
+            <summary>
+            Init EmailTemplateController
+            </summary>
+            <param name="templateService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetAvailableTemplates(System.Threading.CancellationToken)">
+            <summary>
+            Get available templates for current user
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of available templates</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetMyTemplates(System.Threading.CancellationToken)">
+            <summary>
+            Get user's own templates
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of user's templates</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetSharedTemplates(System.Threading.CancellationToken)">
+            <summary>
+            Get shared templates (not owned by current user)
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of shared templates</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.SearchTemplates(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Search templates by keyword
+            </summary>
+            <param name="keyword">Search keyword</param>
+            <param name="category">Optional category filter</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of matching templates</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetByCategory(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get templates by category
+            </summary>
+            <param name="category">Category name</param>
+            <param name="ct">Cancellation token</param>
+            <returns>List of templates in category</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get template by ID
+            </summary>
+            <param name="id">Template ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Template details</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.Create(CRMSys.Application.Dtos.Request.CreateEmailTemplateRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new template
+            </summary>
+            <param name="request">Template information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created template</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateEmailTemplateRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update template
+            </summary>
+            <param name="id">Template ID</param>
+            <param name="request">Updated template information</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Success status</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete template
+            </summary>
+            <param name="id">Template ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Success status</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.RenderTemplate(CRMSys.Application.Dtos.Request.RenderEmailTemplateRequest,System.Threading.CancellationToken)">
+            <summary>
+            Render template with variable replacement (preview)
+            </summary>
+            <param name="request">Render request with template ID and variable values</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Rendered template</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.UseTemplate(CRMSys.Application.Dtos.Request.UseEmailTemplateRequest,System.Threading.CancellationToken)">
+            <summary>
+            Use template (send email)
+            </summary>
+            <param name="request">Use template request with recipient and variable values</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Success status</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetAvailableVariables(System.Threading.CancellationToken)">
+            <summary>
+            Get all available variables
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of variables grouped by entity type</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.EmailTemplateController.GetCurrentUserEmail">
+            <summary>
+            Helper method to get current user email from context or JWT token
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.GoalController">
+            <summary>
+            GoalController
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.#ctor(CRMSys.Application.Interfaces.Services.IGoalService)">
+            <summary>
+            Init GoalController
+            </summary>
+            <param name="goalService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.GetGoals(CRMSys.Application.Dtos.Request.GoalQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            GetGoals
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            GetById
+            </summary>
+            <param name="id"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.Create(CRMSys.Application.Dtos.Request.CreateGoalRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateGoalRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update
+            </summary>
+            <param name="id"></param>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete
+            </summary>
+            <param name="id"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.GoalController.GetMetrics(CRMSys.Application.Dtos.Request.GoalMetricsRequest,System.Threading.CancellationToken)">
+            <summary>
+            GetMetrics
+            </summary>
+            <param name="request"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.LeadController">
+            <summary>
+            Controller for managing Leads (CRM Leads management) with CRUD and advanced query
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.#ctor(CRMSys.Application.Interfaces.Services.ILeadService)">
+            <summary>
+            Init LeadController
+            </summary>
+            <param name="leadService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.CreateWithActivity(CRMSys.Application.Dtos.Request.CreateLeadWithActivityRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create lead WITH initial activity (required) in a single transaction.
+            </summary>
+            <param name="request">Lead and activity data to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created lead and activity</returns>
+            <response code="201">Successfully created lead and activity</response>
+            <response code="400">Invalid request or missing activity</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.GetLeads(CRMSys.Application.Dtos.Request.LeadQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query leads với pagination, filtering, ordering, top N và field selection.
+            Sử dụng query parameters cho simple filters và domain filters.
+            Ví dụ: ?status=new&amp;fields=id,first_name,email&amp;page=1&amp;pageSize=20&amp;domain={"status":"new"}
+            </summary>
+            <param name="request">Lead query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of leads</returns>
+            <response code="200">Successfully returned List of leads</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.QueryWithDomain(System.Int32,System.Int32,System.String,System.String,CRMSys.Application.Dtos.Request.LeadDomainQueryWrapper,System.Threading.CancellationToken)">
+            <summary>
+            Query leads with advanced domain filter (JSON expression) và field selection.
+            Sử dụng LeadQueryRequest trong body để truyền domain filter và fields.
+            </summary>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Records per page (default: 10, max: 100)</param>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="body">Domain filter wrapper containing filter conditions</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of leads</returns>
+            <response code="200">Successfully returned List of leads</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get lead by ID
+            </summary>
+            <param name="id">Lead ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>lead</returns>
+            <response code="200">Successfully returned lead details</response>
+            <response code="404">lead</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.Create(CRMSys.Application.Dtos.Request.CreateLeadRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new lead
+            </summary>
+            <param name="request">lead information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created lead</returns>
+            <response code="201">Successfully created lead, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateLeadRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update lead
+            </summary>
+            <param name="id">Lead ID to update</param>
+            <param name="request">lead information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update lead thành công</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">lead</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete lead
+            </summary>
+            <param name="id">Lead ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete lead thành công</response>
+            <response code="404">lead</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.ConvertToDeal(System.Int64,CRMSys.Application.Dtos.Request.ConvertLeadToDealRequest,System.Threading.CancellationToken)">
+            <summary>
+            Convert lead to deal with customer and contact creation
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadController.CreateLeadAddress(CRMSys.Application.Dtos.Request.CreateLeadAddressRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create address for lead (stored in crm_lead_address)
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.LeadScoreController">
+            <summary>
+            Controller for Lead Score Rule management - simplified single-table design
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.#ctor(CRMSys.Application.Interfaces.Services.ILeadScoreService)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.GetAllRules(System.Threading.CancellationToken)">
+            <summary>
+            Get all lead score rules
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.GetActiveRules(System.Threading.CancellationToken)">
+            <summary>
+            Get active lead score rules only
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.GetRuleById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get lead score rule by ID
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.CreateRule(CRMSys.Application.Dtos.Request.CreateLeadScoreRuleRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new lead score rule
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.UpdateRule(System.Int64,CRMSys.Application.Dtos.Request.UpdateLeadScoreRuleRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update existing lead score rule
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.LeadScoreController.DeleteRule(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete lead score rule (soft delete)
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.PipelineLogController">
+            <summary>
+            Controller for managing Pipeline Logs (CRM Pipeline Logs management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.#ctor(CRMSys.Application.Interfaces.Services.IPipelineLogService)">
+            <summary>
+            Init
+            </summary>
+            <param name="pipelineLogService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.GetPipelineLogs(CRMSys.Application.Dtos.Request.PipelineLogQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query pipeline logs with pagination and filtering
+            </summary>
+            <param name="request">Pipeline log query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of pipeline logs</returns>
+            <response code="200">Successfully returned List of pipeline logs</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get pipeline log by ID
+            </summary>
+            <param name="id">Pipeline log ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>pipeline log</returns>
+            <response code="200">Successfully returned pipeline log details</response>
+            <response code="404">pipeline log</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.Create(CRMSys.Application.Dtos.Request.CreatePipelineLogRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new pipeline log
+            </summary>
+            <param name="request">pipeline log information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created pipeline log</returns>
+            <response code="201">Successfully created pipeline log, returns ID</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdatePipelineLogRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update pipeline log
+            </summary>
+            <param name="id">Pipeline log ID to update</param>
+            <param name="request">pipeline log information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update pipeline log thành công</response>
+            <response code="400">Invalid request or validation failed</response>
+            <response code="404">pipeline log</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete pipeline log
+            </summary>
+            <param name="id">Pipeline log ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete pipeline log thành công</response>
+            <response code="404">pipeline log</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.GetByDealId(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Lấy pipeline logs theo deal ID
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.PipelineLogController.GetByStage(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Lấy pipeline logs theo stage
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.QuotationController">
+            <summary>
+            Controller for managing Quotations
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.QuotationController.#ctor(CRMSys.Application.Interfaces.Services.IQuotationService)">
+            <summary>
+            Init
+            </summary>
+            <param name="quotationService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.QuotationController.GetQuotations(CRMSys.Application.Dtos.Request.QuotationQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query quotations with pagination and filtering
+            </summary>
+            <param name="request">Quotation query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of quotations</returns>
+            <response code="200">Successfully returned List of quotations</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.QuotationController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get quotation by ID
+            </summary>
+            <param name="id">Quotation ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>quotation</returns>
+            <response code="200">Successfully returned quotation details</response>
+            <response code="404">quotation</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.QuotationController.Create(CRMSys.Application.Dtos.Request.CreateQuotationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new quotation
+            </summary>
+            <param name="request">quotation information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created quotation</returns>
+            <response code="201">Successfully created quotation, returns ID</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.QuotationController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateQuotationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update quotation
+            </summary>
+            <param name="id">Quotation ID to update</param>
+            <param name="request">quotation information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update quotation thành công</response>
+            <response code="404">quotation</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.QuotationController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete quotation
+            </summary>
+            <param name="id">Quotation ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete quotation thành công</response>
+            <response code="404">quotation</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.SharePointController">
+            <summary>
+            Controller for SharePoint integration (file and folder management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.#ctor(Shared.ExternalServices.Interfaces.ISharepointService,CRMSys.Application.Interfaces.Services.ICRMUploadService)">
+            <summary>
+            Init
+            </summary>
+            <param name="sharepointService"></param>
+            <param name="CRMUploadService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.GetAllFiles(System.String)">
+            <summary>
+            Lấy tất cả files và folders từ SharePoint
+            </summary>
+            <param name="folder">Đường dẫn folder (mặc định: DEV/CRM)</param>
+            <returns>Cây thư mục files và folders</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.GetAll(System.String)">
+            <summary>
+            Lấy cây thư mục folders từ SharePoint
+            </summary>
+            <param name="folder">Đường dẫn folder (mặc định: DEV/CRM)</param>
+            <returns>Cây thư mục folders</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.GetFolders(System.String)">
+            <summary>
+            Lấy List of các thư mục con trong một thư mục SharePoint cụ thể.
+            </summary>
+            <param name="folderPath">Đường dẫn thư mục cha trong SharePoint (ví dụ: DEV/CRM)</param>
+            <returns>List of các thư mục con với thông tin Id, Name, Path, HasChildren</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.CreateFolder(System.String)">
+            <summary>
+            Create new folder trong SharePoint
+            </summary>
+            <param name="folder">Đường dẫn folder cần tạo (mặc định: DEV/CRM)</param>
+            <returns>tạo folder</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.UploadFile(CRMSys.Application.Dtos.Request.UploadFileRequest)">
+            <summary>
+            Upload file lên SharePoint (test endpoint)
+            </summary>
+            <param name="request">Upload file request chứa file và folder path</param>
+            <returns>upload file</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.DownloadFile(System.String)">
+            <summary>
+            Download file từ SharePoint
+            </summary>
+            <param name="fileId">SharePoint file ID</param>
+            <returns>File content stream</returns>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.SharePointController.UploadToSharePointAndSaveData(CRMSys.Application.Dtos.Request.UploadFileRequest,System.Threading.CancellationToken)">
+            <summary>
+            Upload file lên SharePoint và lưu metadata vào database
+            </summary>
+            <param name="request">Upload file request chứa file và folder path</param>
+            <param name="ct">Cancellation token</param>
+            <returns>upload và lưu dữ liệu</returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.UserController">
+            <summary>
+            Controller for managing Users (CRM Users management)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.UserController.#ctor(CRMSys.Application.Interfaces.Services.IUserService)">
+            <summary>
+            Init UserController
+            </summary>
+            <param name="userService"></param>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.UserController.GetUsers(CRMSys.Application.Dtos.Request.UserQueryRequest,System.Threading.CancellationToken)">
+            <summary>
+            Query users with pagination and filtering
+            </summary>
+            <param name="request">User query parameters including pagination, filters and sorting</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of users</returns>
+            <response code="200">Successfully returned List of users</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.UserController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get user by ID
+            </summary>
+            <param name="id">User ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>user</returns>
+            <response code="200">Successfully returned user details</response>
+            <response code="404">user</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.UserController.Create(CRMSys.Application.Dtos.Request.CreateUserRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create new user
+            </summary>
+            <param name="request">user information to create</param>
+            <param name="ct">Cancellation token</param>
+            <returns>ID of the created user</returns>
+            <response code="201">Successfully created user, returns ID</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.UserController.Update(System.Int64,CRMSys.Application.Dtos.Request.UpdateUserRequest,System.Threading.CancellationToken)">
+            <summary>
+            Update user
+            </summary>
+            <param name="id">User ID to update</param>
+            <param name="request">user information to update</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Update result</returns>
+            <response code="200">Update user thành công</response>
+            <response code="404">user</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.UserController.Delete(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete user
+            </summary>
+            <param name="id">User ID to delete</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Deletion result</returns>
+            <response code="200">Delete user thành công</response>
+            <response code="404">user</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.WebhookController">
+            <summary>
+            Controller for handling webhooks from external systems (Dynamics 365, etc.)
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Controllers.WebhookController.OnQuotationStatusChanged(CRMSys.Api.Controllers.QuotationStatusWebhook,System.Threading.CancellationToken)">
+            <summary>
+            Handle quotation status change webhook from Dynamics 365
+            </summary>
+            <param name="webhook">Quotation status change data</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Success response</returns>
+        </member>
+        <member name="T:CRMSys.Api.Controllers.QuotationStatusWebhook">
+            <summary>
+            Webhook data model for quotation status changes
+            </summary>
+        </member>
+        <member name="P:CRMSys.Api.Controllers.QuotationStatusWebhook.QuotationNumber">
+            <summary>
+            The quotation number that changed
+            </summary>
+        </member>
+        <member name="P:CRMSys.Api.Controllers.QuotationStatusWebhook.OldStatus">
+            <summary>
+            Previous status
+            </summary>
+        </member>
+        <member name="P:CRMSys.Api.Controllers.QuotationStatusWebhook.NewStatus">
+            <summary>
+            New status
+            </summary>
+        </member>
+        <member name="P:CRMSys.Api.Controllers.QuotationStatusWebhook.ChangedAt">
+            <summary>
+            Timestamp of the change
+            </summary>
+        </member>
+        <member name="T:CRMSys.Api.Middleware.ValidationExceptionMiddleware">
+            <summary>
+            ValidationExceptionMiddleware
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Middleware.ValidationExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Init ValidationExceptionMiddleware
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:CRMSys.Api.Middleware.ValidationExceptionMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            InvokeAsync
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSys.Api.Utils.ODataFunctionParser">
+            <summary>
+            ODataFunctionParser
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api.Utils.ODataFunctionParser.ParseFilter(System.String)">
+            <summary>
+            ParseFilter
+            </summary>
+            <param name="rawFilter"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:CRMSys.Api._samples.LeadApiDomainFilterDemo">
+            <summary>
+            Demo API calls for Lead endpoints with Domain Filter
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.GetLeadsByStatusAndScore">
+            <summary>
+            GET /api/leads with simple domain filter
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.GetLeadsByStatusOrSource">
+            <summary>
+            GET /api/leads with OR logic domain filter
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.GetLeadsByComplexFilter">
+            <summary>
+            GET /api/leads with complex nested domain filter
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.GetLeadsByNameAndCompany">
+            <summary>
+            GET /api/leads with LIKE and ILIKE filters
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.GetLeadsNotConverted">
+            <summary>
+            GET /api/leads with NOT and NULL filters
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.GetDuplicateLeads">
+            <summary>
+            GET /api/leads with domain filter for duplicates
+            </summary>
+        </member>
+        <member name="M:CRMSys.Api._samples.LeadApiDomainFilterDemo.PostLeadsSearchWithDomain">
+            <summary>
+            Example of POST /api/leads with domain filter in body
+            </summary>
+        </member>
+        <member name="T:CRMSysApi.Api.Controllers.CommonController">
+            <summary>
+            Controller quản lý CRMCommon API.
+            </summary>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CommonController.GetReferenceByComplType(System.String,System.Threading.CancellationToken)">
+            <summary>
+            complType = "1", hiện tại đang có Predefined = 1, Additional = 2
+            </summary>        
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CommonController.GetPagedComplGroups(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            kind = 0 lấy hết
+            </summary>        
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CommonController.GetPagedComplGroups(System.String,System.Threading.CancellationToken)">
+            <summary>
+            truyền kind = '1,2' ko truyền lấy hết
+            </summary>   
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CommonController.GetFRTreatmentTypes">
+            <summary>
+            GetFRTreatmentTypes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CRMSysApi.Api.Controllers.CRMCategoryController">
+            <summary>
+            CRMCategoryController 
+            </summary>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.#ctor(CRMSys.Application.Interfaces.Services.ICRMCategoryService,CRMSys.Application.Interfaces.Services.ICategorySharePointSyncService)">
+            <summary>
+            Init CRMCategoryController
+            </summary>
+            <param name="CRMCategoryService"></param>
+            <param name="syncService"></param>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.GetById(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get category by ID
+            </summary>
+            <param name="id">Category ID</param>
+            <param name="ct">Cancellation token</param>
+            <returns>category</returns>
+            <response code="200">Successfully returned category details</response>
+            <response code="404">category</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.GetAll(System.Threading.CancellationToken)">
+            <summary>
+            categories
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns>List of tất cả categories</returns>
+            <response code="200">Successfully returned List of categories</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.GetPaged(System.Int32,System.Int32,System.String,System.String,System.Collections.Generic.List{Shared.Dapper.Models.FilterRequest},System.Threading.CancellationToken)">
+            <summary>
+            Query categories with pagination and filtering
+            </summary>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Số records mỗi trang (mặc định: 10)</param>
+            <param name="sortColumn">Column name to sort by</param>
+            <param name="sortOrder">Sort order: asc or desc (default: asc)</param>
+            <param name="filters">List of filters</param>
+            <param name="ct">Cancellation token</param>
+            <returns>Paginated list of categories</returns>
+            <response code="200">Successfully returned List of categories</response>
+            <response code="400">Invalid request</response>
+            <response code="500">Server error while processing request</response>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.Create(CRMSys.Application.Dtos.Request.CRMCategoryRequestDto)">
+            <summary>
+            Create new category
+            </summary>
+            <param name="dto">category information to create</param>
+            <returns>ID of the created category</returns>
+            <response code="201">Successfully created category, returns ID</response>
+            <response code="400">Invalid request</response>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.Update(System.Int32,CRMSys.Application.Dtos.Request.CRMCategoryRequestDto)">
+            <summary>
+            Update
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.Delete(System.Int32)">
+            <summary>
+            Delete
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.DeleteMulti(System.Collections.Generic.IEnumerable{System.Int64},System.Threading.CancellationToken)">
+            <summary>
+            DeleteMulti
+            </summary>
+            <param name="ids"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.GetOrphanedFolders(System.Threading.CancellationToken)">
+            <summary>
+            GetOrphanedFolders
+            </summary>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRMSysApi.Api.Controllers.CRMCategoryController.CheckFolder(System.String,System.Threading.CancellationToken)">
+            <summary>
+            CheckFolder
+            </summary>
+            <param name="path"></param>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CRM.Api.Utils.ApiResponse`1">
+            <summary>
+            ApiResponse
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CRM.Api.Utils.ApiResponse`1.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="P:CRM.Api.Utils.ApiResponse`1.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:CRM.Api.Utils.ApiResponse`1.Data">
+            <summary>
+            Data
+            </summary>
+        </member>
+        <member name="M:CRM.Api.Utils.ApiResponse`1.Ok(`0,System.String)">
+            <summary>
+            Ok
+            </summary>
+            <param name="data"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CRM.Api.Utils.ApiResponse`1.Fail(System.String)">
+            <summary>
+            Fail
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

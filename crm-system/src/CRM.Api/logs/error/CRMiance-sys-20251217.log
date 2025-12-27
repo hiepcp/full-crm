@@ -1,0 +1,66 @@
+2025-12-17 00:02:03.276 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 93
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-17 00:05:24.820 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-17 00:05:41.296 +07:00 [ERR] Create - Error creating deal (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Application.Services.BaseService`3.AddAsync(TRequestDto dto, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 58
+   at CRMSys.Application.Services.DealService.CreateAsync(CreateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 92
+   at CRMSys.Api.Controllers.DealController.Create(CreateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 253
+2025-12-17 00:06:57.295 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/deals, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-17 00:38:23.189 +07:00 [ERR] Update - Error updating deal with id: 420 (User=hiepcp@response.com.vn, Path=/api/deals/420, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CRMSys.Application.Services.DealService.UpdateAsync(Int64 id, UpdateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 101
+   at CRMSys.Api.Controllers.DealController.Update(Int64 id, UpdateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 298
+2025-12-17 00:38:36.740 +07:00 [ERR] Update - Error updating deal with id: 420 (User=hiepcp@response.com.vn, Path=/api/deals/420, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CRMSys.Application.Services.DealService.UpdateAsync(Int64 id, UpdateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 101
+   at CRMSys.Api.Controllers.DealController.Update(Int64 id, UpdateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 298
+2025-12-17 00:39:07.579 +07:00 [ERR] Update - Error updating deal with id: 420 (User=hiepcp@response.com.vn, Path=/api/deals/420, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CRMSys.Application.Services.DealService.UpdateAsync(Int64 id, UpdateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 101
+   at CRMSys.Api.Controllers.DealController.Update(Int64 id, UpdateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 298
+2025-12-17 00:39:48.951 +07:00 [ERR] Update - Error updating deal with id: 418 (User=hiepcp@response.com.vn, Path=/api/deals/418, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CRMSys.Application.Services.DealService.UpdateAsync(Int64 id, UpdateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 101
+   at CRMSys.Api.Controllers.DealController.Update(Int64 id, UpdateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 298
+2025-12-17 00:41:32.745 +07:00 [ERR] Update - Error updating deal with id: 418 (User=hiepcp@response.com.vn, Path=/api/deals/418, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+UpdateDealRequest -> CreateDealRequest
+CRMSys.Application.Dtos.Request.UpdateDealRequest -> CRMSys.Application.Dtos.Request.CreateDealRequest
+   at lambda_method33(Closure, Object, CreateDealRequest, ResolutionContext)
+   at CRMSys.Application.Services.DealService.UpdateAsync(Int64 id, UpdateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 128
+   at CRMSys.Api.Controllers.DealController.Update(Int64 id, UpdateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 298
+2025-12-17 00:41:44.409 +07:00 [ERR] Update - Error updating deal with id: 418 (User=hiepcp@response.com.vn, Path=/api/deals/418, Method=PUT, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+UpdateDealRequest -> CreateDealRequest
+CRMSys.Application.Dtos.Request.UpdateDealRequest -> CRMSys.Application.Dtos.Request.CreateDealRequest
+   at lambda_method33(Closure, Object, CreateDealRequest, ResolutionContext)
+   at CRMSys.Application.Services.DealService.UpdateAsync(Int64 id, UpdateDealRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\DealService.cs:line 128
+   at CRMSys.Api.Controllers.DealController.Update(Int64 id, UpdateDealRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\DealController.cs:line 298
+2025-12-17 09:50:40.443 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/leads/with-activity, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-17 09:50:40.586 +07:00 [ERR] CreateWithActivity - Error creating lead with activity (User=hiepcp@response.com.vn, Path=/api/leads/with-activity, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Infrastructure.Repositories.LeadRepository.CreateAsync(Lead lead, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadRepository.cs:line 82
+   at CRMSys.Application.Services.LeadService.CreateWithActivityAsync(CreateLeadWithActivityRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadService.cs:line 654
+   at CRMSys.Api.Controllers.LeadController.CreateWithActivity(CreateLeadWithActivityRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadController.cs:line 58
+2025-12-17 09:52:51.490 +07:00 [ERR] AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first. (User=hiepcp@response.com.vn, Path=/api/leads/with-activity, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+2025-12-17 09:52:51.821 +07:00 [ERR] CreateWithActivity - Error creating lead with activity (User=hiepcp@response.com.vn, Path=/api/leads/with-activity, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: AddAsync requires an active transaction. Call _unitOfWork.BeginTransactionAsync() first.
+   at Shared.Dapper.Repositories.BaseRepository`2.EnsureTransactionActive(String operationName)
+   at Shared.Dapper.Repositories.DapperRepository`2.AddAsync(TEntity entity, CancellationToken cancellationToken)
+   at CRMSys.Infrastructure.Repositories.LeadRepository.CreateAsync(Lead lead, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\LeadRepository.cs:line 82
+   at CRMSys.Application.Services.LeadService.CreateWithActivityAsync(CreateLeadWithActivityRequest request, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadService.cs:line 654
+   at CRMSys.Api.Controllers.LeadController.CreateWithActivity(CreateLeadWithActivityRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadController.cs:line 58

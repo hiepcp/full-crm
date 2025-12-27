@@ -1,0 +1,55 @@
+2025-12-09 16:55:31.724 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.AuthTokenClient.GetGraphTokenAsync(String appName, Int32 env, String serviceName)
+   at Shared.ExternalServices.Services.SharepointService.GetAccessTokenAsync()
+   at Shared.ExternalServices.Services.SharepointService.PrepareAuthAsync()
+   at Shared.ExternalServices.Services.SharepointService.CreateFileAsync(String folderPath, String fileName, Stream fileStream)
+   at Shared.ExternalServices.Services.SharepointService.UploadFile(String folderPath, String fileName, Stream fileStream)
+   at CRMSys.Application.Services.CRMUploadService.UploadToSharePointAndSaveDataWithFileNameAsync(UploadFileRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CRMUploadService.cs:line 73
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 253
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-09 16:56:07.542 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.AuthTokenClient.GetGraphTokenAsync(String appName, Int32 env, String serviceName)
+   at Shared.ExternalServices.Services.SharepointService.GetAccessTokenAsync()
+   at Shared.ExternalServices.Services.SharepointService.PrepareAuthAsync()
+   at Shared.ExternalServices.Services.SharepointService.CreateFileAsync(String folderPath, String fileName, Stream fileStream)
+   at Shared.ExternalServices.Services.SharepointService.UploadFile(String folderPath, String fileName, Stream fileStream)
+   at CRMSys.Application.Services.CRMUploadService.UploadToSharePointAndSaveDataWithFileNameAsync(UploadFileRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CRMUploadService.cs:line 73
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 253
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-09 16:57:28.208 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.AuthTokenClient.GetGraphTokenAsync(String appName, Int32 env, String serviceName)
+   at Shared.ExternalServices.Services.SharepointService.GetAccessTokenAsync()
+   at Shared.ExternalServices.Services.SharepointService.PrepareAuthAsync()
+   at Shared.ExternalServices.Services.SharepointService.CreateFileAsync(String folderPath, String fileName, Stream fileStream)
+   at Shared.ExternalServices.Services.SharepointService.UploadFile(String folderPath, String fileName, Stream fileStream)
+   at CRMSys.Application.Services.CRMUploadService.UploadToSharePointAndSaveDataWithFileNameAsync(UploadFileRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CRMUploadService.cs:line 73
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 253
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-09 17:00:13.407 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.AuthTokenClient.GetGraphTokenAsync(String appName, Int32 env, String serviceName)
+   at Shared.ExternalServices.Services.SharepointService.GetAccessTokenAsync()
+   at Shared.ExternalServices.Services.SharepointService.PrepareAuthAsync()
+   at Shared.ExternalServices.Services.SharepointService.CreateFileAsync(String folderPath, String fileName, Stream fileStream)
+   at Shared.ExternalServices.Services.SharepointService.UploadFile(String folderPath, String fileName, Stream fileStream)
+   at CRMSys.Application.Services.CRMUploadService.UploadToSharePointAndSaveDataWithFileNameAsync(UploadFileRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CRMUploadService.cs:line 73
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 253
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273
+2025-12-09 17:00:26.839 +07:00 [ERR] Error creating activity with participants and attachments (User=hiepcp@response.com.vn, Path=/api/activities/with-participants-and-attachments, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.Net.Http.HttpRequestException: Response status code does not indicate success: 500 (Internal Server Error).
+   at System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode()
+   at Shared.ExternalServices.Services.AuthTokenClient.GetGraphTokenAsync(String appName, Int32 env, String serviceName)
+   at Shared.ExternalServices.Services.SharepointService.GetAccessTokenAsync()
+   at Shared.ExternalServices.Services.SharepointService.PrepareAuthAsync()
+   at Shared.ExternalServices.Services.SharepointService.CreateFileAsync(String folderPath, String fileName, Stream fileStream)
+   at Shared.ExternalServices.Services.SharepointService.UploadFile(String folderPath, String fileName, Stream fileStream)
+   at CRMSys.Application.Services.CRMUploadService.UploadToSharePointAndSaveDataWithFileNameAsync(UploadFileRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\CRMUploadService.cs:line 73
+   at CRMSys.Application.Services.ActivityService.CreateWithParticipantsAndAttachmentsAsync(CreateActivityWithParticipantsAndAttachmentsRequest request, List`1 files, String userEmail, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityService.cs:line 253
+   at CRM.Api.Controllers.ActivityController.CreateWithParticipantsAndAttachments(CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityController.cs:line 273

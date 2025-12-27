@@ -1,0 +1,130 @@
+2025-12-11 16:21:28.074 +07:00 [ERR] Request GET /api/common/reference-types-by-compliance-types failed after 37 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/common/reference-types-by-compliance-types, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.InvalidOperationException: Unable to resolve service for type 'CRMSys.Application.Interfaces.Services.IReferenceTypesService' while attempting to activate 'ComplianceSysApi.Api.Controllers.CommonController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-11 16:28:30.619 +07:00 [ERR] Request GET /api/common/reference-types-by-compliance-types failed after 531 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/common/reference-types-by-compliance-types, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[CRMSys.Domain.Entities.ReferenceTypes, CRM.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[CRMSys.Application.Constants.EnumDto, CRM.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+ReferenceTypes -> EnumDto
+CRMSys.Domain.Entities.ReferenceTypes -> CRMSys.Application.Constants.EnumDto
+   at lambda_method13(Closure, ReferenceTypes, EnumDto, ResolutionContext)
+   at lambda_method12(Closure, IEnumerable`1, List`1, ResolutionContext)
+   --- End of inner exception stack trace ---
+   at lambda_method12(Closure, IEnumerable`1, List`1, ResolutionContext)
+   at CRMSys.Application.Services.ReferenceTypesService.GetPagedAsync(PagedRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ReferenceTypesService.cs:line 31
+   at CRMSysApi.Api.Controllers.CommonController.GetReferenceByComplType(String complType, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\CommonController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-11 16:28:40.481 +07:00 [ERR] Request GET /api/common/reference-types-by-compliance-types failed after 132 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/common/reference-types-by-compliance-types, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[CRMSys.Domain.Entities.ReferenceTypes, CRM.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[CRMSys.Application.Constants.EnumDto, CRM.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+ReferenceTypes -> EnumDto
+CRMSys.Domain.Entities.ReferenceTypes -> CRMSys.Application.Constants.EnumDto
+   at lambda_method13(Closure, ReferenceTypes, EnumDto, ResolutionContext)
+   at lambda_method12(Closure, IEnumerable`1, List`1, ResolutionContext)
+   --- End of inner exception stack trace ---
+   at lambda_method12(Closure, IEnumerable`1, List`1, ResolutionContext)
+   at CRMSys.Application.Services.ReferenceTypesService.GetPagedAsync(PagedRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ReferenceTypesService.cs:line 31
+   at CRMSysApi.Api.Controllers.CommonController.GetReferenceByComplType(String complType, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\CommonController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-11 16:28:41.499 +07:00 [ERR] Request GET /api/common/reference-types-by-compliance-types failed after 73 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/common/reference-types-by-compliance-types, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[CRMSys.Domain.Entities.ReferenceTypes, CRM.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[CRMSys.Application.Constants.EnumDto, CRM.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+ReferenceTypes -> EnumDto
+CRMSys.Domain.Entities.ReferenceTypes -> CRMSys.Application.Constants.EnumDto
+   at lambda_method13(Closure, ReferenceTypes, EnumDto, ResolutionContext)
+   at lambda_method12(Closure, IEnumerable`1, List`1, ResolutionContext)
+   --- End of inner exception stack trace ---
+   at lambda_method12(Closure, IEnumerable`1, List`1, ResolutionContext)
+   at CRMSys.Application.Services.ReferenceTypesService.GetPagedAsync(PagedRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ReferenceTypesService.cs:line 31
+   at CRMSysApi.Api.Controllers.CommonController.GetReferenceByComplType(String complType, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\CommonController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-11 16:47:43.554 +07:00 [ERR] Request GET /api/common/reference-types-by-compliance-types failed after 150 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/common/reference-types-by-compliance-types, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+AutoMapper.AutoMapperMappingException: Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[CRMSys.Domain.Entities.ReferenceTypes, CRM.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[CRMSys.Application.Constants.EnumDto, CRM.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+ ---> AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+ReferenceTypes -> EnumDto
+CRMSys.Domain.Entities.ReferenceTypes -> CRMSys.Application.Constants.EnumDto
+   at lambda_method517(Closure, ReferenceTypes, EnumDto, ResolutionContext)
+   at lambda_method516(Closure, IEnumerable`1, List`1, ResolutionContext)
+   --- End of inner exception stack trace ---
+   at lambda_method516(Closure, IEnumerable`1, List`1, ResolutionContext)
+   at CRMSys.Application.Services.ReferenceTypesService.GetPagedAsync(PagedRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ReferenceTypesService.cs:line 31
+   at CRMSysApi.Api.Controllers.CommonController.GetReferenceByComplType(String complType, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\CommonController.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)

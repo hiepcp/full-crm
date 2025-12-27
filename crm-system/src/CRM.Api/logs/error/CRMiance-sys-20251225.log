@@ -1,0 +1,282 @@
+2025-12-25 08:49:56.424 +07:00 [ERR] GetAssignees - Error querying assignees (User=hiepcp@response.com.vn, Path=/api/assignees, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'a.UserEmail' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.AssigneeRepository.QueryAsync(AssigneeQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\AssigneeRepository.cs:line 128
+   at CRMSys.Application.Services.AssigneeService.QueryAsync(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\AssigneeService.cs:line 57
+   at CRMSys.Api.Controllers.AssigneesController.GetAssignees(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\AssigneesController.cs:line 64
+2025-12-25 08:50:01.721 +07:00 [ERR] GetAssignees - Error querying assignees (User=hiepcp@response.com.vn, Path=/api/assignees, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'a.UserEmail' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.AssigneeRepository.QueryAsync(AssigneeQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\AssigneeRepository.cs:line 128
+   at CRMSys.Application.Services.AssigneeService.QueryAsync(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\AssigneeService.cs:line 57
+   at CRMSys.Api.Controllers.AssigneesController.GetAssignees(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\AssigneesController.cs:line 64
+2025-12-25 08:50:06.298 +07:00 [ERR] GetAssignees - Error querying assignees (User=hiepcp@response.com.vn, Path=/api/assignees, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'a.UserEmail' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.AssigneeRepository.QueryAsync(AssigneeQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\AssigneeRepository.cs:line 128
+   at CRMSys.Application.Services.AssigneeService.QueryAsync(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\AssigneeService.cs:line 57
+   at CRMSys.Api.Controllers.AssigneesController.GetAssignees(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\AssigneesController.cs:line 64
+2025-12-25 08:50:28.640 +07:00 [ERR] GetAssignees - Error querying assignees (User=hiepcp@response.com.vn, Path=/api/assignees, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'a.UserEmail' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.AssigneeRepository.QueryAsync(AssigneeQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\AssigneeRepository.cs:line 128
+   at CRMSys.Application.Services.AssigneeService.QueryAsync(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\AssigneeService.cs:line 57
+   at CRMSys.Api.Controllers.AssigneesController.GetAssignees(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\AssigneesController.cs:line 64
+2025-12-25 08:51:12.477 +07:00 [ERR] GetAssignees - Error querying assignees (User=hiepcp@response.com.vn, Path=/api/assignees, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'a.UserEmail' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.AssigneeRepository.QueryAsync(AssigneeQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\AssigneeRepository.cs:line 128
+   at CRMSys.Application.Services.AssigneeService.QueryAsync(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\AssigneeService.cs:line 57
+   at CRMSys.Api.Controllers.AssigneesController.GetAssignees(AssigneeQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\AssigneesController.cs:line 64
+2025-12-25 08:55:06.904 +07:00 [ERR] GetById - Error retrieving lead with id: 17 (User=hiepcp@response.com.vn, Path=/api/leads/17, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.Collections.Generic.KeyNotFoundException: Lead with id 17 not found.
+   at CRMSys.Application.Services.BaseService`3.GetByIdAsync(TKey id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\BaseService.cs:line 67
+   at CRMSys.Application.Services.LeadService.GetByIdAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\LeadService.cs:line 104
+   at CRMSys.Api.Controllers.LeadController.GetById(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\LeadController.cs:line 305
+2025-12-25 12:53:14.499 +07:00 [ERR] Error querying activity participants (User=hiepcp@response.com.vn, Path=/api/activity-participants, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_activity_participant' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.ActivityParticipantRepository.QueryAsync(ActivityParticipantQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\ActivityParticipantRepository.cs:line 82
+   at CRMSys.Application.Services.ActivityParticipantService.QueryAsync(ActivityParticipantQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityParticipantService.cs:line 46
+   at CRMSys.Api.Controllers.ActivityParticipantsController.Get(ActivityParticipantQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityParticipantsController.cs:line 44
+2025-12-25 12:53:14.746 +07:00 [ERR] Error querying activity participants (User=hiepcp@response.com.vn, Path=/api/activity-participants, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_activity_participant' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.ActivityParticipantRepository.QueryAsync(ActivityParticipantQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\ActivityParticipantRepository.cs:line 82
+   at CRMSys.Application.Services.ActivityParticipantService.QueryAsync(ActivityParticipantQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityParticipantService.cs:line 46
+   at CRMSys.Api.Controllers.ActivityParticipantsController.Get(ActivityParticipantQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityParticipantsController.cs:line 44
+2025-12-25 12:53:14.920 +07:00 [ERR] Error querying activity participants (User=hiepcp@response.com.vn, Path=/api/activity-participants, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_activity_participant' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryMultipleAsync(IDbConnection cnn, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 1042
+   at CRMSys.Infrastructure.Repositories.ActivityParticipantRepository.QueryAsync(ActivityParticipantQueryRequest query, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\ActivityParticipantRepository.cs:line 82
+   at CRMSys.Application.Services.ActivityParticipantService.QueryAsync(ActivityParticipantQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\ActivityParticipantService.cs:line 46
+   at CRMSys.Api.Controllers.ActivityParticipantsController.Get(ActivityParticipantQueryRequest request, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\ActivityParticipantsController.cs:line 44
+2025-12-25 13:27:30.777 +07:00 [ERR] Request POST /api/leads/query-domain failed after 763 ms by hiepcp@response.com.vn (User=hiepcp@response.com.vn, Path=/api/leads/query-domain, Method=POST, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+System.IO.IOException: The client reset the request stream.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestStream.ReadAsyncInternal(Memory`1 destination, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Text.Json.Serialization.ReadBufferState.ReadFromStreamAsync(Stream utf8Json, CancellationToken cancellationToken, Boolean fillBuffer)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.DeserializeAsync(Stream utf8Json, CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.DeserializeAsObjectAsync(Stream utf8Json, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinder.BindModelAsync(ModelBindingContext bindingContext)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.<>c__DisplayClass0_0.<<CreateBinderDelegate>g__Bind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Shared.AuthZ.Middleware.CustomAuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Shared.AuthN.Middleware.UserLoggingMiddleware.Invoke(HttpContext context)
+2025-12-25 13:30:58.343 +07:00 [ERR] Error getting progress history for goal 1006 (User=hiepcp@response.com.vn, Path=/api/goals/1006/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-25 13:30:58.883 +07:00 [ERR] Error getting progress history for goal 1002 (User=hiepcp@response.com.vn, Path=/api/goals/1002/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-25 13:30:59.211 +07:00 [ERR] Error getting forecast for goal 1006 (User=hiepcp@response.com.vn, Path=/api/goals/1006/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-25 13:30:58.112 +07:00 [ERR] Error getting progress history for goal 1001 (User=hiepcp@response.com.vn, Path=/api/goals/1001/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-25 13:30:58.444 +07:00 [ERR] Error getting forecast for goal 1002 (User=hiepcp@response.com.vn, Path=/api/goals/1002/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-25 13:30:58.837 +07:00 [ERR] Error getting forecast for goal 1001 (User=hiepcp@response.com.vn, Path=/api/goals/1001/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-25 13:30:58.860 +07:00 [ERR] Error getting progress history for goal 1005 (User=hiepcp@response.com.vn, Path=/api/goals/1005/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-25 13:30:59.427 +07:00 [ERR] Error getting forecast for goal 1005 (User=hiepcp@response.com.vn, Path=/api/goals/1005/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320

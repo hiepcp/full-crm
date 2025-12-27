@@ -1,0 +1,128 @@
+2025-12-27 09:58:25.489 +07:00 [ERR] Error getting progress history for goal 1002 (User=hiepcp@response.com.vn, Path=/api/goals/1002/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-27 09:58:25.573 +07:00 [ERR] Error getting forecast for goal 1001 (User=hiepcp@response.com.vn, Path=/api/goals/1001/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-27 09:58:25.896 +07:00 [ERR] Error getting progress history for goal 1005 (User=hiepcp@response.com.vn, Path=/api/goals/1005/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-27 09:58:26.062 +07:00 [ERR] Error getting progress history for goal 1001 (User=hiepcp@response.com.vn, Path=/api/goals/1001/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
+2025-12-27 09:58:26.322 +07:00 [ERR] Error getting forecast for goal 1006 (User=hiepcp@response.com.vn, Path=/api/goals/1006/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-27 09:58:26.618 +07:00 [ERR] Error getting forecast for goal 1002 (User=hiepcp@response.com.vn, Path=/api/goals/1002/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-27 09:58:26.747 +07:00 [ERR] Error getting forecast for goal 1005 (User=hiepcp@response.com.vn, Path=/api/goals/1005/forecast, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetForecastAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 421
+   at CRMSys.Api.Controllers.GoalController.GetForecast(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 320
+2025-12-27 09:58:26.968 +07:00 [ERR] Error getting progress history for goal 1006 (User=hiepcp@response.com.vn, Path=/api/goals/1006/progress-history, Method=GET, Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0)
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'crm_sys_db.crm_goal_progress_history' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Dapper.SqlMapper.QueryAsync[T](IDbConnection cnn, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 434
+   at CRMSys.Infrastructure.Repositories.GoalProgressHistoryRepository.GetByGoalIdAsync(Int64 goalId, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Infrastructure\Repositories\GoalProgressHistoryRepository.cs:line 34
+   at CRMSys.Application.Services.GoalService.GetProgressHistoryAsync(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Application\Services\GoalService.cs:line 520
+   at CRMSys.Api.Controllers.GoalController.GetProgressHistory(Int64 id, CancellationToken ct) in E:\project\full crm\crm-system\src\CRM.Api\Controllers\GoalController.cs:line 349
