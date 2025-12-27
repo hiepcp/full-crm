@@ -9,6 +9,7 @@
 	<ItemGroup>
 		<None Include="Sqls\Tables\**\*.sql" CopyToOutputDirectory="Always" />
 		<None Include="Sqls\Procedures\**\*.sql" CopyToOutputDirectory="Always" />
+		<None Include="Migrations\**\*.sql" CopyToOutputDirectory="Always" />
 	</ItemGroup>
 
 	<ItemGroup>
