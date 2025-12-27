@@ -1,3 +1,5 @@
 export { UploadDocumentUseCase } from './UploadDocumentUseCase'
 export { SearchDocumentsUseCase } from './SearchDocumentsUseCase'
 export { GetEntityDocumentsUseCase } from './GetEntityDocumentsUseCase'
+export { GetVersionHistoryUseCase } from './GetVersionHistoryUseCase'
+export { BulkMigrateDocumentsUseCase } from './BulkMigrateDocumentsUseCase'
