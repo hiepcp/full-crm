@@ -1,4 +1,4 @@
-# Implementation Plan: User Sale Registration
+# Implementation Plan: [FEATURE]
 
 **Branch**: `003-user-sale-registration` | **Date**: 2025-12-25 | **Spec**: [spec.md](./spec.md)
 **Input**: Feature specification from `/specs/003-user-sale-registration/spec.md`
@@ -161,6 +161,12 @@ specs/003-user-sale-registration/
 ```
 
 ### Source Code (repository root)
+<!--
+  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
+  for this feature. Delete unused options and expand the chosen structure with
+  real paths (e.g., apps/admin, packages/something). The delivered plan must
+  not include Option labels.
+-->
 
 **Structure Decision**: This feature follows the existing **Web Application** structure (frontend + backend separation) with Clean Architecture patterns in both layers.
 
