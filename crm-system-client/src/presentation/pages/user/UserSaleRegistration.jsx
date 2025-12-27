@@ -21,7 +21,7 @@ import { GetAllCRMHcmWorkersUseCase } from "@application/usecases/all-crms";
 import authRolesApi from "@infrastructure/api/authRolesApi";
 import usersApi from "@infrastructure/api/usersApi";
 
-n// Helper functions to extract first/last names
+// Helper functions to extract first/last names
 function extractFirstName(fullName) {
   if (!fullName) return "";
   const parts = fullName.trim().split(/s+/);
