@@ -3,7 +3,7 @@
   "spec": "003-dynamics-365-category-synchronization",
   "state": "building",
   "subtasks": {
-    "completed": 17,
+    "completed": 18,
     "total": 19,
     "in_progress": 1,
     "failed": 0
@@ -18,8 +18,8 @@
     "max": 1
   },
   "session": {
-    "number": 21,
+    "number": 22,
     "started_at": "2025-12-27T21:25:04.880837"
   },
-  "last_update": "2025-12-28T01:15:52.361602"
+  "last_update": "2025-12-28T01:22:09.476922"
 }
