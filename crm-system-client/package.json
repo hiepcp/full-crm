@@ -72,8 +72,10 @@
     "react-sparklines": "^1.7.0",
     "simplebar": "^6.3.2",
     "simplebar-react": "^3.3.2",
+    "swiper": "^11.2.10",
     "swr": "^2.3.6",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "vite-plugin-pwa": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
