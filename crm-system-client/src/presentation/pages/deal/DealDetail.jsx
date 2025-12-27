@@ -20,6 +20,7 @@ import PipelineProgress from './components/PipelineProgress';
 import ActivityFeed from '../../components/common/ActivityFeed';
 import AssigneeSection from '../../components/common/AssigneeSection';
 import InstantDocsSection from '../../components/common/InstantDocsSection';
+import DocumentSection from '../../components/sharepoint/DocumentSection';
 import CustomSnackbar from '../../components/CustomSnackbar';
 import {
   Edit as EditIcon,
@@ -807,6 +808,21 @@ const DealDetail = () => {
               </Collapse>
             </CardContent>
           </Card>
+
+          {/* Documents Section */}
+          <Box sx={{ mt: 2, mb: 2 }}>
+            <DocumentSection
+              entityType="deal"
+              entityId={dealId}
+              title="Documents"
+              onDocumentUploaded={(doc) => {
+                setSnackbar({ open: true, message: 'Document uploaded successfully', severity: 'success' });
+              }}
+              onDocumentDeleted={(docId) => {
+                setSnackbar({ open: true, message: 'Document deleted successfully', severity: 'success' });
+              }}
+            />
+          </Box>
         </Box>
 
         {/* Right Sidebar - People, Address, Agenda */}
