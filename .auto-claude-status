@@ -1,0 +1,25 @@
+{
+  "active": true,
+  "spec": "002-sharepoint-document-management-integration",
+  "state": "building",
+  "subtasks": {
+    "completed": 2,
+    "total": 26,
+    "in_progress": 1,
+    "failed": 0
+  },
+  "phase": {
+    "current": "Backend Core Infrastructure",
+    "id": null,
+    "total": 3
+  },
+  "workers": {
+    "active": 0,
+    "max": 1
+  },
+  "session": {
+    "number": 3,
+    "started_at": "2025-12-27T20:59:51.760488"
+  },
+  "last_update": "2025-12-27T21:09:50.896804"
+}
