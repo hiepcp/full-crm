@@ -55,7 +55,15 @@ export default function MobileSection() {
     <>
       <Box sx={{ flexShrink: 0, ml: 0.75 }}>
         <IconButton
-          sx={{ color: 'text.primary', bgcolor: open ? iconBackColorOpen : iconBackColor }}
+          sx={{
+            color: 'text.primary',
+            bgcolor: open ? iconBackColorOpen : iconBackColor,
+            // Ensure minimum touch target size of 44x44px on mobile
+            minWidth: 44,
+            minHeight: 44,
+            width: 44,
+            height: 44
+          }}
           aria-label="open more menu"
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}

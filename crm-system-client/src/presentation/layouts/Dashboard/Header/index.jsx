@@ -51,7 +51,16 @@ export default function Header() {
         edge="start"
         color="secondary"
         variant="light"
-        sx={{ color: 'text.primary', bgcolor: drawerOpen ? iconBackColorOpen : iconBackColor, ml: { xs: 0, lg: -2 } }}
+        sx={{
+          color: 'text.primary',
+          bgcolor: drawerOpen ? iconBackColorOpen : iconBackColor,
+          ml: { xs: 0, lg: -2 },
+          // Ensure minimum touch target size of 44x44px on mobile
+          minWidth: { xs: 44, sm: 44 },
+          minHeight: { xs: 44, sm: 44 },
+          width: { xs: 44, sm: 40 },
+          height: { xs: 44, sm: 40 }
+        }}
       >
         {!drawerOpen ? <Menu /> : <MenuOutlined />}
       </IconButton>

@@ -143,7 +143,14 @@ const NotificationBell = ({ showBadge = true, iconColor = 'inherit' }) => {
           ref={bellRef}
           onClick={handleOpen}
           color={iconColor}
-          sx={{ ml: 1 }}
+          sx={{
+            ml: 1,
+            // Ensure minimum touch target size of 44x44px on mobile
+            minWidth: { xs: 44, sm: 40 },
+            minHeight: { xs: 44, sm: 40 },
+            width: { xs: 44, sm: 40 },
+            height: { xs: 44, sm: 40 }
+          }}
         >
           <Badge badgeContent={showBadge ? unreadCount : 0} color="error">
             <NotificationsOutlined />

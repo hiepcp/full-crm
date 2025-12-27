@@ -107,7 +107,9 @@ export default function Profile() {
           bgcolor: open ? iconBackColorOpen : 'transparent',
           borderRadius: 1,
           '&:hover': { bgcolor: 'grey.lighter' },
-          '&:focus-visible': { outline: `2px solid ${theme.palette.grey.dark}`, outlineOffset: 2 }
+          '&:focus-visible': { outline: `2px solid ${theme.palette.grey.dark}`, outlineOffset: 2 },
+          // Ensure minimum touch target size of 44x44px on mobile
+          minHeight: { xs: 44, md: 'auto' }
         }}
         aria-label="open profile"
         ref={anchorRef}
