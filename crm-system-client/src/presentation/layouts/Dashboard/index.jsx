@@ -14,6 +14,7 @@ import Drawer from './Drawer';
 import Header from './Header';
 import Loader from '@presentation/components/Loader';
 import Breadcrumbs from '@presentation/components/@extended/Breadcrumbs';
+import BottomNav from '@presentation/components/mobile/BottomNav';
 import { drawerWidth } from '@src/config';
 
 //import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
@@ -68,7 +69,9 @@ export default function DashboardLayout() {
             xs: 0,
             lg: drawerOpen ? 0 : 0
           },
-          overflow: 'auto'
+          overflow: 'auto',
+          // Add padding bottom on mobile to account for bottom nav
+          pb: { xs: '80px', lg: 2 }
         }}
       >
         <Toolbar />
@@ -76,6 +79,7 @@ export default function DashboardLayout() {
         {/* <Breadcrumbs navigation={navigation} title /> */}
         <Outlet />
       </Box>
+      <BottomNav />
     </Box>
   );
 }
