@@ -26,6 +26,7 @@ import ActivityFeed from '../../components/common/ActivityFeed';
 import CreateLead from './components/CreateLead';
 import AssigneeSection from '../../components/common/AssigneeSection';
 import AddressSection from '../../components/common/AddressSection';
+import DocumentSection from '../../components/sharepoint/DocumentSection';
 import {
   Edit as EditIcon,
   Delete as DeleteIcon,
@@ -882,6 +883,21 @@ const LeadDetail = React.memo(() => {
             customer={lead?.customer}
             onRefresh={refreshLead}
           />
+
+          {/* Documents Section */}
+          <Box sx={{ mt: 2 }}>
+            <DocumentSection
+              entityType="lead"
+              entityId={leadId.toString()}
+              title="Documents"
+              onDocumentUploaded={(doc) => {
+                setSnackbar({ open: true, message: 'Document uploaded successfully', severity: 'success' });
+              }}
+              onDocumentDeleted={(docId) => {
+                setSnackbar({ open: true, message: 'Document deleted successfully', severity: 'success' });
+              }}
+            />
+          </Box>
 
         </Box>
       </Box>
