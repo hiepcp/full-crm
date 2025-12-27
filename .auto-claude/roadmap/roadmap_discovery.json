@@ -1,0 +1,166 @@
+{
+  "project_name": "CoreOne CRM System",
+  "project_type": "web-app",
+  "tech_stack": {
+    "primary_language": "JavaScript/TypeScript (Frontend), C# (Backend)",
+    "frameworks": [
+      "React 18",
+      "Vite",
+      "Material-UI (MUI)",
+      ".NET 8",
+      "ASP.NET Core Web API"
+    ],
+    "key_dependencies": [
+      "@mui/material",
+      "@mui/x-data-grid",
+      "@azure/msal-react",
+      "@microsoft/signalr",
+      "axios",
+      "react-router-dom",
+      "@reduxjs/toolkit",
+      "Dapper",
+      "FluentValidation",
+      "Serilog",
+      "MySQL"
+    ]
+  },
+  "target_audience": {
+    "primary_persona": "Sales Representatives and Business Development Managers who need to manage customer relationships, track leads through conversion funnels, and close deals efficiently",
+    "secondary_personas": [
+      "Sales Managers who need pipeline visibility and team performance metrics",
+      "Customer Success Teams who track customer interactions and activities",
+      "Marketing Teams who generate and qualify leads before handoff to sales"
+    ],
+    "pain_points": [
+      "Fragmented customer data across multiple systems making it hard to get a complete view",
+      "Manual lead tracking and qualification processes that waste time",
+      "Lack of visibility into deal pipeline status and conversion rates",
+      "Difficulty tracking all customer interactions and activities in one place",
+      "No automated lead-to-customer conversion workflow",
+      "Missing real-time collaboration and notifications for team coordination"
+    ],
+    "goals": [
+      "Centralize all customer relationship data in one unified system",
+      "Streamline lead qualification and conversion to customers",
+      "Visualize and manage deal pipelines with automatic stage transitions",
+      "Track all customer activities, emails, calls, and meetings in one timeline",
+      "Automate repetitive tasks like lead assignment and follow-up reminders",
+      "Gain insights through dashboards and analytics on sales performance"
+    ],
+    "usage_context": "Daily usage by sales teams during business hours (9am-6pm) for managing customer interactions, updating deal statuses, logging activities, and tracking pipeline progress. Access needed from office desktops and mobile devices for field sales reps. Critical during sales cycles, customer meetings, and pipeline review sessions."
+  },
+  "product_vision": {
+    "one_liner": "A comprehensive CRM platform that unifies customer data, automates sales workflows, and provides real-time pipeline visibility to help sales teams close more deals faster.",
+    "problem_statement": "Sales teams struggle with fragmented customer data spread across emails, spreadsheets, and multiple tools, leading to missed opportunities, inefficient workflows, and lack of visibility into pipeline health. They need a unified system that centralizes customer relationships, automates lead conversion, and provides actionable insights.",
+    "value_proposition": "Unlike generic CRMs that require extensive customization, CoreOne CRM delivers industry-specific workflows out-of-the-box with Clean Architecture for easy extensibility. It combines Azure AD enterprise authentication, real-time SignalR notifications, sophisticated deal pipeline automation based on quotation status, and seamless integrations with SharePoint and Dynamics 365 - purpose-built for teams that need enterprise-grade security with startup-level agility.",
+    "success_metrics": [
+      "Time to convert lead to customer reduced by 40%",
+      "Pipeline visibility - 100% of deals tracked with accurate stage information",
+      "User adoption rate - 80% daily active usage by sales team within 3 months",
+      "Data completeness - 90% of customer records have complete contact and activity data",
+      "Deal velocity - 25% reduction in average deal cycle time",
+      "Integration efficiency - 50% reduction in manual data entry through SharePoint/Dynamics integration"
+    ]
+  },
+  "current_state": {
+    "maturity": "mvp",
+    "existing_features": [
+      "Complete authentication and authorization system with Azure AD integration",
+      "JWT-based auth with refresh token rotation and API key middleware",
+      "Frontend UI for all major modules: Dashboard, Customer, Lead, Deal, Contact, Activity",
+      "Deal pipeline visualization with drag-and-drop stage management",
+      "Clean Architecture implementation across all projects (Domain/Application/Infrastructure/API)",
+      "SignalR hub for real-time logout notifications",
+      "Axios interceptors with automatic token refresh",
+      "Role-based access control (RBAC) infrastructure",
+      "SSL/HTTPS configuration for local development",
+      "CRM Category API module (only backend API implemented)",
+      "Mock data layer for frontend development",
+      "Lead conversion workflow UI (Lead → Customer → Deal)",
+      "Activity management interface with calendar integration",
+      "Material-UI component library with custom theming"
+    ],
+    "known_gaps": [
+      "Backend APIs missing for Customer, Lead, Deal, Contact, Activity modules - CRITICAL BLOCKER",
+      "Database integration incomplete - only Auth API connected to MySQL",
+      "No quotation management API despite UI being ready",
+      "Document management API not implemented",
+      "SharePoint and Dynamics 365 integrations configured but not fully tested",
+      "Real-time notifications (SignalR) only implemented for logout, not for CRM events",
+      "Advanced search and filtering APIs not developed",
+      "Reporting and analytics backend missing",
+      "Email integration (inbox management) not implemented",
+      "Mobile responsiveness needs optimization",
+      "No automated testing for frontend components",
+      "Data export/import functionality missing"
+    ],
+    "technical_debt": [
+      "Frontend using mock data instead of real API calls - needs refactoring when APIs ready",
+      "Database schema references in docs mention PostgreSQL but actual implementation uses MySQL (documentation inconsistency)",
+      "Some API client modules created but not connected to actual endpoints",
+      "Shared NuGet packages (Res.Shared.AuthN, Res.Shared.AuthZ) referenced but not all projects use them consistently",
+      "Logging configuration differs between CRM API and Auth API - needs standardization",
+      "Certificate management requires manual setup for each developer (mkcert process)",
+      "Environment variable management across 3 projects needs centralization",
+      "CORS configuration duplicated across backend APIs",
+      "Repository pattern implemented but no caching layer for frequently accessed data",
+      "No database migration strategy defined (currently using Init.sql scripts)",
+      "Test coverage very low - only basic unit tests in CRMApi.UnitTests"
+    ]
+  },
+  "competitive_context": {
+    "alternatives": [
+      "Salesforce - Enterprise CRM leader with extensive features but high cost and complexity",
+      "HubSpot CRM - Free tier popular with SMBs, strong marketing automation",
+      "Microsoft Dynamics 365 - Deep Microsoft ecosystem integration, enterprise-focused",
+      "Pipedrive - Sales-focused CRM with intuitive pipeline management",
+      "Zoho CRM - Affordable option with broad feature set for small-medium businesses"
+    ],
+    "differentiators": [
+      "Clean Architecture with true separation of concerns - easier to customize and extend than monolithic competitors",
+      "Built-in Azure AD enterprise authentication (most competitors charge extra for SSO)",
+      "Real-time SignalR notifications for instant team collaboration",
+      "Automatic deal stage transitions based on quotation status - reduces manual updates",
+      "Native SharePoint and Dynamics 365 integration for Microsoft-centric organizations",
+      "Self-hosted option with full data ownership vs SaaS-only competitors",
+      "Tailored for specific industry workflows rather than generic one-size-fits-all",
+      "Open architecture allows unlimited customization without vendor lock-in",
+      "HTTPS-first development environment with proper certificate management"
+    ],
+    "market_position": "Positioned as an enterprise-grade CRM for mid-market companies (50-500 employees) in the Microsoft ecosystem who need Salesforce-level capabilities with Pipedrive-level usability, while maintaining full control over their data and customization. Target customers are growth-stage B2B companies with complex sales cycles who have outgrown basic CRMs but find enterprise solutions too rigid and expensive.",
+    "competitor_pain_points": [],
+    "competitor_analysis_available": false
+  },
+  "constraints": {
+    "technical": [
+      "Must maintain Clean Architecture pattern across all new features",
+      "MySQL database already chosen - migration to another DB would be costly",
+      "Dapper ORM with SimpleCRUD - limited compared to Entity Framework for complex queries",
+      "React 18 frontend - must stay compatible with Material-UI v7 ecosystem",
+      "Azure AD integration dependency - requires Azure tenant setup for customers",
+      "HTTPS required for local development - adds setup complexity for new developers",
+      "Shared NuGet packages (Res.Shared.AuthN) are local DLLs, not published to NuGet.org",
+      "SignalR requires WebSocket support - may have issues with some proxies/firewalls",
+      "Three separate projects (frontend, CRM API, Auth API) must be run simultaneously for development",
+      "Certificate management (mkcert) requires manual installation on each developer machine"
+    ],
+    "resources": [
+      "Solo developer (hiepcp) - limited bandwidth for parallel feature development",
+      "No dedicated QA team - testing must be developer-driven",
+      "No DevOps/infrastructure team - deployment and CI/CD are developer responsibilities",
+      "Limited time for documentation - focus on code quality over extensive docs",
+      "Development happens incrementally - need to prioritize high-value features first"
+    ],
+    "dependencies": [
+      "Azure AD tenant for authentication (customer-specific setup required)",
+      "MySQL database server must be running locally or accessible remotely",
+      "SharePoint instance for document management integration",
+      "Microsoft Dynamics 365 instance for category synchronization",
+      "mkcert for SSL certificate generation in development",
+      "Node.js/npm ecosystem for frontend build and development",
+      ".NET 8 SDK for backend development",
+      "Git for version control and collaboration"
+    ]
+  },
+  "created_at": "2025-12-26T13:40:00Z"
+}

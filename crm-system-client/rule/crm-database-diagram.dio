@@ -1,0 +1,251 @@
+// CRM System Database Diagram
+// Generated from mockup data analysis
+// Updated to match DB_Schema.csv with audit fields (created_by, updated_by)
+// Updated with extended activity fields (call_duration, call_outcome, appointment_*)
+// Updated with user_id in activity_participants
+
+// Core Tables
+Table users {
+  Id int [pk, increment]
+  Email varchar [unique]
+  FirstName varchar
+  LastName varchar
+  Role varchar
+  Avatar varchar
+}
+
+Table customers {
+  Id int [pk, increment]
+  Name varchar
+  Domain varchar
+  Phone varchar
+  Email varchar
+  BillingAddress text
+  ShippingAddress text
+  Website varchar
+  Type varchar // Customer, Partner, Prospect
+  OwnerId int [ref: > users.Id]
+  VatNumber varchar
+  Currency varchar
+  Country varchar
+  Industry varchar
+  Notes text
+  CreatedOn timestamp
+  UpdatedOn timestamp
+  CreatedBy varchar
+  UpdatedBy varchar
+  PaymentTerms varchar
+  DeliveryTerms varchar
+  ContactPerson varchar
+}
+
+Table contacts {
+  Id int [pk, increment]
+  CustomerId int [ref: > customers.Id]
+  Salutation varchar
+  FirstName varchar
+  MiddleName varchar
+  LastName varchar
+  Email varchar
+  Phone varchar
+  MobilePhone varchar
+  Fax varchar
+  JobTitle varchar
+  Address text
+  OwnerId int [ref: > users.Id]
+  Notes text
+  IsPrimary boolean
+  CreatedOn timestamp
+  UpdatedOn timestamp
+  CreatedBy varchar
+  UpdatedBy varchar
+}
+
+// Sales Pipeline Tables
+Table leads {
+  Id int [pk, increment]
+  Email varchar
+  Phone varchar
+  FirstName varchar
+  LastName varchar
+  Company varchar
+  Domain varchar
+  Source varchar // web, event, referral, ads, facebook, other
+  Status varchar // working, qualified, unqualified
+  OwnerId int [ref: > users.Id]
+  Score int
+  IsConverted boolean
+  ConvertedAt timestamp
+  CustomerId int [ref: > customers.Id]
+  ContactId int [ref: > contacts.Id]
+  DealId int [ref: > deals.Id]
+  CreatedOn timestamp
+  UpdatedOn timestamp
+  CreatedBy varchar
+  UpdatedBy varchar
+  Note text
+  FollowUpDate date
+}
+
+Table deals {
+  Id int [pk, increment]
+  CustomerId int [ref: > customers.Id]
+  OwnerId int [ref: > users.Id]
+  LeadId int [ref: > leads.Id]
+  Name varchar
+  Description text
+  Stage varchar // Prospecting, Proposal, Quotation, Negotiation, Closed Won, Closed Lost
+  Source varchar // web, event, referral, ads, facebook, other
+  ExpectedRevenue decimal
+  ActualRevenue decimal
+  CloseDate date
+  ContactId int [ref: > contacts.Id]
+  Note text
+  CreatedOn timestamp
+  UpdatedOn timestamp
+  CreatedBy varchar
+  UpdatedBy varchar
+}
+
+Table quotations {
+  Id int [pk, increment]
+  QuotationNumber varchar [unique]
+  Name varchar
+  Description text
+  TotalAmount decimal
+  Status varchar // draft, sent, accepted, rejected, expired
+  ValidUntil date
+  Notes text
+  CreatedOn timestamp
+  UpdatedOn timestamp
+  CreatedBy varchar
+  UpdatedBy varchar
+}
+
+// Activity Management
+Table activities {
+  Id int [pk, increment]
+  ExternalId varchar
+  ConversationId varchar
+  SourceFrom varchar // gmail-email, phone-call, calendar-meeting, system-task, system-note, instant-doc
+  Subject varchar
+  Body text
+  CreatedOn timestamp
+  DueAt timestamp
+  CompletedAt timestamp
+  Status varchar // open, in_progress, completed, overdue, cancelled
+  Priority varchar // low, normal, high
+  AssignedTo varchar
+  RelationType varchar // lead, contact, deal, customer
+  RelationId int
+  CreatedBy varchar
+  HasAttachment boolean
+  AttachmentCount int
+  // Extended fields for phone-call activities
+  CallDuration varchar // Duration in minutes
+  CallOutcome varchar // positive, neutral, negative
+  // Extended fields for calendar-meeting activities
+  AppointmentDate date
+  AppointmentTime time
+  AppointmentDuration int // Duration in minutes
+  AppointmentLocation varchar
+  AppointmentPlatform varchar // zoom, whatsapp, teams, etc.
+}
+
+Table activity_participants {
+  Id int [pk, increment]
+  ActivityId int [ref: > activities.Id]
+  ContactId int [ref: > contacts.Id]
+  UserId int [ref: > users.Id] // Optional: for internal users as participants
+  Role varchar // from, to, organizer, attendee, cc, bcc
+}
+
+Table activity_attachments {
+  Id int [pk, increment]
+  ActivityId int [ref: > activities.Id]
+  FileName varchar
+  FilePath varchar
+  FileSize int
+  MimeType varchar
+  UpdatedOn timestamp
+}
+
+// Assignment & Collaboration
+Table assignees {
+  Id int [pk, increment]
+  RelationType varchar // lead, deal, customer, contact, activity
+  RelationId int
+  UserId int [ref: > users.Id]
+  Role varchar // primary_owner, collaborator, viewer
+  AssignedAt timestamp
+  Notes text
+}
+
+// Junction Tables
+Table deal_quotations {
+  Id int [pk, increment]
+  DealId int [ref: > deals.Id]
+  QuotationId int [ref: > quotations.Id]
+}
+
+// Pipeline Tracking
+Table pipeline_logs {
+  Id int [pk, increment]
+  DealId int [ref: > deals.Id]
+  OldStage varchar
+  NewStage varchar
+  ChangedBy varchar
+  ChangedAt timestamp
+  Notes text
+}
+
+// Email Integration
+Table emails {
+  Id varchar [pk] // Microsoft Graph ID format
+  ConversationId varchar
+  Subject varchar
+  BodyPreview varchar
+  Body text // Contains {contentType: html/text, content: <html>...}
+  Importance varchar // low, normal, high
+  HasAttachments boolean
+  IsRead boolean
+  IsDraft boolean
+  From text // From field
+  Sender text // Sender field
+  ToRecipients text // To recipients
+  CcRecipients text // CC recipients
+  BccRecipients text // BCC recipients
+  ReplyTo text // Reply to
+  ReceivedDateTime timestamp
+  SentDateTime timestamp
+  CreatedDateTime timestamp
+  LastModifiedDateTime timestamp
+  InternetMessageId varchar
+  Categories text
+  Flag text // Flag status
+  Attachments text // Attachments
+  SyncedToActivity boolean
+  SyncedActivityId int [ref: > activities.Id]
+  PotentialRelationType varchar // lead, contact, deal, customer
+  PotentialRelationId int
+  MatchedContactId int [ref: > contacts.Id]
+}
+
+// Relationships and Constraints
+
+// Polymorphic relationships (logical relationships, not FK constraints)
+Ref: activities.RelationId > leads.Id
+Ref: activities.RelationId > deals.Id
+Ref: activities.RelationId > contacts.Id
+Ref: activities.RelationId > customers.Id
+
+Ref: assignees.RelationId > leads.Id
+Ref: assignees.RelationId > deals.Id
+Ref: assignees.RelationId > customers.Id
+Ref: assignees.RelationId > contacts.Id
+Ref: assignees.RelationId > activities.Id
+
+Ref: emails.PotentialRelationId > leads.Id
+Ref: emails.PotentialRelationId > deals.Id
+Ref: emails.PotentialRelationId > contacts.Id
+Ref: emails.PotentialRelationId > customers.Id

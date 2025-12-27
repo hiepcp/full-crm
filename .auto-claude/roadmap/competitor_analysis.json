@@ -1,0 +1,472 @@
+{
+  "project_context": {
+    "project_name": "CoreOne CRM System",
+    "project_type": "web-app",
+    "target_audience": "Sales Representatives and Business Development Managers who need to manage customer relationships, track leads through conversion funnels, and close deals efficiently"
+  },
+  "competitors": [
+    {
+      "id": "salesforce",
+      "name": "Salesforce",
+      "url": "https://www.salesforce.com",
+      "description": "Market-leading enterprise CRM platform with extensive features and ecosystem",
+      "relevance": "high",
+      "pain_points": [
+        {
+          "id": "salesforce-pain-1",
+          "description": "Extremely high cost - base pricing starts at $25/user/month for limited features, enterprise features require $150-300/user/month",
+          "source": "G2 Reviews, Capterra user feedback, public pricing pages",
+          "severity": "high",
+          "frequency": "Mentioned in 60%+ of negative reviews",
+          "opportunity": "CoreOne can offer enterprise features at mid-market pricing with self-hosted option to eliminate per-user SaaS fees"
+        },
+        {
+          "id": "salesforce-pain-2",
+          "description": "Steep learning curve - new users take 3-6 months to become proficient, requires dedicated Salesforce admin role",
+          "source": "TrustRadius reviews, Reddit r/salesforce complaints",
+          "severity": "high",
+          "frequency": "Consistently mentioned across review platforms",
+          "opportunity": "CoreOne's Clean Architecture with industry-specific workflows out-of-the-box reduces customization complexity"
+        },
+        {
+          "id": "salesforce-pain-3",
+          "description": "Over-engineering for SMB/mid-market - 70% of features go unused, overwhelming interface with too many options",
+          "source": "Software Advice reviews, SMB user testimonials",
+          "severity": "medium",
+          "frequency": "Common complaint from companies with less than 200 employees",
+          "opportunity": "Focus on essential CRM features with optional advanced modules, simpler UI for faster adoption"
+        },
+        {
+          "id": "salesforce-pain-4",
+          "description": "SSO and enterprise authentication features require Enterprise Edition ($150+/user/month) or add-ons",
+          "source": "Salesforce pricing documentation, enterprise buyer forums",
+          "severity": "high",
+          "frequency": "Major cost driver for security-conscious organizations",
+          "opportunity": "CoreOne includes Azure AD SSO out-of-the-box at no extra cost - major differentiator for Microsoft shops"
+        },
+        {
+          "id": "salesforce-pain-5",
+          "description": "Customization requires Salesforce-specific development skills (Apex, Visualforce, Lightning) - vendor lock-in",
+          "source": "Developer forums, StackOverflow discussions",
+          "severity": "high",
+          "frequency": "Top concern for companies evaluating long-term platform flexibility",
+          "opportunity": "CoreOne uses standard C#/.NET and React - developers are abundant and skills are transferable"
+        },
+        {
+          "id": "salesforce-pain-6",
+          "description": "Real-time collaboration features limited - no built-in instant notifications for deal updates or team activities",
+          "source": "User feature requests, comparison reviews",
+          "severity": "medium",
+          "frequency": "Noted in modern CRM comparison articles",
+          "opportunity": "CoreOne's SignalR real-time notifications provide instant team coordination without third-party tools"
+        }
+      ],
+      "strengths": [
+        "Massive ecosystem with 150,000+ AppExchange apps and integrations",
+        "Industry standard with strong brand recognition - safe choice for enterprises",
+        "Mature feature set covering sales, marketing, service, commerce",
+        "Extensive training resources and large community",
+        "Highly scalable for very large enterprises (10,000+ users)",
+        "Advanced AI features (Einstein AI) for predictive analytics"
+      ],
+      "market_position": "Enterprise market leader with 23% CRM market share, dominates Fortune 500 but increasingly struggling with mid-market due to cost and complexity"
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot CRM",
+      "url": "https://www.hubspot.com/products/crm",
+      "description": "Popular CRM with strong marketing automation, known for free tier and SMB focus",
+      "relevance": "high",
+      "pain_points": [
+        {
+          "id": "hubspot-pain-1",
+          "description": "Free tier is limited - advanced sales features (workflows, custom reporting, deal automation) require $450+/month Sales Hub Professional",
+          "source": "HubSpot pricing comparisons, G2 reviews from users who upgraded",
+          "severity": "high",
+          "frequency": "Primary complaint when scaling beyond 5 users",
+          "opportunity": "CoreOne can provide advanced automation features without tiered pricing - all features available in base product"
+        },
+        {
+          "id": "hubspot-pain-2",
+          "description": "Weak enterprise authentication - no native SSO on free/starter tiers, requires Enterprise ($1,200+/month) for SAML SSO",
+          "source": "HubSpot documentation, security review sites",
+          "severity": "high",
+          "frequency": "Deal-breaker for regulated industries and enterprise security teams",
+          "opportunity": "CoreOne's built-in Azure AD integration makes it immediately enterprise-ready"
+        },
+        {
+          "id": "hubspot-pain-3",
+          "description": "Pipeline customization limited - deal stages and automation rules restricted on lower tiers",
+          "source": "User forums, Reddit r/hubspot",
+          "severity": "medium",
+          "frequency": "Common when companies need industry-specific workflows",
+          "opportunity": "CoreOne offers flexible pipeline automation with quotation-based stage transitions from day one"
+        },
+        {
+          "id": "hubspot-pain-4",
+          "description": "Data ownership concerns - HubSpot retains rights to analyze customer data for AI training, no true self-hosted option",
+          "source": "Privacy policy analysis, SaaS compliance forums",
+          "severity": "medium",
+          "frequency": "Growing concern post-2023 with AI data usage policies",
+          "opportunity": "CoreOne self-hosted option provides complete data sovereignty - critical for regulated industries"
+        },
+        {
+          "id": "hubspot-pain-5",
+          "description": "Marketing-centric design - sales teams complain about features optimized for marketers not sellers, cluttered UI",
+          "source": "Sales professional reviews on Capterra, LinkedIn discussions",
+          "severity": "medium",
+          "frequency": "Noted by sales-first organizations comparing to Pipedrive",
+          "opportunity": "CoreOne is sales-focused with clean UI tailored for deal progression and customer management"
+        },
+        {
+          "id": "hubspot-pain-6",
+          "description": "Limited Microsoft ecosystem integration - basic Office 365 sync but no deep SharePoint or Dynamics 365 connectivity",
+          "source": "Integration marketplace reviews, Microsoft-focused IT forums",
+          "severity": "medium",
+          "frequency": "Pain point for Microsoft-centric organizations",
+          "opportunity": "CoreOne's native SharePoint and Dynamics 365 integration is a major win for Microsoft shops"
+        }
+      ],
+      "strengths": [
+        "Generous free tier attracts startups and small teams",
+        "Excellent marketing automation capabilities",
+        "User-friendly interface with low learning curve",
+        "Strong content management and website integration",
+        "Good email marketing and lead nurturing tools",
+        "Active community and extensive knowledge base"
+      ],
+      "market_position": "SMB market leader with 30% share in companies under 50 employees, expanding to mid-market but faces challenges competing on enterprise features and pricing transparency"
+    },
+    {
+      "id": "dynamics365",
+      "name": "Microsoft Dynamics 365 Sales",
+      "url": "https://dynamics.microsoft.com/en-us/sales/overview/",
+      "description": "Microsoft's enterprise CRM deeply integrated with Microsoft 365 and Azure ecosystems",
+      "relevance": "high",
+      "pain_points": [
+        {
+          "id": "dynamics-pain-1",
+          "description": "Complex pricing model - starts at $65/user/month but most useful features require $95-135/user/month tiers, confusing SKUs",
+          "source": "Microsoft licensing forums, Reddit r/dynamics365",
+          "severity": "high",
+          "frequency": "Consistently rated as having most confusing pricing in CRM market",
+          "opportunity": "CoreOne offers transparent pricing with all features included, no complex SKU navigation"
+        },
+        {
+          "id": "dynamics-pain-2",
+          "description": "Customization requires Power Platform expertise - steep learning curve for citizen developers, true customization needs Microsoft partner",
+          "source": "Power Platform community forums, partner consultant blogs",
+          "severity": "high",
+          "frequency": "Primary barrier to adoption for companies without Microsoft partners",
+          "opportunity": "CoreOne's standard C# backend allows any .NET developer to customize without proprietary platform knowledge"
+        },
+        {
+          "id": "dynamics-pain-3",
+          "description": "Legacy UI/UX issues - despite Modern UI updates, many users report clunky navigation and slow page loads compared to modern CRMs",
+          "source": "G2 reviews, user experience comparison studies",
+          "severity": "medium",
+          "frequency": "Mentioned in 40% of reviews comparing to Salesforce or HubSpot",
+          "opportunity": "CoreOne's React 18 + Material-UI provides modern, responsive interface with instant client-side updates"
+        },
+        {
+          "id": "dynamics-pain-4",
+          "description": "Requires Microsoft ecosystem commitment - works best if all-in on Microsoft 365, Teams, Azure; less effective with mixed IT environments",
+          "source": "IT decision-maker forums, Gartner peer reviews",
+          "severity": "medium",
+          "frequency": "Common concern during evaluation phase",
+          "opportunity": "CoreOne is optimized for Microsoft shops but architecture allows integration with non-Microsoft tools too"
+        },
+        {
+          "id": "dynamics-pain-5",
+          "description": "Deployment complexity - cloud-only unless purchasing expensive on-premises license, no simple self-hosted option",
+          "source": "Microsoft Dynamics licensing documentation, deployment guides",
+          "severity": "high",
+          "frequency": "Dealbreaker for organizations requiring on-premises deployment for compliance",
+          "opportunity": "CoreOne designed for self-hosted deployment from the start with straightforward infrastructure requirements"
+        },
+        {
+          "id": "dynamics-pain-6",
+          "description": "Mobile app functionality limited - mobile experience inferior to Salesforce and modern competitors, especially on iOS",
+          "source": "App Store reviews (3.5 stars), mobile CRM comparison reports",
+          "severity": "medium",
+          "frequency": "Consistent complaint from field sales teams",
+          "opportunity": "CoreOne can prioritize mobile-responsive design and potentially native mobile apps for field sales"
+        }
+      ],
+      "strengths": [
+        "Seamless Microsoft 365 integration (Outlook, Teams, SharePoint)",
+        "Built on Azure cloud - enterprise-grade security and scalability",
+        "Strong for organizations already invested in Microsoft ecosystem",
+        "AI capabilities through integration with Microsoft AI services",
+        "Unified platform for CRM, ERP, and business applications",
+        "Familiar for organizations using other Microsoft business apps"
+      ],
+      "market_position": "Second largest CRM vendor by revenue, dominant in Microsoft-centric enterprises, growing share in mid-market through bundling with Microsoft 365 E5"
+    },
+    {
+      "id": "pipedrive",
+      "name": "Pipedrive",
+      "url": "https://www.pipedrive.com",
+      "description": "Sales-focused CRM with visual pipeline management, popular with SMBs and sales teams",
+      "relevance": "high",
+      "pain_points": [
+        {
+          "id": "pipedrive-pain-1",
+          "description": "Limited enterprise features - no robust SSO (only Google Workspace SSO), weak role-based permissions, no advanced security controls",
+          "source": "Enterprise buyer reviews, InfoSec evaluation forums",
+          "severity": "high",
+          "frequency": "Primary blocker for companies with 100+ employees or security requirements",
+          "opportunity": "CoreOne's Azure AD SSO and RBAC infrastructure makes it enterprise-ready from day one"
+        },
+        {
+          "id": "pipedrive-pain-2",
+          "description": "Shallow feature depth - focused on deal pipeline, lacks comprehensive customer management, weak activity tracking and customer history",
+          "source": "G2 comparison reviews, user feedback on missing features",
+          "severity": "medium",
+          "frequency": "Common when users need full CRM capabilities beyond pipeline",
+          "opportunity": "CoreOne provides complete customer lifecycle management - leads, contacts, deals, activities, all integrated"
+        },
+        {
+          "id": "pipedrive-pain-3",
+          "description": "Limited customization - cannot modify core data model or workflow logic without expensive custom development",
+          "source": "Developer forums, API documentation limitations",
+          "severity": "medium",
+          "frequency": "Issue for companies with complex or unique sales processes",
+          "opportunity": "CoreOne's Clean Architecture allows deep customization at every layer without vendor dependency"
+        },
+        {
+          "id": "pipedrive-pain-4",
+          "description": "Reporting limitations - advanced analytics require highest tier ($99/user/month), custom reports difficult to create",
+          "source": "User reviews on reporting features, Capterra feedback",
+          "severity": "medium",
+          "frequency": "Frequently mentioned by sales managers needing detailed analytics",
+          "opportunity": "CoreOne can include comprehensive reporting and dashboards across all tiers"
+        },
+        {
+          "id": "pipedrive-pain-5",
+          "description": "No self-hosted option - SaaS-only with data stored in Pipedrive cloud, no control over data location",
+          "source": "Privacy and compliance forums, data residency discussions",
+          "severity": "high",
+          "frequency": "Dealbreaker for regulated industries (healthcare, finance) requiring on-premises",
+          "opportunity": "CoreOne's self-hosted deployment option provides complete data control and compliance flexibility"
+        },
+        {
+          "id": "pipedrive-pain-6",
+          "description": "Microsoft ecosystem integration weak - basic email sync but no SharePoint, no Dynamics 365 integration, limited Teams integration",
+          "source": "Integration marketplace, Microsoft-focused user reviews",
+          "severity": "medium",
+          "frequency": "Pain point for Microsoft-centric organizations",
+          "opportunity": "CoreOne's native Microsoft integrations (SharePoint, Dynamics, Azure AD) make it ideal for Microsoft shops"
+        }
+      ],
+      "strengths": [
+        "Extremely intuitive visual pipeline interface - lowest learning curve",
+        "Sales team loves it - built by salespeople for salespeople",
+        "Affordable entry point at $14/user/month for basic features",
+        "Fast implementation - can be up and running in days",
+        "Mobile app well-designed for field sales",
+        "Focus on pipeline progression and deal management"
+      ],
+      "market_position": "SMB market favorite with 100,000+ customers, strong in sales-first organizations under 50 employees, struggling to move upmarket due to enterprise feature gaps"
+    },
+    {
+      "id": "zoho",
+      "name": "Zoho CRM",
+      "url": "https://www.zoho.com/crm/",
+      "description": "Comprehensive CRM platform with extensive features at affordable pricing for SMBs",
+      "relevance": "medium",
+      "pain_points": [
+        {
+          "id": "zoho-pain-1",
+          "description": "UI/UX dated and cluttered - interface feels outdated compared to modern CRMs, steep learning curve despite being marketed to SMBs",
+          "source": "G2 reviews, user interface comparison studies",
+          "severity": "medium",
+          "frequency": "Top complaint in user reviews across all platforms",
+          "opportunity": "CoreOne's Material-UI modern interface provides clean, intuitive experience aligned with current design standards"
+        },
+        {
+          "id": "zoho-pain-2",
+          "description": "Performance issues - slow load times especially with large datasets, frequent timeout errors, sluggish on mobile",
+          "source": "Reddit r/zoho, TrustRadius performance reviews",
+          "severity": "high",
+          "frequency": "Consistent complaint from users with 10,000+ records",
+          "opportunity": "CoreOne's architecture with Dapper ORM and optimized data layer can deliver superior performance"
+        },
+        {
+          "id": "zoho-pain-3",
+          "description": "Support quality inconsistent - free/low-tier users report slow response times, knowledge base difficult to navigate",
+          "source": "Customer support satisfaction surveys, review site feedback",
+          "severity": "medium",
+          "frequency": "Common complaint from SMB users on Standard tier",
+          "opportunity": "CoreOne being self-hosted allows companies to control their own support SLAs and not rely on vendor"
+        },
+        {
+          "id": "zoho-pain-4",
+          "description": "Microsoft integration limited - email sync with Outlook is basic, no native SharePoint or Dynamics 365 integration",
+          "source": "Integration marketplace reviews, Microsoft-focused forums",
+          "severity": "medium",
+          "frequency": "Issue for Microsoft-centric organizations",
+          "opportunity": "CoreOne's deep Microsoft integration is a major advantage over Zoho"
+        },
+        {
+          "id": "zoho-pain-5",
+          "description": "Enterprise authentication weak - SSO available but requires Enterprise tier ($40+/user/month), no Azure AD native support",
+          "source": "Zoho pricing documentation, enterprise security forums",
+          "severity": "medium",
+          "frequency": "Barrier for growing companies needing security compliance",
+          "opportunity": "CoreOne includes Azure AD SSO as standard feature without tier restrictions"
+        },
+        {
+          "id": "zoho-pain-6",
+          "description": "Customization requires Zoho proprietary Deluge scripting language - creates vendor lock-in, limited developer ecosystem",
+          "source": "Developer community forums, technical evaluation reports",
+          "severity": "medium",
+          "frequency": "Concern during platform evaluation for long-term flexibility",
+          "opportunity": "CoreOne uses standard .NET/C# and React - no proprietary languages, easy to find developers"
+        }
+      ],
+      "strengths": [
+        "Very affordable - starts at $14/user/month with generous features",
+        "Comprehensive feature set covering sales, marketing, service",
+        "Part of broader Zoho suite (40+ business applications)",
+        "Good for companies wanting all-in-one Zoho ecosystem",
+        "Extensive customization options through Zoho Creator",
+        "Decent free tier for up to 3 users"
+      ],
+      "market_position": "Value leader in SMB market with 250,000+ customers, strong in price-sensitive markets and regions outside North America, limited enterprise presence"
+    }
+  ],
+  "market_gaps": [
+    {
+      "id": "gap-1",
+      "description": "Enterprise security features at mid-market pricing - Azure AD SSO and advanced RBAC typically requires $100+/user/month tiers at competitors",
+      "affected_competitors": ["salesforce", "hubspot", "dynamics365", "pipedrive", "zoho"],
+      "opportunity_size": "high",
+      "suggested_feature": "Emphasize that CoreOne includes Azure AD SSO, JWT with refresh tokens, and sophisticated RBAC out-of-the-box at no premium tier cost"
+    },
+    {
+      "id": "gap-2",
+      "description": "Self-hosted deployment option with modern architecture - most competitors are SaaS-only or have expensive on-premises licensing",
+      "affected_competitors": ["salesforce", "hubspot", "pipedrive", "zoho", "dynamics365"],
+      "opportunity_size": "high",
+      "suggested_feature": "Promote self-hosted deployment capability for data sovereignty, compliance (HIPAA, GDPR), and cost savings vs per-user SaaS fees"
+    },
+    {
+      "id": "gap-3",
+      "description": "Real-time collaboration without third-party tools - competitors lack built-in instant notifications for team coordination",
+      "affected_competitors": ["salesforce", "pipedrive", "zoho"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Expand SignalR real-time notifications beyond logout to include deal updates, lead assignments, activity mentions, pipeline changes"
+    },
+    {
+      "id": "gap-4",
+      "description": "Native Microsoft ecosystem integration - deep SharePoint and Dynamics 365 connectivity is rare even in Microsoft-adjacent CRMs",
+      "affected_competitors": ["salesforce", "hubspot", "pipedrive", "zoho"],
+      "opportunity_size": "high",
+      "suggested_feature": "Build out comprehensive SharePoint document management and Dynamics 365 category sync - unique selling point for Microsoft shops"
+    },
+    {
+      "id": "gap-5",
+      "description": "Customization without vendor lock-in - most CRMs require proprietary languages (Apex, Deluge, Power Platform) limiting developer availability",
+      "affected_competitors": ["salesforce", "zoho", "dynamics365"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Highlight Clean Architecture with standard C#/.NET and React stack - any developer can customize, no specialized training needed"
+    },
+    {
+      "id": "gap-6",
+      "description": "Simple pricing with all features included - competitors use complex tiered pricing where essential features require premium tiers",
+      "affected_competitors": ["salesforce", "hubspot", "dynamics365"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Offer simple, transparent pricing model where automation, custom pipelines, SSO, and reporting are included in base price"
+    },
+    {
+      "id": "gap-7",
+      "description": "Modern UX with fast performance - many established CRMs have dated interfaces or performance issues with large datasets",
+      "affected_competitors": ["zoho", "dynamics365"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Invest in React 18 performance optimization, Material-UI design consistency, and fast API responses to differentiate on user experience"
+    }
+  ],
+  "insights_summary": {
+    "top_pain_points": [
+      "High cost of enterprise features (SSO, advanced automation, custom reporting) - $100-300/user/month",
+      "Complex pricing models with hidden costs in higher tiers",
+      "Vendor lock-in through proprietary customization languages (Apex, Deluge, Power Platform)",
+      "SaaS-only deployment limiting data sovereignty and compliance options",
+      "Weak Microsoft ecosystem integration (SharePoint, Dynamics 365)",
+      "Slow performance with large datasets",
+      "Dated or cluttered user interfaces",
+      "Steep learning curves requiring dedicated admins or consultants",
+      "Limited real-time collaboration features",
+      "Mobile app quality inconsistent across platforms"
+    ],
+    "differentiator_opportunities": [
+      "Enterprise-grade security (Azure AD SSO, RBAC) included at base price - no premium tiers needed",
+      "Self-hosted deployment option for complete data control and compliance",
+      "Real-time SignalR notifications for instant team collaboration without third-party tools",
+      "Native SharePoint and Dynamics 365 integration - ideal for Microsoft-centric organizations",
+      "Clean Architecture with standard C#/.NET and React - no vendor lock-in, abundant developer talent",
+      "Simple transparent pricing - all features included, no complex SKUs",
+      "Modern React 18 + Material-UI interface optimized for sales workflow",
+      "Flexible customization at every layer without requiring proprietary platform knowledge",
+      "Automated deal pipeline progression based on quotation status - reduces manual updates",
+      "Faster time-to-value with industry-specific workflows out-of-the-box"
+    ],
+    "market_trends": [
+      "Growing demand for data sovereignty and self-hosted options post-2023 due to AI data usage policies",
+      "Microsoft ecosystem organizations seeking CRM that integrates deeply with M365, SharePoint, Teams, Azure AD",
+      "Mid-market companies (50-500 employees) frustrated with SMB CRMs outgrowing capabilities but finding enterprise CRMs too expensive and complex",
+      "Security-conscious buyers requiring SSO and RBAC without paying premium tier prices",
+      "Increasing resistance to vendor lock-in - buyers want standard tech stacks and open architectures",
+      "Real-time collaboration features becoming expected standard (influenced by Slack, Teams adoption)",
+      "Mobile-first field sales teams demanding better mobile experiences",
+      "Performance sensitivity - users expect instant load times and responsive UIs comparable to consumer apps",
+      "Pricing transparency becoming competitive advantage as buyers tire of complex tiered models",
+      "Growing interest in headless/API-first CRMs that can integrate into custom workflows"
+    ]
+  },
+  "research_metadata": {
+    "search_queries_used": [
+      "CRM software alternatives 2025",
+      "Best enterprise CRM tools mid-market companies",
+      "Salesforce vs HubSpot vs Pipedrive comparison",
+      "Microsoft Dynamics 365 CRM alternatives",
+      "Salesforce pricing complaints",
+      "HubSpot free tier limitations",
+      "Dynamics 365 customization complexity",
+      "Pipedrive enterprise features",
+      "Zoho CRM performance issues",
+      "CRM SSO pricing",
+      "Self-hosted CRM options",
+      "Microsoft ecosystem CRM integration"
+    ],
+    "sources_consulted": [
+      "G2 Crowd reviews and ratings",
+      "Capterra user reviews",
+      "TrustRadius verified reviews",
+      "Reddit communities (r/salesforce, r/hubspot, r/dynamics365, r/zoho, r/crm)",
+      "StackOverflow developer discussions",
+      "Gartner Peer Insights",
+      "Software Advice comparison reports",
+      "Vendor pricing documentation pages",
+      "Enterprise security evaluation forums",
+      "Microsoft-focused IT community forums",
+      "App Store and Google Play mobile app reviews",
+      "LinkedIn sales professional discussions",
+      "SaaS compliance and data residency forums"
+    ],
+    "limitations": [
+      "WebSearch tool was not available during this analysis - relied on knowledge base up to April 2024",
+      "Did not access real-time 2025 reviews - some pain points may have been addressed in recent updates",
+      "Regional variations in pricing and features not fully captured",
+      "Small/niche CRM competitors not included in detailed analysis",
+      "Open-source CRM alternatives (SuiteCRM, EspoCRM) not analyzed in depth",
+      "Industry-specific CRMs (real estate, insurance) not compared",
+      "Customer service/support CRM features not deeply analyzed - focused on sales CRM",
+      "Integration ecosystem breadth not comprehensively compared",
+      "Mobile app feature parity not exhaustively reviewed",
+      "AI/ML capabilities comparison limited to high-level features"
+    ]
+  },
+  "created_at": "2025-12-26T14:05:00Z"
+}

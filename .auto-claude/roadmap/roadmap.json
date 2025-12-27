@@ -1,0 +1,1059 @@
+{
+  "id": "roadmap-20251226",
+  "project_name": "CoreOne CRM System",
+  "version": "1.0",
+  "vision": "A comprehensive CRM platform that unifies customer data, automates sales workflows, and provides real-time pipeline visibility to help sales teams close more deals faster.",
+  "target_audience": {
+    "primary": "Sales Representatives and Business Development Managers who need to manage customer relationships, track leads through conversion funnels, and close deals efficiently",
+    "secondary": [
+      "Sales Managers who need pipeline visibility and team performance metrics",
+      "Customer Success Teams who track customer interactions and activities",
+      "Marketing Teams who generate and qualify leads before handoff to sales"
+    ]
+  },
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Foundation - Core Backend APIs",
+      "description": "Complete the backend API layer to make the existing frontend functional. This phase eliminates the critical blocker preventing any real CRM usage by implementing all missing backend APIs and database integration.",
+      "order": 1,
+      "status": "planned",
+      "features": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5",
+        "feature-6",
+        "feature-7",
+        "feature-8"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-1-1",
+          "title": "Backend APIs Live for All Core Modules",
+          "description": "Customer, Lead, Deal, Contact, and Activity APIs fully implemented and integrated with MySQL database, enabling real CRM operations",
+          "features": [
+            "feature-1",
+            "feature-2",
+            "feature-3",
+            "feature-4",
+            "feature-5"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-1-2",
+          "title": "Frontend Connected to Real Data",
+          "description": "All frontend modules refactored to use real API endpoints instead of mock data, system is functionally complete for basic CRM operations",
+          "features": [
+            "feature-6",
+            "feature-7",
+            "feature-8"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "Enterprise Differentiation",
+      "description": "Leverage competitive advantages by implementing features that directly address competitor pain points - real-time collaboration, Microsoft integration, and advanced automation that competitors charge premium prices for.",
+      "order": 2,
+      "status": "planned",
+      "features": [
+        "feature-9",
+        "feature-10",
+        "feature-11",
+        "feature-12",
+        "feature-13",
+        "feature-14",
+        "feature-15"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-2-1",
+          "title": "Real-Time Collaboration Active",
+          "description": "SignalR notifications working for all CRM events, providing instant team coordination that competitors lack",
+          "features": [
+            "feature-9"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-2-2",
+          "title": "Microsoft Ecosystem Integration Complete",
+          "description": "SharePoint document management and Dynamics 365 category sync fully operational, delivering unique value for Microsoft-centric organizations",
+          "features": [
+            "feature-10",
+            "feature-11"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-2-3",
+          "title": "Workflow Automation Live",
+          "description": "Automated deal pipeline progression, lead assignment, and follow-up reminders reduce manual work and accelerate sales cycles",
+          "features": [
+            "feature-12",
+            "feature-13",
+            "feature-14"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "Analytics & Intelligence",
+      "description": "Provide sales managers and leadership with actionable insights through comprehensive dashboards, reporting, and analytics capabilities that help optimize sales performance.",
+      "order": 3,
+      "status": "planned",
+      "features": [
+        "feature-16",
+        "feature-17",
+        "feature-18",
+        "feature-19",
+        "feature-20"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-3-1",
+          "title": "Sales Performance Dashboards Live",
+          "description": "Real-time dashboards showing pipeline health, conversion rates, team performance, and deal velocity metrics",
+          "features": [
+            "feature-16",
+            "feature-17"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-3-2",
+          "title": "Advanced Reporting Available",
+          "description": "Custom report builder and data export capabilities enable deep analysis and integration with BI tools",
+          "features": [
+            "feature-18",
+            "feature-19",
+            "feature-20"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "name": "Scale & Polish",
+      "description": "Enhance user experience, improve performance, add communication integrations, and optimize for mobile usage to compete with modern CRM user expectations.",
+      "order": 4,
+      "status": "planned",
+      "features": [
+        "feature-21",
+        "feature-22",
+        "feature-23",
+        "feature-24",
+        "feature-25",
+        "feature-26",
+        "feature-27"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-4-1",
+          "title": "Communication Hub Operational",
+          "description": "Email integration and activity tracking provide centralized communication history within CRM",
+          "features": [
+            "feature-21",
+            "feature-22"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-4-2",
+          "title": "Mobile-Optimized Experience",
+          "description": "Responsive design optimizations and mobile app enable field sales teams to work effectively from anywhere",
+          "features": [
+            "feature-23",
+            "feature-24"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-4-3",
+          "title": "Performance & Quality Optimized",
+          "description": "Caching, advanced search, and comprehensive testing ensure enterprise-grade reliability and speed",
+          "features": [
+            "feature-25",
+            "feature-26",
+            "feature-27"
+          ],
+          "status": "planned"
+        }
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "feature-1",
+      "title": "Customer Management API",
+      "description": "Complete backend API for customer CRUD operations, including customer creation from lead conversion, customer profile updates, relationship management, and customer search/filtering.",
+      "rationale": "Critical blocker - frontend Customer module exists but has no backend. Sales teams cannot manage customer data without this API. This is the foundation for all CRM operations.",
+      "priority": "must",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Customer CRUD API endpoints implemented following Clean Architecture pattern",
+        "MySQL database integration with Customer table and relationships",
+        "Lead-to-Customer conversion API endpoint working",
+        "Customer search and filtering with pagination implemented",
+        "Validation using FluentValidation for all customer data inputs",
+        "API returns proper error responses for invalid operations",
+        "Logging implemented using Serilog for audit trail"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to create customer records from qualified leads so that I can start tracking sales opportunities",
+        "As a customer success manager, I want to view complete customer profiles so that I can understand customer history and context",
+        "As a sales manager, I want to search and filter customers so that I can analyze customer segments and assign territories"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-2",
+      "title": "Lead Management API",
+      "description": "Complete backend API for lead lifecycle management including lead capture, qualification, assignment, scoring, and conversion to customers.",
+      "rationale": "Critical blocker - frontend Lead module exists but has no backend. Marketing and sales teams cannot manage the lead pipeline. Addresses the pain point of manual lead tracking and qualification.",
+      "priority": "must",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Lead CRUD API endpoints implemented with Clean Architecture",
+        "MySQL database integration with Lead table and status tracking",
+        "Lead qualification workflow API (New → Contacted → Qualified → Converted)",
+        "Lead assignment API for routing leads to sales reps",
+        "Lead scoring calculation based on configurable criteria",
+        "Lead-to-Customer conversion endpoint with data migration",
+        "Bulk lead import API for marketing integration"
+      ],
+      "user_stories": [
+        "As a marketing manager, I want to import leads from campaigns so that sales can follow up immediately",
+        "As a sales rep, I want to qualify leads through stages so that I focus on high-probability opportunities",
+        "As a sales manager, I want to assign leads to team members so that workload is distributed evenly"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-3",
+      "title": "Deal Pipeline API",
+      "description": "Complete backend API for deal management including deal creation, stage progression, quotation linking, win/loss tracking, and pipeline analytics.",
+      "rationale": "Critical blocker - frontend Deal module and drag-drop pipeline exist but have no backend. Sales teams cannot track opportunities or forecast revenue. This is the core of sales CRM functionality.",
+      "priority": "must",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [
+        "feature-1",
+        "feature-2"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Deal CRUD API endpoints with stage management",
+        "MySQL database integration with Deal, Stage, and DealHistory tables",
+        "Automatic stage progression based on quotation status (unique differentiator)",
+        "Deal value calculation and weighted pipeline value API",
+        "Win/loss tracking with reason codes",
+        "Deal timeline API showing all stage transitions and activities",
+        "Pipeline summary API for dashboard visualization"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to create deals linked to customers so that I can track all sales opportunities",
+        "As a sales rep, I want deals to automatically progress stages when quotations are approved so that I save time on manual updates",
+        "As a sales manager, I want to view pipeline value by stage so that I can forecast revenue accurately"
+      ],
+      "competitor_insight_ids": [
+        "salesforce-pain-6",
+        "hubspot-pain-3"
+      ]
+    },
+    {
+      "id": "feature-4",
+      "title": "Contact Management API",
+      "description": "Complete backend API for contact management including contact CRUD, relationship to customers/leads/deals, contact role tracking, and communication history.",
+      "rationale": "Critical blocker - frontend Contact module exists but has no backend. Sales teams need to manage multiple contacts per customer and track who to communicate with for each deal.",
+      "priority": "must",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [
+        "feature-1"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Contact CRUD API endpoints implemented",
+        "MySQL database integration with Contact table and relationships",
+        "Contact-to-Customer linking API (many contacts per customer)",
+        "Contact role management (Decision Maker, Influencer, User, etc.)",
+        "Contact search across all customers with filtering",
+        "Primary contact designation per customer",
+        "Contact activity history API integration"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to add multiple contacts per customer so that I can track all stakeholders in a deal",
+        "As a sales rep, I want to designate contact roles so that I know who the decision makers are",
+        "As a customer success manager, I want to see all communication with a contact so that I have full context"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-5",
+      "title": "Activity Tracking API",
+      "description": "Complete backend API for activity management including logging calls, emails, meetings, tasks, and notes, with calendar integration and activity timeline.",
+      "rationale": "Critical blocker - frontend Activity module and calendar exist but have no backend. Sales teams cannot track customer interactions or schedule follow-ups, addressing the pain point of fragmented activity tracking.",
+      "priority": "must",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Activity CRUD API for calls, emails, meetings, tasks, notes",
+        "MySQL database integration with Activity table and polymorphic relationships",
+        "Activity linking to Customer, Lead, Deal, and Contact entities",
+        "Activity timeline API sorted by date with filtering",
+        "Task completion tracking and overdue task API",
+        "Activity type categorization and custom activity types",
+        "Upcoming activities API for sales rep daily planning"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to log all customer calls and emails so that my team can see the complete communication history",
+        "As a sales rep, I want to schedule follow-up tasks so that I never miss an important customer touchpoint",
+        "As a sales manager, I want to see team activity metrics so that I can track engagement and coaching opportunities"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-6",
+      "title": "Quotation Management API",
+      "description": "Backend API for quotation creation, approval workflow, line item management, quotation status tracking, and automatic deal stage updates based on quotation status.",
+      "rationale": "High impact - the unique differentiator of automatic deal stage progression based on quotation status requires this API. Frontend quotation UI is ready but non-functional.",
+      "priority": "must",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [
+        "feature-3"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Quotation CRUD API with line item management",
+        "MySQL database integration with Quotation and QuotationLineItem tables",
+        "Quotation status workflow (Draft → Sent → Approved → Rejected)",
+        "Quotation approval triggers automatic deal stage transition",
+        "Quotation PDF generation API for customer delivery",
+        "Quotation versioning to track changes",
+        "Quotation analytics API for conversion tracking"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to create quotations with multiple line items so that I can present pricing to customers",
+        "As a sales rep, I want deals to automatically move to negotiation stage when I send a quotation so that my pipeline stays current without manual updates",
+        "As a sales manager, I want to track quotation-to-deal conversion rates so that I can optimize pricing strategy"
+      ],
+      "competitor_insight_ids": [
+        "salesforce-pain-6",
+        "hubspot-pain-3"
+      ]
+    },
+    {
+      "id": "feature-7",
+      "title": "Document Management API",
+      "description": "Backend API for document upload, storage, versioning, and linking documents to customers, leads, and deals with SharePoint integration.",
+      "rationale": "High impact - enables sales teams to centralize all customer documents (contracts, proposals, presentations) within CRM. SharePoint integration is a key differentiator for Microsoft-centric organizations.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [
+        "feature-1",
+        "feature-3"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Document upload API with file type validation and size limits",
+        "MySQL database integration with Document metadata table",
+        "Document linking to Customer, Lead, Deal entities",
+        "SharePoint integration for document storage and retrieval",
+        "Document versioning and history tracking",
+        "Document search and filtering API",
+        "Document access control based on user permissions"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to upload contracts and proposals to customer records so that all documentation is centralized",
+        "As a sales rep, I want documents automatically stored in SharePoint so that they're accessible across Microsoft tools",
+        "As a compliance officer, I want to see document version history so that I can track changes and approvals"
+      ],
+      "competitor_insight_ids": [
+        "hubspot-pain-6",
+        "pipedrive-pain-6",
+        "zoho-pain-4"
+      ]
+    },
+    {
+      "id": "feature-8",
+      "title": "Frontend API Integration Refactoring",
+      "description": "Refactor all frontend modules to replace mock data with real API calls using axios interceptors, implement error handling, loading states, and optimistic updates.",
+      "rationale": "Critical to make the CRM functional - frontend currently uses mock data and needs comprehensive refactoring to connect to the new backend APIs. This completes the technical foundation.",
+      "priority": "must",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5",
+        "feature-6"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "All frontend modules use real API endpoints instead of mock data",
+        "Axios interceptors properly handle authentication, token refresh, and error responses",
+        "Loading states implemented for all API calls",
+        "Error messages displayed to users for API failures",
+        "Optimistic UI updates for better perceived performance",
+        "Redux state management updated to sync with API responses",
+        "API client modules fully configured and tested"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to see real customer data when I open the CRM so that I can trust the information is accurate",
+        "As a user, I want to see loading indicators when data is being fetched so that I know the system is working",
+        "As a user, I want clear error messages when something goes wrong so that I can take corrective action"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-9",
+      "title": "Real-Time SignalR Notifications for CRM Events",
+      "description": "Expand SignalR hub to broadcast real-time notifications for deal updates, lead assignments, activity mentions, pipeline changes, and team collaboration events.",
+      "rationale": "Major competitive differentiator - Salesforce and most competitors lack built-in real-time collaboration. Addresses the pain point of missing real-time team coordination. SignalR infrastructure already exists but only used for logout.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "SignalR hub broadcasts notifications when deals change stages",
+        "Notifications sent when leads are assigned to sales reps",
+        "Real-time alerts when users are mentioned in notes or activities",
+        "Pipeline updates broadcast to all viewers for instant refresh",
+        "Frontend displays toast notifications for real-time events",
+        "Notification history API for missed events",
+        "User notification preferences API (which events to receive)"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to receive instant notifications when I'm assigned a new lead so that I can follow up immediately",
+        "As a sales manager, I want to see real-time pipeline updates when deals move stages so that I have accurate forecasts without refreshing",
+        "As a team member, I want to be notified when someone mentions me in a note so that I can respond to collaboration requests quickly"
+      ],
+      "competitor_insight_ids": [
+        "salesforce-pain-6",
+        "pipedrive-pain-1",
+        "gap-3"
+      ]
+    },
+    {
+      "id": "feature-10",
+      "title": "SharePoint Document Management Integration",
+      "description": "Complete implementation and testing of SharePoint integration for document storage, retrieval, folder organization, and permission sync with CRM access control.",
+      "rationale": "Major differentiator for Microsoft-centric organizations - none of the competitors (Salesforce, HubSpot, Pipedrive, Zoho) offer native SharePoint integration. Addresses a critical market gap.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-7"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Documents uploaded in CRM automatically stored in SharePoint",
+        "SharePoint folder structure mirrors CRM organization (Customers/Leads/Deals)",
+        "SharePoint permissions synchronized with CRM user roles",
+        "Document search works across CRM and SharePoint",
+        "SharePoint document links accessible from CRM interface",
+        "Document versioning in SharePoint tracked in CRM",
+        "Bulk document migration tool from local storage to SharePoint"
+      ],
+      "user_stories": [
+        "As a sales rep, I want documents I upload to CRM to be available in SharePoint so that I can access them from Teams and Outlook",
+        "As an IT administrator, I want CRM permissions to control SharePoint access so that document security is consistent",
+        "As a user, I want to search for documents across CRM and SharePoint in one place so that I find what I need faster"
+      ],
+      "competitor_insight_ids": [
+        "hubspot-pain-6",
+        "pipedrive-pain-6",
+        "zoho-pain-4",
+        "gap-4"
+      ]
+    },
+    {
+      "id": "feature-11",
+      "title": "Dynamics 365 Category Synchronization",
+      "description": "Complete implementation and testing of Dynamics 365 integration for bidirectional category synchronization, ensuring CRM categories stay in sync with D365 master data.",
+      "rationale": "Unique capability for organizations using both CoreOne CRM and Dynamics 365 - allows seamless data flow between systems. Differentiator for Microsoft ecosystem customers.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-2",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Bidirectional sync between CRM categories and Dynamics 365 categories",
+        "Automatic sync on schedule (hourly/daily configurable)",
+        "Manual sync trigger available in admin interface",
+        "Sync conflict resolution with configurable master source",
+        "Sync audit log showing all changes and timestamps",
+        "Category mapping configuration for different naming conventions",
+        "Error handling and retry logic for network failures"
+      ],
+      "user_stories": [
+        "As a system administrator, I want CRM categories to automatically sync with Dynamics 365 so that both systems have consistent master data",
+        "As a sales rep, I want to use the same product categories in CRM that we use in Dynamics 365 so that reporting is unified",
+        "As an IT manager, I want to see sync history and errors so that I can troubleshoot integration issues"
+      ],
+      "competitor_insight_ids": [
+        "gap-4"
+      ]
+    },
+    {
+      "id": "feature-12",
+      "title": "Automated Deal Pipeline Progression Rules",
+      "description": "Configurable automation rules for automatic deal stage transitions based on activities, time triggers, quotation status, and custom business logic.",
+      "rationale": "High-impact automation that reduces manual work - competitors charge premium prices for workflow automation. HubSpot requires $450+/month Sales Hub Professional for advanced workflows. This addresses the pain point of manual pipeline updates.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-3",
+        "feature-6"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Rule engine for defining automatic stage transitions (IF-THEN logic)",
+        "Time-based triggers (e.g., move to 'Stale' if no activity for 30 days)",
+        "Activity-based triggers (e.g., advance stage when demo meeting is logged)",
+        "Quotation-based triggers (already partially implemented - expand it)",
+        "Admin interface for creating and managing automation rules",
+        "Rule testing and preview before activation",
+        "Automation audit log showing which rules triggered which actions"
+      ],
+      "user_stories": [
+        "As a sales manager, I want deals to automatically move to 'Stale' after 30 days of no activity so that reps focus on active opportunities",
+        "As a sales rep, I want deals to advance stages automatically when I complete key activities so that I spend less time on pipeline admin",
+        "As a sales operations manager, I want to configure custom automation rules so that our unique sales process is enforced consistently"
+      ],
+      "competitor_insight_ids": [
+        "hubspot-pain-1",
+        "hubspot-pain-3",
+        "pipedrive-pain-4"
+      ]
+    },
+    {
+      "id": "feature-13",
+      "title": "Intelligent Lead Assignment and Routing",
+      "description": "Automated lead assignment based on territory, round-robin distribution, lead score, sales rep availability, and workload balancing with configurable assignment rules.",
+      "rationale": "Addresses the pain point of manual lead tracking and qualification. Automates a time-consuming process and ensures leads are routed to the right reps immediately, improving response time.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-2"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Territory-based assignment (assign leads by geographic region or industry)",
+        "Round-robin assignment with workload balancing",
+        "Lead score-based routing (high-score leads to senior reps)",
+        "Sales rep availability tracking (don't assign to OOO reps)",
+        "Configurable assignment rules in admin interface",
+        "Manual override capability for managers",
+        "Assignment notification to sales reps via email and in-app"
+      ],
+      "user_stories": [
+        "As a sales manager, I want leads to be automatically assigned based on territory so that reps only get leads they can serve",
+        "As a sales rep, I want to receive instant notification when I'm assigned a high-score lead so that I can respond before competitors",
+        "As a sales operations manager, I want to balance lead distribution evenly so that no rep is overwhelmed or underutilized"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-14",
+      "title": "Automated Follow-Up Reminders and Task Management",
+      "description": "Smart reminder system that suggests follow-up activities based on deal stage, last contact date, and customer engagement patterns, with automatic task creation.",
+      "rationale": "Addresses the pain point of missed follow-ups and inefficient workflows. Helps sales reps stay on top of opportunities and ensures consistent customer communication.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-3",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Automatic task creation for follow-ups based on deal stage (e.g., 3 days after demo, create 'Send proposal' task)",
+        "Reminder notifications for overdue tasks via email and in-app",
+        "Smart suggestions based on engagement patterns (e.g., 'Customer hasn't responded in 7 days, time for a call?')",
+        "Configurable follow-up cadences per deal stage",
+        "Snooze and reschedule options for tasks",
+        "Task completion tracking and analytics",
+        "Integration with calendar for scheduling"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to receive reminders to follow up on deals so that I never let an opportunity go cold",
+        "As a sales rep, I want the system to suggest next actions based on deal stage so that I follow best practices consistently",
+        "As a sales manager, I want to see task completion rates so that I can identify reps who need coaching on follow-through"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-15",
+      "title": "Advanced Search and Filtering Engine",
+      "description": "Powerful search across all CRM entities with natural language queries, saved searches, full-text search, and advanced filtering with multiple criteria combinations.",
+      "rationale": "High user productivity impact - sales reps spend significant time searching for customers, deals, and activities. Fast, intelligent search improves daily efficiency and user satisfaction.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Global search across Customers, Leads, Deals, Contacts, Activities",
+        "Full-text search with relevance ranking",
+        "Advanced filters with AND/OR/NOT logic",
+        "Saved search templates for common queries",
+        "Search history and recent searches",
+        "Export search results to CSV/Excel",
+        "Search performance optimization for large datasets (100,000+ records)"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to search for all deals related to a specific company so that I can see the complete relationship",
+        "As a customer success manager, I want to find all customers in a specific industry with recent activity so that I can run targeted campaigns",
+        "As a sales manager, I want to save frequently-used searches so that I can access key segments with one click"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-16",
+      "title": "Sales Performance Dashboard",
+      "description": "Real-time dashboard showing individual and team sales metrics including pipeline value, conversion rates, deal velocity, activity metrics, and quota attainment.",
+      "rationale": "Addresses the pain point of lack of visibility into sales performance. Sales managers need real-time insights to coach teams and forecast accurately. Critical for achieving the success metric of 'Pipeline visibility - 100% of deals tracked'.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-3",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Dashboard displays pipeline value by stage with visual pipeline chart",
+        "Conversion rates shown for each stage transition",
+        "Deal velocity metrics (average days in each stage)",
+        "Activity metrics (calls, meetings, emails per rep)",
+        "Quota vs actual performance with progress bars",
+        "Trend analysis showing week-over-week and month-over-month changes",
+        "Drill-down capability to see underlying deals and activities",
+        "Real-time updates using SignalR when data changes"
+      ],
+      "user_stories": [
+        "As a sales manager, I want to see real-time pipeline health so that I can forecast revenue accurately and identify risks",
+        "As a sales rep, I want to see my quota attainment so that I know how close I am to my targets",
+        "As a VP of Sales, I want to compare team performance metrics so that I can identify coaching opportunities and best practices"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-17",
+      "title": "Lead Funnel Analytics",
+      "description": "Visual funnel showing lead progression through qualification stages with conversion rates, time-in-stage analysis, and drop-off identification.",
+      "rationale": "Enables marketing and sales to optimize lead qualification process by identifying bottlenecks. Supports the success metric of 'Time to convert lead to customer reduced by 40%'.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-3",
+      "dependencies": [
+        "feature-2"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Visual funnel showing lead counts at each stage (New → Contacted → Qualified → Converted)",
+        "Conversion rates between each stage with benchmarks",
+        "Average time in each stage with outlier identification",
+        "Drop-off analysis showing where leads are lost",
+        "Lead source performance comparison (which sources convert best)",
+        "Trend analysis over time (monthly/quarterly comparisons)",
+        "Filters by date range, sales rep, lead source, industry"
+      ],
+      "user_stories": [
+        "As a marketing manager, I want to see which lead sources convert best so that I can optimize campaign spend",
+        "As a sales manager, I want to identify bottleneck stages in lead qualification so that I can provide targeted coaching",
+        "As a sales operations manager, I want to track conversion rate trends so that I can measure the impact of process improvements"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-18",
+      "title": "Custom Report Builder",
+      "description": "Drag-and-drop report builder allowing users to create custom reports with filters, grouping, calculations, and visualizations without coding.",
+      "rationale": "Competitors charge premium prices for custom reporting - HubSpot requires Professional tier ($450+/month), Pipedrive requires highest tier ($99/user/month). Providing this at base level is a differentiator.",
+      "priority": "could",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-3",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Drag-and-drop interface for selecting report fields",
+        "Support for filters, grouping, and sorting",
+        "Calculated fields and aggregations (SUM, AVG, COUNT)",
+        "Visualization options (tables, charts, graphs)",
+        "Report scheduling and email delivery",
+        "Report sharing and permissions",
+        "Report templates for common scenarios",
+        "Export to PDF, Excel, CSV"
+      ],
+      "user_stories": [
+        "As a sales manager, I want to create custom reports without IT help so that I can analyze data specific to my region",
+        "As an executive, I want to schedule weekly reports to be emailed so that I stay informed without logging in",
+        "As a sales operations analyst, I want to build complex reports with calculations so that I can provide insights to leadership"
+      ],
+      "competitor_insight_ids": [
+        "hubspot-pain-1",
+        "pipedrive-pain-4"
+      ]
+    },
+    {
+      "id": "feature-19",
+      "title": "Data Export and Import Utilities",
+      "description": "Comprehensive data export to CSV/Excel and bulk import with mapping, validation, and duplicate detection for migration and integration scenarios.",
+      "rationale": "Essential for enterprise customers who need data portability and integration with BI tools. Addresses data ownership concerns and prevents vendor lock-in.",
+      "priority": "could",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-3",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Export all CRM data to CSV/Excel with field selection",
+        "Bulk import from CSV/Excel with field mapping UI",
+        "Validation and error reporting during import",
+        "Duplicate detection and merge options",
+        "Import preview before committing changes",
+        "Support for related data (e.g., import customers with contacts)",
+        "API endpoints for programmatic data exchange",
+        "Import/export history and audit log"
+      ],
+      "user_stories": [
+        "As a system administrator, I want to export all customer data so that I can analyze it in Excel or migrate to another system if needed",
+        "As a data analyst, I want to import enriched data from external sources so that I can enhance CRM records with market intelligence",
+        "As a migration specialist, I want to bulk import historical data with validation so that I can onboard new customers efficiently"
+      ],
+      "competitor_insight_ids": [
+        "hubspot-pain-4"
+      ]
+    },
+    {
+      "id": "feature-20",
+      "title": "Win/Loss Analysis and Sales Intelligence",
+      "description": "Detailed win/loss tracking with reason codes, competitor tracking, deal post-mortem analysis, and insights to improve win rates.",
+      "rationale": "Helps sales teams learn from wins and losses to improve strategy. Supports the success metric of 'Deal velocity - 25% reduction in average deal cycle time' by identifying patterns.",
+      "priority": "could",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-3",
+      "dependencies": [
+        "feature-3"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Win/loss reason code capture when closing deals",
+        "Competitor tracking on lost deals",
+        "Win/loss ratio reporting by rep, region, product, industry",
+        "Common loss reasons analysis with trends",
+        "Deal size and cycle time comparison (won vs lost)",
+        "Sales intelligence recommendations based on patterns",
+        "Integration with deal pipeline for immediate feedback"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to record why I won or lost a deal so that the team can learn from my experience",
+        "As a sales manager, I want to see common reasons for lost deals so that I can address objections in training",
+        "As a product manager, I want to see which competitor features cause us to lose deals so that I can prioritize our roadmap"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-21",
+      "title": "Email Integration and Inbox Management",
+      "description": "Two-way email sync with Outlook/Gmail, email tracking, automatic activity logging, and email templates for common scenarios.",
+      "rationale": "Addresses the pain point of fragmented customer data - emails are critical sales interactions that should be centralized in CRM. Improves data completeness success metric.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-4",
+      "dependencies": [
+        "feature-1",
+        "feature-4",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Two-way sync with Outlook and Gmail via API",
+        "Automatic email logging to customer/contact records",
+        "Email tracking (open rates, click rates)",
+        "Email template library with merge fields",
+        "Email scheduling and send later functionality",
+        "Email thread view showing complete conversation",
+        "Unsubscribe management and compliance"
+      ],
+      "user_stories": [
+        "As a sales rep, I want emails to automatically log to customer records so that my team sees the complete communication history",
+        "As a sales rep, I want to use email templates so that I can respond quickly with consistent messaging",
+        "As a sales manager, I want to see email engagement metrics so that I can coach on email effectiveness"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-22",
+      "title": "Call Logging and Phone Integration",
+      "description": "Click-to-call functionality, automatic call logging, call recording (with consent), and call analytics integrated into activity tracking.",
+      "rationale": "Completes the communication hub by adding phone call integration. Sales teams make dozens of calls daily - automatic logging saves time and improves data completeness.",
+      "priority": "could",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-4",
+      "dependencies": [
+        "feature-1",
+        "feature-4",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Click-to-call from contact records using VoIP integration",
+        "Automatic call logging with duration and outcome",
+        "Call recording with consent management and compliance",
+        "Call notes capture during or after calls",
+        "Call analytics (volume, duration, outcomes by rep)",
+        "Integration with popular VoIP providers (Twilio, RingCentral)",
+        "Mobile app support for call logging"
+      ],
+      "user_stories": [
+        "As a sales rep, I want to click a contact's phone number to initiate a call so that I can reach customers faster",
+        "As a sales rep, I want calls to be automatically logged so that I don't have to manually enter call details",
+        "As a sales manager, I want to access call recordings for coaching so that I can help reps improve their pitch"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-23",
+      "title": "Mobile Responsive Optimization",
+      "description": "Comprehensive mobile UI/UX optimization ensuring all CRM features work seamlessly on smartphones and tablets with touch-friendly interfaces.",
+      "rationale": "Addresses the pain point identified in Dynamics 365 and Zoho - mobile experience is critical for field sales teams. Usage context indicates 'Access needed from mobile devices for field sales reps'.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-4",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Responsive design works on iOS and Android phones/tablets",
+        "Touch-friendly UI with appropriate button sizes and gestures",
+        "Mobile-optimized pipeline view with swipe gestures",
+        "Quick actions for common tasks (log call, create activity)",
+        "Offline capability for viewing recently-accessed records",
+        "Mobile-specific navigation patterns (bottom nav, hamburger menu)",
+        "Performance optimization for mobile networks",
+        "Testing on multiple devices and screen sizes"
+      ],
+      "user_stories": [
+        "As a field sales rep, I want to update deal stages from my phone immediately after customer meetings so that my pipeline is always current",
+        "As a sales rep, I want to view customer details on my tablet during meetings so that I have context without carrying a laptop",
+        "As a sales rep, I want to log activities from my phone while driving so that I capture information before I forget"
+      ],
+      "competitor_insight_ids": [
+        "dynamics-pain-6"
+      ]
+    },
+    {
+      "id": "feature-24",
+      "title": "Native Mobile Apps (iOS and Android)",
+      "description": "Native mobile applications for iOS and Android with offline support, push notifications, and mobile-optimized workflows for field sales teams.",
+      "rationale": "Takes mobile experience beyond responsive web to native apps with better performance, offline capability, and push notifications. Differentiates from competitors with weak mobile apps like Dynamics 365 (3.5 stars).",
+      "priority": "could",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-4",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Native iOS app published on App Store",
+        "Native Android app published on Google Play",
+        "Offline mode with local data caching and sync",
+        "Push notifications for lead assignments and deal updates",
+        "Camera integration for scanning business cards",
+        "Location tracking for customer visit logging",
+        "Biometric authentication (Face ID, fingerprint)",
+        "App Store rating target: 4.5+ stars"
+      ],
+      "user_stories": [
+        "As a field sales rep, I want a native mobile app so that I can access CRM even without internet connection",
+        "As a sales rep, I want push notifications for urgent lead assignments so that I can respond immediately",
+        "As a sales rep, I want to scan business cards with my phone so that I can quickly add new contacts"
+      ],
+      "competitor_insight_ids": [
+        "dynamics-pain-6"
+      ]
+    },
+    {
+      "id": "feature-25",
+      "title": "Performance Optimization and Caching Layer",
+      "description": "Implement Redis caching for frequently-accessed data, database query optimization, and API response time improvements to handle large datasets.",
+      "rationale": "Addresses Zoho's critical pain point of slow performance with large datasets. As CRM scales to 100,000+ records, performance becomes competitive differentiator. Technical debt item identified in discovery.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-4",
+      "dependencies": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Redis cache implemented for frequently-accessed customer and deal data",
+        "Cache invalidation strategy when data changes",
+        "Database query optimization (indexing, query refactoring)",
+        "API response time < 200ms for 95% of requests",
+        "Pagination for large datasets (1000+ records)",
+        "Database connection pooling optimization",
+        "Performance monitoring and alerting",
+        "Load testing with 100,000+ records and 100+ concurrent users"
+      ],
+      "user_stories": [
+        "As a user, I want the CRM to load customer data instantly even with 100,000 customers so that I don't waste time waiting",
+        "As a sales manager, I want pipeline reports to generate in seconds even with years of historical data so that I can make real-time decisions",
+        "As a system administrator, I want performance monitoring so that I can proactively address slowdowns before users complain"
+      ],
+      "competitor_insight_ids": [
+        "zoho-pain-2",
+        "gap-7"
+      ]
+    },
+    {
+      "id": "feature-26",
+      "title": "Comprehensive Testing Suite",
+      "description": "Implement unit tests, integration tests, and end-to-end tests for frontend and backend to ensure reliability and enable confident refactoring.",
+      "rationale": "Technical debt item - current test coverage is very low. Essential for maintaining code quality as solo developer adds features. Enables faster development with confidence.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-4",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Backend unit tests covering 80%+ of business logic",
+        "Backend integration tests for all API endpoints",
+        "Frontend unit tests for React components using Jest/React Testing Library",
+        "End-to-end tests for critical user flows using Cypress or Playwright",
+        "CI/CD pipeline runs tests automatically on commits",
+        "Test coverage reporting integrated into build process",
+        "Mocking strategies for external dependencies (Azure AD, SharePoint, Dynamics)",
+        "Performance benchmarks as regression tests"
+      ],
+      "user_stories": [
+        "As a developer, I want comprehensive tests so that I can refactor code confidently without breaking existing functionality",
+        "As a product owner, I want automated testing so that bugs are caught before deployment",
+        "As a developer, I want fast-running tests so that I get immediate feedback during development"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-27",
+      "title": "Database Migration Strategy and Tooling",
+      "description": "Implement proper database migration tooling (e.g., FluentMigrator or Evolve) to replace manual Init.sql scripts, enabling version-controlled schema changes.",
+      "rationale": "Technical debt item - current approach with Init.sql scripts is not sustainable for production deployments. Needed for smooth upgrades and multi-environment deployments.",
+      "priority": "could",
+      "complexity": "medium",
+      "impact": "low",
+      "phase_id": "phase-4",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Migration tool selected and configured (FluentMigrator or Evolve)",
+        "Existing Init.sql converted to migration scripts",
+        "Migrations run automatically on application startup or via CLI",
+        "Rollback capability for failed migrations",
+        "Migration history tracked in database",
+        "Seed data separated from schema migrations",
+        "Documentation for creating new migrations",
+        "Testing migrations on local, staging, and production environments"
+      ],
+      "user_stories": [
+        "As a developer, I want to create database schema changes as code so that they're version-controlled with application code",
+        "As a system administrator, I want database migrations to run automatically so that deployments are consistent and error-free",
+        "As a developer, I want to rollback migrations if something goes wrong so that I can quickly recover from errors"
+      ],
+      "competitor_insight_ids": []
+    }
+  ],
+  "metadata": {
+    "created_at": "2025-12-26T14:30:00Z",
+    "updated_at": "2025-12-26T07:20:13.363Z",
+    "generated_by": "roadmap_features agent",
+    "prioritization_framework": "MoSCoW",
+    "competitor_analysis_used": true
+  }
+}
