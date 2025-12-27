@@ -28,6 +28,9 @@ const GoalHierarchyView = Loadable(lazy(() => import('@presentation/pages/goals/
 const GoalAnalytics = Loadable(lazy(() => import('@presentation/pages/goals/GoalAnalytics')));
 const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/GoalDetailPage')));
 
+// Admin Pages - lazy loaded
+const Dynamics365SyncPage = Loadable(lazy(() => import('@presentation/pages/admin/Dynamics365Sync')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -102,6 +105,11 @@ const MainRoutes = {
           // NEW: Goal Detail Page (Phase 8)
           path: 'goals/:id',
           element: <RouteGuard element={<GoalDetailPage />} menuId="goals" />
+        },
+        {
+          // NEW: Dynamics 365 Sync Admin Page
+          path: 'admin/dynamics365-sync',
+          element: <Dynamics365SyncPage />
         },
         {
           // RouteResolver sẽ tự động kiểm tra quyền và render đúng component theo menu
