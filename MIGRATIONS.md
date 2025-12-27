@@ -18,10 +18,8 @@ This guide explains how to work with database migrations using **Evolve** in the
 
 ## Overview
 
-All three services (ResAuthN, ResAuthZ, and CRM) use **Evolve** for database migrations:
+The **CRM system** uses **Evolve** for database migrations:
 
-- **ResAuthN**: `./res-auth-api/src/ResAuthN/ResAuthApi.Infrastructure/Migrations/`
-- **ResAuthZ**: `./res-auth-api/src/ResAuthZ/ResAuthZApi.Infrastructure/Migrations/`
 - **CRM**: `./crm-system/src/CRM.Infrastructure/Migrations/`
 
 Migrations execute **automatically on application startup** and are version-controlled in Git.
@@ -49,7 +47,7 @@ Evolve is a SQL-first migration tool that:
 
 ### Configuration
 
-Evolve is configured in each service's `Program.cs`:
+Evolve is configured in the CRM service's `Program.cs`:
 
 ```csharp
 using Evolve;
@@ -106,12 +104,6 @@ Follow the **semantic versioning** strategy:
 **Check existing migrations** to determine the next version:
 
 ```bash
-# ResAuthN
-ls ./res-auth-api/src/ResAuthN/ResAuthApi.Infrastructure/Migrations/
-
-# ResAuthZ
-ls ./res-auth-api/src/ResAuthZ/ResAuthZApi.Infrastructure/Migrations/
-
 # CRM
 ls ./crm-system/src/CRM.Infrastructure/Migrations/
 ```
@@ -127,9 +119,6 @@ V{major}.{minor}.{patch}__{Description}.sql
 **Examples:**
 
 ```bash
-# ResAuthN - Add new email verification table
-touch ./res-auth-api/src/ResAuthN/ResAuthApi.Infrastructure/Migrations/V1.1.0__Add_Email_Verification_Table.sql
-
 # CRM - Add index to improve query performance
 touch ./crm-system/src/CRM.Infrastructure/Migrations/V1.0.1__Add_Customer_Email_Index.sql
 
@@ -143,26 +132,21 @@ Write **idempotent SQL** that can run multiple times safely:
 
 ```sql
 -- =============================================================================
--- Migration: Add Email Verification Table
--- Version: V1.1.0
--- Description: Adds email_verification_tokens table for email verification flow
+-- Migration: Add Product Catalog Table
+-- Version: V1.2.0
+-- Description: Adds products table for product catalog feature
 -- =============================================================================
 
--- Create email_verification_tokens table
-CREATE TABLE IF NOT EXISTS `email_verification_tokens` (
+-- Create products table
+CREATE TABLE IF NOT EXISTS `products` (
   `Id` CHAR(36) NOT NULL PRIMARY KEY, -- UUID
-  `Email` VARCHAR(255) NOT NULL,
-  `Token` VARCHAR(128) NOT NULL UNIQUE,
-  `ExpiresAt` DATETIME NOT NULL,
+  `Name` VARCHAR(255) NOT NULL,
+  `Description` TEXT,
+  `Price` DECIMAL(10, 2) NOT NULL,
   `CreatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `VerifiedAt` DATETIME DEFAULT NULL,
-  INDEX `IX_EmailVerificationTokens_Email` (`Email`),
-  INDEX `IX_EmailVerificationTokens_ExpiresAt` (`ExpiresAt`)
+  `UpdatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `IX_Products_Name` (`Name`)
 );
-
--- Add column to users table (if not exists)
-ALTER TABLE `users`
-ADD COLUMN IF NOT EXISTS `EmailVerified` BOOLEAN NOT NULL DEFAULT FALSE;
 ```
 
 ### Step 4: Test Migration Locally
@@ -171,10 +155,10 @@ ADD COLUMN IF NOT EXISTS `EmailVerified` BOOLEAN NOT NULL DEFAULT FALSE;
 
 ```bash
 # Drop database
-mysql -u root -p -e "DROP DATABASE IF EXISTS res_auth_db;"
+mysql -u root -p -e "DROP DATABASE IF EXISTS crm_db;"
 
 # Run application (migrations execute automatically)
-cd ./res-auth-api/src/ResAuthApi.Api
+cd ./crm-system/src/CRM.Api
 dotnet run
 ```
 
@@ -189,17 +173,17 @@ dotnet run
 
 ```bash
 # Check changelog table
-mysql -u root -p -D res_auth_db -e "SELECT * FROM changelog ORDER BY installed_rank DESC LIMIT 5;"
+mysql -u root -p -D crm_db -e "SELECT * FROM changelog ORDER BY installed_rank DESC LIMIT 5;"
 
 # Verify table created
-mysql -u root -p -D res_auth_db -e "SHOW TABLES;"
+mysql -u root -p -D crm_db -e "SHOW TABLES;"
 ```
 
 ### Step 5: Commit Migration
 
 ```bash
-git add ./res-auth-api/src/ResAuthN/ResAuthApi.Infrastructure/Migrations/V1.1.0__Add_Email_Verification_Table.sql
-git commit -m "feat: add email verification table migration (V1.1.0)"
+git add ./crm-system/src/CRM.Infrastructure/Migrations/V1.2.0__Add_Product_Catalog.sql
+git commit -m "feat: add product catalog table migration (V1.2.0)"
 ```
 
 ---
@@ -253,10 +237,6 @@ Separate **seed data** from **schema migrations** using a different version name
 Migrations run **automatically on application startup**:
 
 ```bash
-# ResAuth API
-cd ./res-auth-api/src/ResAuthApi.Api
-dotnet run
-
 # CRM API
 cd ./crm-system/src/CRM.Api
 dotnet run
@@ -266,8 +246,8 @@ dotnet run
 
 ```
 📦 Starting database migration...
-🚀 Executing migration V1.0.0__ResAuthN_Initial_Schema.sql
-🚀 Executing migration V1.1.0__Add_Email_Verification_Table.sql
+🚀 Executing migration V1.0.0__CRM_Initial_Schema.sql
+🚀 Executing migration V1.2.0__Add_Product_Catalog.sql
 ✅ Database migration completed successfully.
 ```
 
@@ -282,7 +262,7 @@ using MySql.Data.MySqlClient;
 
 var connectionString = args.Length > 0
     ? args[0]
-    : "Server=localhost;Database=res_auth_db;User=root;Password=Dev@123;SslMode=None;";
+    : "Server=localhost;Database=crm_db;User=root;Password=Dev@123;SslMode=None;";
 
 using var connection = new MySqlConnection(connectionString);
 
@@ -301,7 +281,7 @@ Console.WriteLine("✅ Migrations completed successfully.");
 **Run:**
 
 ```bash
-dotnet run --project MigrationRunner "Server=localhost;Database=res_auth_db;User=root;Password=Dev@123;SslMode=None;"
+dotnet run --project MigrationRunner "Server=localhost;Database=crm_db;User=root;Password=Dev@123;SslMode=None;"
 ```
 
 ### Verify Migration Status
@@ -325,8 +305,8 @@ ORDER BY installed_rank DESC;
 ```
 | installed_rank | version | description              | type | installed_on        | success |
 |----------------|---------|--------------------------|------|---------------------|---------|
-| 2              | 1.1.0   | Add_Email_Verification   | SQL  | 2025-12-27 10:30:15 | 1       |
-| 1              | 1.0.0   | ResAuthN_Initial_Schema  | SQL  | 2025-12-27 10:30:10 | 1       |
+| 2              | 1.2.0   | Add_Product_Catalog      | SQL  | 2025-12-27 10:30:15 | 1       |
+| 1              | 1.0.0   | CRM_Initial_Schema       | SQL  | 2025-12-27 10:30:10 | 1       |
 ```
 
 ---
@@ -345,10 +325,10 @@ Create a **new migration** to fix the issue:
 
 ```bash
 # Original migration (broken)
-V1.1.0__Add_Email_Verification_Table.sql
+V1.2.0__Add_Product_Catalog.sql
 
 # Fix-forward migration
-V1.1.1__Fix_Email_Verification_Table.sql
+V1.2.1__Fix_Product_Catalog.sql
 ```
 
 **Advantages:**
@@ -363,7 +343,7 @@ If a migration **fails during execution**:
 1. **Identify failed migration** from logs:
 
 ```
-❌ Database migration failed: Syntax error in V1.1.0__Add_Email_Verification_Table.sql
+❌ Database migration failed: Syntax error in V1.2.0__Add_Product_Catalog.sql
 ```
 
 2. **Use Evolve Repair** to clear failed migration from history:
@@ -442,7 +422,7 @@ CREATE TABLE IF NOT EXISTS bad_syntax_table (
 2. Test SQL manually in MySQL Workbench or CLI:
 
 ```bash
-mysql -u root -p -D res_auth_db < ./Migrations/V1.1.0__Add_Email_Verification_Table.sql
+mysql -u root -p -D crm_db < ./Migrations/V1.2.0__Add_Product_Catalog.sql
 ```
 
 3. Fix syntax error
@@ -454,7 +434,7 @@ mysql -u root -p -D res_auth_db < ./Migrations/V1.1.0__Add_Email_Verification_Ta
 **Symptoms:**
 
 ```
-❌ Migration checksum mismatch for V1.0.0__ResAuthN_Initial_Schema.sql
+❌ Migration checksum mismatch for V1.0.0__CRM_Initial_Schema.sql
 ```
 
 **Cause:** You edited an already-executed migration file.
@@ -464,7 +444,7 @@ mysql -u root -p -D res_auth_db < ./Migrations/V1.1.0__Add_Email_Verification_Ta
 **Option A: Revert Changes** (recommended)
 
 ```bash
-git checkout HEAD -- ./Migrations/V1.0.0__ResAuthN_Initial_Schema.sql
+git checkout HEAD -- ./Migrations/V1.0.0__CRM_Initial_Schema.sql
 ```
 
 **Option B: Update Checksum** (development only)
@@ -490,7 +470,7 @@ Verify `appsettings.json` contains connection string:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=res_auth_db;User=root;Password=Dev@123;SslMode=None;"
+    "DefaultConnection": "Server=localhost;Database=crm_db;User=root;Password=Dev@123;SslMode=None;"
   }
 }
 ```
@@ -527,7 +507,7 @@ dotnet build
 **Symptoms:**
 
 ```
-❌ Database migration failed: Unknown database 'res_auth_db'
+❌ Database migration failed: Unknown database 'crm_db'
 ```
 
 **Solution:**
@@ -535,7 +515,7 @@ dotnet build
 Create database manually before running migrations:
 
 ```sql
-CREATE DATABASE IF NOT EXISTS res_auth_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS crm_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 Or modify connection string to connect without database:
@@ -607,7 +587,7 @@ Before merging a migration PR:
 # appsettings.Development.json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=res_auth_db;User=root;Password=Dev@123;SslMode=None;"
+    "DefaultConnection": "Server=localhost;Database=crm_db;User=root;Password=Dev@123;SslMode=None;"
   }
 }
 ```
@@ -625,7 +605,7 @@ Before merging a migration PR:
 # appsettings.Staging.json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=staging-db.example.com;Database=res_auth_db;User=app_user;Password=${DB_PASSWORD};SslMode=Required;"
+    "DefaultConnection": "Server=staging-db.example.com;Database=crm_db;User=app_user;Password=${DB_PASSWORD};SslMode=Required;"
   }
 }
 ```
@@ -644,7 +624,7 @@ Before merging a migration PR:
 # appsettings.Production.json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=prod-db.example.com;Database=res_auth_db;User=app_user;Password=${DB_PASSWORD};SslMode=Required;"
+    "DefaultConnection": "Server=prod-db.example.com;Database=crm_db;User=app_user;Password=${DB_PASSWORD};SslMode=Required;"
   }
 }
 ```
@@ -654,7 +634,7 @@ Before merging a migration PR:
 1. **Backup production database** before deployment
 
 ```bash
-mysqldump -u root -p res_auth_db > backup_$(date +%Y%m%d_%H%M%S).sql
+mysqldump -u root -p crm_db > backup_$(date +%Y%m%d_%H%M%S).sql
 ```
 
 2. **Test migrations in staging** (identical schema to production)
@@ -706,10 +686,8 @@ Better approach: Use **separate migration files** with different version namespa
 
 ### Related Files
 
-- **ResAuthN Migrations**: `./res-auth-api/src/ResAuthN/ResAuthApi.Infrastructure/Migrations/`
-- **ResAuthZ Migrations**: `./res-auth-api/src/ResAuthZ/ResAuthZApi.Infrastructure/Migrations/`
 - **CRM Migrations**: `./crm-system/src/CRM.Infrastructure/Migrations/`
-- **Program.cs Integration**: `./res-auth-api/src/ResAuthApi.Api/Program.cs`, `./crm-system/src/CRM.Api/Program.cs`
+- **Program.cs Integration**: `./crm-system/src/CRM.Api/Program.cs`
 
 ---
 
