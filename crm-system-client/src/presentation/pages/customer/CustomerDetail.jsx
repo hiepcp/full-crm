@@ -55,6 +55,7 @@ import {
 import ActivityFeed from '../../components/common/ActivityFeed';
 import CustomerAddressForm from '../../components/customerAddress/CustomerAddressForm';
 import CreateContact from '../contact/components/CreateContact';
+import DocumentSection from '../../components/sharepoint/DocumentSection';
 import customerAddressesApi from '@infrastructure/api/customerAddressesApi';
 import customersApi from '@infrastructure/api/customersApi';
 import contactsApi from '@infrastructure/api/contactsApi';
@@ -1535,6 +1536,21 @@ const CustomerDetail = () => {
               </Collapse>
             </CardContent>
           </Card>
+
+          {/* Documents Section */}
+          <Box sx={{ mt: 2, mb: 2 }}>
+            <DocumentSection
+              entityType="customer"
+              entityId={accountNum}
+              title="Documents"
+              onDocumentUploaded={(doc) => {
+                setSnackbar({ open: true, message: 'Document uploaded successfully', severity: 'success' });
+              }}
+              onDocumentDeleted={(docId) => {
+                setSnackbar({ open: true, message: 'Document deleted successfully', severity: 'success' });
+              }}
+            />
+          </Box>
 
         </Box>
 
