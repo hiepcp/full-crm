@@ -73,6 +73,13 @@ export const constructActivityData = (formData, description, uploadedFiles, rela
     }
   } else if (formData.activityCategory === 'email') {
     activityData.emailSubject = formData.subject;
+  } else if (formData.activityCategory === 'contract') {
+    if (formData.contractDate) {
+      activityData.contractDate = formData.contractDate;
+    }
+    if (formData.contractValue) {
+      activityData.contractValue = parseFloat(formData.contractValue);
+    }
   }
 
   // Add files if any

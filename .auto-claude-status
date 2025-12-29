@@ -1,25 +1,25 @@
 {
   "active": true,
-  "spec": "001-database-migration-strategy-and-tooling",
-  "state": "complete",
+  "spec": "007-fix-missing-contractdate-and-contractvalue-values",
+  "state": "building",
   "subtasks": {
-    "completed": 18,
-    "total": 18,
-    "in_progress": 0,
+    "completed": 9,
+    "total": 10,
+    "in_progress": 1,
     "failed": 0
   },
   "phase": {
-    "current": "Integration & QA",
+    "current": "Integration Testing",
     "id": null,
-    "total": 1
+    "total": 3
   },
   "workers": {
     "active": 0,
     "max": 1
   },
   "session": {
-    "number": 1,
-    "started_at": "2025-12-27T14:20:02.003477"
+    "number": 10,
+    "started_at": "2025-12-29T10:53:48.656504"
   },
-  "last_update": "2025-12-27T14:28:53.132490"
+  "last_update": "2025-12-29T11:40:58.624050"
 }

@@ -38,6 +38,10 @@ namespace CRMSys.Domain.Entities
         public int? CallDuration { get; set; } // in seconds
         public string? CallOutcome { get; set; }
 
+        // === Contract Specific ===
+        public DateTime? ContractDate { get; set; }
+        public decimal? ContractValue { get; set; }
+
         // === Computed Properties ===
         [NotMapped]
         public bool IsEmail => ActivityType == "email";
