@@ -15,6 +15,7 @@ import Header from './Header';
 import Loader from '@presentation/components/Loader';
 import Breadcrumbs from '@presentation/components/@extended/Breadcrumbs';
 import BottomNav from '@presentation/components/mobile/BottomNav';
+import QuickActionFAB from '@presentation/components/mobile/QuickActionFAB';
 import { drawerWidth } from '@src/config';
 
 //import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
@@ -42,6 +43,15 @@ export default function DashboardLayout() {
     updateDrawer.execute(!downXL);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [downXL]);
+
+  // Quick action handlers
+  const handleLogCall = () => {
+    // TODO: Implement log call functionality
+  };
+
+  const handleCreateActivity = () => {
+    // TODO: Implement create activity functionality
+  };
 
   if (menuMasterLoading || roleProfileLoading) return <Loader />;
 
@@ -80,6 +90,10 @@ export default function DashboardLayout() {
         <Outlet />
       </Box>
       <BottomNav />
+      <QuickActionFAB
+        onLogCall={handleLogCall}
+        onCreateActivity={handleCreateActivity}
+      />
     </Box>
   );
 }
