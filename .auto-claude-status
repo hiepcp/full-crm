@@ -1,11 +1,11 @@
 {
   "active": true,
   "spec": "003-dynamics-365-category-synchronization",
-  "state": "building",
+  "state": "complete",
   "subtasks": {
-    "completed": 18,
+    "completed": 19,
     "total": 19,
-    "in_progress": 1,
+    "in_progress": 0,
     "failed": 0
   },
   "phase": {
@@ -21,5 +21,5 @@
     "number": 22,
     "started_at": "2025-12-27T21:25:04.880837"
   },
-  "last_update": "2025-12-28T01:22:09.476922"
+  "last_update": "2025-12-28T01:25:49.210367"
 }
