@@ -203,6 +203,34 @@ builder.Services.AddCors(o =>
 
 var app = builder.Build();
 
+// Run Evolve database migrations
+try
+{
+    Log.Information("📦 Starting database migration...");
+
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? throw new InvalidOperationException("DefaultConnection not found in appsettings.json");
+
+    using var connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+
+    var evolve = new Evolve.Evolve(connection, msg => Log.Debug(msg))
+    {
+        Locations = new List<string> { "Migrations" },
+        IsEraseDisabled = true, // CRITICAL: Disable erase in production
+        MetadataTableName = "changelog",
+        CommandTimeout = 60 // 60 seconds timeout for migrations
+    };
+
+    evolve.Migrate();
+
+    Log.Information("✅ Database migration completed successfully.");
+}
+catch (Exception ex)
+{
+    Log.Error(ex, "❌ Database migration failed: {ErrorMessage}", ex.Message);
+    throw; // Fail application startup if migration fails
+}
+
 // Init database khi kh?i d?ng
 //using (var scope = app.Services.CreateScope())
 //{
