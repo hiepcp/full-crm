@@ -3,23 +3,23 @@
   "spec": "007-fix-missing-contractdate-and-contractvalue-values",
   "state": "building",
   "subtasks": {
-    "completed": 5,
+    "completed": 7,
     "total": 10,
     "in_progress": 1,
     "failed": 0
   },
   "phase": {
-    "current": "Database Migration",
+    "current": "Integration Testing",
     "id": null,
-    "total": 2
+    "total": 3
   },
   "workers": {
     "active": 0,
     "max": 1
   },
   "session": {
-    "number": 6,
+    "number": 8,
     "started_at": "2025-12-29T10:53:48.656504"
   },
-  "last_update": "2025-12-29T11:04:35.783309"
+  "last_update": "2025-12-29T11:31:58.386617"
 }
