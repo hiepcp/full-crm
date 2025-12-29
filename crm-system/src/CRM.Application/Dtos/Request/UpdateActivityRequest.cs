@@ -19,5 +19,7 @@ namespace CRMSys.Application.Dtos.Request
         public int? CallDuration { get; set; }
         public string? CallOutcome { get; set; }
         public DateTime? CompletedAt { get; set; }
+        public DateTime? ContractDate { get; set; }
+        public decimal? ContractValue { get; set; }
     }
 }
