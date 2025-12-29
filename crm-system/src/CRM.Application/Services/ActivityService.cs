@@ -39,6 +39,7 @@ namespace CRMSys.Application.Services
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGoalProgressCalculationService? _goalCalculationService;
+        private readonly INotificationOrchestrator _notificationOrchestrator;
 
         private string ActivityFolderPath => _configuration["Sharepoint:ActivityFolderPath"] ?? "DEV/CRM";
 
@@ -62,6 +63,7 @@ namespace CRMSys.Application.Services
             Shared.ExternalServices.Interfaces.ISharepointService sharepointService,
             IRepository<CRMSharepointFile, long> crmSharepointFileRepository,
             IConfiguration configuration,
+            INotificationOrchestrator notificationOrchestrator,
             IGoalProgressCalculationService? goalCalculationService = null)
             : base(repository, unitOfWork, mapper, createValidator)
         {
@@ -84,6 +86,7 @@ namespace CRMSys.Application.Services
             _configuration = configuration;
             _unitOfWork = unitOfWork;
             _goalCalculationService = goalCalculationService;
+            _notificationOrchestrator = notificationOrchestrator;
         }
 
         /// <summary>
@@ -141,7 +144,32 @@ namespace CRMSys.Application.Services
                 // Warning: Tasks should have due dates, but allow creation
             }
 
-            return await base.AddAsync(request, userEmail, ct);
+            var activityId = await base.AddAsync(request, userEmail, ct);
+
+            // Send notifications after successful creation
+            try
+            {
+                await _notificationOrchestrator.NotifyEntityChangeAsync(
+                    entityType: "activity",
+                    entityId: activityId,
+                    context: new CRMSys.Application.Dtos.Notification.NotificationContext 
+                    { 
+                        EventType = "CREATED",
+                        ActivityType = request.ActivityType
+                    },
+                    entityData: new 
+                    { 
+                        Subject = request.Subject,
+                        Type = request.ActivityType,
+                        Status = request.Status
+                    });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Failed to send notifications for Activity {ActivityId} creation", activityId);
+            }
+
+            return activityId;
         }
 
         /// <summary>
@@ -384,6 +412,29 @@ namespace CRMSys.Application.Services
 
                 // Commit transaction
                 await _unitOfWork.CommitAsync();
+
+                // Send notifications after successful creation
+                try
+                {
+                    await _notificationOrchestrator.NotifyEntityChangeAsync(
+                        entityType: "activity",
+                        entityId: activityId,
+                        context: new CRMSys.Application.Dtos.Notification.NotificationContext
+                        {
+                            EventType = "CREATED",
+                            ActivityType = request.Activity.ActivityType
+                        },
+                        entityData: new
+                        {
+                            Subject = request.Activity.Subject,
+                            Type = request.Activity.ActivityType,
+                            Status = request.Activity.Status
+                        });
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Failed to send notifications for Activity {ActivityId} creation", activityId);
+                }
 
                 return activityId;
             }

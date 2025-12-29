@@ -17,6 +17,10 @@ namespace CRMSys.Api.Controllers
     {
         private readonly IFileRetrievalService _fileService;
 
+        /// <summary>
+        /// Init FilesController
+        /// </summary>
+        /// <param name="fileService"></param>
         public FilesController(IFileRetrievalService fileService)
         {
             _fileService = fileService;

@@ -12,18 +12,15 @@ namespace CRMSys.Application.Services;
 public class NotificationService : INotificationService
 {
     private readonly INotificationRepository _notificationRepo;
-    private readonly INotificationPreferenceRepository _preferenceRepo;
     private readonly INotificationPushService _pushService;
     private readonly ILogger<NotificationService> _logger;
 
     public NotificationService(
         INotificationRepository notificationRepo,
-        INotificationPreferenceRepository preferenceRepo,
         INotificationPushService pushService,
         ILogger<NotificationService> logger)
     {
         _notificationRepo = notificationRepo;
-        _preferenceRepo = preferenceRepo;
         _pushService = pushService;
         _logger = logger;
     }
@@ -36,15 +33,6 @@ public class NotificationService : INotificationService
                 "CreateAndSendAsync: Starting to create notification for UserId={UserId}, Type={Type}",
                 dto.UserId, dto.Type);
 
-            // Check if user wants this notification
-            var shouldSend = await ShouldSendNotificationAsync(dto.UserId, dto.Type, dto.Severity);
-            if (!shouldSend)
-            {
-                _logger.LogDebug("Notification filtered out by user preferences. UserId={UserId}, Type={Type}", 
-                    dto.UserId, dto.Type);
-                return dto;
-            }
-
             // Create entity
             var notification = new Notification
             {
@@ -56,8 +44,6 @@ public class NotificationService : INotificationService
                 EntityType = dto.EntityType,
                 EntityId = dto.EntityId,
                 IsRead = false,
-                Severity = dto.Severity,
-                ActionUrl = dto.ActionUrl,
                 Metadata = dto.Metadata,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = dto.CreatedBy
@@ -156,129 +142,6 @@ public class NotificationService : INotificationService
         }
     }
 
-    public async Task<NotificationPreferenceDto> GetUserPreferencesAsync(long userId)
-    {
-        var preference = await _preferenceRepo.GetByUserIdAsync(userId);
-        
-        // Create default if not exists
-        if (preference == null)
-        {
-            preference = new NotificationPreference
-            {
-                UserId = userId,
-                InAppEnabled = true,
-                EmailEnabled = false,
-                LeadNotifications = true,
-                DealNotifications = true,
-                CustomerNotifications = true,
-                ActivityNotifications = true,
-                MentionNotifications = true,
-                NotifyRelatedDealChanges = true,
-                NotifyRelatedCustomerChanges = true,
-                MinimumSeverity = "MEDIUM"
-            };
-            
-            preference = await _preferenceRepo.CreateAsync(preference);
-        }
-
-        return MapToPreferenceDto(preference);
-    }
-
-    public async Task UpdateUserPreferencesAsync(long userId, NotificationPreferenceDto dto)
-    {
-        var existing = await _preferenceRepo.GetByUserIdAsync(userId);
-        if (existing == null)
-        {
-            throw new InvalidOperationException($"Preferences not found for user {userId}");
-        }
-
-        existing.InAppEnabled = dto.InAppEnabled;
-        existing.EmailEnabled = dto.EmailEnabled;
-        existing.LeadNotifications = dto.LeadNotifications;
-        existing.DealNotifications = dto.DealNotifications;
-        existing.CustomerNotifications = dto.CustomerNotifications;
-        existing.ActivityNotifications = dto.ActivityNotifications;
-        existing.MentionNotifications = dto.MentionNotifications;
-        existing.NotifyRelatedDealChanges = dto.NotifyRelatedDealChanges;
-        existing.NotifyRelatedCustomerChanges = dto.NotifyRelatedCustomerChanges;
-        existing.MinimumSeverity = dto.MinimumSeverity;
-        existing.DoNotDisturbStart = dto.DoNotDisturbStart;
-        existing.DoNotDisturbEnd = dto.DoNotDisturbEnd;
-        existing.UpdatedAt = DateTime.UtcNow;
-
-        await _preferenceRepo.UpdateAsync(existing);
-    }
-
-    public async Task<bool> ShouldSendNotificationAsync(long userId, string notificationType, string severity)
-    {
-        var preferences = await _preferenceRepo.GetByUserIdAsync(userId);
-        if (preferences == null || !preferences.InAppEnabled)
-        {
-            return false;
-        }
-
-        // Check severity threshold
-        if (!MeetsSeverityThreshold(severity, preferences.MinimumSeverity))
-        {
-            return false;
-        }
-
-        // Check Do Not Disturb
-        if (IsInDoNotDisturbPeriod(preferences))
-        {
-            return false;
-        }
-
-        // Check type-specific toggles
-        if (notificationType.Contains("LEAD") && !preferences.LeadNotifications) return false;
-        if (notificationType.Contains("DEAL") && !preferences.DealNotifications) return false;
-        if (notificationType.Contains("CUSTOMER") && !preferences.CustomerNotifications) return false;
-        if (notificationType.Contains("ACTIVITY") && !preferences.ActivityNotifications) return false;
-        if (notificationType.Contains("MENTION") && !preferences.MentionNotifications) return false;
-
-        return true;
-    }
-
-    private bool MeetsSeverityThreshold(string actual, string minimum)
-    {
-        var levels = new Dictionary<string, int>
-        {
-            ["LOW"] = 1,
-            ["INFO"] = 1,
-            ["MEDIUM"] = 2,
-            ["WARNING"] = 2,
-            ["HIGH"] = 3,
-            ["ERROR"] = 3,
-            ["CRITICAL"] = 4,
-            ["SUCCESS"] = 2
-        };
-
-        var actualLevel = levels.GetValueOrDefault(actual.ToUpper(), 1);
-        var minimumLevel = levels.GetValueOrDefault(minimum.ToUpper(), 1);
-
-        return actualLevel >= minimumLevel;
-    }
-
-    private bool IsInDoNotDisturbPeriod(NotificationPreference preferences)
-    {
-        if (!preferences.DoNotDisturbStart.HasValue || !preferences.DoNotDisturbEnd.HasValue)
-        {
-            return false;
-        }
-
-        var now = DateTime.Now.TimeOfDay;
-        var start = preferences.DoNotDisturbStart.Value;
-        var end = preferences.DoNotDisturbEnd.Value;
-
-        // Handle overnight period (e.g., 22:00 - 08:00)
-        if (start > end)
-        {
-            return now >= start || now <= end;
-        }
-
-        return now >= start && now <= end;
-    }
-
     private NotificationDto MapToDto(Notification entity)
     {
         return new NotificationDto
@@ -292,32 +155,9 @@ public class NotificationService : INotificationService
             EntityId = entity.EntityId,
             IsRead = entity.IsRead,
             ReadAt = entity.ReadAt,
-            Severity = entity.Severity,
-            ActionUrl = entity.ActionUrl,
             Metadata = entity.Metadata,
             CreatedAt = entity.CreatedAt,
             CreatedBy = entity.CreatedBy
-        };
-    }
-
-    private NotificationPreferenceDto MapToPreferenceDto(NotificationPreference entity)
-    {
-        return new NotificationPreferenceDto
-        {
-            Id = entity.Id,
-            UserId = entity.UserId,
-            InAppEnabled = entity.InAppEnabled,
-            EmailEnabled = entity.EmailEnabled,
-            LeadNotifications = entity.LeadNotifications,
-            DealNotifications = entity.DealNotifications,
-            CustomerNotifications = entity.CustomerNotifications,
-            ActivityNotifications = entity.ActivityNotifications,
-            MentionNotifications = entity.MentionNotifications,
-            NotifyRelatedDealChanges = entity.NotifyRelatedDealChanges,
-            NotifyRelatedCustomerChanges = entity.NotifyRelatedCustomerChanges,
-            MinimumSeverity = entity.MinimumSeverity,
-            DoNotDisturbStart = entity.DoNotDisturbStart,
-            DoNotDisturbEnd = entity.DoNotDisturbEnd
         };
     }
 }

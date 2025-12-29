@@ -25,6 +25,11 @@ namespace CRMSys.Application.Interfaces.Services
         Task<long> CreateAsync(CreateLeadRequest request, string userEmail, CancellationToken ct = default);
 
         /// <summary>
+        /// Create new darft lead
+        /// </summary>
+        Task<long> CreateDraftAsync(CreateLeadRequest request, string userEmail, CancellationToken ct = default);
+
+        /// <summary>
         /// Update existing lead
         /// </summary>
         Task<bool> UpdateAsync(long id, UpdateLeadRequest request, string userEmail, CancellationToken ct = default);

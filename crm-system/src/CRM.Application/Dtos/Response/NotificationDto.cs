@@ -17,8 +17,7 @@ public class NotificationDto
     public bool IsRead { get; set; }
     public DateTime? ReadAt { get; set; }
     
-    public string Severity { get; set; } = "INFO";
-    public string? ActionUrl { get; set; }
+
     public string? Metadata { get; set; }
     
     public DateTime CreatedAt { get; set; }

@@ -20,11 +20,4 @@ public interface INotificationService
     
     // Delete
     Task<bool> DeleteAsync(string notificationId, long userId);
-    
-    // Preferences
-    Task<NotificationPreferenceDto> GetUserPreferencesAsync(long userId);
-    Task UpdateUserPreferencesAsync(long userId, NotificationPreferenceDto preferences);
-    
-    // Helper methods
-    Task<bool> ShouldSendNotificationAsync(long userId, string notificationType, string severity);
 }

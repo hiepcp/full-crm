@@ -56,15 +56,11 @@ public static class DependencyInjection
         
         // Notification repositories
         services.AddScoped<INotificationRepository, NotificationRepository>();
-        services.AddScoped<INotificationPreferenceRepository, NotificationPreferenceRepository>();
+        services.AddScoped<INotificationRecipientRepository, NotificationRecipientRepository>();
 
         // Notification push service (SignalR)
         services.AddScoped<CRMSys.Application.Interfaces.Services.INotificationPushService, 
             CRMSys.Infrastructure.Services.SignalRNotificationPushService>();
-
-        // Register background services
-        services.AddHostedService<GoalSnapshotJob>();
-        services.AddHostedService<GoalProgressCalculationJob>();
 
         return services;
     }

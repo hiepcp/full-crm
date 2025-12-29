@@ -62,16 +62,20 @@ public class DailyFollowUpReminderService : BackgroundService
 
     private TimeSpan CalculateDelayUntil8AM()
     {
-        var now = DateTime.Now;
-        var next8AM = DateTime.Today.AddHours(8);
+        // TEST MODE: Run in 1 minute
+        return TimeSpan.FromMinutes(1);
 
-        // If it's already past 8 AM today, schedule for tomorrow
-        if (now.Hour >= 8)
-        {
-            next8AM = next8AM.AddDays(1);
-        }
+        // PRODUCTION MODE: (commented out for testing)
+        //var now = DateTime.Now;
+        //var next8AM = DateTime.Today.AddHours(8);
 
-        return next8AM - now;
+        //// If it's already past 8 AM today, schedule for tomorrow
+        //if (now.Hour >= 8)
+        //{
+        //    next8AM = next8AM.AddDays(1);
+        //}
+
+        //return next8AM - now;
     }
 
     private async Task ProcessDailyFollowUpRemindersAsync()
@@ -199,8 +203,6 @@ public class DailyFollowUpReminderService : BackgroundService
                 Message = $"Follow-up is scheduled today for {entityType} '{entityName}'",
                 EntityType = entityType,
                 EntityId = entityId,
-                Severity = role == "owner" ? "HIGH" : "MEDIUM",
-                ActionUrl = $"/{entityType}s/{entityId}",
                 Metadata = JsonSerializer.Serialize(new
                 {
                     entityId,

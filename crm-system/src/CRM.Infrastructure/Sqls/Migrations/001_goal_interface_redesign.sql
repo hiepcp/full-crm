@@ -12,23 +12,161 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- STEP 1: EXTEND EXISTING crm_goal TABLE
 -- ===========================================
 
-ALTER TABLE crm_goal
-  -- Add hierarchy support
-  ADD COLUMN ParentGoalId BIGINT NULL COMMENT 'Parent goal for hierarchy (NULL for root goals)',
+-- Add ParentGoalId column if it doesn't exist
+SET @dbname = DATABASE();
+SET @tablename = 'crm_goal';
+SET @columnname = 'ParentGoalId';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (COLUMN_NAME = @columnname)
+  ) > 0,
+  'SELECT "Column ParentGoalId already exists" AS step1_1_status;',
+  'ALTER TABLE crm_goal ADD COLUMN ParentGoalId BIGINT NULL COMMENT ''Parent goal for hierarchy (NULL for root goals)'';'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
 
-  -- Add auto-calculation support
-  ADD COLUMN CalculationSource ENUM('manual', 'auto_calculated') NOT NULL DEFAULT 'manual' COMMENT 'How progress is updated',
-  ADD COLUMN LastCalculatedAt DATETIME NULL COMMENT 'Last auto-calculation timestamp',
-  ADD COLUMN CalculationFailed TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Indicates calculation failure',
-  ADD COLUMN ManualOverrideReason TEXT NULL COMMENT 'Justification for manual override (FR-018)',
+-- Add CalculationSource column if it doesn't exist
+SET @columnname = 'CalculationSource';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (COLUMN_NAME = @columnname)
+  ) > 0,
+  'SELECT "Column CalculationSource already exists" AS step1_2_status;',
+  'ALTER TABLE crm_goal ADD COLUMN CalculationSource ENUM(''manual'', ''auto_calculated'') NOT NULL DEFAULT ''manual'' COMMENT ''How progress is updated'';'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
 
-  -- Add indexes for new columns
-  ADD INDEX idx_parent_goal_id (ParentGoalId),
-  ADD INDEX idx_calculation_source (CalculationSource),
-  ADD INDEX idx_calculation_failed (CalculationFailed),
+-- Add LastCalculatedAt column if it doesn't exist
+SET @columnname = 'LastCalculatedAt';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (COLUMN_NAME = @columnname)
+  ) > 0,
+  'SELECT "Column LastCalculatedAt already exists" AS step1_3_status;',
+  'ALTER TABLE crm_goal ADD COLUMN LastCalculatedAt DATETIME NULL COMMENT ''Last auto-calculation timestamp'';'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
 
-  -- Add foreign key constraint for hierarchy
-  ADD CONSTRAINT fk_parent_goal FOREIGN KEY (ParentGoalId) REFERENCES crm_goal(Id) ON DELETE SET NULL;
+-- Add CalculationFailed column if it doesn't exist
+SET @columnname = 'CalculationFailed';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (COLUMN_NAME = @columnname)
+  ) > 0,
+  'SELECT "Column CalculationFailed already exists" AS step1_4_status;',
+  'ALTER TABLE crm_goal ADD COLUMN CalculationFailed TINYINT(1) NOT NULL DEFAULT 0 COMMENT ''Indicates calculation failure'';'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
+
+-- Add ManualOverrideReason column if it doesn't exist
+SET @columnname = 'ManualOverrideReason';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (COLUMN_NAME = @columnname)
+  ) > 0,
+  'SELECT "Column ManualOverrideReason already exists" AS step1_5_status;',
+  'ALTER TABLE crm_goal ADD COLUMN ManualOverrideReason TEXT NULL COMMENT ''Justification for manual override (FR-018)'';'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
+
+-- Add index for ParentGoalId if it doesn't exist
+SET @indexname = 'idx_parent_goal_id';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (INDEX_NAME = @indexname)
+  ) > 0,
+  'SELECT "Index idx_parent_goal_id already exists" AS step1_6_status;',
+  'ALTER TABLE crm_goal ADD INDEX idx_parent_goal_id (ParentGoalId);'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
+
+-- Add index for CalculationSource if it doesn't exist
+SET @indexname = 'idx_calculation_source';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (INDEX_NAME = @indexname)
+  ) > 0,
+  'SELECT "Index idx_calculation_source already exists" AS step1_7_status;',
+  'ALTER TABLE crm_goal ADD INDEX idx_calculation_source (CalculationSource);'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
+
+-- Add index for CalculationFailed if it doesn't exist
+SET @indexname = 'idx_calculation_failed';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS
+    WHERE
+      (TABLE_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (INDEX_NAME = @indexname)
+  ) > 0,
+  'SELECT "Index idx_calculation_failed already exists" AS step1_8_status;',
+  'ALTER TABLE crm_goal ADD INDEX idx_calculation_failed (CalculationFailed);'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
+
+-- Add foreign key for ParentGoalId if it doesn't exist
+SET @constraintname = 'fk_parent_goal';
+SET @preparedStatement = (SELECT IF(
+  (
+    SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+    WHERE
+      (CONSTRAINT_SCHEMA = @dbname)
+      AND (TABLE_NAME = @tablename)
+      AND (CONSTRAINT_NAME = @constraintname)
+      AND (CONSTRAINT_TYPE = 'FOREIGN KEY')
+  ) > 0,
+  'SELECT "Foreign key fk_parent_goal already exists" AS step1_9_status;',
+  'ALTER TABLE crm_goal ADD CONSTRAINT fk_parent_goal FOREIGN KEY (ParentGoalId) REFERENCES crm_goal(Id) ON DELETE SET NULL;'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
 
 SELECT 'Extended crm_goal table with hierarchy and auto-calculation fields' AS step1_complete;
 
@@ -190,7 +328,7 @@ SELECT 'Created crm_background_job_lock table' AS step2_7_complete;
 -- STEP 3: INSERT SYSTEM TEMPLATES
 -- ===========================================
 
-INSERT INTO crm_goal_template (Name, Description, GoalType, Timeframe, OwnerType, SuggestedTargetValue, IsSystemTemplate, IsActive)
+INSERT IGNORE INTO crm_goal_template (Name, Description, GoalType, Timeframe, OwnerType, SuggestedTargetValue, IsSystemTemplate, IsActive)
 VALUES
   ('Monthly Revenue Goal', 'Track monthly revenue targets', 'revenue', 'this_month', 'individual', 100000.00, 1, 1),
   ('Quarterly Deals Goal', 'Track deals closed per quarter', 'deals', 'this_quarter', 'team', 50.00, 1, 1),
@@ -204,7 +342,7 @@ SELECT 'Inserted system goal templates' AS step3_complete;
 -- STEP 4: INITIALIZE JOB LOCKS
 -- ===========================================
 
-INSERT INTO crm_background_job_lock (JobName)
+INSERT IGNORE INTO crm_background_job_lock (JobName)
 VALUES
   ('goal-snapshot-job'),
   ('goal-progress-calculation-job'),

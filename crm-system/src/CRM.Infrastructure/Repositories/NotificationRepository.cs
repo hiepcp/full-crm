@@ -21,10 +21,10 @@ public class NotificationRepository : DapperRepository<Notification, string>, IN
         const string sql = @"
             INSERT INTO crm_notifications 
             (Id, UserId, Type, Title, Message, EntityType, EntityId, IsRead, ReadAt,
-             Severity, ActionUrl, Metadata, CreatedAt, CreatedBy)
+             Metadata, CreatedAt, CreatedBy)
             VALUES 
             (@Id, @UserId, @Type, @Title, @Message, @EntityType, @EntityId, @IsRead, @ReadAt,
-             @Severity, @ActionUrl, @Metadata, @CreatedAt, @CreatedBy)";
+             @Metadata, @CreatedAt, @CreatedBy)";
 
         await Connection.ExecuteAsync(sql, notification, Transaction);
         return notification;
@@ -36,7 +36,7 @@ public class NotificationRepository : DapperRepository<Notification, string>, IN
             SELECT 
                 CAST(Id AS CHAR(36)) AS Id,
                 UserId, Type, Title, Message, EntityType, EntityId, 
-                IsRead, ReadAt, Severity, ActionUrl, Metadata, 
+                IsRead, ReadAt, Metadata, 
                 CreatedAt, CreatedBy, UpdatedAt
             FROM crm_notifications
             WHERE UserId = @UserId
@@ -62,7 +62,7 @@ public class NotificationRepository : DapperRepository<Notification, string>, IN
             SELECT 
                 CAST(Id AS CHAR(36)) AS Id,
                 UserId, Type, Title, Message, EntityType, EntityId, 
-                IsRead, ReadAt, Severity, ActionUrl, Metadata, 
+                IsRead, ReadAt, Metadata, 
                 CreatedAt, CreatedBy, UpdatedAt
             FROM crm_notifications 
             WHERE Id = @Id";

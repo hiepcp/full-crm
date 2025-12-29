@@ -293,7 +293,7 @@ namespace CRMSys.Infrastructure.Repositories
                 SELECT * 
                 FROM crm_lead
                 WHERE DATE(FollowUpDate) = DATE(@Date)
-                  AND Status NOT IN ('Converted', 'Lost', 'Cancelled')";
+                  AND Status NOT IN ('qualified')";
 
             return await Connection.QueryAsync<Lead>(sql, new { Date = date }, Transaction);
         }

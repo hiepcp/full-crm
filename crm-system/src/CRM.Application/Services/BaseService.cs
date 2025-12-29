@@ -113,7 +113,7 @@ namespace CRMSys.Application.Services
         {
             ArgumentNullException.ThrowIfNull(dto);
             ArgumentException.ThrowIfNullOrWhiteSpace(userEmail);
-            TEntity entity = null;
+            TEntity? entity = null;
             try
             {
                 Log.Information("AddAsync - Creating new {EntityName} by {User}", _entityName, userEmail);

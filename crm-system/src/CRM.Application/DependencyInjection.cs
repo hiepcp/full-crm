@@ -78,8 +78,11 @@ namespace CRMSys.Application
                 services.AddScoped<IAppointmentService, AppointmentService>();
                 services.AddScoped<ILeadScoreService, LeadScoreService>();
 
-                // Notification service
+                // Notification services
                 services.AddScoped<INotificationService, NotificationService>();
+                services.AddScoped<INotificationRulesEngine, NotificationRulesEngine>();
+                services.AddScoped<INotificationBuilder, NotificationBuilder>();
+                services.AddScoped<INotificationOrchestrator, NotificationOrchestrator>();
 
                 services.AddScoped<IAllCRMService, AllCRMService>();
                 services.AddScoped<DynamicModelService>();

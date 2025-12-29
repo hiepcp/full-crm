@@ -252,7 +252,12 @@ app.UseCors("Spa");
 app.UseMiddleware<ValidationExceptionMiddleware>();
 
 // Middleware x�c th?c API Key from Shared.AuthN
-app.UseApiKeyAuth();
+// Skip ApiKey check for SignalR hub endpoints (/hubs/*)
+app.UseWhen(
+    context => !context.Request.Path.StartsWithSegments("/hubs"),
+    appBuilder => appBuilder.UseApiKeyAuth()
+);
+
 // Use authentication and authorization
 app.UseAuthentication();
 

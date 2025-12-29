@@ -20,8 +20,7 @@ public class Notification
     public DateTime? ReadAt { get; set; }
     
     // UI metadata
-    public string Severity { get; set; } = "INFO";
-    public string? ActionUrl { get; set; }
+
     public string? Metadata { get; set; } // JSON string
     
     // Audit

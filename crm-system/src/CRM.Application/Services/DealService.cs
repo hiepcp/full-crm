@@ -24,6 +24,7 @@ namespace CRMSys.Application.Services
         private readonly IValidator<UpdateDealRequest> _updateValidator;
         private readonly IDealRepository _dealRepository;
         private readonly IGoalProgressCalculationService? _goalCalculationService;
+        private readonly INotificationOrchestrator _notificationOrchestrator;
 
         public DealService(
             IRepository<Deal, long> repository,
@@ -32,6 +33,7 @@ namespace CRMSys.Application.Services
             IMapper mapper,
             IValidator<CreateDealRequest> createValidator,
             IValidator<UpdateDealRequest> updateValidator,
+            INotificationOrchestrator notificationOrchestrator,
             IGoalProgressCalculationService? goalCalculationService = null
             )
             : base(repository, unitOfWork, mapper, createValidator)
@@ -43,6 +45,7 @@ namespace CRMSys.Application.Services
             _createValidator = createValidator;
             _updateValidator = updateValidator;
             _goalCalculationService = goalCalculationService;
+            _notificationOrchestrator = notificationOrchestrator;
         }
 
         /// <summary>
@@ -97,7 +100,31 @@ namespace CRMSys.Application.Services
                 });
             }
 
-            return await base.AddAsync(request, userEmail, ct);
+            var dealId = await base.AddAsync(request, userEmail, ct);
+
+            // Send notifications after successful creation
+            try
+            {
+                await _notificationOrchestrator.NotifyEntityChangeAsync(
+                    entityType: "deal",
+                    entityId: dealId,
+                    context: new CRMSys.Application.Dtos.Notification.NotificationContext 
+                    { 
+                        EventType = "CREATED" 
+                    },
+                    entityData: new 
+                    { 
+                        Name = request.Name,
+                        Stage = request.Stage,
+                        ExpectedRevenue = request.ExpectedRevenue
+                    });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Failed to send notifications for Deal {DealId} creation", dealId);
+            }
+
+            return dealId;
         }
 
         /// <summary>
@@ -151,6 +178,28 @@ namespace CRMSys.Application.Services
                         // Log but don't fail the deal update if goal recalculation fails
                         Log.Warning(ex, "Failed to trigger goal recalculation for deal {DealId}", id);
                     }
+                }
+
+                // Send notifications after successful update
+                try
+                {
+                    await _notificationOrchestrator.NotifyEntityChangeAsync(
+                        entityType: "deal",
+                        entityId: id,
+                        context: new CRMSys.Application.Dtos.Notification.NotificationContext 
+                        { 
+                            EventType = nowClosedWon ? "WON" : "UPDATED" 
+                        },
+                        entityData: new 
+                        { 
+                            Name = request.Name ?? existingDeal?.Name,
+                            Stage = request.Stage ?? existingDeal?.Stage,
+                            ExpectedRevenue = request.ExpectedRevenue ?? existingDeal?.ExpectedRevenue
+                        });
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Failed to send notifications for Deal {DealId} update", id);
                 }
 
                 return true;

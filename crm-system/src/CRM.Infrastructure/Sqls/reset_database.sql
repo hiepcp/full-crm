@@ -29,7 +29,6 @@ DROP TABLE IF EXISTS crm_email_templates;
 DROP TABLE IF EXISTS crm_lead_score_rule;
 
 -- Drop notification tables
-DROP TABLE IF EXISTS crm_notification_preferences;
 DROP TABLE IF EXISTS crm_notifications;
 
 -- Drop main entity tables
@@ -734,8 +733,6 @@ CREATE TABLE IF NOT EXISTS crm_notifications (
   ReadAt DATETIME NULL,
   
   -- UI/UX metadata
-  Severity VARCHAR(20) NOT NULL DEFAULT 'INFO' COMMENT 'INFO, WARNING, SUCCESS, ERROR, HIGH, MEDIUM, LOW',
-  ActionUrl VARCHAR(500) NULL COMMENT 'Deep link to entity detail page',
   Metadata JSON NULL COMMENT 'Flexible data for UI customization',
   
   -- Audit
@@ -752,41 +749,6 @@ CREATE TABLE IF NOT EXISTS crm_notifications (
   FOREIGN KEY (UserId) REFERENCES crm_user(Id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci 
 COMMENT='All notifications for users - both event-driven and scheduled';
-
--- 16. Notification Preferences table
-CREATE TABLE IF NOT EXISTS crm_notification_preferences (
-  Id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  UserId BIGINT NOT NULL UNIQUE,
-  
-  -- Global toggles
-  InAppEnabled TINYINT(1) NOT NULL DEFAULT 1,
-  EmailEnabled TINYINT(1) NOT NULL DEFAULT 0,
-  
-  -- Type-specific toggles
-  LeadNotifications TINYINT(1) NOT NULL DEFAULT 1,
-  DealNotifications TINYINT(1) NOT NULL DEFAULT 1,
-  CustomerNotifications TINYINT(1) NOT NULL DEFAULT 1,
-  ActivityNotifications TINYINT(1) NOT NULL DEFAULT 1,
-  MentionNotifications TINYINT(1) NOT NULL DEFAULT 1,
-  
-  -- Related entity notifications (cross-entity)
-  NotifyRelatedDealChanges TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Lead owner notified when related deal changes',
-  NotifyRelatedCustomerChanges TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'Deal owner notified when customer changes',
-  
-  -- Severity filter
-  MinimumSeverity VARCHAR(20) NOT NULL DEFAULT 'MEDIUM' COMMENT 'LOW, MEDIUM, HIGH, CRITICAL',
-  
-  -- Do Not Disturb
-  DoNotDisturbStart TIME NULL,
-  DoNotDisturbEnd TIME NULL,
-  
-  -- Audit
-  CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UpdatedAt DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  
-  FOREIGN KEY (UserId) REFERENCES crm_user(Id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-COMMENT='User notification preferences and settings';
 
 SELECT '🏗️ All CRM tables created!' AS step2_complete;
 
@@ -1619,8 +1581,6 @@ UNION ALL
 SELECT 'SharePointFiles', COUNT(*) FROM crm_sharepoint_files
 UNION ALL
 SELECT 'Notifications', COUNT(*) FROM crm_notifications
-UNION ALL
-SELECT 'NotificationPreferences', COUNT(*) FROM crm_notification_preferences
 ORDER BY count DESC;
 
 SELECT CONCAT('Total records in reset database: ',
@@ -1634,41 +1594,25 @@ SELECT CONCAT('Total records in reset database: ',
     (SELECT COUNT(*) FROM crm_activity) +
     (SELECT COUNT(*) FROM crm_email) +
     (SELECT COUNT(*) FROM crm_sharepoint_files) +
-    (SELECT COUNT(*) FROM crm_notifications) +
-    (SELECT COUNT(*) FROM crm_notification_preferences)
+    (SELECT COUNT(*) FROM crm_notifications)
 ) AS final_summary;
-
--- Insert default notification preferences for all users
-INSERT INTO crm_notification_preferences (
-    UserId, InAppEnabled, EmailEnabled,
-    LeadNotifications, DealNotifications, CustomerNotifications, ActivityNotifications, MentionNotifications,
-    NotifyRelatedDealChanges, NotifyRelatedCustomerChanges,
-    MinimumSeverity, DoNotDisturbStart, DoNotDisturbEnd
-) VALUES
-(101, 1, 0, 1, 1, 1, 1, 1, 1, 1, 'MEDIUM', '22:00:00', '08:00:00'),
-(102, 1, 0, 1, 1, 1, 1, 1, 1, 1, 'MEDIUM', '22:00:00', '08:00:00'),
-(103, 1, 0, 1, 1, 1, 1, 1, 1, 1, 'MEDIUM', '22:00:00', '08:00:00'),
-(104, 1, 0, 1, 1, 1, 1, 1, 0, 0, 'HIGH', NULL, NULL),
-(105, 1, 0, 1, 1, 1, 1, 1, 0, 0, 'HIGH', NULL, NULL);
 
 -- Insert sample notifications (historical)
 INSERT INTO crm_notifications (
     Id, UserId, Type, Title, Message,
     EntityType, EntityId, IsRead, ReadAt,
-    Severity, ActionUrl, Metadata, CreatedAt, CreatedBy
+    Metadata, CreatedAt, CreatedBy
 ) VALUES
 -- Lead notifications
 (UUID(), 101, 'LEAD_ASSIGNED', 'New lead assigned to you', 
  'Lead "ILVA A/S" has been assigned to you by system',
  'lead', 1, 1, '2025-10-01 09:00:00',
- 'HIGH', '/leads/1', 
  '{"leadId":1,"leadName":"ILVA A/S","assignedBy":"system@crm.com"}',
  '2025-10-01 08:30:00', 'system@crm.com'),
 
 (UUID(), 101, 'LEAD_STATUS_CHANGED', 'Lead status changed', 
  'Lead "Hugga Design" status changed from "New" to "Qualified"',
  'lead', 3, 1, '2025-10-02 17:00:00',
- 'MEDIUM', '/leads/3',
  '{"leadId":3,"leadName":"Hugga Design","oldStatus":"New","newStatus":"Qualified"}',
  '2025-09-25 10:30:00', 'sales@crm.com'),
 
@@ -1676,14 +1620,12 @@ INSERT INTO crm_notifications (
 (UUID(), 101, 'DEAL_STAGE_CHANGED', 'Deal moved to Negotiation', 
  'Deal "ILVA A/S - Enterprise CRM Implementation" moved to Negotiation stage',
  'deal', 401, 0, NULL,
- 'HIGH', '/deals/401',
  '{"dealId":401,"dealName":"ILVA A/S - Enterprise CRM Implementation","oldStage":"Qualification","newStage":"Negotiation"}',
  '2025-10-02 16:50:00', 'sales@crm.com'),
 
 (UUID(), 102, 'DEAL_WON', 'Congratulations! Deal won 🎉', 
  'Deal "Scan Global Logistics - Logistics CRM Solution" has been closed won!',
  'deal', 405, 1, '2025-10-03 09:30:00',
- 'CRITICAL', '/deals/405',
  '{"dealId":405,"dealName":"Scan Global Logistics - Logistics CRM Solution","amount":150000}',
  '2025-10-02 11:15:00', 'sales@crm.com'),
 
@@ -1691,7 +1633,6 @@ INSERT INTO crm_notifications (
 (UUID(), 103, 'FOLLOW_UP_DUE', 'Lead follow-up due today', 
  'Follow-up is scheduled today for lead "Paul Anthony Furnishings"',
  'lead', 4, 0, NULL,
- 'HIGH', '/leads/4',
  '{"leadId":4,"leadName":"Paul Anthony Furnishings","followUpDate":"2025-10-15","role":"owner"}',
  '2025-10-15 08:00:00', 'system@crm.com'),
 
@@ -1699,7 +1640,6 @@ INSERT INTO crm_notifications (
 (UUID(), 101, 'ACTIVITY_ASSIGNED', 'New activity assigned', 
  'You have been assigned to activity "Meeting with ILVA team"',
  'activity', 1, 1, '2025-10-03 10:00:00',
- 'MEDIUM', '/activities/1',
  '{"activityId":1,"activitySubject":"Meeting with ILVA team","activityType":"Meeting"}',
  '2025-10-03 09:00:00', 'system@crm.com'),
 
@@ -1707,11 +1647,9 @@ INSERT INTO crm_notifications (
 (UUID(), 102, 'USER_MENTIONED', 'You were mentioned in a comment', 
  'Anders Rask mentioned you in a comment on Deal "Response Vietnam"',
  'deal', 402, 0, NULL,
- 'HIGH', '/deals/402',
  '{"dealId":402,"dealName":"Deal with Response Vietnam Co., Ltd.","mentionedBy":"Anders Rask","commentId":123}',
  '2025-10-03 14:30:00', 'anders.rask@coreone.dk');
 
 SELECT '✅ Notification tables seeded successfully!' AS status,
-  (SELECT COUNT(*) FROM crm_notifications) AS total_notifications,
-  (SELECT COUNT(*) FROM crm_notification_preferences) AS total_preferences;
+  (SELECT COUNT(*) FROM crm_notifications) AS total_notifications;
 

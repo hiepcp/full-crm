@@ -63,7 +63,7 @@ namespace CRMSys.Api.Controllers
                 
                 // Use system user for public submissions
                 var userEmail = "public-form@crm.com";
-                var leadId = await _leadService.CreateAsync(request, userEmail, ct);
+                var leadId = await _leadService.CreateDraftAsync(request, userEmail, ct);
 
                 var payload = new { leadId };
                 Log.Information("CreatePublicLead - Successfully created lead {LeadId} from public form", leadId);

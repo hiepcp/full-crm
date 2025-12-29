@@ -163,49 +163,6 @@ public class NotificationController : ControllerBase
     }
 
     /// <summary>
-    /// Get user notification preferences
-    /// </summary>
-    [HttpGet("preferences")]
-    public async Task<ActionResult<ApiResponse<NotificationPreferenceDto>>> GetPreferences()
-    {
-        try
-        {
-            var userId = GetCurrentUserId();
-            var preferences = await _notificationService.GetUserPreferencesAsync(userId);
-
-            return Ok(ApiResponse<NotificationPreferenceDto>.Ok(
-                preferences,
-                "Preferences retrieved"));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error getting preferences");
-            return StatusCode(500, ApiResponse<NotificationPreferenceDto>.Fail("Failed to get preferences"));
-        }
-    }
-
-    /// <summary>
-    /// Update user notification preferences
-    /// </summary>
-    [HttpPut("preferences")]
-    public async Task<ActionResult<ApiResponse<bool>>> UpdatePreferences(
-        [FromBody] NotificationPreferenceDto preferences)
-    {
-        try
-        {
-            var userId = GetCurrentUserId();
-            await _notificationService.UpdateUserPreferencesAsync(userId, preferences);
-
-            return Ok(ApiResponse<bool>.Ok(true, "Preferences updated"));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error updating preferences");
-            return StatusCode(500, ApiResponse<bool>.Fail("Failed to update preferences"));
-        }
-    }
-
-    /// <summary>
     /// Test endpoint - send a test notification to yourself
     /// </summary>
     [HttpPost("test")]
@@ -213,14 +170,14 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();            var userEmail = User?.Claims.FirstOrDefault(c => c.Type == "email")?.Value ?? "system@crm.com";
+            var userId = GetCurrentUserId();
+            var userEmail = User?.Claims.FirstOrDefault(c => c.Type == "email")?.Value ?? "system@crm.com";
             var notification = new NotificationDto
             {
                 UserId = userId,
                 Type = "TEST_NOTIFICATION",
                 Title = "Test Notification",
                 Message = "This is a test notification from the CRM system",
-                Severity = "INFO",
                 CreatedBy = userEmail
             };
 
@@ -232,6 +189,79 @@ public class NotificationController : ControllerBase
         {
             _logger.LogError(ex, "Error sending test notification");
             return StatusCode(500, ApiResponse<NotificationDto>.Fail("Failed to send test notification"));
+        }
+    }
+
+    /// <summary>
+    /// Manual trigger for daily follow-up reminders (for testing)
+    /// </summary>
+    [HttpPost("test/daily-reminders")]
+    public async Task<IActionResult> TriggerDailyReminders()
+    {
+        try
+        {
+            _logger.LogInformation("Manual trigger for daily follow-up reminders");
+
+            var userId = GetCurrentUserId();
+            var userEmail = HttpContext.Items["UserEmail"]?.ToString() ?? "system";
+
+            // Import necessary types
+            using var scope = HttpContext.RequestServices.CreateScope();
+            var leadRepository = scope.ServiceProvider.GetRequiredService<CRMSys.Application.Interfaces.Repositories.ILeadRepository>();
+            var assigneeRepository = scope.ServiceProvider.GetRequiredService<CRMSys.Application.Interfaces.Repositories.IAssigneeRepository>();
+
+            var today = DateTime.Today;
+            var leads = await leadRepository.GetLeadsWithFollowUpDueAsync(today);
+            var totalNotifications = 0;
+
+            foreach (var lead in leads)
+            {
+                var assignees = await assigneeRepository.GetByRelationAsync("lead", lead.Id);
+                var leadName = !string.IsNullOrEmpty(lead.Company)
+                    ? lead.Company
+                    : $"{lead.FirstName} {lead.LastName}".Trim();
+
+                foreach (var assignment in assignees)
+                {
+                    var notification = new NotificationDto
+                    {
+                        UserId = assignment.UserId,
+                        Type = "LEAD_FOLLOW_UP_DUE",
+                        Title = "Lead follow-up due today",
+                        Message = $"Follow-up is scheduled today for lead '{leadName}'",
+                        EntityType = "lead",
+                        EntityId = lead.Id,
+                        Metadata = System.Text.Json.JsonSerializer.Serialize(new
+                        {
+                            entityId = lead.Id,
+                            entityName = leadName,
+                            entityType = "lead",
+                            followUpDate = lead.FollowUpDate,
+                            role = assignment.Role,
+                            sentAt = DateTime.UtcNow,
+                            reminderType = "MANUAL_TRIGGER"
+                        }),
+                        CreatedBy = userEmail
+                    };
+
+                    await _notificationService.CreateAndSendAsync(notification);
+                    totalNotifications++;
+                }
+            }
+
+            return Ok(ApiResponse<object>.Ok(
+                new { 
+                    leadCount = leads.Count(), 
+                    notificationCount = totalNotifications,
+                    date = today.ToString("yyyy-MM-dd")
+                },
+                $"Processed {leads.Count()} leads, sent {totalNotifications} notifications"
+            ));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error triggering daily reminders");
+            return StatusCode(500, ApiResponse<object>.Fail($"Failed to trigger daily reminders: {ex.Message}"));
         }
     }
 }

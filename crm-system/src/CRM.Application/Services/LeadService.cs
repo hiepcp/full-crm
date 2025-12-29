@@ -32,9 +32,7 @@ namespace CRMSys.Application.Services
         private readonly IDealQuotationRepository _dealQuotationRepository;
         private readonly IValidator<CreateLeadAddressRequest> _leadAddressCreateValidator;
         private readonly ICRMDynamicsService _crmDynamicsService;
-        private readonly INotificationService _notificationService;
-        private readonly IAssigneeRepository _assigneeRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly INotificationOrchestrator _notificationOrchestrator;
         private readonly ILogger<LeadService> _logger;
 
         public LeadService(
@@ -54,9 +52,7 @@ namespace CRMSys.Application.Services
             IDealQuotationRepository dealQuotationRepository,
             IValidator<CreateLeadAddressRequest> leadAddressCreateValidator,
             ICRMDynamicsService crmDynamicsService,
-            INotificationService notificationService,
-            IAssigneeRepository assigneeRepository,
-            IUserRepository userRepository,
+            INotificationOrchestrator notificationOrchestrator,
             ILogger<LeadService> logger)
             : base(repository, unitOfWork, mapper, createValidator)
         {
@@ -75,9 +71,7 @@ namespace CRMSys.Application.Services
             _dealQuotationRepository = dealQuotationRepository;
             _leadAddressCreateValidator = leadAddressCreateValidator;
             _crmDynamicsService = crmDynamicsService;
-            _notificationService = notificationService;
-            _assigneeRepository = assigneeRepository;
-            _userRepository = userRepository;
+            _notificationOrchestrator = notificationOrchestrator;
             _logger = logger;
         }
 
@@ -182,6 +176,116 @@ namespace CRMSys.Application.Services
                 }
 
                 await _unitOfWork.CommitAsync();
+
+                // Send notifications after successful creation (outside transaction)
+                try
+                {
+                    await _notificationOrchestrator.NotifyEntityChangeAsync(
+                        entityType: "lead",
+                        entityId: leadId,
+                        context: new CRMSys.Application.Dtos.Notification.NotificationContext
+                        {
+                            EventType = "CREATED"
+                        },
+                        entityData: new
+                        {
+                            //Name = request.CompanyName ?? request.Email,
+                            Email = request.Email,
+                            Status = request.Status
+                        });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to send notifications for Lead {LeadId} creation", leadId);
+                }
+
+                return leadId;
+            }
+            catch (Exception ex)
+            {
+                await _unitOfWork.RollbackAsync();
+                throw new ValidationException(new[] {
+                        new ValidationFailure(nameof(request.Email), ex.Message)
+                    });
+            }
+        }
+
+        /// <summary>
+        /// Create new public lead 
+        /// </summary>
+        public async Task<long> CreateDraftAsync(CreateLeadRequest request, string userEmail, CancellationToken ct = default)
+        {
+            // Additional business validation
+            if (!string.IsNullOrEmpty(request.Email))
+            {
+                var isUnique = await _leadRepository.IsEmailUniqueAsync(request.Email, null, ct);
+                if (!isUnique)
+                {
+                    return 0;
+                }
+            }
+
+            // Check for duplicate based on email or phone
+            var validationResult = await ValidateLeadAsync(request, ct);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors.Select(e => new ValidationFailure("", e)));
+            }
+
+            // Map to entity and create lead
+            var leadEntity = _mapper.Map<Lead>(request);
+
+            // Set audit fields
+            var now = DateTime.UtcNow;
+            leadEntity.CreatedOn = now;
+            leadEntity.CreatedBy = userEmail;
+            leadEntity.UpdatedOn = now;
+            leadEntity.UpdatedBy = userEmail;
+
+            try
+            {
+                await _unitOfWork.BeginTransactionAsync();
+
+                var leadId = await _leadRepository.CreateAsync(leadEntity, ct);
+
+                // Handle addresses if provided
+                if (request.Addresses != null && request.Addresses.Any())
+                {
+                    var addressEntities = _mapper.Map<IEnumerable<LeadAddress>>(request.Addresses);
+                    foreach (var address in addressEntities)
+                    {
+                        address.LeadId = leadId;
+                        address.CreatedOn = now;
+                        address.CreatedBy = userEmail;
+                        address.UpdatedOn = now;
+                        address.UpdatedBy = userEmail;
+                    }
+                    await _leadAddressRepository.BulkInsertAsync(addressEntities, ct);
+                }
+
+                await _unitOfWork.CommitAsync();
+
+                // Send notifications after successful creation (outside transaction)
+                try
+                {
+                    await _notificationOrchestrator.NotifyEntityChangeAsync(
+                        entityType: "lead",
+                        entityId: leadId,
+                        context: new CRMSys.Application.Dtos.Notification.NotificationContext
+                        {
+                            EventType = "CREATED"
+                        },
+                        entityData: new
+                        {
+                            //Name = request.CompanyName ?? request.Email,
+                            Email = request.Email,
+                            Status = request.Status
+                        });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to send notifications for Lead {LeadId} creation", leadId);
+                }
 
                 return leadId;
             }
@@ -306,9 +410,28 @@ namespace CRMSys.Application.Services
                 }
 
                 await _unitOfWork.CommitAsync();
-                
+
                 // Send notifications after successful update (outside transaction)
-                await SendLeadUpdateNotificationsAsync(id, existingLead, userEmail);
+                try
+                {
+                    await _notificationOrchestrator.NotifyEntityChangeAsync(
+                        entityType: "lead",
+                        entityId: id,
+                        context: new CRMSys.Application.Dtos.Notification.NotificationContext
+                        {
+                            EventType = "UPDATED"
+                        },
+                        entityData: new
+                        {
+                            //Name = existingLead.CompanyName ?? existingLead.Email,
+                            Email = existingLead.Email,
+                            Status = existingLead.Status
+                        });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to send notifications for Lead {LeadId} update", id);
+                }
             }
             catch (Exception)
             {
@@ -900,110 +1023,6 @@ namespace CRMSys.Application.Services
 
             return null;
         }
-
-        /// <summary>
-        /// Send notifications to lead owner and assigned users when lead is updated
-        /// </summary>
-        private async Task SendLeadUpdateNotificationsAsync(long leadId, Lead lead, string updatedBy)
-        {
-            try
-            {
-                // Get all users that need to be notified (owner + assignees)
-                var userIdsToNotify = await GetUsersToNotifyForLeadAsync(leadId);
-
-                _logger.LogInformation(
-                    "SendLeadUpdateNotifications: Found {Count} users to notify for Lead {LeadId}. Users: [{UserIds}]",
-                    userIdsToNotify.Count, leadId, string.Join(", ", userIdsToNotify));
-
-                if (!userIdsToNotify.Any())
-                {
-                    _logger.LogDebug("No users to notify for Lead {LeadId}", leadId);
-                    return;
-                }
-
-                // Build lead display name
-                var leadName = !string.IsNullOrEmpty(lead.Company) 
-                    ? lead.Company 
-                    : $"{lead.FirstName} {lead.LastName}".Trim();
-
-                // Send notification to each user
-                foreach (var userId in userIdsToNotify)
-                {
-                    _logger.LogInformation(
-                        "Sending notification to UserId={UserId} for Lead {LeadId} ({LeadName})",
-                        userId, leadId, leadName);
-
-                    var notification = new NotificationDto
-                    {
-                        UserId = userId,
-                        Type = "LeadUpdate",
-                        Title = "Lead Updated",
-                        Message = $"Lead '{leadName}' has been updated",
-                        EntityType = "Lead",
-                        EntityId = leadId,
-                        Severity = "Low",
-                        ActionUrl = $"/leads/{leadId}",
-                        Metadata = System.Text.Json.JsonSerializer.Serialize(new
-                        {
-                            LeadId = leadId,
-                            LeadName = leadName,
-                            LeadEmail = lead.Email,
-                            LeadPhone = lead.TelephoneNo,
-                            LeadStatus = lead.Status,
-                            UpdatedBy = updatedBy
-                        }),
-                        CreatedBy = updatedBy
-                    };
-
-                    await _notificationService.CreateAndSendAsync(notification);
-                    
-                    _logger.LogInformation(
-                        "Successfully sent notification to UserId={UserId}",
-                        userId);
-                }
-
-                _logger.LogInformation(
-                    "Sent {Count} update notifications for Lead {LeadId} to users: {UserIds}", 
-                    userIdsToNotify.Count, leadId, string.Join(", ", userIdsToNotify));
-            }
-            catch (Exception ex)
-            {
-                // Don't fail the update operation if notification fails
-                _logger.LogError(ex, "Failed to send notifications for Lead {LeadId} update", leadId);
-            }
-        }
-
-        /// <summary>
-        /// Get list of user IDs that need to be notified for a lead (owner + assignees)
-        /// </summary>
-        private async Task<List<long>> GetUsersToNotifyForLeadAsync(long leadId)
-        {
-            var userIds = new HashSet<long>();
-
-            // Get lead to check owner
-            var lead = await _leadRepository.GetByIdAsync(leadId);
-            if (lead != null && lead.OwnerId.HasValue)
-            {
-                userIds.Add(lead.OwnerId.Value);
-            }
-
-            // Get all assignees for this lead (now returns UserEmail)
-            var assignees = await _assigneeRepository.GetByRelationAsync("Lead", leadId);
-            
-            // Convert UserEmail to UserId by querying user table
-            foreach (var assignee in assignees)
-            {
-                if (!string.IsNullOrEmpty(assignee.UserEmail))
-                {
-                    var user = await _userRepository.GetByEmailAsync(assignee.UserEmail);
-                    if (user != null)
-                    {
-                        userIds.Add(user.Id);
-                    }
-                }
-            }
-
-            return userIds.ToList();
-        }
     }
 }
+

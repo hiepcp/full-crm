@@ -9,6 +9,6 @@ namespace CRMSys.Application.Interfaces.Services
     {
         // Thêm nghiệp vụ riêng (nếu có)
         Task<string?> GetCategoryPathAsync(long value, CancellationToken ct);
-        Task<PagedResult<CRMCategoryResponseDto>> GetPagedAsync(PagedRequest request, CancellationToken ct = default);
+        new Task<PagedResult<CRMCategoryResponseDto>> GetPagedAsync(PagedRequest request, CancellationToken ct = default);
     }
 }
