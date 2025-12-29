@@ -37,6 +37,10 @@ namespace CRMSys.Application.Dtos.Response
         public int? CallDuration { get; set; }
         public string? CallOutcome { get; set; }
 
+        // === Contract Specific ===
+        public DateTime? ContractDate { get; set; }
+        public decimal? ContractValue { get; set; }
+
         // === Computed Properties ===
         public bool IsEmail => ActivityType == "email";
         public bool IsCall => ActivityType == "call";
