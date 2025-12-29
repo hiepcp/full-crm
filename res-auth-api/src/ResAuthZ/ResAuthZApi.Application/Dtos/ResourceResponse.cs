@@ -1,0 +1,17 @@
+﻿namespace ResAuthZApi.Application.Dtos
+{
+    public class ResourceResponse
+    {
+        public int ResourceId { get; set; }
+        public string Code { get; set; } = null!;
+        public string Name { get; set; } = null!;
+        public List<PermissionDto> Permissions { get; set; } = new();
+    }
+
+    public class PermissionDto
+    {
+        public int PermissionId { get; set; }
+        public string Code { get; set; } = null!;
+        public string Description { get; set; } = null!;
+    }
+}

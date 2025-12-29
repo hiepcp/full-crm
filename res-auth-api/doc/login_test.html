@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Azure AD Login Tester</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:;">
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; padding: 24px; }
+    button { padding: 10px 16px; border-radius: 10px; border: 1px solid #ddd; cursor: pointer; }
+    #log { white-space: pre-wrap; background: #f7f7f9; padding: 12px; border-radius: 8px; border: 1px solid #eee; margin-top: 16px; }
+    code { background: #f1f1f4; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Test nhận <code>access_token</code> qua <code>postMessage</code></h1>
+  <p>
+    File này sẽ mở popup đăng nhập Azure AD và chờ nhận message từ
+    <code>/signin-oidc</code> của bạn.
+  </p>
+
+  <button id="btnLogin">Đăng nhập Azure AD</button>
+
+  <div id="log"></div>
+
+  <script>
+    // ====== CẦN CHỈNH SỬA Ở ĐÂY ======
+    const TENANT_ID    = "f286906e-f0af-4d95-8ac0-76cbdfb897fa";
+    const CLIENT_ID    = "badc369f-3f7a-4da3-8690-4b26f3908070";
+    const REDIRECT_URI = "https://api-authn-dev.response.com.vn:7016/signin-oidc";
+    const SCOPES       = "openid profile email offline_access"; // muốn refresh_token thì giữ offline_access
+    const STATE        = "123456"; // tuỳ ý, để check CSRF
+    // Origin của BE trả postMessage (nên khớp với domain của REDIRECT_URI).
+    // Nếu backend bạn dùng '*' thì vẫn nên tự kiểm tra cho an toàn:
+    const ALLOWED_ORIGIN = new URL(REDIRECT_URI).origin;
+
+    // ====== Helper log ======
+    const $log = document.getElementById("log");
+    function log(msg) {
+      console.log(msg);
+      $log.textContent += (typeof msg === "string" ? msg : JSON.stringify(msg, null, 2)) + "\n";
+    }
+
+    // ====== Xây URL authorize ======
+    function buildAuthorizeUrl() {
+      const params = new URLSearchParams({
+        client_id: CLIENT_ID,
+        response_type: "code",
+        redirect_uri: REDIRECT_URI,
+        response_mode: "query",
+        scope: SCOPES,
+        state: STATE
+      });
+      return `https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/authorize?${params.toString()}`;
+    }
+
+    let popup = null;
+    let popupTimer = null;
+
+    // Nhận message từ /signin-oidc (window.opener.postMessage)
+    window.addEventListener("message", (event) => {
+      try {
+        // Kiểm tra origin
+        if (event.origin !== ALLOWED_ORIGIN) {
+          log(`Bỏ qua message từ origin không hợp lệ: ${event.origin}`);
+          return;
+        }
+
+        // event.data dự kiến: { access_token: "...", expires_in: 3600 }
+        log("Đã nhận message từ popup:");
+        log(event.data);
+
+        // In ra console riêng access_token
+        if (event.data && event.data.access_token) {
+          console.log("ACCESS TOKEN:", event.data.access_token);
+          log("ACCESS TOKEN (console cũng đã in): " + event.data.access_token);
+        } else {
+          log("Không có access_token trong payload!");
+        }
+      } catch (e) {
+        log("Lỗi xử lý message: " + e.message);
+      } finally {
+        if (popup && !popup.closed) popup.close();
+        if (popupTimer) clearInterval(popupTimer);
+      }
+    });
+
+    function startLogin() {
+      const url = buildAuthorizeUrl();
+      log("Mở popup đến:\n" + url);
+
+      popup = window.open(
+        url,
+        "azuread_login",
+        "width=500,height=650,menubar=no,toolbar=no,location=no,status=no"
+      );
+
+      if (!popup) {
+        log("🎯 Trình duyệt chặn popup. Hãy bật cho phép popup hoặc giữ nút bên dưới để mở lại.");
+        return;
+      }
+
+      // Poll xem user có đóng popup không
+      popupTimer = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(popupTimer);
+          log("Popup đã đóng.");
+        }
+      }, 500);
+    }
+
+    document.getElementById("btnLogin").addEventListener("click", startLogin);
+
+    // Tự động chạy luôn khi mở file (nếu popup bị chặn, bấm nút)
+    window.addEventListener("load", () => {
+      startLogin();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.1.66" />
+		<PackageReference Include="MySql.Data" Version="9.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
+
+		<PackageReference Include="Res.Shared.Dapper" Version="1.0.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Sqls\Tables\**\*.sql" CopyToOutputDirectory="Always" />
+		<None Include="Sqls\Procedures\**\*.sql" CopyToOutputDirectory="Always" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Database\MySqlConnectionFactory.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Database\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ResAuthZApi.Application\ResAuthZApi.Application.csproj" />
+	  <ProjectReference Include="..\ResAuthZApi.Domain\ResAuthZApi.Domain.csproj" />
+	</ItemGroup>
+
+
+
+</Project>

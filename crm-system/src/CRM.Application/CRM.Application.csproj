@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+	  <Compile Remove="Interfaces\Services\ICategoryInfoProvider.cs" />
+	  <Compile Remove="Interfaces\Services\ICRMCategorySharePointService.cs" />
+	  <Compile Remove="Services\CRMCategorySharePointService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--<ProjectReference Include="..\..\..\..\res-shared-nuget\shared-external-services\Shared.ExternalServices.csproj" />-->
+		<ProjectReference Include="..\CRM.Domain\CRM.Domain.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Hangfire.Core" Version="1.8.22" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="9.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.8" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="FluentValidation" Version="12.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.3.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
+		<PackageReference Include="Dapper.SqlBuilder" Version="2.0.78" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+		 <!--<PackageReference Include="Res.Shared.ExternalServices" Version="1.0.6" />--> 
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="ExternalServices\Interfaces\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Shared.Dapper">
+	    <HintPath>..\..\Shared.Dapper.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Shared.ExternalServices">
+	    <HintPath>..\..\Shared.ExternalServices.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+</Project>

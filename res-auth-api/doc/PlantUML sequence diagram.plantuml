@@ -1,0 +1,42 @@
+@startuml
+title Azure AD OIDC Authorization Code Flow with Internal Access Token (Web via Cookie, Mobile via Refresh Token)
+
+actor UserWeb as "Web FE"
+actor UserMobile as "Mobile App"
+participant ResAuthApi
+participant AzureAD as "Azure AD"
+participant BE as "ComplianceApi/QarmaApi"
+
+== Login Flow ==
+UserWeb -> ResAuthApi : Redirect login via Azure AD
+UserMobile -> ResAuthApi : Redirect login via Azure AD
+ResAuthApi -> AzureAD : Exchange code for tokens
+AzureAD --> ResAuthApi : id_token + access_token + refresh_token
+
+note left of ResAuthApi
+  Internal tokens default
+  - access_token: 1h
+  - refresh_token: 7d
+end note
+
+ResAuthApi --> UserWeb : Set HttpOnly Cookie (Domain=.mycompany.com)\n+ internal access_token (1h)
+ResAuthApi --> UserMobile : internal access_token (1h)\n+ refresh_token (7d)
+
+== Refresh Flow (Web FE) ==
+UserWeb -> ResAuthApi : /refresh (with cookie credentials: include)
+ResAuthApi -> AzureAD : Use Azure AD refresh_token if needed
+AzureAD --> ResAuthApi : New Azure tokens
+ResAuthApi --> UserWeb : New internal access_token (1h)
+
+== Refresh Flow (Mobile App) ==
+UserMobile -> ResAuthApi : /refresh (send refresh_token)
+ResAuthApi -> AzureAD : Use Azure AD refresh_token if needed
+AzureAD --> ResAuthApi : New Azure tokens
+ResAuthApi --> UserMobile : New internal access_token (1h)
+
+== Call Backend APIs ==
+UserWeb -> BE : Call API with internal access_token
+UserMobile -> BE : Call API with internal access_token
+BE -> ResAuthApi : Validate internal token signature (public key)
+
+@enduml

@@ -1,0 +1,23 @@
+CREATE TABLE crm_lead_address (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    lead_id BIGINT NOT NULL,
+    address_type VARCHAR(50) NOT NULL DEFAULT 'legal',
+    company_name VARCHAR(255),
+    address_line TEXT,
+    postcode VARCHAR(32),
+    city VARCHAR(128),
+    country VARCHAR(3),
+    contact_person VARCHAR(255),
+    email VARCHAR(320),
+    telephone_no VARCHAR(64),
+    port_of_destination VARCHAR(255),
+    is_primary BOOLEAN DEFAULT FALSE,
+    created_on DATETIME,
+    created_by VARCHAR(255),
+    updated_on DATETIME,
+    updated_by VARCHAR(255),
+    INDEX idx_lead_id (lead_id),
+    INDEX idx_address_type (address_type),
+    INDEX idx_is_primary (is_primary),
+    FOREIGN KEY (lead_id) REFERENCES crm_leads(id) ON DELETE CASCADE
+);

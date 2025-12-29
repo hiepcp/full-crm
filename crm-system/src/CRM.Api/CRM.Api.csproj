@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+
+		<PackageReference Include="Res.Shared.AuthN" Version="1.0.3" />
+		<PackageReference Include="Res.Shared.AuthZ" Version="1.0.3" />
+		 <!--<PackageReference Include="Res.Shared.ExternalServices" Version="1.0.6" />--> 
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CRM.Application\CRM.Application.csproj" />
+		<ProjectReference Include="..\CRM.Infrastructure\CRM.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Shared.Dapper">
+	    <HintPath>..\..\Shared.Dapper.dll</HintPath>
+	  </Reference>
+	  <Reference Include="Shared.ExternalServices">
+	    <HintPath>..\..\Shared.ExternalServices.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="appsettings.Development.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+
+
+</Project>

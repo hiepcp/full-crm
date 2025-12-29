@@ -2,3 +2,25 @@
 .env
 .env.*
 node_modules/
+
+# Certificates and keys
+*.pem
+*.p12
+*.pfx
+*.key
+*.crt
+**/Certs/
+**/Keys/
+**/keys/
+
+# Sensitive configuration files
+appsettings.*.json
+!appsettings.json
+launchSettings.json
+nuget.config
+
+# Claude settings
+.claude/settings.local.json
+
+# Worktrees
+.worktrees/

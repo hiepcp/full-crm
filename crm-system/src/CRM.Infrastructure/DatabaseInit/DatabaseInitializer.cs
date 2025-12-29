@@ -1,11 +1,11 @@
-using Dapper;
-using Microsoft.Extensions.Configuration;
-using MySql.Data.MySqlClient;
 using System.Data;
+using Dapper;
+using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 
-namespace CRM.Infrastructure.DatabaseInit;
+namespace CRMSys.Infrastructure.DatabaseInit;
 
-[Obsolete("Use Evolve migrations instead. This class is deprecated and will be removed in a future version.")]
 public class DatabaseInitializer
 {
     private readonly string _connectionString;
@@ -16,7 +16,6 @@ public class DatabaseInitializer
         _connectionString = configuration.GetConnectionString("DefaultConnection")
                            ?? throw new InvalidOperationException("DefaultConnection not found in appsettings.json");
 
-        // Parse database name from connection string
         var builder = new MySqlConnectionStringBuilder(_connectionString);
         _databaseName = builder.Database;
     }
@@ -24,11 +23,8 @@ public class DatabaseInitializer
     private IDbConnection CreateConnection(bool includeDatabase = true)
     {
         if (includeDatabase)
-        {
             return new MySqlConnection(_connectionString);
-        }
 
-        // Nếu chưa tạo database, bỏ phần Database trong connection string
         var builder = new MySqlConnectionStringBuilder(_connectionString)
         {
             Database = ""
@@ -38,9 +34,26 @@ public class DatabaseInitializer
 
     public async Task InitializeAsync()
     {
+        Log.Information("?? Checking database existence...");
+        if (await DatabaseExistsAsync())
+        {
+            Log.Warning($"? Database '{_databaseName}' already exists. Skipping initialization.");
+            return;
+        }
+
+        Log.Information($"??? Initializing database '{_databaseName}'...");
         await InitDatabase();
         await InitTables();
         await InitProcedures();
+        Log.Information("?? Database initialization CRMeted successfully.");
+    }
+
+    private async Task<bool> DatabaseExistsAsync()
+    {
+        using var connection = CreateConnection(includeDatabase: false);
+        var sql = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = @dbName;";
+        var result = await connection.QueryFirstOrDefaultAsync<string>(sql, new { dbName = _databaseName });
+        return result != null;
     }
 
     private async Task InitDatabase()
@@ -48,6 +61,7 @@ public class DatabaseInitializer
         using var connection = CreateConnection(includeDatabase: false);
         var sql = $"CREATE DATABASE IF NOT EXISTS `{_databaseName}`;";
         await connection.ExecuteAsync(sql);
+        Log.Information($"? Database '{_databaseName}' created or already exists.");
     }
 
     private async Task InitTables()
@@ -55,7 +69,11 @@ public class DatabaseInitializer
         using var connection = CreateConnection();
         var sqlFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sqls/Tables");
 
-        if (!Directory.Exists(sqlFolderPath)) return;
+        if (!Directory.Exists(sqlFolderPath))
+        {
+            Log.Warning("?? No table scripts found.");
+            return;
+        }
 
         foreach (var file in Directory.GetFiles(sqlFolderPath, "*.sql"))
         {
@@ -63,11 +81,11 @@ public class DatabaseInitializer
             {
                 var sql = await File.ReadAllTextAsync(file);
                 await connection.ExecuteAsync(sql);
-                Console.WriteLine($"Executed table script: {Path.GetFileName(file)}");
+                Log.Information($"?? Executed table script: {Path.GetFileName(file)}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error executing {Path.GetFileName(file)}: {ex.Message}");
+                Log.Error($"? Error executing {Path.GetFileName(file)}: {ex.Message}");
             }
         }
     }
@@ -77,7 +95,11 @@ public class DatabaseInitializer
         using var connection = CreateConnection();
         var sqlFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sqls/Procedures");
 
-        if (!Directory.Exists(sqlFolderPath)) return;
+        if (!Directory.Exists(sqlFolderPath))
+        {
+            Log.Error("?? No procedure scripts found.");
+            return;
+        }
 
         foreach (var file in Directory.GetFiles(sqlFolderPath, "*.sql"))
         {
@@ -86,11 +108,11 @@ public class DatabaseInitializer
                 var sql = await File.ReadAllTextAsync(file);
                 sql = FixDelimiter(sql);
                 await connection.ExecuteAsync(sql);
-                Console.WriteLine($"Executed procedure script: {Path.GetFileName(file)}");
+                Log.Information($"?? Executed procedure script: {Path.GetFileName(file)}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error executing {Path.GetFileName(file)}: {ex.Message}");
+                Log.Error($"? Error executing {Path.GetFileName(file)}: {ex.Message}");
             }
         }
     }
