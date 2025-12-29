@@ -20,13 +20,13 @@ class NotificationHubService {
    */
   async start() {
     if (this.connection && this.isConnected) {
-      console.log('NotificationHub: Already connected');
+      // console.log('NotificationHub: Already connected');
       return;
     }
 
     const token = tokenHelper.get();
     if (!token) {
-      console.warn('NotificationHub: No access token available');
+      // console.warn('NotificationHub: No access token available');
       return;
     }
 
@@ -35,9 +35,11 @@ class NotificationHubService {
     const baseUrl = config.API_URL.replace(/\/api\/?$/, '');
     const hubUrl = `${baseUrl}/hubs/notifications`;
     
-    console.log('NotificationHub: Connecting to', hubUrl);
+    // console.log('NotificationHub: Connecting to', hubUrl);
 
     // Build connection
+    // NOTE: Do NOT add headers - SignalR doesn't support custom headers in negotiate request
+    // Backend must skip ApiKey middleware for /hubs/* endpoints
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl(hubUrl, {
         // Get fresh token each time (important for token refresh)
@@ -46,12 +48,15 @@ class NotificationHubService {
           if (!currentToken) {
             console.warn('NotificationHub: Token not available in accessTokenFactory');
           }
+          // console.log('NotificationHub: accessTokenFactory called, token available:', currentToken);
           return currentToken;
         },
-        // Add XApiKey as query parameter (SignalR doesn't support custom headers for negotiate)
-        headers: {
-          'XApiKey': config.x_api_key
-        }
+        // SECURITY: Use LongPolling only to avoid sending token in query string
+        // LongPolling sends token in Authorization header (secure)
+        // WebSocket/SSE must send token via query string (less secure - appears in logs)
+        skipNegotiation: false,
+        transport: signalR.HttpTransportType.LongPolling // Most secure option
+        // Alternative (less secure): signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.ServerSentEvents | signalR.HttpTransportType.LongPolling
       })
       .withAutomaticReconnect({
         nextRetryDelayInMilliseconds: (retryContext) => {
@@ -62,11 +67,11 @@ class NotificationHubService {
           return null; // Stop reconnecting
         }
       })
-      .configureLogging(signalR.LogLevel.Information)
+      // .configureLogging(signalR.LogLevel.Information)
       .build();
 
     // Setup event handlers
-    this.setupEventHandlers();
+     this.setupEventHandlers();
 
     try {
       await this.connection.start();

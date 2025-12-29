@@ -34,7 +34,7 @@ const codeToComponent = {
   "setting-score": <SettingScorePage />,
   "user-register-hcm": <HcmWorkerRegisterPage />,
   "calendar-all": <CalendarAllPage />,
-  "calendar-my": <CalendarMyPage />,
+  "my-calendar": <CalendarMyPage />,
 };
 
 function pathPatternToRegex(pattern) {
@@ -78,7 +78,7 @@ export default function RouteResolver() {
     "setting-score": "/setting-score",
     "user-register-hcm": "/users/register-hcm",
     "calendar-all": "/calendar/all",
-    "calendar-my": "/calendar/my",
+    "my-calendar": "/calendar/my",
   };
 
   const matched = useMemo(() => {

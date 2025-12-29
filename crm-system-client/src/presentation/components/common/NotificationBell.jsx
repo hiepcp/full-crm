@@ -216,11 +216,11 @@ const NotificationBell = ({ showBadge = true, iconColor = 'inherit' }) => {
         {/* Notification list */}
         <List sx={{ p: 0, maxHeight: 400, overflow: 'auto' }}>
           {isLoading ? (
-            <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', p: 2 }}>
               <CircularProgress />
             </Box>
           ) : filteredNotifications.length === 0 ? (
-            <Box sx={{ p: 3, textAlign: 'center' }}>
+            <Box sx={{ p: 2, textAlign: 'center' }}>
               <Typography variant="body2" color="text.secondary">
                 {filter === 'unread' ? 'No unread notifications' : 'No notifications'}
               </Typography>
@@ -302,18 +302,9 @@ const NotificationBell = ({ showBadge = true, iconColor = 'inherit' }) => {
                         >
                           {notification.message}
                         </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                          {notification.referenceType && (
-                            <Chip
-                              label={notification.referenceType}
-                              size="small"
-                              sx={{ height: 16, fontSize: '0.65rem' }}
-                            />
-                          )}
-                        </Box>
                       </>
                     }
-                    sx={{ pr: 8, my: 0 }}
+                    sx={{ pr: 4, my: 0 }}
                   />
                 </ListItem>
               </Box>

@@ -163,7 +163,7 @@ export const NotificationProvider = ({ children }) => {
    */
   useEffect(() => {
     if (!hasToken) {
-      console.warn('NotificationContext: No token available yet, waiting...');
+      // console.warn('NotificationContext: No token available yet, waiting...');
       return;
     }
 
@@ -173,13 +173,13 @@ export const NotificationProvider = ({ children }) => {
       return;
     }
 
-    console.log('NotificationContext: Initializing SignalR connection...');
+    // console.log('NotificationContext: Initializing SignalR connection...');
 
     // Start SignalR connection
     notificationHubService.start().then(() => {
       const connected = notificationHubService.getConnectionStatus();
       setIsConnected(connected);
-      console.log('NotificationContext: SignalR connection status:', connected);
+      // console.log('NotificationContext: SignalR connection status:', connected);
       
       // Load initial data
       if (connected) {

@@ -758,6 +758,12 @@ const BaseForm = ({
               <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
                 {field.label}
               </Typography>
+              {
+              arrayValue.length > field.maxItems ? 
+              <Typography variant="body2" color="text.secondary" sx={{ mr: 2 }}>
+                Max
+              </Typography> 
+              : 
               <Button
                 size="small"
                 startIcon={<AddIcon />}
@@ -767,6 +773,7 @@ const BaseForm = ({
               >
                 {field.addButtonLabel || 'Add Item'}
               </Button>
+              }
             </Box>
 
             <Stack spacing={2}>

@@ -321,24 +321,6 @@ const NotificationList = () => {
                               >
                                 {notification.message}
                               </Typography>
-                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, flexWrap: 'wrap' }}>
-                                {notification.type && (
-                                  <Chip
-                                    label={notification.type.replace(/_/g, ' ')}
-                                    size="small"
-                                    color={getNotificationColor(notification.type)}
-                                    sx={{ height: 16, fontSize: '0.65rem', textTransform: 'capitalize' }}
-                                  />
-                                )}
-                                {notification.severity && notification.severity !== 'INFO' && (
-                                  <Chip
-                                    label={notification.severity}
-                                    size="small"
-                                    variant="outlined"
-                                    sx={{ height: 16, fontSize: '0.65rem' }}
-                                  />
-                                )}
-                              </Box>
                             </>
                           }
                           sx={{ pr: 10, my: 0 }}

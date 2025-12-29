@@ -1482,7 +1482,7 @@ export const getEnrichedDeal = async (dealId) => {
 
     const assignees = await Promise.all(assigneesResponse.map(async (assignee) => ({
       ...assignee,
-      user: await getUserById(assignee.userId)
+      user: await getUserByEmail(assignee.userEmail)
     })));
 
     const [customer, contact, lead] = await Promise.all([
