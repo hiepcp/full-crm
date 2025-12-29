@@ -204,11 +204,11 @@ builder.Services.AddCors(o =>
 var app = builder.Build();
 
 // Init database khi kh?i d?ng
-using (var scope = app.Services.CreateScope())
-{
-    var dbInit = scope.ServiceProvider.GetRequiredService<CRMSys.Infrastructure.DatabaseInit.DatabaseInitializer>();
-    await dbInit.InitializeAsync();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var dbInit = scope.ServiceProvider.GetRequiredService<CRMSys.Infrastructure.DatabaseInit.DatabaseInitializer>();
+//    await dbInit.InitializeAsync();
+//}
 
 if (app.Environment.IsDevelopment())
 {
