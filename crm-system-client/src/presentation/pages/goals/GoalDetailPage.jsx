@@ -34,7 +34,7 @@ import {
   GoalCalculationSourceBadge,
   RecalculateButton
 } from '@presentation/components/goals';
-import { goalProgressCalculator } from '@application/services/goalProgressCalculator';
+import goalProgressCalculator from '@application/services/goalProgressCalculator';
 
 /**
  * GoalDetailPage

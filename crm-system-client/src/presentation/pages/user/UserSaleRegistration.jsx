@@ -172,34 +172,32 @@ export default function UserSaleRegistration() {
         setTotal(data.totalCount ?? data.TotalCount ?? data["@odata.count"] ?? normalized.length);
       } catch (error) {
         console.error("Failed to load workers", error);
-    // Extract first and last name from full name
+      }
     };
     fetchWorkers();
   }, [paginationModel, search, orderBy, getHcmWorkersUseCase]);
 
-      email: normalized.email || prev.email,
-      firstName: extractFirstName(normalized.name) || prev.firstName,
-      lastName: extractLastName(normalized.name) || prev.lastName,
-      personnelNumber: normalized.personnelNumber || prev.personnelNumber,
-    // Auto-generate username from email prefix or personnel number
-    const userName = normalized.email
-      ? normalized.email.split("@")[0]
-      : normalized.personnelNumber || "";
-
-    setForm((prev) => ({
-      ...prev,
-      email: normalized.email || prev.email,
-      fullName: normalized.name || prev.fullName,
-      userName: userName || prev.userName,
-    }));
-    setAlert(null);
+  // Handle worker selection
+  const handleSelectWorker = (worker) => {
+    setSelectedWorker(worker);
+    setForm({
+      email: worker.email || "",
+      firstName: extractFirstName(worker.name),
+      lastName: extractLastName(worker.name),
+      personnelNumber: worker.personnelNumber || "",
+      role: "",
+    });
   };
 
   // Handle form submission
-      if (!form.role) {
-        setAlert({ severity: "warning", message: "Role is required" });
-        return;
-      }
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
+    if (!form.role) {
+      setAlert({ severity: "warning", message: "Role is required" });
+      return;
+    }
+
+    setSubmitting(true);
     try {
       const payload = {
         email: form.email,
@@ -208,16 +206,6 @@ export default function UserSaleRegistration() {
         personnelNumber: form.personnelNumber || null,
         role: form.role,
         isActive: true,
-      };
-        setAlert({ severity: "warning", message: "At least one role must be assigned" });
-        return;
-      }
-
-      const payload = {
-        email: form.email,
-        fullName: form.fullName,
-        userName: form.userName,
-        roleIds: form.roleIds,
       };
 
       await usersApi.create(payload);
@@ -347,6 +335,7 @@ export default function UserSaleRegistration() {
               </Typography>
 
               <Divider sx={{ my: 2 }} />
+              <Stack direction="column" spacing={2}>
                 <TextField
                   label="First Name"
                   value={form.firstName}
@@ -358,6 +347,7 @@ export default function UserSaleRegistration() {
                   value={form.personnelNumber}
                   onChange={(e) => setForm((prev) => ({ ...prev, personnelNumber: e.target.value }))}
                   fullWidth
+                />
                 <FormControl fullWidth required error={!form.role && alert?.severity === "warning"}>
                   <InputLabel id="role-select-label">Role</InputLabel>
                   <Select
@@ -379,47 +369,26 @@ export default function UserSaleRegistration() {
                     </Typography>
                   )}
                 </FormControl>
-                      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                        {selected.map((value) => {
-                          const role = roles.find((r) => r.id === value);
-                          return <Chip key={value} label={role?.name || value} />;
-                        })}
-                      </Box>
-                    )}
-                    disabled={rolesLoading}
-                  >
-                    {roles.map((role) => (
-                      <MenuItem key={role.id} value={role.id}>
-                        {role.name} ({role.id})
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  {form.roleIds.length === 0 && alert?.severity === "warning" && (
-                    <Typography variant="caption" color="error" sx={{ mt: 0.5 }}>
-                      At least one role required
-                    </Typography>
-                  )}
-                </FormControl>
-
-                <Button
-                  variant="contained"
-                  onClick={handleSubmit}
-                  disabled={!isFormValid || submitting}
-                >
-                  {submitting ? "Creating..." : "Create User"}
-                </Button>
-
-                {selectedWorker && (
-                  <Alert severity="info">
-                    Using worker: {selectedWorker.name} ({selectedWorker.personnelNumber})
-                  </Alert>
-                )}
-                {alert && (
-                  <Alert severity={alert.severity} onClose={() => setAlert(null)}>
-                    {alert.message}
-                  </Alert>
-                )}
               </Stack>
+
+              <Button
+                variant="contained"
+                onClick={handleSubmit}
+                disabled={!isFormValid || submitting}
+              >
+                {submitting ? "Creating..." : "Create User"}
+              </Button>
+
+              {selectedWorker && (
+                <Alert severity="info">
+                  Using worker: {selectedWorker.name} ({selectedWorker.personnelNumber})
+                </Alert>
+              )}
+              {alert && (
+                <Alert severity={alert.severity} onClose={() => setAlert(null)}>
+                  {alert.message}
+                </Alert>
+              )}
             </CardContent>
           </Card>
         </Grid>

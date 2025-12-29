@@ -9,13 +9,15 @@
 
 
 	<ItemGroup>
+		<PackageReference Include="Evolve" Version="3.2.0" />
+		<PackageReference Include="MySql.Data" Version="9.4.0" />
 		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
 
 		<PackageReference Include="Res.Shared.AuthN" Version="1.0.3" />
 		<PackageReference Include="Res.Shared.AuthZ" Version="1.0.3" />
-		 <!--<PackageReference Include="Res.Shared.ExternalServices" Version="1.0.6" />--> 
+		 <!--<PackageReference Include="Res.Shared.ExternalServices" Version="1.0.6" />-->
 	</ItemGroup>
 
 	<ItemGroup>

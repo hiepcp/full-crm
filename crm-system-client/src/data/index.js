@@ -468,6 +468,8 @@ export const createActivity = async (activityData, participants = [], emailRecip
       appointmentDuration: activityData.appointmentDuration || null,
       appointmentLocation: activityData.appointmentLocation || null,
       appointmentPlatform: activityData.appointmentPlatform || null,
+      contractDate: activityData.contractDate || null,
+      contractValue: activityData.contractValue || null,
     };
 
     // Transform participants from personId strings to ParticipantInput objects

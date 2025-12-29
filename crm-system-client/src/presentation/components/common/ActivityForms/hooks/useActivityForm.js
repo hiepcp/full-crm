@@ -26,6 +26,8 @@ export const useActivityForm = (initialData, defaultAssignee, contacts, users) =
     assignedTo: defaultAssignee || '',
     dueDate: '',
     dueTime: '',
+    contractDate: '',
+    contractValue: '',
   });
 
   const [description, setDescription] = useState('');
@@ -126,6 +128,8 @@ export const useActivityForm = (initialData, defaultAssignee, contacts, users) =
           dueDate: '',
           dueTime: '',
           conversationId: getConversationId(initialData),
+          contractDate: initialData.contractDate ? new Date(initialData.contractDate).toISOString().split('T')[0] : '',
+          contractValue: initialData.contractValue || '',
         });
 
         if (initialData.dueAt) {
@@ -203,6 +207,8 @@ export const useActivityForm = (initialData, defaultAssignee, contacts, users) =
       assignedTo: defaultAssignee || '',
       dueDate: '',
       dueTime: '',
+      contractDate: '',
+      contractValue: '',
     });
     setDescription('');
     setUploadedFiles([]);

@@ -23,7 +23,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import { mockCalendarActivities, getNextActivityId, activityTypes } from '../../../../utils/constants_calendar';
+import {   activityTypes } from '../../../../utils/constants_calendar';
 import ActivityFormDialog from './ActivityFormDialog';
 
 const CalendarAllPage = () => {
@@ -34,10 +34,10 @@ const CalendarAllPage = () => {
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
   const calendarRef = useRef(null);
 
-  useEffect(() => {
-    // Initialize events from mock data
-    setEvents(mockCalendarActivities);
-  }, []);
+  // useEffect(() => {
+  //   // Initialize events from mock data
+  //   setEvents(mockCalendarActivities);
+  // }, []);
 
   // Handle date/time slot click - create new event
   const handleDateSelect = (selectInfo) => {
@@ -101,23 +101,23 @@ const CalendarAllPage = () => {
   };
 
   // Save activity (create or update)
-  const handleSaveActivity = (activityData) => {
-    if (activityData.id) {
-      // Update existing
-      setEvents(prevEvents =>
-        prevEvents.map(evt => (evt.id === activityData.id ? activityData : evt))
-      );
-      showSnackbar('Activity updated successfully', 'success');
-    } else {
-      // Create new
-      const newActivity = {
-        ...activityData,
-        id: getNextActivityId()
-      };
-      setEvents(prevEvents => [...prevEvents, newActivity]);
-      showSnackbar('Activity created successfully', 'success');
-    }
-  };
+  // const handleSaveActivity = (activityData) => {
+  //   if (activityData.id) {
+  //     // Update existing
+  //     setEvents(prevEvents =>
+  //       prevEvents.map(evt => (evt.id === activityData.id ? activityData : evt))
+  //     );
+  //     showSnackbar('Activity updated successfully', 'success');
+  //   } else {
+  //     // Create new
+  //     const newActivity = {
+  //       ...activityData,
+  //       id: getNextActivityId()
+  //     };
+  //     setEvents(prevEvents => [...prevEvents, newActivity]);
+  //     showSnackbar('Activity created successfully', 'success');
+  //   }
+  // };
 
   // Delete activity
   const handleDeleteActivity = () => {

@@ -2,6 +2,7 @@ using CRMSys.Api.Middleware;
 using CRMSys.Application;
 using CRMSys.Infrastructure;
 using Dapper;
+using EvolveDb;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
@@ -213,7 +214,7 @@ try
 
     using var connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
 
-    var evolve = new Evolve.Evolve(connection, msg => Log.Debug(msg))
+    var evolve = new EvolveDb.Evolve(connection, msg => Log.Debug(msg))
     {
         Locations = new List<string> { "Migrations" },
         IsEraseDisabled = true, // CRITICAL: Disable erase in production
