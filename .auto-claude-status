@@ -1,11 +1,11 @@
 {
   "active": true,
   "spec": "007-fix-missing-contractdate-and-contractvalue-values",
-  "state": "building",
+  "state": "complete",
   "subtasks": {
-    "completed": 9,
+    "completed": 10,
     "total": 10,
-    "in_progress": 1,
+    "in_progress": 0,
     "failed": 0
   },
   "phase": {
@@ -21,5 +21,5 @@
     "number": 10,
     "started_at": "2025-12-29T10:53:48.656504"
   },
-  "last_update": "2025-12-29T11:40:58.624050"
+  "last_update": "2025-12-29T11:47:17.346477"
 }
