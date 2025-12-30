@@ -1,11 +1,10 @@
 <!--
 Sync Impact Report
 ==================
-Version: 1.0.0 → 1.1.0 (MINOR - New file preview principle added)
-Modified Principles: N/A
-Added Sections:
-  - VI. File Management & Preview (New principle)
-Removed Sections: N/A
+Version: 1.1.0 → 1.1.0 (PATCH - Restored ratified constitution from git history)
+Modified Principles: None (restored to ratified state)
+Added Sections: None (restored to ratified state)
+Removed Sections: None (restored to ratified state)
 Templates Requiring Updates:
   ✅ .specify/templates/plan-template.md - Constitution Check section aligns with principles
   ✅ .specify/templates/spec-template.md - Requirements sections align with security and functional needs
