@@ -133,7 +133,7 @@ export default function ActivityDataGrid({
   ];
 
   return (
-    <Box sx={{ height: 700, width: '100%' }}>
+    <Box sx={{ minHeight: 560, maxHeight: 800, width: '100%' }}>
       <DataGrid
         rows={data}
         columns={columns}
@@ -158,6 +158,8 @@ export default function ActivityDataGrid({
           '& .MuiDataGrid-cell': {
             py: 1,
           },
+          minHeight: 560,
+          maxHeight: 800,
         }}
         disableRowSelectionOnClick
         disableColumnFilter={false}

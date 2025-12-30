@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Box, Typography, Card, CardContent, Tabs, Tab, Alert } from '@mui/material';
-import { FormatListBulleted as ListIcon } from '@mui/icons-material';
+import { FormatListBulleted as ListIcon, Timeline as TimelineIcon } from '@mui/icons-material';
 import CustomerDataGrid from './components/CustomerDataGrid';
+import CustomerActivityPage from './CustomerActivityPage';
 import { RestAllCRMRepository } from "@infrastructure/repositories/RestAllCRMRepository";
 import { GetAllCRMCustTableEntitiesUseCase } from '@application/usecases/all-crms';
 
@@ -163,6 +164,11 @@ const CustomerPage = () => {
               label={`List (${total})`}
               sx={{ fontWeight: 'bold' }}
             />
+            <Tab
+              icon={<TimelineIcon />}
+              label="Activities"
+              sx={{ fontWeight: 'bold' }}
+            />
           </Tabs>
         </Box>
 
@@ -181,6 +187,13 @@ const CustomerPage = () => {
               filterModel={filterModel}
               onFilterModelChange={setFilterModel}
             />
+          </Box>
+        </TabPanel>
+
+        {/* Activities Tab */}
+        <TabPanel value={activeTab} index={1}>
+          <Box sx={{ pt: 2 }}>
+            <CustomerActivityPage />
           </Box>
         </TabPanel>
       </CardContent>

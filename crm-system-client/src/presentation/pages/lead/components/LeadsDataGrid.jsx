@@ -178,7 +178,7 @@ const LeadsDataGrid = ({
   ];
 
   return (
-    <Box sx={{ height: 560, width: '100%', mt: 1 }}>
+    <Box sx={{ minHeight: 560, maxHeight: 800, width: '100%', mt: 1 }}>
       <DataGrid
         rows={rows}
         columns={columns}

@@ -18,6 +18,14 @@ public class ExcelPreviewCacheMiddleware
     private readonly ILogger<ExcelPreviewCacheMiddleware> _logger;
     private readonly ExcelPreviewCacheOptions _options;
 
+    /// <summary>
+    /// Initializes a new instance of the ExcelPreviewCacheMiddleware class with the specified request delegate, memory
+    /// cache, logger, and configuration options.
+    /// </summary>
+    /// <param name="next">The next middleware component in the HTTP request pipeline.</param>
+    /// <param name="cache">The memory cache instance used to store and retrieve Excel preview data.</param>
+    /// <param name="logger">The logger used to record middleware operations and errors.</param>
+    /// <param name="options">The configuration options for the Excel preview cache. Cannot be null.</param>
     public ExcelPreviewCacheMiddleware(
         RequestDelegate next,
         IMemoryCache cache,
@@ -137,8 +145,8 @@ public class ExcelPreviewCacheMiddleware
         }
 
         // Add cache hit header for monitoring
-        context.Response.Headers.Add("X-Cache-Hit", "true");
-        context.Response.Headers.Add("X-Response-Time", "0ms"); // Served from cache
+        context.Response.Headers.Append("X-Cache-Hit", "true");
+        context.Response.Headers.Append("X-Response-Time", "0ms"); // Served from cache
 
         // Set content type for Excel files
         context.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -190,7 +198,7 @@ public class ExcelPreviewCacheMiddleware
                 }
 
                 // Add cache miss header
-                context.Response.Headers.Add("X-Cache-Hit", "false");
+                context.Response.Headers.Append("X-Cache-Hit", "false");
             }
 
             // Copy captured response back to original stream
@@ -227,6 +235,14 @@ public class ExcelPreviewCacheMiddleware
 /// </summary>
 public static class ExcelPreviewCacheMiddlewareExtensions
 {
+    /// <summary>
+    /// Adds middleware to the application's request pipeline to enable Excel preview caching.
+    /// </summary>
+    /// <remarks>This middleware should be registered early in the pipeline to ensure that Excel preview
+    /// requests are properly cached. Call this method in the <c>Configure</c> method of your application's startup
+    /// class.</remarks>
+    /// <param name="builder">The application builder to configure.</param>
+    /// <returns>The original <see cref="IApplicationBuilder"/> instance with the Excel preview cache middleware configured.</returns>
     public static IApplicationBuilder UseExcelPreviewCache(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<ExcelPreviewCacheMiddleware>();

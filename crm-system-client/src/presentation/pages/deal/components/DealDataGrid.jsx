@@ -229,7 +229,7 @@ const DealDataGrid = ({
   ];
 
   return (
-    <Box sx={{ height: 560, width: '100%', mt: 1 }}>
+    <Box sx={{ minHeight: 560, maxHeight: 800, width: '100%', mt: 1 }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -250,6 +250,7 @@ const DealDataGrid = ({
         getRowId={(row) => row.id}
         onRowClick={(params) => navigate(`/deals/${params.row.id}`)}
         getRowHeight={() => 'auto'}
+        sx={{minHeight: 560, maxHeight: 800}}
       />
     </Box>
   );

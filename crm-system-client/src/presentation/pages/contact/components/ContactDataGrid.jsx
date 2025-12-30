@@ -209,7 +209,7 @@ export default function ContactDataGrid({
   ];
 
   return (
-    <Box sx={{ height: 600, width: '100%' }}>
+    <Box sx={{ minHeight: 560, maxHeight: 800, width: '100%' }}>
       <DataGrid
         rows={data}
         columns={columns}
@@ -230,6 +230,8 @@ export default function ContactDataGrid({
           '& .MuiDataGrid-row:hover': {
             cursor: 'pointer',
           },
+          minHeight: 560,
+          maxHeight: 800,
         }}
         disableRowSelectionOnClick
         disableColumnFilter={false}

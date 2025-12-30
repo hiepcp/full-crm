@@ -7,6 +7,6 @@ namespace CRMSys.Application.Interfaces.Services
 {
     public interface IReferenceTypesService : IBaseService<ReferenceTypes, long, ReferenceTypesRequestDto>
     {
-        Task<IEnumerable<EnumDto>> GetPagedAsync(PagedRequest request, CancellationToken ct = default);
+        new Task<IEnumerable<EnumDto>> GetPagedAsync(PagedRequest request, CancellationToken ct = default);
     }
 }
