@@ -45,6 +45,8 @@ import { ACTIVITY_TYPES } from '../../../../utils/constants';
 import EmailListComponent from '../../../pages/lead/components/EmailListComponent';
 import AppointmentListComponent from '../../../pages/lead/components/AppointmentListComponent';
 import { useEmailConnection } from '@app/contexts/EmailConnectionContext';
+import { LocalAuthRepository } from '@infrastructure/repositories/LocalAuthRepository';
+import { EmailAuthRepository } from '@infrastructure/repositories/EmailAuthRepository';
 
 // Custom hooks
 import { useEmailDialog } from './hooks/useEmailDialog';
@@ -55,6 +57,7 @@ import { useActivityForm } from './hooks/useActivityForm';
 import ActivityCategoryFields from './components/ActivityCategoryFields';
 import DescriptionEditor from './components/DescriptionEditor';
 import FileUploadSection from './components/FileUploadSection';
+import ConversationThreadDialog from './components/ConversationThreadDialog';
 
 // Utils
 import { mapEmailToCreateEmailRequest } from './utils/emailHelpers';
@@ -161,50 +164,93 @@ const AddActivityForm = forwardRef((
     }
   };
 
-  // Handle email selection confirmation
+  // Handle email selection confirmation - now opens conversation thread dialog
   const handleConfirmEmail = async () => {
+    if (!emailDialog.selectedEmail) return;
+
+    // Open conversation thread dialog
+    await emailDialog.handleOpenConversationThread();
+  };
+
+  // Handle confirmation from conversation thread dialog
+  const handleConfirmConversationThread = async (latestEmail, includedEmails) => {
     setDownloadingAttachments(true);
 
     try {
-      const result = await emailDialog.handleConfirmEmailSelection((emailData) => {
-        // Update form with email data
-        activityForm.updateFormData({
-          activityCategory: 'email',
-          subject: ` ${emailData.subject}`,
-          emailFrom: emailData.sender?.address || emailData.sender?.emailAddress?.address || '',
-          emailRecipient: emailData.recipients.map(r => r.emailAddress?.address || r.address || ''),
-          conversationId: emailData.conversationId,
-          person: [],
-        });
+      const conversationId = latestEmail.conversationId || '';
+      const sender = latestEmail.from?.emailAddress || latestEmail.from;
+      const recipients = latestEmail.toRecipients || [];
+      const subject = latestEmail.subject || '';
+      const body = latestEmail.body?.content || latestEmail.bodyPreview || '';
 
-        activityForm.setDescription(emailData.body);
+      // Download attachments if any
+      console.log('Checking for attachments in email:', latestEmail.subject);
+      const localRepo = new LocalAuthRepository();
+      const emailRepo = new EmailAuthRepository(localRepo);
+      const downloadedAttachments = latestEmail.hasAttachments
+        ? await emailRepo.downloadEmailAttachments(latestEmail.id)
+        : [];
 
-        // Handle attachments from email
-        if (emailData.attachments && emailData.attachments.length > 0) {
-          const successfulAttachments = emailData.attachments.filter(att => att.success && att.file);
+      if (downloadedAttachments.length > 0) {
+        console.log(`Downloaded ${downloadedAttachments.filter(a => a.success).length} of ${downloadedAttachments.length} attachments`);
+      }
 
-          if (successfulAttachments.length > 0) {
-            console.log(`Adding ${successfulAttachments.length} downloaded attachments to activity form`);
+      // Store the confirmed email for later use
+      emailDialog.setConfirmedEmail(latestEmail);
 
-            // Merge downloaded attachments with existing uploaded files
-            const newFiles = successfulAttachments.map(att => att.file);
-            const currentFiles = activityForm.uploadedFiles || [];
-            activityForm.setUploadedFiles([...currentFiles, ...newFiles]);
-          }
-
-          // Log failed attachments for debugging
-          const failedAttachments = emailData.attachments.filter(att => !att.success);
-          if (failedAttachments.length > 0) {
-            console.warn(`Failed to download ${failedAttachments.length} attachments:`,
-              failedAttachments.map(att => `${att.originalAttachment.name}: ${att.error}`));
-          }
-        }
-
-        // Call parent callback if provided
-        if (onEmailData) {
-          onEmailData(emailData);
-        }
+      // Update form with email data
+      activityForm.updateFormData({
+        activityCategory: 'email',
+        subject: ` ${subject}`,
+        emailFrom: sender?.address || sender?.emailAddress?.address || '',
+        emailRecipient: recipients.map(r => r.emailAddress?.address || r.address || ''),
+        conversationId: conversationId,
+        person: [],
       });
+
+      activityForm.setDescription(body);
+
+      // Handle attachments from email
+      if (downloadedAttachments && downloadedAttachments.length > 0) {
+        const successfulAttachments = downloadedAttachments.filter(att => att.success && att.file);
+
+        if (successfulAttachments.length > 0) {
+          console.log(`Adding ${successfulAttachments.length} downloaded attachments to activity form`);
+
+          // Merge downloaded attachments with existing uploaded files
+          const newFiles = successfulAttachments.map(att => att.file);
+          const currentFiles = activityForm.uploadedFiles || [];
+          activityForm.setUploadedFiles([...currentFiles, ...newFiles]);
+        }
+
+        // Log failed attachments for debugging
+        const failedAttachments = downloadedAttachments.filter(att => !att.success);
+        if (failedAttachments.length > 0) {
+          console.warn(`Failed to download ${failedAttachments.length} attachments:`,
+            failedAttachments.map(att => `${att.originalAttachment.name}: ${att.error}`));
+        }
+      }
+
+      // Call parent callback if provided
+      if (onEmailData) {
+        onEmailData({
+          sender: sender,
+          subject: subject,
+          body: body,
+          email: latestEmail,
+          conversationId: conversationId,
+          recipients: recipients,
+          attachments: downloadedAttachments,
+          includedEmails: includedEmails // Pass the list of included emails
+        });
+      }
+
+      // Close both dialogs
+      emailDialog.handleCloseConversationThread();
+      emailDialog.handleCloseEmailDialog();
+
+    } catch (error) {
+      console.error('Error processing conversation thread selection:', error);
     } finally {
       setDownloadingAttachments(false);
     }
@@ -747,6 +793,16 @@ const AddActivityForm = forwardRef((
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Conversation Thread Selection Dialog */}
+      <ConversationThreadDialog
+        open={emailDialog.conversationThreadDialogOpen}
+        onClose={emailDialog.handleCloseConversationThread}
+        selectedEmail={emailDialog.selectedEmail}
+        conversationEmails={emailDialog.conversationEmails}
+        loading={emailDialog.loadingConversation}
+        onConfirm={handleConfirmConversationThread}
+      />
 
       {/* Appointment Selection Dialog */}
       <Dialog

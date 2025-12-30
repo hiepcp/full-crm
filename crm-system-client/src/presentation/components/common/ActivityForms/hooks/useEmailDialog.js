@@ -23,6 +23,11 @@ export const useEmailDialog = () => {
   const [selectedFolderId, setSelectedFolderId] = useState(null);
   const [confirmingEmail, setConfirmingEmail] = useState(false);
 
+  // Conversation thread dialog state
+  const [conversationThreadDialogOpen, setConversationThreadDialogOpen] = useState(false);
+  const [conversationEmails, setConversationEmails] = useState([]);
+  const [loadingConversation, setLoadingConversation] = useState(false);
+
   const loadEmailsForActivityCreation = async (page = 1, append = false, folderIdParam = null) => {
     if (append) {
       setLoadingMoreEmails(true);
@@ -149,6 +154,41 @@ export const useEmailDialog = () => {
     await loadEmailsForActivityCreation(1, false, folder.id);
   };
 
+  // Open conversation thread dialog to select email range
+  const handleOpenConversationThread = async () => {
+    if (!selectedEmail) return;
+
+    const conversationId = selectedEmail.conversationId;
+    if (!conversationId) {
+      console.warn('Selected email has no conversationId');
+      return;
+    }
+
+    try {
+      setLoadingConversation(true);
+      setConversationThreadDialogOpen(true);
+
+      const conversationResult = await checkEmailsByConversation(conversationId);
+
+      if (conversationResult.hasEmails && conversationResult.emails.length > 0) {
+        setConversationEmails(conversationResult.emails);
+      } else {
+        // Fallback to just the selected email if conversation fetch fails
+        setConversationEmails([selectedEmail]);
+      }
+    } catch (error) {
+      console.error('Error loading conversation thread:', error);
+      setConversationEmails([selectedEmail]);
+    } finally {
+      setLoadingConversation(false);
+    }
+  };
+
+  const handleCloseConversationThread = () => {
+    setConversationThreadDialogOpen(false);
+    setConversationEmails([]);
+  };
+
   const handleConfirmEmailSelection = async (onEmailData) => {
     if (selectedEmail && !confirmingEmail) {
       setConfirmingEmail(true);
@@ -157,27 +197,43 @@ export const useEmailDialog = () => {
         let latestEmail = selectedEmail;
         let body = selectedEmail.body?.content || selectedEmail.bodyPreview || '';
 
-        // If we have a conversationId, try to get the latest email from the conversation
+        // If we have a conversationId, try to get emails up to the selected email
         if (conversationId) {
-          console.log('Fetching latest email from conversation:', conversationId);
+          console.log('Fetching emails from conversation up to selected email:', conversationId);
 
           const conversationResult = await checkEmailsByConversation(conversationId);
 
           if (conversationResult.hasEmails && conversationResult.emails.length > 0) {
-            const sortedEmails = conversationResult.emails.sort((a, b) => {
+            const selectedEmailDate = new Date(selectedEmail.receivedDateTime || selectedEmail.sentDateTime || 0);
+
+            // Filter emails: only keep emails that are older than or equal to the selected email
+            const filteredEmails = conversationResult.emails.filter(email => {
+              const emailDate = new Date(email.receivedDateTime || email.sentDateTime || 0);
+              return emailDate <= selectedEmailDate;
+            });
+
+            // Sort by date descending (newest first)
+            const sortedEmails = filteredEmails.sort((a, b) => {
               const dateA = new Date(a.receivedDateTime || a.sentDateTime || 0);
               const dateB = new Date(b.receivedDateTime || b.sentDateTime || 0);
               return dateB - dateA;
             });
 
-            latestEmail = sortedEmails[0];
-            body = latestEmail.body?.content || latestEmail.bodyPreview || '';
+            // Take the latest email from the filtered list
+            if (sortedEmails.length > 0) {
+              latestEmail = sortedEmails[0];
+              body = latestEmail.body?.content || latestEmail.bodyPreview || '';
 
-            console.log('Using latest email from conversation:', {
-              subject: latestEmail.subject,
-              receivedDateTime: latestEmail.receivedDateTime,
-              isDifferentFromSelected: latestEmail.id !== selectedEmail.id
-            });
+              console.log('Using latest email from filtered conversation:', {
+                subject: latestEmail.subject,
+                receivedDateTime: latestEmail.receivedDateTime,
+                totalEmailsInConversation: conversationResult.emails.length,
+                filteredEmailsCount: filteredEmails.length,
+                isDifferentFromSelected: latestEmail.id !== selectedEmail.id
+              });
+            } else {
+              console.log('No emails found after filtering, using selected email');
+            }
           } else {
             console.log('No emails found in conversation, using selected email');
           }
@@ -302,7 +358,10 @@ export const useEmailDialog = () => {
     foldersLoading,
     selectedFolderId,
     confirmingEmail,
-    
+    conversationThreadDialogOpen,
+    conversationEmails,
+    loadingConversation,
+
     // State setters (for direct manipulation when needed)
     setEmailDialogOpen,
     setEmails,
@@ -318,7 +377,10 @@ export const useEmailDialog = () => {
     setFoldersLoading,
     setSelectedFolderId,
     setConfirmingEmail,
-    
+    setConversationThreadDialogOpen,
+    setConversationEmails,
+    setLoadingConversation,
+
     // Actions
     loadEmailsForActivityCreation,
     loadMoreEmails,
@@ -329,6 +391,8 @@ export const useEmailDialog = () => {
     handleFolderSelect,
     handleConfirmEmailSelection,
     resetEmailDialog,
+    handleOpenConversationThread,
+    handleCloseConversationThread,
   };
 };
 
