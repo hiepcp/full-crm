@@ -157,7 +157,10 @@ public class NotificationController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting notification {Id}", id);
+            var safeId = id?.Replace(Environment.NewLine, string.Empty)
+                            .Replace("\n", string.Empty)
+                            .Replace("\r", string.Empty);
+            _logger.LogError(ex, "Error deleting notification {Id}", safeId);
             return StatusCode(500, ApiResponse<bool>.Fail("Failed to delete notification"));
         }
     }
