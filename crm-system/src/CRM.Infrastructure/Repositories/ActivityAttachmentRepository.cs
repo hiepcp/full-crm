@@ -10,6 +10,32 @@ namespace CRMSys.Infrastructure.Repositories
 {
     public class ActivityAttachmentRepository : DapperRepository<ActivityAttachment, long>, IActivityAttachmentRepository
     {
+        private static string BuildOrderClause(string? orderBy)
+        {
+            // Define allowed sort options mapped to concrete SQL clauses.
+            // Extend this map as needed when adding new sortable fields.
+            var allowedOrderings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "Id", "Id ASC" },
+                { "-Id", "Id DESC" },
+                // Example additional fields (uncomment / adjust if these columns exist):
+                // { "CreatedOn", "CreatedOn ASC" },
+                // { "-CreatedOn", "CreatedOn DESC" },
+                // { "ActivityId", "ActivityId ASC" },
+                // { "-ActivityId", "ActivityId DESC" },
+            };
+
+            var key = string.IsNullOrWhiteSpace(orderBy) ? "-Id" : orderBy.Trim();
+
+            if (allowedOrderings.TryGetValue(key, out var clause))
+            {
+                return clause;
+            }
+
+            // Fallback to a safe default if the client sends an unexpected value.
+            return "Id DESC";
+        }
+
         public ActivityAttachmentRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
@@ -52,8 +78,7 @@ namespace CRMSys.Infrastructure.Repositories
             sql += string.Join("", whereClauses);
             countSql += string.Join("", whereClauses);
 
-            var orderBy = !string.IsNullOrEmpty(query.OrderBy) ? query.OrderBy : "-Id";
-            var orderClause = orderBy.StartsWith('-') ? $"{orderBy[1..]} DESC" : $"{orderBy} ASC";
+            var orderClause = BuildOrderClause(query.OrderBy);
             sql += $" ORDER BY {orderClause}";
 
             sql += " LIMIT @PageSize OFFSET @Offset";
