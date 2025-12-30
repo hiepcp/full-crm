@@ -24,3 +24,32 @@ nuget.config
 
 # Worktrees
 .worktrees/
+
+# Frontend (React/Node.js)
+crm-system-client/dist/
+crm-system-client/build/
+crm-system-client/coverage/
+crm-system-client/*.log
+
+# Backend (.NET/C#)
+crm-system/*/bin/
+crm-system/*/obj/
+crm-system/**/*.suo
+crm-system/**/*.user
+crm-system/**/userosscache
+
+# Logs
+logs/
+*.log
+
+# Editor files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+*.DotSettings.user
+
+# Build outputs
+coverage/
+*.lcov
+.nyc_output/

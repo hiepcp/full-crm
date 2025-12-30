@@ -1,0 +1,1 @@
+SELECT * FROM crm_team_members WHERE team_id = @TeamId AND user_email = @UserEmail

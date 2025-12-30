@@ -1,11 +1,35 @@
 import React, { lazy } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 // project import
 import Loadable from '@presentation/components/Loadable';
 import Dashboard from '@presentation/layouts/Dashboard';
 import RouteResolver from '@app/routes/RouteResolver';
 import RouteGuard from '@app/routes/guards/RouteGuard';
+
+// Detail Pages - lazy loaded
+const CustomerDetailPage = Loadable(lazy(() => import('@presentation/pages/customer/CustomerDetail')));
+const LeadDetailPage = Loadable(lazy(() => import('@presentation/pages/lead/LeadDetail')));
+const DealDetailPage = Loadable(lazy(() => import('@presentation/pages/deal/DealDetail')));
+const ActivityDetailPage = Loadable(lazy(() => import('@presentation/pages/activity/ActivityDetail')));
+const ContactDetailPage = Loadable(lazy(() => import('@presentation/pages/contact/ContactDetail')));
+const DashboardPage = Loadable(lazy(() => import('@presentation/pages/dashboard')));
+const InboxPage = Loadable(lazy(() => import('@presentation/pages/inbox')));
+const EmailConnectPage = Loadable(lazy(() => import('@presentation/pages/email/EmailConnect')));
+const EmailOAuthCallbackPage = Loadable(lazy(() => import('@presentation/pages/auth/EmailOAuthCallback')));
+const HcmWorkerRegisterPage = Loadable(lazy(() => import('@presentation/pages/user/HcmWorkerRegister')));
+const NotificationListPage = Loadable(lazy(() => import('@presentation/pages/notifications/NotificationList')));
+const UserSaleRegistrationPage = Loadable(lazy(() => import('@presentation/pages/user/UserSaleRegistration')));
+
+// Goal Pages - lazy loaded (NEW - Phase 6, 7, 8)
+const GoalHierarchyView = Loadable(lazy(() => import('@presentation/pages/goals/GoalHierarchyView')));
+const GoalAnalytics = Loadable(lazy(() => import('@presentation/pages/goals/GoalAnalytics')));
+const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/GoalDetailPage')));
+
+// Team Pages - lazy loaded (NEW - Phase 3: User Story 2)
+const TeamListPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamList')));
+const TeamFormPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamForm')));
+const TeamMembersPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamMembers')));
 
 const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
 
@@ -33,12 +57,20 @@ const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/Goa
 const MainRoutes = {
   path: '/',
   element: <Dashboard />,
-  children: [
-    // OAuth callback should be accessible without authentication
-    {
-      path: 'auth/callback',
-      element: <EmailOAuthCallbackPage />
-    },
+       children: [
+         // NEW: Team Management (Phase 3: User Story 2)
+         {
+           path: '/teams',
+           element: <PrivateRoute><TeamListPage /></PrivateRoute>
+         },
+         {
+           path: '/teams/new',
+           element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+         },
+         {
+           path: '/teams/:id/edit',
+           element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+         },
     {
       path: '/',
       element: <PrivateRoute />,
