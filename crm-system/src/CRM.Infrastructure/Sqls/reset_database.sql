@@ -358,18 +358,18 @@ CREATE TABLE IF NOT EXISTS crm_sales_teams (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
-  created_by VARCHAR(255) NOT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_by VARCHAR(255),
-  updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NOT NULL,
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255),
+  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
 
   INDEX idx_teams_name (name),
-  INDEX idx_teams_created_by (created_by),
+  INDEX idx_teams_created_by (CreatedBy),
   UNIQUE KEY uk_teams_name (name),
   CONSTRAINT fk_teams_created_by
-    FOREIGN KEY (created_by) REFERENCES crm_user(email) ON DELETE RESTRICT,
+    FOREIGN KEY (CreatedBy) REFERENCES crm_user(email) ON DELETE RESTRICT,
   CONSTRAINT fk_teams_updated_by
-    FOREIGN KEY (updated_by) REFERENCES crm_user(email) ON DELETE SET NULL
+    FOREIGN KEY (UpdatedBy) REFERENCES crm_user(email) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS crm_team_members (
@@ -378,6 +378,10 @@ CREATE TABLE IF NOT EXISTS crm_team_members (
   user_email VARCHAR(255) NOT NULL,
   role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
   joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255),
+  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
 
   INDEX idx_members_team (team_id),
   INDEX idx_members_user (user_email),
@@ -1639,58 +1643,6 @@ SELECT CONCAT('Total records in reset database: ',
     (SELECT COUNT(*) FROM crm_notifications)
 ) AS final_summary;
 
--- Insert sample notifications (historical)
-INSERT INTO crm_notifications (
-    Id, UserId, Type, Title, Message,
-    EntityType, EntityId, IsRead, ReadAt,
-    Metadata, CreatedAt, CreatedBy
-) VALUES
--- Lead notifications
-(UUID(), 101, 'LEAD_ASSIGNED', 'New lead assigned to you', 
- 'Lead "ILVA A/S" has been assigned to you by system',
- 'lead', 1, 1, '2025-10-01 09:00:00',
- '{"leadId":1,"leadName":"ILVA A/S","assignedBy":"system@crm.com"}',
- '2025-10-01 08:30:00', 'system@crm.com'),
-
-(UUID(), 101, 'LEAD_STATUS_CHANGED', 'Lead status changed', 
- 'Lead "Hugga Design" status changed from "New" to "Qualified"',
- 'lead', 3, 1, '2025-10-02 17:00:00',
- '{"leadId":3,"leadName":"Hugga Design","oldStatus":"New","newStatus":"Qualified"}',
- '2025-09-25 10:30:00', 'sales@crm.com'),
-
--- Deal notifications
-(UUID(), 101, 'DEAL_STAGE_CHANGED', 'Deal moved to Negotiation', 
- 'Deal "ILVA A/S - Enterprise CRM Implementation" moved to Negotiation stage',
- 'deal', 401, 0, NULL,
- '{"dealId":401,"dealName":"ILVA A/S - Enterprise CRM Implementation","oldStage":"Qualification","newStage":"Negotiation"}',
- '2025-10-02 16:50:00', 'sales@crm.com'),
-
-(UUID(), 102, 'DEAL_WON', 'Congratulations! Deal won 🎉', 
- 'Deal "Scan Global Logistics - Logistics CRM Solution" has been closed won!',
- 'deal', 405, 1, '2025-10-03 09:30:00',
- '{"dealId":405,"dealName":"Scan Global Logistics - Logistics CRM Solution","amount":150000}',
- '2025-10-02 11:15:00', 'sales@crm.com'),
-
--- Follow-up reminders (examples)
-(UUID(), 103, 'FOLLOW_UP_DUE', 'Lead follow-up due today', 
- 'Follow-up is scheduled today for lead "Paul Anthony Furnishings"',
- 'lead', 4, 0, NULL,
- '{"leadId":4,"leadName":"Paul Anthony Furnishings","followUpDate":"2025-10-15","role":"owner"}',
- '2025-10-15 08:00:00', 'system@crm.com'),
-
--- Activity notifications
-(UUID(), 101, 'ACTIVITY_ASSIGNED', 'New activity assigned', 
- 'You have been assigned to activity "Meeting with ILVA team"',
- 'activity', 1, 1, '2025-10-03 10:00:00',
- '{"activityId":1,"activitySubject":"Meeting with ILVA team","activityType":"Meeting"}',
- '2025-10-03 09:00:00', 'system@crm.com'),
-
--- Mention notification
-(UUID(), 102, 'USER_MENTIONED', 'You were mentioned in a comment', 
- 'Anders Rask mentioned you in a comment on Deal "Response Vietnam"',
- 'deal', 402, 0, NULL,
- '{"dealId":402,"dealName":"Deal with Response Vietnam Co., Ltd.","mentionedBy":"Anders Rask","commentId":123}',
- '2025-10-03 14:30:00', 'anders.rask@coreone.dk');
 
 SELECT '✅ Notification tables seeded successfully!' AS status,
   (SELECT COUNT(*) FROM crm_notifications) AS total_notifications;

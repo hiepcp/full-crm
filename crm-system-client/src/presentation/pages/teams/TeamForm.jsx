@@ -26,6 +26,8 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
         name: team.name || '',
         description: team.description || ''
       });
+    } else {
+      setFormData({ name: '', description: '' });
     }
   }, [team, open]);
 

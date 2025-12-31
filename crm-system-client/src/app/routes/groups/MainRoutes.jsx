@@ -28,7 +28,7 @@ const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/Goa
 
 // Team Pages - lazy loaded (NEW - Phase 3: User Story 2)
 const TeamListPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamList')));
-const TeamFormPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamForm')));
+const TeamFormPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamFormPage')));
 const TeamMembersPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamMembers')));
 
 const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));

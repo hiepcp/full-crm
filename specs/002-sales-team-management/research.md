@@ -33,24 +33,29 @@ The sales team management feature will allow users to create and manage sales te
 **Database Schema**:
 ```sql
 CREATE TABLE crm_sales_teams (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL UNIQUE,
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
   description TEXT,
-  created_by INT NOT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_by INT,
-  updated_at DATETIME
+  CreatedBy VARCHAR(255) NOT NULL,
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255),
+  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uk_teams_name (name)
 );
 
 CREATE TABLE crm_team_members (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  team_id INT NOT NULL,
-  user_id INT NOT NULL,
+  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  team_id BIGINT NOT NULL,
+  user_email VARCHAR(255) NOT NULL,
   role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
   joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255),
+  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (team_id) REFERENCES crm_sales_teams(id) ON DELETE CASCADE,
-  FOREIGN KEY (user_id) REFERENCES crm_user(id) ON DELETE CASCADE,
-  UNIQUE KEY unique_team_user (team_id, user_id)
+  FOREIGN KEY (user_email) REFERENCES crm_user(email) ON DELETE CASCADE,
+  UNIQUE KEY uk_members_team_user (team_id, user_email)
 );
 ```
 
@@ -239,7 +244,7 @@ ADD INDEX idx_customers_team (sales_team_id);
 2. **Database Indexing**:
     - Index on `crm_sales_teams.name` for uniqueness checks and search
     - Index on `crm_team_members.team_id` for fast member lookups
-    - Index on `crm_team_members.user_id` for "find user's teams" queries
+    - Index on `crm_team_members.user_email` for "find user's teams" queries
     - Index on `crm_deal.sales_team_id` for team-based deal filtering
     - Index on `crm_customer.sales_team_id` for team-based customer filtering
 

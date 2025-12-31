@@ -13,6 +13,7 @@ namespace CRMSys.Application.Dtos.Response
         public long? CustomerId { get; set; }
         public long? OwnerId { get; set; }
         public long? LeadId { get; set; }
+        public long? SalesTeamId { get; set; }
 
         // === Deal Information ===
         public string Name { get; set; } = string.Empty;

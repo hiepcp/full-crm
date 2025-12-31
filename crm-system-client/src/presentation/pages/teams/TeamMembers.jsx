@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -27,8 +27,9 @@ import { useTeams } from '../../../app/contexts/TeamContext';
 import { TEAM_ROLES } from '../../../utils/constants';
 import TeamMemberForm from './TeamMemberForm';
 
-const TeamMembers = ({ teamId }) => {
-  const navigate = useNavigate();
+const TeamMembers = () => {
+  const { id } = useParams();
+  const teamId = Number(id);
   const {
     fetchTeamMembers,
     addTeamMember,
@@ -48,10 +49,17 @@ const TeamMembers = ({ teamId }) => {
   const [searchUser, setSearchUser] = useState('');
 
   useEffect(() => {
+    if (!Number.isFinite(teamId)) {
+      return;
+    }
     loadMembers();
   }, [teamId, pagination.page, pagination.pageSize, roleFilter]);
 
   const loadMembers = async () => {
+    if (!Number.isFinite(teamId)) {
+      setMembers([]);
+      return;
+    }
     try {
       setLoading(true);
       setError(null);
@@ -89,7 +97,8 @@ const TeamMembers = ({ teamId }) => {
 
   const confirmDelete = async () => {
     if (memberToDelete) {
-      const success = await removeTeamMember(teamId, memberToDelete.userEmail);
+      const userEmail = memberToDelete.user?.email || memberToDelete.userEmail;
+      const success = await removeTeamMember(teamId, userEmail);
       if (success) {
         setDeleteDialogOpen(false);
         setMemberToDelete(null);
@@ -105,7 +114,8 @@ const TeamMembers = ({ teamId }) => {
 
   const handleFormSave = async (memberData) => {
     if (editingMember) {
-      const success = await updateTeamMemberRole(teamId, editingMember.userEmail, memberData);
+      const userEmail = editingMember.user?.email || editingMember.userEmail;
+      const success = await updateTeamMemberRole(teamId, userEmail, memberData);
       if (success) {
         setFormOpen(false);
         setEditingMember(null);
@@ -261,7 +271,7 @@ const TeamMembers = ({ teamId }) => {
           pagination
           autoHeight
           disableColumnSelector
-          getRowId={(row) => row.userEmail}
+          getRowId={(row) => row.user?.email || row.userEmail}
           sx={{
             '& .MuiDataGrid-cell': {
               fontSize: '0.9rem'
@@ -279,7 +289,7 @@ const TeamMembers = ({ teamId }) => {
           <DialogTitle>Remove Team Member</DialogTitle>
           <DialogContent>
             <Typography>
-              Are you sure you want to remove <strong>{memberToDelete.user?.displayName || memberToDelete.userEmail}</strong> from this team?
+              Are you sure you want to remove <strong>{memberToDelete.user?.displayName || memberToDelete.user?.email || memberToDelete.userEmail}</strong> from this team?
               This action cannot be undone.
             </Typography>
           </DialogContent>
