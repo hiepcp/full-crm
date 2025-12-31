@@ -75,7 +75,6 @@ namespace CRMSys.Application.Services
             existing.Description = request.Description ?? existing.Description;
             existing.UpdatedBy = userEmail;
             existing.UpdatedOn = DateTime.UtcNow;
-            existing.UpdatedAt = DateTime.UtcNow;
 
             await _repository.UpdateAsync(existing, ct);
 
@@ -111,7 +110,7 @@ namespace CRMSys.Application.Services
                 UserId = 1,
                 User = new UserReference { Id = 1, Email = member.UserEmail, DisplayName = member.UserEmail.Split('@')[0] },
                 Role = member.Role.ToString(),
-                JoinedAt = member.JoinedAt
+                JoinedAt = member.CreatedOn
             }).ToList();
 
             return new PagedResult<TeamMemberResponse>
@@ -135,7 +134,10 @@ namespace CRMSys.Application.Services
                 TeamId = teamId,
                 UserEmail = request.UserEmail,
                 Role = request.Role,
-                JoinedAt = DateTime.UtcNow
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow,
+                CreatedBy = userEmail,
+                UpdatedBy = userEmail
             };
 
             var memberId = await _repository.AddMemberAsync(member, ct);
@@ -146,7 +148,7 @@ namespace CRMSys.Application.Services
                 UserId = 1,
                 User = new UserReference { Id = 1, Email = member.UserEmail, DisplayName = member.UserEmail.Split('@')[0] },
                 Role = member.Role.ToString(),
-                JoinedAt = member.JoinedAt
+                JoinedAt = member.CreatedOn
             };
 
             Log.Information("Team member added: MemberId {MemberId}, TeamId {TeamId}, UserEmail {UserEmail}", memberId, teamId, request.UserEmail);
@@ -199,9 +201,9 @@ namespace CRMSys.Application.Services
                 Id = team.Id,
                 Name = team.Name,
                 Description = team.Description,
-                CreatedAt = team.CreatedAt,
+                CreatedAt = team.CreatedOn,
                 CreatedBy = new UserReference { Id = 1, Email = team.CreatedBy, DisplayName = team.CreatedBy.Split('@')[0] },
-                UpdatedAt = team.UpdatedAt,
+                UpdatedAt = team.UpdatedOn,
                 UpdatedBy = team.UpdatedBy.HasValue ? new UserReference { Id = 1, Email = team.UpdatedBy, DisplayName = team.UpdatedBy.Split('@')[0] } : null,
                 MemberCount = memberCount ?? 0,
                 DealCount = dealCount ?? 0,
@@ -217,7 +219,7 @@ namespace CRMSys.Application.Services
                 UserId = 1, // TODO: Get from user service
                 User = new UserReference { Id = 1, Email = member.UserEmail, DisplayName = "User" }, // TODO: Get from user service
                 Role = member.Role.ToString(),
-                JoinedAt = member.JoinedAt
+                JoinedAt = member.CreatedOn
             };
         }
     }
