@@ -152,7 +152,6 @@ const TeamList = () => {
           </Button>
         </GridToolbar>
       </GridToolbarContainer>
-    </GridToolbarContainer>
 
       {error && (
         <Box sx={{ mb: 2 }}>

@@ -1,7 +1,7 @@
 using CRMSys.Application.Dtos.Teams;
+using CRMSys.Application.Interfaces.Repositories;
 using CRMSys.Application.Interfaces.Services;
 using CRMSys.Domain.Entities;
-using CRMSys.Infrastructure.Repositories;
 using Shared.Dapper.Models;
 using Serilog;
 using System.Text.Json;
@@ -21,7 +21,7 @@ namespace CRMSys.Application.Services
         {
             var result = await _repository.QueryAsync(query, ct);
 
-            var items = result.Items.Select(MapToTeamResponse).ToList();
+            var items = result.Items.Select(MapToTeamResponseWithoutCounts).ToList();
 
             return new PagedResult<TeamResponse>
             {
@@ -109,7 +109,7 @@ namespace CRMSys.Application.Services
                 Id = member.Id,
                 UserId = 1,
                 User = new UserReference { Id = 1, Email = member.UserEmail, DisplayName = member.UserEmail.Split('@')[0] },
-                Role = member.Role.ToString(),
+                Role = member.Role,
                 JoinedAt = member.CreatedOn
             }).ToList();
 
@@ -136,8 +136,8 @@ namespace CRMSys.Application.Services
                 Role = request.Role,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
-                CreatedBy = userEmail,
-                UpdatedBy = userEmail
+                CreatedBy = "system",
+                UpdatedBy = "system"
             };
 
             var memberId = await _repository.AddMemberAsync(member, ct);
@@ -147,7 +147,7 @@ namespace CRMSys.Application.Services
                 Id = memberId,
                 UserId = 1,
                 User = new UserReference { Id = 1, Email = member.UserEmail, DisplayName = member.UserEmail.Split('@')[0] },
-                Role = member.Role.ToString(),
+                Role = member.Role,
                 JoinedAt = member.CreatedOn
             };
 
@@ -166,16 +166,10 @@ namespace CRMSys.Application.Services
             }
 
             member.Role = request.Role;
-            await _repository.UpdateAsync(member, ct);
+            var success = await _repository.UpdateMemberRoleAsync(teamId, userEmail, member, ct);
 
             Log.Information("Team member role updated: TeamId {TeamId}, UserEmail {UserEmail}, NewRole {Role}", teamId, userEmail, request.Role);
 
-            return true;
-        }
-
-        public async Task<bool> UpdateMemberRoleAsync(long teamId, string userEmail, UpdateTeamMemberRequest request, CancellationToken ct = default)
-        {
-            var success = await _repository.UpdateMemberRoleAsync(teamId, userEmail, new TeamMember { Role = request.Role }, ct);
             return success;
         }
 
@@ -204,10 +198,27 @@ namespace CRMSys.Application.Services
                 CreatedAt = team.CreatedOn,
                 CreatedBy = new UserReference { Id = 1, Email = team.CreatedBy, DisplayName = team.CreatedBy.Split('@')[0] },
                 UpdatedAt = team.UpdatedOn,
-                UpdatedBy = team.UpdatedBy.HasValue ? new UserReference { Id = 1, Email = team.UpdatedBy, DisplayName = team.UpdatedBy.Split('@')[0] } : null,
+                UpdatedBy = !string.IsNullOrEmpty(team.UpdatedBy) ? new UserReference { Id = 1, Email = team.UpdatedBy, DisplayName = team.UpdatedBy.Split('@')[0] } : null,
                 MemberCount = memberCount ?? 0,
                 DealCount = dealCount ?? 0,
                 CustomerCount = customerCount ?? 0
+            };
+        }
+
+        private TeamResponse MapToTeamResponseWithoutCounts(SalesTeam team)
+        {
+            return new TeamResponse
+            {
+                Id = team.Id,
+                Name = team.Name,
+                Description = team.Description,
+                CreatedAt = team.CreatedOn,
+                CreatedBy = new UserReference { Id = 1, Email = team.CreatedBy, DisplayName = team.CreatedBy.Split('@')[0] },
+                UpdatedAt = team.UpdatedOn,
+                UpdatedBy = !string.IsNullOrEmpty(team.UpdatedBy) ? new UserReference { Id = 1, Email = team.UpdatedBy, DisplayName = team.UpdatedBy.Split('@')[0] } : null,
+                MemberCount = 0,
+                DealCount = 0,
+                CustomerCount = 0
             };
         }
 
@@ -218,7 +229,7 @@ namespace CRMSys.Application.Services
                 Id = member.Id,
                 UserId = 1, // TODO: Get from user service
                 User = new UserReference { Id = 1, Email = member.UserEmail, DisplayName = "User" }, // TODO: Get from user service
-                Role = member.Role.ToString(),
+                Role = member.Role,
                 JoinedAt = member.CreatedOn
             };
         }

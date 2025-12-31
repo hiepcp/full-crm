@@ -310,7 +310,7 @@ export const DealFormConfigWrapper = () => {
 
   const config = {
     ...DealFormConfig,
-    sections: DealFormConfig.sections.map(section => {
+    sections: DealFormConfig.sections.map(section => ({
       ...section,
       fields: section.fields.map(field => {
         if (field.name === 'contactSelection') {
@@ -375,111 +375,6 @@ export const DealFormConfigWrapper = () => {
               return allOptions;
             }
           };
-
-        if (field.name === 'customerSelection') {
-          return {
-            ...field,
-            options: (formData) => {
-              const baseOptions = []; // No create-new option since canCreate.customer is false
-
-              // Always include the current selected value (fallback even if not in dataset)
-              let additionalOptions = [];
-              if (formData?.customerSelection && formData.customerSelection !== 'create_new') {
-                const currentCustomer = customers.find(c => c.id.toString() === formData.customerSelection);
-                const label = currentCustomer
-                  ? `${currentCustomer.name} (${currentCustomer.domain})`
-                  : `Selected Customer (#${formData.customerSelection})`;
-                additionalOptions = [{
-                  value: formData.customerSelection.toString(),
-                  label
-                }];
-              }
-
-              if (customersLoading) {
-                return [
-                  ...baseOptions,
-                  ...additionalOptions,
-                  { value: '', label: 'Loading customers...', disabled: true }
-                ];
-              }
-
-              if (customersError) {
-                return [
-                  ...baseOptions,
-                  ...additionalOptions,
-                  { value: '', label: 'Failed to load customers', disabled: true }
-                ];
-              }
-
-              const customerOptions = getCustomerOptions(customers);
-              // Remove duplicate if current selection is already in customerOptions
-              const filteredCustomerOptions = additionalOptions.length > 0
-                ? customerOptions.filter(option => option.value !== additionalOptions[0].value)
-                : customerOptions;
-
-              const allOptions = [
-                ...baseOptions,
-                ...additionalOptions,
-                ...filteredCustomerOptions
-              ];
-
-              return allOptions;
-            }
-          };
-
-        if (field.name === 'teamId') {
-          return {
-            ...field,
-            options: (formData) => {
-              if (teamsLoading) {
-                return [
-                  { value: '', label: 'Loading teams...', disabled: true }
-                ];
-              }
-
-              if (teamsError) {
-                return [
-                  { value: '', label: 'Failed to load teams', disabled: true }
-                ];
-              }
-
-              const teamOptions = teams.map(team => ({
-                value: team.id.toString(),
-                label: team.name
-              }));
-
-              return teamOptions;
-            }
-          };
-
-        if (field.name === 'ownerId') {
-          return {
-            ...field,
-            options: (formData) => {
-              if (usersLoading) {
-                return [
-                  { value: '', label: 'Loading users...', disabled: true }
-                ];
-              }
-
-              if (usersError) {
-                return [
-                  { value: '', label: 'Failed to load users', disabled: true }
-                ];
-              }
-
-              const userOptions = getUserOptions(users);
-              return userOptions;
-            }
-          };
-
-        return field;
-      })
-    }))
-  };
-
-  return config;
-};
         }
 
         if (field.name === 'customerSelection') {
@@ -530,6 +425,32 @@ export const DealFormConfigWrapper = () => {
               ];
 
               return allOptions;
+            }
+          };
+        }
+
+        if (field.name === 'teamId') {
+          return {
+            ...field,
+            options: (formData) => {
+              if (teamsLoading) {
+                return [
+                  { value: '', label: 'Loading teams...', disabled: true }
+                ];
+              }
+
+              if (teamsError) {
+                return [
+                  { value: '', label: 'Failed to load teams', disabled: true }
+                ];
+              }
+
+              const teamOptions = teams.map(team => ({
+                value: team.id.toString(),
+                label: team.name
+              }));
+
+              return teamOptions;
             }
           };
         }
