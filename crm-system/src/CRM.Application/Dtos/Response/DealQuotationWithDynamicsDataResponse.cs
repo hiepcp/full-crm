@@ -20,3 +20,4 @@ namespace CRMSys.Application.Dtos.Response
         public decimal TotalAmount => SalesQuotationAmount ?? 0;
     }
 }
+
