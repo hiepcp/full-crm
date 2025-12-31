@@ -56,9 +56,6 @@ namespace CRMSys.Domain.Entities
 
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-
-        public long CreatedBy { get; set; }
-        public long? UpdatedBy { get; set; }
     }
 }
 ```
@@ -76,7 +73,7 @@ namespace CRMSys.Domain.Entities
         public long Id { get; set; }
 
         public long TeamId { get; set; }
-        public long UserId { get; set; }
+        public string UserEmail { get; set; } = string.Empty;
         public TeamRole Role { get; set; }
     }
 }
@@ -268,8 +265,8 @@ Implement `ISalesTeamRepository` using Dapper:
 Example SQL:
 ```sql
 -- CreateTeam.sql
-INSERT INTO crm_sales_teams (name, description, created_by, created_at)
-VALUES (@Name, @Description, @CreatedBy, NOW());
+INSERT INTO crm_sales_teams (name, description, CreatedBy, CreatedOn, UpdatedBy, UpdatedOn)
+VALUES (@Name, @Description, @CreatedBy, NOW(), @UpdatedBy, NOW());
 SELECT LAST_INSERT_ID();
 ```
 

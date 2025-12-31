@@ -92,18 +92,18 @@ CREATE TABLE crm_sales_teams (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
-  created_by VARCHAR(255) NOT NULL,
-  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_by VARCHAR(255),
-  updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NOT NULL,
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255),
+  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
 
   INDEX idx_teams_name (name),
-  INDEX idx_teams_created_by (created_by),
+  INDEX idx_teams_CreatedBy (CreatedBy),
   UNIQUE KEY uk_teams_name (name),
-  CONSTRAINT fk_teams_created_by
-    FOREIGN KEY (created_by) REFERENCES crm_user(email) ON DELETE RESTRICT,
-  CONSTRAINT fk_teams_updated_by
-    FOREIGN KEY (updated_by) REFERENCES crm_user(email) ON DELETE SET NULL
+  CONSTRAINT fk_teams_CreatedBy
+    FOREIGN KEY (CreatedBy) REFERENCES crm_user(email) ON DELETE RESTRICT,
+  CONSTRAINT fk_teams_UpdatedBy
+    FOREIGN KEY (UpdatedBy) REFERENCES crm_user(email) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
@@ -116,6 +116,10 @@ CREATE TABLE crm_team_members (
   user_email VARCHAR(255) NOT NULL,
   role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
   joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
+  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UpdatedBy VARCHAR(255),
+  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
 
   INDEX idx_members_team (team_id),
   INDEX idx_members_user (user_email),
@@ -262,7 +266,7 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 |-------|--------|---------|
 | crm_sales_teams | PRIMARY KEY (id) | Primary key, unique identification |
 | crm_sales_teams | uk_teams_name (name) | Unique name lookup, validation |
-| crm_sales_teams | idx_teams_created_by (created_by) | Query teams by creator |
+| crm_sales_teams | idx_teams_CreatedBy (CreatedBy) | Query teams by creator |
 | crm_team_members | PRIMARY KEY (id) | Primary key |
 | crm_team_members | uk_members_team_user (team_id, user_email) | Unique membership lookup |
 | crm_team_members | idx_members_team (team_id) | Query members by team |
@@ -295,7 +299,7 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 ### Business Rules
 
 1. **Team Name Uniqueness** (FR-002): Enforced by database unique constraint
-2. **Duplicate Membership Prevention** (FR-008): Enforced by unique constraint on (team_id, user_id)
+2. **Duplicate Membership Prevention** (FR-008): Enforced by unique constraint on (team_id, user_email)
 3. **Team Deletion Constraint** (FR-005): Application-level validation before deletion
 4. **Optional Team Assignment** (FR-011, FR-012): Nullable foreign keys on crm_deal/crm_customer
 
@@ -305,22 +309,22 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 
 ### SalesTeam Records
 
-| id | name | description | created_by | created_at | updated_by | updated_at |
+| id | name | description | CreatedBy | CreatedOn | UpdatedBy | UpdatedOn |
 |-----|------|-------------|------------|------------|------------|------------|
-| 1 | Enterprise Sales | Handles enterprise client deals | 10 | 2025-01-15 09:00:00 | 10 | 2025-01-15 09:00:00 |
-| 2 | SMB Sales | Focus on small and medium businesses | 15 | 2025-01-20 14:30:00 | 20 | 2025-01-25 11:15:00 |
-| 3 | Northeast Region | Northeast US sales territory | 25 | 2025-02-01 08:45:00 | NULL | NULL |
+| 1 | Enterprise Sales | Handles enterprise client deals | manager@crm.local | 2025-01-15 09:00:00 | manager@crm.local | 2025-01-15 09:00:00 |
+| 2 | SMB Sales | Focus on small and medium businesses | lead@crm.local | 2025-01-20 14:30:00 | director@crm.local | 2025-01-25 11:15:00 |
+| 3 | Northeast Region | Northeast US sales territory | admin@crm.local | 2025-02-01 08:45:00 | NULL | NULL |
 
 ### TeamMember Records
 
-| id | team_id | user_id | role | joined_at |
-|-----|---------|---------|------|-----------|
-| 1 | 1 | 100 | TeamLead | 2025-01-15 09:05:00 |
-| 2 | 1 | 101 | Member | 2025-01-16 10:20:00 |
-| 3 | 1 | 102 | Member | 2025-01-17 11:30:00 |
-| 4 | 2 | 105 | TeamLead | 2025-01-20 14:45:00 |
-| 5 | 2 | 106 | Member | 2025-01-21 09:10:00 |
-| 6 | 3 | 100 | Observer | 2025-02-01 09:00:00 |
+| id | team_id | user_email | role | joined_at | CreatedBy | CreatedOn | UpdatedBy | UpdatedOn |
+|-----|---------|------------|------|-----------|------------|------------|------------|------------|
+| 1 | 1 | alice@crm.local | TeamLead | 2025-01-15 09:05:00 | manager@crm.local | 2025-01-15 09:05:00 | NULL | NULL |
+| 2 | 1 | bob@crm.local | Member | 2025-01-16 10:20:00 | manager@crm.local | 2025-01-16 10:20:00 | NULL | NULL |
+| 3 | 1 | chris@crm.local | Member | 2025-01-17 11:30:00 | manager@crm.local | 2025-01-17 11:30:00 | NULL | NULL |
+| 4 | 2 | dana@crm.local | TeamLead | 2025-01-20 14:45:00 | lead@crm.local | 2025-01-20 14:45:00 | director@crm.local | 2025-01-25 11:15:00 |
+| 5 | 2 | eli@crm.local | Member | 2025-01-21 09:10:00 | lead@crm.local | 2025-01-21 09:10:00 | NULL | NULL |
+| 6 | 3 | alice@crm.local | Observer | 2025-02-01 09:00:00 | admin@crm.local | 2025-02-01 09:00:00 | NULL | NULL |
 
 ---
 

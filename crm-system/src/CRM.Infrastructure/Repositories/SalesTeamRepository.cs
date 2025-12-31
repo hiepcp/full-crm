@@ -47,7 +47,7 @@ namespace CRMSys.Infrastructure.Repositories
             }
             else
             {
-                sqlBuilder.OrderBy("CreatedAt DESC");
+                sqlBuilder.OrderBy("CreatedOn DESC");
             }
 
             // Execute queries
@@ -70,7 +70,7 @@ namespace CRMSys.Infrastructure.Repositories
         {
             var allowedFields = new HashSet<string>
             {
-                "id", "name", "description", "createdat", "updatedat"
+                "id", "name", "description", "createdon", "updatedon"
             };
 
             if (allowedFields.Any(x => x.Equals(orderBy, StringComparison.OrdinalIgnoreCase)))
@@ -80,16 +80,16 @@ namespace CRMSys.Infrastructure.Repositories
                     "id" => "Id",
                     "name" => "Name",
                     "description" => "Description",
-                    "createdat" => "CreatedAt",
-                    "updatedat" => "UpdatedAt",
-                    _ => "CreatedAt"
+                    "createdon" => "CreatedOn",
+                    "updatedon" => "UpdatedOn",
+                    _ => "CreatedOn"
                 };
 
                 var direction = orderDirection?.ToUpper() == "ASC" ? "ASC" : "DESC";
                 return $"{dbField} {direction}";
             }
 
-            return "CreatedAt DESC";
+            return "CreatedOn DESC";
         }
 
         public async Task<bool> IsNameUniqueAsync(string name, CancellationToken ct = default)
@@ -101,7 +101,7 @@ namespace CRMSys.Infrastructure.Repositories
 
         public async Task<int> GetMemberCountAsync(long teamId, CancellationToken ct = default)
         {
-            const string sql = "SELECT COUNT(1) FROM crm_team_members WHERE TeamId = @TeamId";
+            const string sql = "SELECT COUNT(1) FROM crm_team_members WHERE team_id = @TeamId";
             return await Connection.ExecuteScalarAsync<int>(sql, new { TeamId = teamId }, Transaction);
         }
 
@@ -118,7 +118,7 @@ namespace CRMSys.Infrastructure.Repositories
             ");
 
             // Build WHERE clause
-            sqlBuilder.Where("TeamId = @TeamId", new { TeamId = teamId });
+            sqlBuilder.Where("team_id = @TeamId", new { TeamId = teamId });
 
             if (!string.IsNullOrEmpty(query.Role))
             {
@@ -126,7 +126,7 @@ namespace CRMSys.Infrastructure.Repositories
             }
 
             // Build ORDER BY clause
-            sqlBuilder.OrderBy("JoinedAt DESC");
+            sqlBuilder.OrderBy("joined_at DESC");
 
             // Execute queries
             using var multi = await Connection.QueryMultipleAsync(
@@ -147,7 +147,7 @@ namespace CRMSys.Infrastructure.Repositories
         public async Task<long> AddMemberAsync(TeamMember member, CancellationToken ct = default)
         {
             const string sql = @"
-                INSERT INTO crm_team_members (team_id, user_email, role, created_on, updated_on, created_by, updated_by)
+                INSERT INTO crm_team_members (team_id, user_email, role, CreatedOn, UpdatedOn, CreatedBy, UpdatedBy)
                 VALUES (@TeamId, @UserEmail, @Role, @CreatedOn, @UpdatedOn, @CreatedBy, @UpdatedBy);
                 SELECT LAST_INSERT_ID()";
 
@@ -200,7 +200,7 @@ namespace CRMSys.Infrastructure.Repositories
         public async Task<long> AddAsync(SalesTeam entity, CancellationToken ct = default)
         {
             const string sql = @"
-                INSERT INTO crm_sales_teams (name, description, created_by, created_on, updated_by, updated_on)
+                INSERT INTO crm_sales_teams (name, description, CreatedBy, CreatedOn, UpdatedBy, UpdatedOn)
                 VALUES (@Name, @Description, @CreatedBy, @CreatedOn, @UpdatedBy, @UpdatedOn);
                 SELECT LAST_INSERT_ID()";
 
