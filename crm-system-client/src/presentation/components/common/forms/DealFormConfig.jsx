@@ -249,6 +249,7 @@ const createCustomerFromDialogData = (customerData) => {
     city: customerData.city,
     country: customerData.country,
     notes: customerData.notes,
+    salesTeamId: customerData.teamId ? parseInt(customerData.teamId) : null,
     createdOn: new Date().toISOString(),
     updatedOn: new Date().toISOString(),
     createdBy: 'current_user@crm.com',
@@ -288,7 +289,7 @@ export const transformDealData = (formData) => {
     ownerId: formData.ownerId ? parseInt(formData.ownerId) : null,
     customerId: customer ? customer.id : (formData.customerSelection !== 'create_new' ? formData.customerSelection : null),
     contactId: contact ? contact.id : (formData.contactSelection !== 'create_new' ? formData.contactSelection : null),
-    teamId: formData.teamId ? parseInt(formData.teamId) : null,
+    salesTeamId: formData.teamId ? parseInt(formData.teamId) : null,
   };
 
   return {

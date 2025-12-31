@@ -12,6 +12,7 @@ using Shared.AuthZ.Extensions;
 using Shared.ExternalServices;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 // C?u h�nh log
 Log.Logger = new LoggerConfiguration()
@@ -115,6 +116,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 builder.Services.AddEndpointsApiExplorer();
 

@@ -18,17 +18,15 @@ import { TEAM_ROLES } from '../../../utils/constants';
 
 const TeamMemberForm = ({ open, onClose, onSave, member }) => {
   const [formData, setFormData] = useState({
-    user_email: '',
+    userEmail: '',
     role: 'Member'
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [users, setUsers] = useState([]);
-
   useEffect(() => {
     if (member) {
       setFormData({
-        user_email: member.user_email || '',
+        userEmail: member.user?.email || member.userEmail || '',
         role: member.role || 'Member'
       });
     }
@@ -36,10 +34,10 @@ const TeamMemberForm = ({ open, onClose, onSave, member }) => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.user_email.trim()) {
-      newErrors.user_email = 'User email is required';
-    } else if (formData.user_email.length > 320) {
-      newErrors.user_email = 'Email must be 320 characters or less';
+    if (!formData.userEmail.trim()) {
+      newErrors.userEmail = 'User email is required';
+    } else if (formData.userEmail.length > 320) {
+      newErrors.userEmail = 'Email must be 320 characters or less';
     } else if (!formData.role) {
       newErrors.role = 'Role is required';
     } else if (!TEAM_ROLES.find(r => r.value === formData.role)) {
@@ -64,7 +62,7 @@ const TeamMemberForm = ({ open, onClose, onSave, member }) => {
     setIsSubmitting(true);
     try {
       await onSave({
-        user_email: formData.user_email.trim(),
+        userEmail: formData.userEmail.trim(),
         role: formData.role
       });
     } finally {
@@ -73,7 +71,7 @@ const TeamMemberForm = ({ open, onClose, onSave, member }) => {
   };
 
   const handleCancel = () => {
-    setFormData({ user_email: '', role: 'Member' });
+    setFormData({ userEmail: '', role: 'Member' });
     setErrors({});
   };
 
@@ -88,11 +86,11 @@ const TeamMemberForm = ({ open, onClose, onSave, member }) => {
                 required
                 fullWidth
                 label="User Email"
-                name="user_email"
-                value={formData.user_email}
+                name="userEmail"
+                value={formData.userEmail}
                 onChange={handleChange}
-                error={!!errors.user_email}
-                helperText={errors.user_email}
+                error={!!errors.userEmail}
+                helperText={errors.userEmail}
                 disabled={isSubmitting}
                 type="email"
               />

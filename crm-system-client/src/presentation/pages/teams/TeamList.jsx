@@ -25,7 +25,7 @@ import TeamForm from './TeamForm';
 
 const TeamList = () => {
   const navigate = useNavigate();
-  const { teams, loading, error, deleteTeam, fetchTeams } = useTeams();
+  const { teams, loading, error, deleteTeam, fetchTeams, createTeam, updateTeam } = useTeams();
   const [pagination, setPagination] = useState({ page: 1, pageSize: 50 });
   const [search, setSearch] = useState('');
   const [keyword, setKeyword] = useState('');
@@ -68,10 +68,16 @@ const TeamList = () => {
     setEditingTeam(null);
   };
 
-  const handleFormSave = () => {
-    setFormOpen(false);
-    setEditingTeam(null);
-    fetchTeams({ page: pagination.page, pageSize: pagination.pageSize, keyword });
+  const handleFormSave = async (teamData) => {
+    const success = editingTeam
+      ? await updateTeam(editingTeam.id, teamData)
+      : await createTeam(teamData);
+
+    if (success) {
+      setFormOpen(false);
+      setEditingTeam(null);
+      fetchTeams({ page: pagination.page, pageSize: pagination.pageSize, keyword });
+    }
   };
 
   const handleCreateTeam = () => {
