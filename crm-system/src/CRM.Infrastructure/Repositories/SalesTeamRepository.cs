@@ -1,18 +1,24 @@
 using CRMSys.Application.Dtos.Teams;
+using CRMSys.Application.Interfaces.Repositories;
 using CRMSys.Domain.Entities;
 using Dapper;
+using System.Data;
 using Shared.Dapper.Interfaces;
 using Shared.Dapper.Models;
-using Shared.Dapper.Repositories;
 using static Dapper.SqlBuilder;
 
 namespace CRMSys.Infrastructure.Repositories
 {
-    public class SalesTeamRepository : DapperRepository<SalesTeam, long>, ISalesTeamRepository
+    public class SalesTeamRepository : ISalesTeamRepository
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        protected IDbConnection Connection => _unitOfWork.Connection;
+        protected IDbTransaction Transaction => _unitOfWork.Transaction;
+
         public SalesTeamRepository(IUnitOfWork unitOfWork)
-            : base(unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<PagedResult<SalesTeam>> QueryAsync(QueryTeamsRequest query, CancellationToken ct = default)
@@ -141,9 +147,9 @@ namespace CRMSys.Infrastructure.Repositories
         public async Task<long> AddMemberAsync(TeamMember member, CancellationToken ct = default)
         {
             const string sql = @"
-                INSERT INTO crm_team_members (team_id, user_email, role, joined_at)
-                VALUES (@TeamId, @UserEmail, @Role, @JoinedAt);
-                SELECT LAST_INSERT_ID();";
+                INSERT INTO crm_team_members (team_id, user_email, role, created_on, updated_on, created_by, updated_by)
+                VALUES (@TeamId, @UserEmail, @Role, @CreatedOn, @UpdatedOn, @CreatedBy, @UpdatedBy);
+                SELECT LAST_INSERT_ID()";
 
             return await Connection.ExecuteScalarAsync<long>(sql, member, Transaction);
         }
@@ -166,6 +172,13 @@ namespace CRMSys.Infrastructure.Repositories
             return rowsAffected > 0;
         }
 
+        public async Task<bool> RemoveMemberAsync(long teamId, string userEmail, CancellationToken ct = default)
+        {
+            const string sql = "DELETE FROM crm_team_members WHERE team_id = @TeamId AND user_email = @UserEmail";
+            var rowsAffected = await Connection.ExecuteAsync(sql, new { TeamId = teamId, UserEmail = userEmail }, Transaction);
+            return rowsAffected > 0;
+        }
+
         public async Task<int> GetDealCountAsync(long teamId, CancellationToken ct = default)
         {
             const string sql = "SELECT COUNT(1) FROM crm_deal WHERE sales_team_id = @TeamId";
@@ -176,6 +189,51 @@ namespace CRMSys.Infrastructure.Repositories
         {
             const string sql = "SELECT COUNT(1) FROM crm_customer WHERE sales_team_id = @TeamId";
             return await Connection.ExecuteScalarAsync<int>(sql, new { TeamId = teamId }, Transaction);
+        }
+
+        public async Task<SalesTeam?> GetByIdAsync(long id, CancellationToken ct = default)
+        {
+            const string sql = "SELECT * FROM crm_sales_teams WHERE Id = @Id";
+            return await Connection.QuerySingleOrDefaultAsync<SalesTeam>(sql, new { Id = id }, Transaction);
+        }
+
+        public async Task<long> AddAsync(SalesTeam entity, CancellationToken ct = default)
+        {
+            const string sql = @"
+                INSERT INTO crm_sales_teams (name, description, created_by, created_on, updated_by, updated_on)
+                VALUES (@Name, @Description, @CreatedBy, @CreatedOn, @UpdatedBy, @UpdatedOn);
+                SELECT LAST_INSERT_ID()";
+
+            return await Connection.ExecuteScalarAsync<long>(sql, entity, Transaction);
+        }
+
+        public async Task<bool> UpdateAsync(SalesTeam entity, CancellationToken ct = default)
+        {
+            const string sql = @"
+                UPDATE crm_sales_teams
+                SET Name = @Name,
+                    Description = @Description,
+                    UpdatedBy = @UpdatedBy,
+                    UpdatedOn = @UpdatedOn
+                WHERE Id = @Id";
+
+            var rowsAffected = await Connection.ExecuteAsync(sql, new
+            {
+                entity.Id,
+                entity.Name,
+                entity.Description,
+                entity.UpdatedBy,
+                entity.UpdatedOn
+            }, Transaction);
+
+            return rowsAffected > 0;
+        }
+
+        public async Task<bool> DeleteAsync(long id, CancellationToken ct = default)
+        {
+            const string sql = "DELETE FROM crm_sales_teams WHERE Id = @Id";
+            var rowsAffected = await Connection.ExecuteAsync(sql, new { Id = id }, Transaction);
+            return rowsAffected > 0;
         }
     }
 }
