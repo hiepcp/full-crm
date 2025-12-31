@@ -536,61 +536,65 @@ const CustomerDetail = () => {
   return (
     <Box sx={{ bgcolor: theme.palette.grey.A50, minHeight: '100vh' }}>
       {/* Top Header */}
-      <Box sx={{ bgcolor: 'white', borderBottom: `1px solid ${theme.palette.grey[200]}` }}>
-        <Box sx={{ px: { xs: 2, sm: 3 }, py: 2 }}>
-          {/* Title Row */}
-          <Box sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            justifyContent: 'space-between',
-            alignItems: { xs: 'flex-start', sm: 'center' },
-            gap: 2,
-            mb: 2
-          }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
-              <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: '1rem', sm: '1.125rem' } }}>
-                {customer.name}
-                {customer.nameAlias && customer.nameAlias !== customer.name && (
-                  <Typography component="span" variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-                    ({customer.nameAlias})
+      <Card>
+        <CardContent>
+          <Box sx={{ bgcolor: 'white', borderBottom: `1px solid ${theme.palette.grey[200]` }}>
+            <Box sx={{ px: { xs: 2, sm: 3 }, py: 2 }}>
+              {/* Title Row */}
+              <Box sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                justifyContent: 'space-between',
+                alignItems: { xs: 'flex-start', sm: 'center' },
+                gap: 2,
+                mb: 2
+              }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
+                  <Typography variant="h6" sx={{ fontWeight: 600, fontSize: { xs: '1rem', sm: '1.125rem' } }}>
+                    {customer.name}
+                    {customer.nameAlias && customer.nameAlias !== customer.name && (
+                      <Typography component="span" variant="body2" color="text.secondary" sx={{ ml: 1 }}>
+                        ({customer.nameAlias})
+                      </Typography>
+                    )}
                   </Typography>
-                )}
-              </Typography>
-              <Chip
-                label="Dynamics 365"
-                size="small"
-                sx={{
-                  bgcolor: theme.palette.success.lighter,
-                  color: theme.palette.success.main,
-                  fontWeight: 500,
-                  fontSize: '0.75rem'
-                }}
-              />
-              {customer.blocked === 'Yes' && (
-                <Chip
-                  label="Blocked"
-                  size="small"
-                  color="error"
-                  sx={{ fontWeight: 500, fontSize: '0.75rem' }}
-                />
-              )}
-              <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
-                Account: {customer.accountNum}
-              </Typography>
-              {customer.dataAreaId && (
-                <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
-                  Company: {customer.dataAreaId}
-                </Typography>
-              )}
-            </Box>
-            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              <IconButton size="small" sx={{ border: `1px solid ${theme.palette.grey[300]}`, borderRadius: '4px' }}>
-                <MoreVertIcon />
-                </IconButton>
+                  <Chip
+                    label="Dynamics 365"
+                    size="small"
+                    sx={{
+                      bgcolor: theme.palette.success.lighter,
+                      color: theme.palette.success.main,
+                      fontWeight: 500,
+                      fontSize: '0.75rem'
+                    }}
+                  />
+                  {customer.blocked === 'Yes' && (
+                    <Chip
+                      label="Blocked"
+                      size="small"
+                      color="error"
+                      sx={{ fontWeight: 500, fontSize: '0.75rem' }}
+                    />
+                  )}
+                  <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
+                    Account: {customer.accountNum}
+                  </Typography>
+                  {customer.dataAreaId && (
+                    <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
+                      Company: {customer.dataAreaId}
+                    </Typography>
+                  )}
+                </Box>
+                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                  <IconButton size="small" sx={{ border: `1px solid ${theme.palette.grey[300]}`, borderRadius: '4px' }}>
+                    <MoreVertIcon />
+                  </IconButton>
+                </Box>
               </Box>
-            </Collapse>
-          </CardContent>
-        </Card>
+            </Box>
+          </Box>
+        </CardContent>
+      </Card>
 
         {/* Team Section */}
         <TeamSection
