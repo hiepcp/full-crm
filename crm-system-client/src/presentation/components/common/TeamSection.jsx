@@ -16,7 +16,7 @@ import {
   Group as TeamIcon,
   People as PeopleIcon
 } from '@mui/icons-material';
-import teamsApi from '../../infrastructure/api/teamsApi';
+import teamsApi from '../../../infrastructure/api/teamsApi';
 import CustomSnackbar from '../CustomSnackbar';
 
 const TeamSection = ({ deal, team, loading, onRefresh }) => {

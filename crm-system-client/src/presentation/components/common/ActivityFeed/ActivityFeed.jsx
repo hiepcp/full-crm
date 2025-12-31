@@ -471,7 +471,7 @@ const ActivityFeed = ({
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
       list = list.filter((activity) => {
-        const user = activity.created_by && getUserById ? getUserById(activity.created_by) : null;
+        const user = activity.createdBy && getUserById ? getUserById(activity.createdBy) : null;
 
         // Search in subject
         if (activity.subject?.toLowerCase().includes(query)) return true;

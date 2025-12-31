@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  DataGrid,
-  GridActionsCellItem,
-  GridToolbarContainer,
-  GridToolbar,
   TextField,
   Button,
   IconButton,
@@ -15,6 +11,7 @@ import {
   DialogContent,
   DialogActions
 } from '@mui/material';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import {
   Edit as EditIcon,
   Delete as DeleteIcon,
@@ -25,8 +22,9 @@ import TeamForm from './TeamForm';
 
 const TeamList = () => {
   const navigate = useNavigate();
-  const { teams, loading, error, deleteTeam, fetchTeams } = useTeams();
-  const [pagination, setPagination] = useState({ page: 1, pageSize: 50 });
+  const { teams, loading, error, deleteTeam, fetchTeams, createTeam, updateTeam } = useTeams();
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 50 });
+  const [rowCount, setRowCount] = useState(0);
   const [search, setSearch] = useState('');
   const [keyword, setKeyword] = useState('');
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -35,11 +33,21 @@ const TeamList = () => {
   const [editingTeam, setEditingTeam] = useState(null);
 
   useEffect(() => {
-    fetchTeams({ page: pagination.page, pageSize: pagination.pageSize, keyword });
-  }, [pagination.page, pagination.pageSize, keyword]);
+    const loadTeams = async () => {
+      const response = await fetchTeams({ 
+        page: paginationModel.page + 1, 
+        pageSize: paginationModel.pageSize, 
+        keyword 
+      });
+      if (response?.data?.totalCount !== undefined) {
+        setRowCount(response.data.totalCount);
+      }
+    };
+    loadTeams();
+  }, [paginationModel.page, paginationModel.pageSize, keyword]);
 
   const handleSearch = () => {
-    setPagination({ ...pagination, page: 1 });
+    setPaginationModel({ ...paginationModel, page: 0 });
     setKeyword(search);
   };
 
@@ -68,10 +76,23 @@ const TeamList = () => {
     setEditingTeam(null);
   };
 
-  const handleFormSave = () => {
-    setFormOpen(false);
-    setEditingTeam(null);
-    fetchTeams({ page: pagination.page, pageSize: pagination.pageSize, keyword });
+  const handleFormSave = async (teamData) => {
+    try {
+      if (editingTeam) {
+        await updateTeam(editingTeam.id, teamData);
+      } else {
+        await createTeam(teamData);
+      }
+      setFormOpen(false);
+      setEditingTeam(null);
+      await fetchTeams({ 
+        page: paginationModel.page + 1, 
+        pageSize: paginationModel.pageSize, 
+        keyword 
+      });
+    } catch (err) {
+      console.error('Error saving team:', err);
+    }
   };
 
   const handleCreateTeam = () => {
@@ -82,34 +103,49 @@ const TeamList = () => {
   const columns = [
     { field: 'name', headerName: 'Team Name', flex: 1 },
     { field: 'description', headerName: 'Description', flex: 2 },
-    { field: 'memberCount', headerName: 'Members', flex: 0.5, align: 'center' },
-    { field: 'createdAt', headerName: 'Created At', flex: 0.5, align: 'center' },
+    { 
+      field: 'memberCount', 
+      headerName: 'Members', 
+      flex: 0.5, 
+      align: 'center',
+      headerAlign: 'center'
+    },
+    { 
+      field: 'createdOn', 
+      headerName: 'Created At', 
+      flex: 1, 
+      align: 'center',
+      headerAlign: 'center',
+      valueFormatter: (params) => {
+        if (!params) return '';
+        const date = new Date(params);
+        return date.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+      }
+    },
     {
       field: 'actions',
       headerName: 'Actions',
       flex: 0.5,
       align: 'center',
-      renderCell: (params) => {
-        const team = params.row;
-        return (
-          <GridActionsCellItem>
-            <IconButton
-              aria-label="edit"
-              onClick={() => handleEdit(team)}
-              color="primary"
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              aria-label="delete"
-              onClick={() => handleDelete(team)}
-              color="error"
-            >
-              <DeleteIcon />
-            </IconButton>
-          </GridActionsCellItem>
-        );
-      }
+      type: 'actions',
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label="Edit"
+          onClick={() => handleEdit(params.row)}
+          color="primary"
+        />,
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={() => handleDelete(params.row)}
+          color="error"
+        />
+      ]
     }
   ];
 
@@ -129,29 +165,27 @@ const TeamList = () => {
         </Button>
       </Box>
 
-      <GridToolbarContainer>
-        <GridToolbar>
-          <TextField
-            placeholder="Search teams..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch();
-              }
-            }}
-            sx={{ width: 300 }}
-            size="small"
-          />
-          <Button
-            variant="outlined"
-            onClick={handleSearch}
-            disabled={!search}
-          >
-            Search
-          </Button>
-        </GridToolbar>
-      </GridToolbarContainer>
+      <Box sx={{ mb: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
+        <TextField
+          placeholder="Search teams..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
+          sx={{ width: 300 }}
+          size="small"
+        />
+        <Button
+          variant="outlined"
+          onClick={handleSearch}
+          disabled={!search}
+        >
+          Search
+        </Button>
+      </Box>
 
       {error && (
         <Box sx={{ mb: 2 }}>
@@ -163,14 +197,15 @@ const TeamList = () => {
         rows={teams}
         columns={columns}
         loading={loading}
-        pageSize={pagination.pageSize}
-        rowsPerPageOptions={[25, 50, 100]}
-        page={pagination.page}
-        onPageChange={(newPage) => setPagination({ ...pagination, page: newPage })}
-        onPageSizeChange={(newPageSize) => setPagination({ ...pagination, pageSize: newPageSize })}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        pageSizeOptions={[25, 50, 100]}
+        rowCount={rowCount}
+        paginationMode="server"
         pagination
         autoHeight
         disableColumnSelector
+        disableRowSelectionOnClick
         sx={{
           '& .MuiDataGrid-cell': {
             fontSize: '0.9rem'

@@ -47,7 +47,7 @@ namespace CRMSys.Infrastructure.Repositories
             }
             else
             {
-                sqlBuilder.OrderBy("CreatedAt DESC");
+                sqlBuilder.OrderBy("CreatedOn DESC");
             }
 
             // Execute queries
@@ -70,26 +70,26 @@ namespace CRMSys.Infrastructure.Repositories
         {
             var allowedFields = new HashSet<string>
             {
-                "id", "name", "description", "createdat", "updatedat"
+                "id", "name", "description", "createdon", "updatedon"
             };
 
             if (allowedFields.Any(x => x.Equals(orderBy, StringComparison.OrdinalIgnoreCase)))
             {
                 var dbField = orderBy.ToLower() switch
                 {
-                    "id" => "Id",
-                    "name" => "Name",
-                    "description" => "Description",
-                    "createdat" => "CreatedAt",
-                    "updatedat" => "UpdatedAt",
-                    _ => "CreatedAt"
+                    "id" => "id",
+                    "name" => "name",
+                    "description" => "description",
+                    "createdon" => "CreatedOn",
+                    "updatedon" => "UpdatedOn",
+                    _ => "CreatedOn"
                 };
 
                 var direction = orderDirection?.ToUpper() == "ASC" ? "ASC" : "DESC";
                 return $"{dbField} {direction}";
             }
 
-            return "CreatedAt DESC";
+            return "CreatedOn DESC";
         }
 
         public async Task<bool> IsNameUniqueAsync(string name, CancellationToken ct = default)
@@ -126,7 +126,7 @@ namespace CRMSys.Infrastructure.Repositories
             }
 
             // Build ORDER BY clause
-            sqlBuilder.OrderBy("JoinedAt DESC");
+            sqlBuilder.OrderBy("joined_at DESC");
 
             // Execute queries
             using var multi = await Connection.QueryMultipleAsync(

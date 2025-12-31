@@ -12,7 +12,7 @@ import {
   Paper
 } from '@mui/material';
 
-const TeamForm = ({ open, onClose, onSave, team }) => {
+const TeamForm = ({ open = false, onClose, onSave, team }) => {
   const [formData, setFormData] = useState({
     name: '',
     description: ''
@@ -68,6 +68,7 @@ const TeamForm = ({ open, onClose, onSave, team }) => {
   const handleCancel = () => {
     setFormData({ name: '', description: '' });
     setErrors({});
+    onClose();
   };
 
   return (
@@ -112,7 +113,7 @@ const TeamForm = ({ open, onClose, onSave, team }) => {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel} disabled={isSubmitting}>
+        <Button onClick={onClose} disabled={isSubmitting}>
           Cancel
         </Button>
         <Button
