@@ -2,11 +2,15 @@ using CRMSys.Domain.Entities;
 using CRMSys.Application.Dtos.Teams;
 using Shared.Dapper.Models;
 
-namespace CRMSys.Infrastructure.Repositories
+namespace CRMSys.Application.Interfaces.Repositories
 {
-    public interface ISalesTeamRepository : IRepository<SalesTeam, long>
+    public interface ISalesTeamRepository
     {
         Task<PagedResult<SalesTeam>> QueryAsync(QueryTeamsRequest query, CancellationToken ct = default);
+        Task<SalesTeam?> GetByIdAsync(long id, CancellationToken ct = default);
+        Task<long> AddAsync(SalesTeam entity, CancellationToken ct = default);
+        Task<bool> UpdateAsync(SalesTeam entity, CancellationToken ct = default);
+        Task<bool> DeleteAsync(long id, CancellationToken ct = default);
         Task<bool> IsNameUniqueAsync(string name, CancellationToken ct = default);
         Task<int> GetMemberCountAsync(long teamId, CancellationToken ct = default);
         Task<PagedResult<TeamMember>> GetTeamMembersAsync(long teamId, TeamMemberQueryRequest query, CancellationToken ct = default);
@@ -17,5 +21,4 @@ namespace CRMSys.Infrastructure.Repositories
         Task<int> GetDealCountAsync(long teamId, CancellationToken ct = default);
         Task<int> GetCustomerCountAsync(long teamId, CancellationToken ct = default);
     }
-}
 }
