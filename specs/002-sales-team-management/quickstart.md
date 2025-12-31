@@ -148,9 +148,9 @@ namespace CRMSys.Application.Validators
     {
         public TeamMemberRequestValidator()
         {
-            RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage("User ID is required")
-                .MustAsync(ValidUserAsync).WithMessage("User not found");
+            RuleFor(x => x.UserEmail)
+                .NotEmpty().WithMessage("User email is required")
+                .EmailAddress().WithMessage("Valid email is required");
 
             RuleFor(x => x.Role)
                 .IsInEnum().WithMessage("Invalid role");
@@ -318,8 +318,8 @@ Execute SQL to create new tables and add foreign keys:
 -- See data-model.md for full migration script
 CREATE TABLE crm_sales_teams (...);
 CREATE TABLE crm_team_members (...);
-ALTER TABLE crm_deal ADD COLUMN sales_team_id ...;
-ALTER TABLE crm_customer ADD COLUMN sales_team_id ...;
+ALTER TABLE crm_deal ADD COLUMN SalesTeamId ...;
+ALTER TABLE crm_customer ADD COLUMN SalesTeamId ...;
 ```
 
 ---
@@ -510,7 +510,7 @@ import TeamSelector from '../../components/teams/TeamSelector';
 <Grid item xs={12}>
   <TeamSelector
     value={formData.team}
-    onChange={(team) => setFormData({ ...formData, sales_team_id: team?.id })}
+    onChange={(team) => setFormData({ ...formData, SalesTeamId: team?.id })}
     helperText="Optional: Assign team to this deal"
   />
 </Grid>
@@ -618,7 +618,7 @@ Access at: `https://crm.local.com:3000`
 - [ ] Can assign teams to deals
 - [ ] Can assign teams to customers
 - [ ] Team displays on deal/customer details
-- [ ] Team deletion sets team_id to NULL on deals/customers
+- [ ] Team deletion sets SalesTeamId to NULL on deals/customers
 
 ---
 
@@ -651,7 +651,7 @@ Access at: `https://crm.local.com:3000`
 - Verify teams are loaded from API
 
 **Team assignment not saving**:
-- Check form data includes `sales_team_id`
+- Check form data includes `SalesTeamId`
 - Verify deal/customer forms include TeamSelector component
 - Check API response for errors
 

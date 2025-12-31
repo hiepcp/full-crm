@@ -42,8 +42,8 @@
 
 - [X] T005 Execute SQL migration to create crm_sales_teams table in crm-system database
 - [X] T006 Execute SQL migration to create crm_team_members table in crm-system database
-- [X] T007 Execute SQL migration to add sales_team_id column to crm_deal table in crm-system database
-- [X] T008 Execute SQL migration to add sales_team_id column to crm_customer table in crm-system database
+- [X] T007 Execute SQL migration to add SalesTeamId column to crm_deal table in crm-system database
+- [X] T008 Execute SQL migration to add SalesTeamId column to crm_customer table in crm-system database
 
 ### Backend: Domain Layer
 

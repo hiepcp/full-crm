@@ -101,7 +101,7 @@ namespace CRMSys.Infrastructure.Repositories
 
         public async Task<int> GetMemberCountAsync(long teamId, CancellationToken ct = default)
         {
-            const string sql = "SELECT COUNT(1) FROM crm_team_members WHERE team_id = @TeamId";
+            const string sql = "SELECT COUNT(1) FROM crm_team_members WHERE TeamId = @TeamId";
             return await Connection.ExecuteScalarAsync<int>(sql, new { TeamId = teamId }, Transaction);
         }
 
@@ -118,7 +118,7 @@ namespace CRMSys.Infrastructure.Repositories
             ");
 
             // Build WHERE clause
-            sqlBuilder.Where("team_id = @TeamId", new { TeamId = teamId });
+            sqlBuilder.Where("TeamId = @TeamId", new { TeamId = teamId });
 
             if (!string.IsNullOrEmpty(query.Role))
             {
@@ -126,7 +126,7 @@ namespace CRMSys.Infrastructure.Repositories
             }
 
             // Build ORDER BY clause
-            sqlBuilder.OrderBy("joined_at DESC");
+            sqlBuilder.OrderBy("JoinedAt DESC");
 
             // Execute queries
             using var multi = await Connection.QueryMultipleAsync(
@@ -147,7 +147,7 @@ namespace CRMSys.Infrastructure.Repositories
         public async Task<long> AddMemberAsync(TeamMember member, CancellationToken ct = default)
         {
             const string sql = @"
-                INSERT INTO crm_team_members (team_id, user_email, role, CreatedOn, UpdatedOn, CreatedBy, UpdatedBy)
+                INSERT INTO crm_team_members (TeamId, UserEmail, role, CreatedOn, UpdatedOn, CreatedBy, UpdatedBy)
                 VALUES (@TeamId, @UserEmail, @Role, @CreatedOn, @UpdatedOn, @CreatedBy, @UpdatedBy);
                 SELECT LAST_INSERT_ID()";
 
@@ -156,7 +156,7 @@ namespace CRMSys.Infrastructure.Repositories
 
         public async Task<TeamMember?> GetTeamMemberAsync(long teamId, string userEmail, CancellationToken ct = default)
         {
-            const string sql = "SELECT * FROM crm_team_members WHERE team_id = @TeamId AND user_email = @UserEmail";
+            const string sql = "SELECT * FROM crm_team_members WHERE TeamId = @TeamId AND UserEmail = @UserEmail";
             return await Connection.QuerySingleOrDefaultAsync<TeamMember>(
                 sql, new { TeamId = teamId, UserEmail = userEmail }, Transaction);
         }
@@ -166,7 +166,7 @@ namespace CRMSys.Infrastructure.Repositories
             const string sql = @"
                 UPDATE crm_team_members
                 SET role = @Role
-                WHERE team_id = @TeamId AND user_email = @UserEmail";
+                WHERE TeamId = @TeamId AND UserEmail = @UserEmail";
 
             var rowsAffected = await Connection.ExecuteAsync(sql, new { teamId = teamId, UserEmail = userEmail, Role = member.Role }, Transaction);
             return rowsAffected > 0;
@@ -174,20 +174,20 @@ namespace CRMSys.Infrastructure.Repositories
 
         public async Task<bool> RemoveMemberAsync(long teamId, string userEmail, CancellationToken ct = default)
         {
-            const string sql = "DELETE FROM crm_team_members WHERE team_id = @TeamId AND user_email = @UserEmail";
+            const string sql = "DELETE FROM crm_team_members WHERE TeamId = @TeamId AND UserEmail = @UserEmail";
             var rowsAffected = await Connection.ExecuteAsync(sql, new { TeamId = teamId, UserEmail = userEmail }, Transaction);
             return rowsAffected > 0;
         }
 
         public async Task<int> GetDealCountAsync(long teamId, CancellationToken ct = default)
         {
-            const string sql = "SELECT COUNT(1) FROM crm_deal WHERE sales_team_id = @TeamId";
+            const string sql = "SELECT COUNT(1) FROM crm_deal WHERE SalesTeamId = @TeamId";
             return await Connection.ExecuteScalarAsync<int>(sql, new { TeamId = teamId }, Transaction);
         }
 
         public async Task<int> GetCustomerCountAsync(long teamId, CancellationToken ct = default)
         {
-            const string sql = "SELECT COUNT(1) FROM crm_customer WHERE sales_team_id = @TeamId";
+            const string sql = "SELECT COUNT(1) FROM crm_customer WHERE SalesTeamId = @TeamId";
             return await Connection.ExecuteScalarAsync<int>(sql, new { TeamId = teamId }, Transaction);
         }
 

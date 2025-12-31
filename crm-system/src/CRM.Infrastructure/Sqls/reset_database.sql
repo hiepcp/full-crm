@@ -308,7 +308,7 @@ CREATE TABLE IF NOT EXISTS crm_customer (
   PaymentTerms VARCHAR(100) NULL,
   DeliveryTerms VARCHAR(200) NULL,
   ContactPerson VARCHAR(255) NULL,
-  sales_team_id BIGINT NULL,
+  SalesTeamId BIGINT NULL,
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NULL,
   UpdatedOn DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS crm_customer (
   INDEX idx_crm_customer_industry (Industry),
   INDEX idx_crm_customer_createdOn (CreatedOn),
   INDEX idx_crm_customer_updatedOn (UpdatedOn),
-  INDEX idx_crm_customer_sales_team_id (sales_team_id)
+  INDEX idx_crm_customer_sales_team_id (SalesTeamId)
 );
 
 -- 3b. Customer address table (supports multiple address types per customer)
@@ -366,30 +366,25 @@ CREATE TABLE IF NOT EXISTS crm_sales_teams (
   INDEX idx_teams_name (name),
   INDEX idx_teams_created_by (CreatedBy),
   UNIQUE KEY uk_teams_name (name),
-  CONSTRAINT fk_teams_created_by
-    FOREIGN KEY (CreatedBy) REFERENCES crm_user(email) ON DELETE RESTRICT,
-  CONSTRAINT fk_teams_updated_by
-    FOREIGN KEY (UpdatedBy) REFERENCES crm_user(email) ON DELETE SET NULL
+  -- Removed FK to crm_user (email) by request
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS crm_team_members (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  team_id BIGINT NOT NULL,
-  user_email VARCHAR(255) NOT NULL,
+  TeamId BIGINT NOT NULL,
+  UserEmail VARCHAR(255) NOT NULL,
   role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
-  joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  JoinedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UpdatedBy VARCHAR(255),
   UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
 
-  INDEX idx_members_team (team_id),
-  INDEX idx_members_user (user_email),
-  UNIQUE KEY uk_members_team_user (team_id, user_email),
+  INDEX idx_members_team (TeamId),
+  INDEX idx_members_user (UserEmail),
+  UNIQUE KEY uk_members_team_user (TeamId, UserEmail),
   CONSTRAINT fk_members_team
-    FOREIGN KEY (team_id) REFERENCES crm_sales_teams(id) ON DELETE CASCADE,
-  CONSTRAINT fk_members_user
-    FOREIGN KEY (user_email) REFERENCES crm_user(email) ON DELETE CASCADE
+    FOREIGN KEY (TeamId) REFERENCES crm_sales_teams(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 4. Contact table
@@ -437,7 +432,7 @@ CREATE TABLE IF NOT EXISTS crm_deal (
   CloseDate DATE NULL,
   ContactId BIGINT NULL,
   Note TEXT NULL,
-  sales_team_id BIGINT NULL,
+  SalesTeamId BIGINT NULL,
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NULL,
   UpdatedOn DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -452,12 +447,12 @@ CREATE TABLE IF NOT EXISTS crm_deal (
   INDEX idx_crm_deal_expectedRevenue (ExpectedRevenue),
   INDEX idx_crm_deal_createdOn (CreatedOn),
   INDEX idx_crm_deal_updatedOn (UpdatedOn),
-  INDEX idx_crm_deal_sales_team_id (sales_team_id),
+  INDEX idx_crm_deal_sales_team_id (SalesTeamId),
 
   FOREIGN KEY (CustomerId) REFERENCES crm_customer(Id) ON DELETE SET NULL,
   FOREIGN KEY (LeadId) REFERENCES crm_lead(Id) ON DELETE SET NULL,
   FOREIGN KEY (ContactId) REFERENCES crm_contact(Id) ON DELETE SET NULL,
-  FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL
+  FOREIGN KEY (SalesTeamId) REFERENCES crm_sales_teams(id) ON DELETE SET NULL
 );
 
 -- 6. Quotation table

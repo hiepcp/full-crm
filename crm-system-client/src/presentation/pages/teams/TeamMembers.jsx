@@ -14,9 +14,9 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  IconButton,
-  DataGrid
+  IconButton
 } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
 import {
   Edit as EditIcon,
   Delete as DeleteIcon,
