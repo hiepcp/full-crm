@@ -14,7 +14,7 @@ import {
   Select,
   MenuItem
 } from '@mui/material';
-import { TEAM_ROLES } from '../../../utils/teamRoles';
+import { TEAM_ROLES } from '../../../utils/constants';
 
 const TeamMemberForm = ({ open, onClose, onSave, member }) => {
   const [formData, setFormData] = useState({

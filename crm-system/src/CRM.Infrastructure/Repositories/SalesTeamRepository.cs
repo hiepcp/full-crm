@@ -177,12 +177,5 @@ namespace CRMSys.Infrastructure.Repositories
             const string sql = "SELECT COUNT(1) FROM crm_customer WHERE sales_team_id = @TeamId";
             return await Connection.ExecuteScalarAsync<int>(sql, new { TeamId = teamId }, Transaction);
         }
-
-        public async Task<TeamMember?> GetTeamMemberAsync(long teamId, string userEmail, CancellationToken ct = default)
-        {
-            const string sql = "SELECT * FROM crm_team_members WHERE team_id = @TeamId AND user_email = @UserEmail";
-            return await Connection.QuerySingleOrDefaultAsync<TeamMember>(
-                sql, new { TeamId = teamId, UserEmail = userEmail }, Transaction);
-        }
     }
 }

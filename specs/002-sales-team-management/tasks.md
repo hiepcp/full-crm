@@ -117,12 +117,12 @@
 
 ### Frontend: Infrastructure Layer - API Client
 
-- [ ] T042 [P] [US1] Create teamsApi.js in crm-system-client/src/infrastructure/api/teamsApi.js
-- [ ] T043 [P] [US1] Implement getTeams method in teamsApi.js
-- [ ] T044 [P] [US1] Implement getTeam method in teamsApi.js
-- [ ] T045 [P] [US1] Implement createTeam method in teamsApi.js
-- [ ] T046 [P] [US1] Implement updateTeam method in teamsApi.js
-- [ ] T047 [P] [US1] Implement deleteTeam method in teamsApi.js
+- [X] T042 [P] [US1] Create teamsApi.js in crm-system-client/src/infrastructure/api/teamsApi.js
+- [X] T043 [P] [US1] Implement getTeams method in teamsApi.js
+- [X] T044 [P] [US1] Implement getTeam method in teamsApi.js
+- [X] T045 [P] [US1] Implement createTeam method in teamsApi.js
+- [X] T046 [P] [US1] Implement updateTeam method in teamsApi.js
+- [X] T047 [P] [US1] Implement deleteTeam method in teamsApi.js
 
 ### Frontend: Application Layer - Context
 
@@ -136,13 +136,13 @@
 
 ### Frontend: Presentation Layer - Pages
 
-- [ ] T052 [P] [US1] Create TeamList.jsx in crm-system-client/src/presentation/pages/teams/TeamList.jsx
-- [ ] T053 [P] [US1] Implement team list DataGrid in TeamList.jsx with pagination, search, sort
-- [ ] T054 [P] [US1] Implement create team button and navigation in TeamList.jsx
-- [ ] T055 [US1] Implement edit and delete actions in TeamList.jsx
-- [ ] T056 [P] [US1] Create TeamForm.jsx in crm-system-client/src/presentation/pages/teams/TeamForm.jsx
-- [ ] T057 [P] [US1] Implement team form fields (name, description) with validation in TeamForm.jsx
-- [ ] T058 [P] [US1] Implement save and cancel actions in TeamForm.jsx (create/edit mode handling)
+- [X] T052 [P] [US1] Create TeamList.jsx in crm-system-client/src/presentation/pages/teams/TeamList.jsx
+- [X] T053 [P] [US1] Implement team list DataGrid in TeamList.jsx with pagination, search, sort
+- [X] T054 [P] [US1] Implement create team button and navigation in TeamList.jsx
+- [X] T055 [US1] Implement edit and delete actions in TeamList.jsx
+- [X] T056 [P] [US1] Create TeamForm.jsx in crm-system-client/src/presentation/pages/teams/TeamForm.jsx
+- [X] T057 [P] [US1] Implement team form fields (name, description) with validation in TeamForm.jsx
+- [X] T058 [P] [US1] Implement save and cancel actions in TeamForm.jsx (create/edit mode handling)
 
 ### Frontend: Presentation Layer - Components
 
@@ -152,7 +152,7 @@
 
 ### Frontend: Utilities
 
-- [ ] T062 [P] [US1] Add TEAM_ROLES constant to crm-system-client/src/utils/constants.js
+- [X] T062 [P] [US1] Add TEAM_ROLES constant to crm-system-client/src/utils/constants.js
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -166,41 +166,39 @@
 
 ### Backend: Application Layer - Validators
 
-- [ ] T063 [P] [US2] Create TeamMemberRequestValidator in crm-system/src/CRM.Application/Validators/TeamMemberRequestValidator.cs
+- [X] T063 [P] [US2] Create TeamMemberRequestValidator in crm-system/src/CRM.Application/Validators/TeamMemberRequestValidator.cs
 
 ### Backend: Infrastructure Layer - Repository Methods
 
-- [ ] T064 [P] [US2] Implement GetTeamMembersAsync method in SalesTeamRepository.cs
-- [ ] T065 [P] [US2] Implement AddMemberAsync method in SalesTeamRepository.cs
-- [ ] T066 [P] [US2] Implement UpdateMemberRoleAsync method in SalesTeamRepository.cs
-- [ ] T067 [P] [US2] Implement RemoveMemberAsync method in SalesTeamRepository.cs
-- [ ] T068 [P] [US2] Implement GetTeamMemberAsync method in SalesTeamRepository.cs
+- [X] T064 [P] [US2] Implement GetTeamMembersAsync method in SalesTeamRepository.cs
+- [X] T065 [P] [US2] Implement AddMemberAsync method in SalesTeamRepository.cs
+- [X] T066 [P] [US2] Implement UpdateMemberRoleAsync method in SalesTeamRepository.cs
+- [X] T067 [P] [US2] Implement RemoveMemberAsync method in SalesTeamRepository.cs
+- [X] T068 [P] [US2] Implement GetTeamMemberAsync method in SalesTeamRepository.cs
 
 ### Backend: Infrastructure Layer - SQL Queries
 
-- [ ] T069 [P] [US2] Create QueryTeamMembers.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/QueryTeamMembers.sql
-- [ ] T070 [P] [US2] Create AddTeamMember.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/AddTeamMember.sql
-- [ ] T071 [P] [US2] Create UpdateTeamMemberRole.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/UpdateTeamMemberRole.sql
-- [ ] T072 [P] [US2] Create RemoveTeamMember.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/RemoveTeamMember.sql
+- [X] T069 [P] [US2] Create QueryTeamMembers.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/QueryTeamMembers.sql
+- [X] T070 [P] [US2] Create AddTeamMember.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/AddTeamMember.sql
+- [X] T071 [P] [US2] Create UpdateTeamMemberRole.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/UpdateTeamMemberRole.sql
+- [X] T072 [P] [US2] Create RemoveTeamMember.sql in crm-system/src/CRM.Infrastructure/Sqls/Teams/RemoveTeamMember.sql
 
 ### Backend: Application Layer - Service Methods
 
-- [ ] T073 [US2] Implement GetTeamMembersAsync method in SalesTeamService.cs
-- [ ] T074 [US2] Implement AddMemberAsync method in SalesTeamService.cs (with duplicate check FR-008)
-- [ ] T075 [US2] Implement UpdateMemberRoleAsync method in SalesTeamService.cs
-- [ ] T076 [US2] Implement RemoveMemberAsync method in SalesTeamService.cs
+- [X] T073 [US2] Implement GetTeamMembersAsync method in SalesTeamService.cs
+- [X] T074 [US2] Implement AddMemberAsync method in SalesTeamService.cs (with duplicate check FR-008)
+- [X] T075 [US2] Implement UpdateMemberRoleAsync method in SalesTeamService.cs
+- [X] T076 [US2] Implement RemoveMemberAsync method in SalesTeamService.cs
 
 ### Backend: API Layer - Controller Endpoints
 
-- [ ] T077 [US2] Implement GET /api/teams/{id}/members endpoint in SalesTeamsController
-- [ ] T078 [US2] Implement POST /api/teams/{id}/members endpoint in SalesTeamsController
-- [ ] T079 [US2] Implement PUT /api/teams/{teamId}/members/{userId} endpoint in SalesTeamsController
-- [ ] T080 [US2] Implement DELETE /api/teams/{teamId}/members/{userId} endpoint in SalesTeamsController
+- [X] T077 [US2] Implement GET /api/teams/{id}/members endpoint in SalesTeamsController
+- [X] T078 [US2] Implement POST /api/teams/{id}/members endpoint in SalesTeamsController
+- [X] T079 [US2] Implement PUT /api/teams/{teamId}/members/{userId} endpoint in SalesTeamsController
+- [X] T080 [US2] Implement DELETE /api/teams/{teamId}/members/{userId} endpoint in SalesTeamsController
 
 ### Frontend: Infrastructure Layer - API Client Methods
 
-,203i,204i,205i,206i,207i,208i,209i,210i,211i s/[ ]/[X]/
-/ - [X] T081/g
 - [X] T081 [P] [US2] Implement getTeamMembers method in teamsApi.js
 - [X] T082 [P] [US2] Implement addTeamMember method in teamsApi.js
 - [X] T083 [P] [US2] Implement updateTeamMemberRole method in teamsApi.js
@@ -210,7 +208,9 @@
 - [X] T087 [P] [US2] Implement add member button in TeamMembers.jsx
 - [X] T088 [P] [US2] Implement role dropdown for each member in TeamMembers.jsx
 - [X] T089 [P] [US2] Implement remove member action in TeamMembers.jsx
-s/[ ]/[X]/
+
+### Frontend: Presentation Layer - Components
+
 - [X] T090 [P] [US2] Create TeamMemberAutocomplete.jsx in crm-system-client/src/presentation/components/teams/TeamMemberAutocomplete.jsx
 - [X] T091 [P] [US2] Implement user autocomplete with Material-UI in TeamMemberAutocomplete.jsx
 - [X] T092 [P] [US2] Implement user selection handler in TeamMemberAutocomplete.jsx (using existing /api/users endpoint)
@@ -227,7 +227,7 @@ s/[ ]/[X]/
 
 ### Backend: Application Layer - Service Updates
 
-- [ ] T093 [US3] Update GetByIdAsync method in SalesTeamService.cs to include memberCount, dealCount, customerCount
+- [X] T093 [US3] Update GetByIdAsync method in SalesTeamService.cs to include memberCount, dealCount, customerCount
 
 ### Frontend: Presentation Layer - Deal Integration
 
@@ -255,8 +255,8 @@ s/[ ]/[X]/
 
 ### Audit Logging
 
-- [ ] T104 Add audit logging to SalesTeamService.cs for all operations (FR-017)
-- [ ] T105 Ensure audit logs include UserEmail, RequestPath, RequestMethod, UserAgent
+- [X] T104 Add audit logging to SalesTeamService.cs for all operations (FR-017)
+- [X] T105 Ensure audit logs include UserEmail, RequestPath, RequestMethod, UserAgent
 
 ### Documentation
 

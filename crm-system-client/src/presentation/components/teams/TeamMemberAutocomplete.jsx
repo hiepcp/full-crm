@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Autocomplete, TextField, CircularProgress, Box } from '@mui/material';
 import { usersApi } from '../../../infrastructure/api/usersApi';
 

@@ -14,7 +14,8 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  IconButton
+  IconButton,
+  DataGrid
 } from '@mui/material';
 import {
   Edit as EditIcon,
@@ -23,16 +24,16 @@ import {
   Close as CloseIcon
 } from '@mui/icons-material';
 import { useTeams } from '../../../app/contexts/TeamContext';
-import { TEAM_ROLES } from '../../../utils/teamRoles';
+import { TEAM_ROLES } from '../../../utils/constants';
 import TeamMemberForm from './TeamMemberForm';
 
 const TeamMembers = ({ teamId }) => {
   const navigate = useNavigate();
-  const { 
-    getTeamMembers, 
-    addTeamMember, 
-    updateTeamMemberRole, 
-    removeTeamMember 
+  const {
+    fetchTeamMembers,
+    addTeamMember,
+    updateTeamMemberRole,
+    removeTeamMember
   } = useTeams();
   
   const [members, setMembers] = useState([]);
@@ -54,12 +55,12 @@ const TeamMembers = ({ teamId }) => {
     try {
       setLoading(true);
       setError(null);
-      const result = await getTeamMembers(teamId, { 
-        page: pagination.page, 
+      const result = await fetchTeamMembers(teamId, {
+        page: pagination.page,
         pageSize: pagination.pageSize,
         ...(roleFilter && { role: roleFilter })
       });
-      setMembers(result.data?.items || []);
+      setMembers(result?.items || []);
     } catch (err) {
       setError(err.message || 'Failed to load team members');
     } finally {

@@ -124,7 +124,11 @@ namespace CRMSys.Application.Services
         public async Task<TeamMemberResponse?> AddMemberAsync(long teamId, TeamMemberRequest request, CancellationToken ct = default)
         {
             var existing = await _repository.GetTeamMemberAsync(teamId, request.UserEmail, ct);
-            if (existing != null) return null;
+            if (existing != null)
+            {
+                Log.Warning("User {UserEmail} is already a member of team {TeamId}", request.UserEmail, teamId);
+                return null;
+            }
 
             var member = new TeamMember
             {
@@ -145,7 +149,26 @@ namespace CRMSys.Application.Services
                 JoinedAt = member.JoinedAt
             };
 
+            Log.Information("Team member added: MemberId {MemberId}, TeamId {TeamId}, UserEmail {UserEmail}", memberId, teamId, request.UserEmail);
+
             return teamMember;
+        }
+
+        public async Task<bool> UpdateMemberRoleAsync(long teamId, string userEmail, UpdateTeamMemberRequest request, CancellationToken ct = default)
+        {
+            var member = await _repository.GetTeamMemberAsync(teamId, userEmail, ct);
+            if (member == null)
+            {
+                Log.Warning("Team member not found: TeamId {TeamId}, UserEmail {UserEmail}", teamId, userEmail);
+                return false;
+            }
+
+            member.Role = request.Role;
+            await _repository.UpdateAsync(member, ct);
+
+            Log.Information("Team member role updated: TeamId {TeamId}, UserEmail {UserEmail}, NewRole {Role}", teamId, userEmail, request.Role);
+
+            return true;
         }
 
         public async Task<bool> UpdateMemberRoleAsync(long teamId, string userEmail, UpdateTeamMemberRequest request, CancellationToken ct = default)
@@ -156,47 +179,17 @@ namespace CRMSys.Application.Services
 
         public async Task<bool> RemoveMemberAsync(long teamId, string userEmail, CancellationToken ct = default)
         {
+            var member = await _repository.GetTeamMemberAsync(teamId, userEmail, ct);
+            if (member == null) return false;
+
             var success = await _repository.RemoveMemberAsync(teamId, userEmail, ct);
-            return success;
-        }
 
-        public async Task<TeamMemberResponse?> AddMemberAsync(long teamId, TeamMemberRequest request, CancellationToken ct = default)
-        {
-            // Check if already member
-            var existing = await _repository.GetTeamMemberAsync(teamId, request.UserEmail, ct);
-            if (existing != null) return null;
-
-            var member = new TeamMember
+            if (success)
             {
-                TeamId = teamId,
-                UserEmail = request.UserEmail,
-                Role = request.Role,
-                JoinedAt = DateTime.UtcNow
-            };
+                Log.Information("Team member removed: TeamId {TeamId}, UserEmail {UserEmail}", teamId, userEmail);
+            }
 
-            member.Id = await _repository.AddMemberAsync(member, ct);
-
-            return MapToTeamMemberResponse(member);
-        }
-
-        public async Task<bool> UpdateMemberRoleAsync(long teamId, string userEmail, UpdateTeamMemberRequest request, CancellationToken ct = default)
-        {
-            var member = await _repository.GetTeamMemberAsync(teamId, userEmail, ct);
-            if (member == null) return false;
-
-            member.Role = request.Role;
-
-            await _repository.UpdateAsync(member, ct);
-
-            return true;
-        }
-
-        public async Task<bool> RemoveMemberAsync(long teamId, string userEmail, CancellationToken ct = default)
-        {
-            var member = await _repository.GetTeamMemberAsync(teamId, userEmail, ct);
-            if (member == null) return false;
-
-            return await _repository.DeleteAsync(member.Id, ct);
+            return success;
         }
 
         private TeamResponse MapToTeamResponse(SalesTeam team, int? memberCount, int? dealCount, int? customerCount)

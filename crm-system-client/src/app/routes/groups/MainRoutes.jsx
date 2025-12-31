@@ -33,25 +33,6 @@ const TeamMembersPage = Loadable(lazy(() => import('@presentation/pages/teams/Te
 
 const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
 
-// Detail Pages - lazy loaded
-const CustomerDetailPage = Loadable(lazy(() => import('@presentation/pages/customer/CustomerDetail')));
-const LeadDetailPage = Loadable(lazy(() => import('@presentation/pages/lead/LeadDetail')));
-const DealDetailPage = Loadable(lazy(() => import('@presentation/pages/deal/DealDetail')));
-const ActivityDetailPage = Loadable(lazy(() => import('@presentation/pages/activity/ActivityDetail')));
-const ContactDetailPage = Loadable(lazy(() => import('@presentation/pages/contact/ContactDetail')));
-const DashboardPage = Loadable(lazy(() => import('@presentation/pages/dashboard')));
-const InboxPage = Loadable(lazy(() => import('@presentation/pages/inbox')));
-const EmailConnectPage = Loadable(lazy(() => import('@presentation/pages/email/EmailConnect')));
-const EmailOAuthCallbackPage = Loadable(lazy(() => import('@presentation/pages/auth/EmailOAuthCallback')));
-const HcmWorkerRegisterPage = Loadable(lazy(() => import('@presentation/pages/user/HcmWorkerRegister')));
-const NotificationListPage = Loadable(lazy(() => import('@presentation/pages/notifications/NotificationList')));
-const UserSaleRegistrationPage = Loadable(lazy(() => import('@presentation/pages/user/UserSaleRegistration')));
-
-// Goal Pages - lazy loaded (NEW - Phase 6, 7, 8)
-const GoalHierarchyView = Loadable(lazy(() => import('@presentation/pages/goals/GoalHierarchyView')));
-const GoalAnalytics = Loadable(lazy(() => import('@presentation/pages/goals/GoalAnalytics')));
-const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/GoalDetailPage')));
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -67,10 +48,14 @@ const MainRoutes = {
            path: '/teams/new',
            element: <PrivateRoute><TeamFormPage /></PrivateRoute>
          },
-         {
-           path: '/teams/:id/edit',
-           element: <PrivateRoute><TeamFormPage /></PrivateRoute>
-         },
+          {
+            path: '/teams/:id/edit',
+            element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+          },
+          {
+            path: '/teams/:id/members',
+            element: <PrivateRoute><TeamMembersPage /></PrivateRoute>
+          },
     {
       path: '/',
       element: <PrivateRoute />,
