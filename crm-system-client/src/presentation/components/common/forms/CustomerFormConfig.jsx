@@ -4,7 +4,8 @@ import {
   Email as EmailIcon,
   Phone as PhoneIcon,
   LocationOn as LocationIcon,
-  Notes as NotesIcon
+  Notes as NotesIcon,
+  Group as TeamIcon
 } from '@mui/icons-material';
 
 /**
@@ -88,6 +89,7 @@ export const CustomerFormConfig = {
     city: '',
     country: '',
     notes: '',
+    teamId: '',
   },
 
   // Form sections
@@ -151,23 +153,24 @@ export const CustomerFormConfig = {
           required: false,
           grid: { sm: 6 }
         },
-        {
-          name: 'country',
-          label: 'Country',
-          type: 'text',
-          required: false,
-          grid: { sm: 6 }
-        },
-        {
-          name: 'notes',
-          label: 'Notes',
-          type: 'textarea',
-          required: false,
-          rows: 3,
-          placeholder: 'Add any additional notes about this customer...',
-          icon: NotesIcon,
-          grid: { sm: 12 }
-        }
+         {
+           name: 'country',
+           label: 'Country',
+           type: 'text',
+           required: false,
+           grid: { sm: 6 }
+         },
+         {
+           name: 'teamId',
+           label: 'Team',
+           type: 'autocomplete',
+           required: false,
+           icon: TeamIcon,
+           helperText: 'Assign team to this customer (optional)',
+           grid: { sm: 6 }
+         }
+       ]
+     }
       ]
     }
   ],
@@ -204,6 +207,53 @@ export const transformCustomerData = (formData) => {
     createdOn: new Date().toISOString(),
     updatedOn: new Date().toISOString(),
     createdBy: 'current_user@crm.com',
-    isActive: true
+    isActive: true,
+    salesTeamId: formData.teamId ? parseInt(formData.teamId) : null
   };
+};
+
+/**
+ * CustomerFormConfigWrapper - Component wrapper to use hooks
+ * Provides dynamic team options from API
+ */
+export const CustomerFormConfigWrapper = () => {
+  const { teams, loading: teamsLoading, error: teamsError } = useTeams();
+
+  const config = {
+    ...CustomerFormConfig,
+    sections: CustomerFormConfig.sections.map(section => ({
+      ...section,
+      fields: section.fields.map(field => {
+        if (field.name === 'teamId') {
+          return {
+            ...field,
+            options: (formData) => {
+              if (teamsLoading) {
+                return [
+                  { value: '', label: 'Loading teams...', disabled: true }
+                ];
+              }
+
+              if (teamsError) {
+                return [
+                  { value: '', label: 'Failed to load teams', disabled: true }
+                ];
+              }
+
+              const teamOptions = teams.map(team => ({
+                value: team.id.toString(),
+                label: team.name
+              }));
+
+              return teamOptions;
+            }
+          };
+        }
+
+        return field;
+      })
+    }))
+  };
+
+  return config;
 };

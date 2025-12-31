@@ -1,0 +1,1 @@
+UPDATE crm_team_members SET role = @Role WHERE team_id = @TeamId AND user_email = @UserEmail

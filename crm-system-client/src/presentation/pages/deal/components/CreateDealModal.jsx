@@ -63,6 +63,7 @@ const CreateDealModal = ({
         customerId: initialData.customerId ? initialData.customerId.toString() : '',
         contactId: initialData.contactId ? initialData.contactId.toString() : '',
         ownerId: initialData.ownerId ? initialData.ownerId.toString() : '',
+        teamId: initialData.salesTeamId ? initialData.salesTeamId.toString() : '',
         customerSelection: initialData.customerId ? initialData.customerId.toString() : 'create_new',
         contactSelection: initialData.contactId ? initialData.contactId.toString() : 'create_new',
         // For edit mode, we don't recreate contact/customer unless user chooses to

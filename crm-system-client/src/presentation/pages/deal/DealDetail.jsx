@@ -19,6 +19,7 @@ import {
 import PipelineProgress from './components/PipelineProgress';
 import ActivityFeed from '../../components/common/ActivityFeed';
 import AssigneeSection from '../../components/common/AssigneeSection';
+import TeamSection from '../../components/common/TeamSection';
 import InstantDocsSection from '../../components/common/InstantDocsSection';
 import CustomSnackbar from '../../components/CustomSnackbar';
 import {
@@ -61,6 +62,10 @@ const DealDetail = () => {
   const [usersLoading, setUsersLoading] = useState(false);
   const [owner, setOwner] = useState(null);
   const [ownerLoading, setOwnerLoading] = useState(false);
+
+  // Team state
+  const [team, setTeam] = useState(null);
+  const [teamLoading, setTeamLoading] = useState(false);
 
   // Load deal data
   useEffect(() => {
@@ -135,6 +140,26 @@ const DealDetail = () => {
 
     loadOwner();
   }, [deal?.ownerId, owner]);
+
+  // Load team when deal changes
+  useEffect(() => {
+    const loadTeam = async () => {
+      if (deal?.salesTeamId && !team) {
+        try {
+          setTeamLoading(true);
+          const teamData = await teamsApi.getTeam(deal.salesTeamId);
+          setTeam(teamData.data.data);
+        } catch (error) {
+          console.error('Error loading team:', error);
+          setTeam(null);
+        } finally {
+          setTeamLoading(false);
+        }
+      }
+    };
+
+    loadTeam();
+  }, [deal?.salesTeamId, team]);
 
   // Helper function to get user by ID
   const getUserByIdSync = (userId) => {
@@ -1022,6 +1047,13 @@ const DealDetail = () => {
             relationId={dealId}
             assignees={deal.assignees}
             onRefresh={refreshDeal}
+          />
+
+          {/* Team Section */}
+          <TeamSection
+            deal={deal}
+            team={team}
+            loading={teamLoading}
           />
 
           {/* Lead Section */}

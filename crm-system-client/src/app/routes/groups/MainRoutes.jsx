@@ -1,13 +1,11 @@
 import React, { lazy } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 // project import
 import Loadable from '@presentation/components/Loadable';
 import Dashboard from '@presentation/layouts/Dashboard';
 import RouteResolver from '@app/routes/RouteResolver';
 import RouteGuard from '@app/routes/guards/RouteGuard';
-
-const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
 
 // Detail Pages - lazy loaded
 const CustomerDetailPage = Loadable(lazy(() => import('@presentation/pages/customer/CustomerDetail')));
@@ -28,17 +26,36 @@ const GoalHierarchyView = Loadable(lazy(() => import('@presentation/pages/goals/
 const GoalAnalytics = Loadable(lazy(() => import('@presentation/pages/goals/GoalAnalytics')));
 const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/GoalDetailPage')));
 
+// Team Pages - lazy loaded (NEW - Phase 3: User Story 2)
+const TeamListPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamList')));
+const TeamFormPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamForm')));
+const TeamMembersPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamMembers')));
+
+const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
   path: '/',
   element: <Dashboard />,
-  children: [
-    // OAuth callback should be accessible without authentication
-    {
-      path: 'auth/callback',
-      element: <EmailOAuthCallbackPage />
-    },
+       children: [
+         // NEW: Team Management (Phase 3: User Story 2)
+         {
+           path: '/teams',
+           element: <PrivateRoute><TeamListPage /></PrivateRoute>
+         },
+         {
+           path: '/teams/new',
+           element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+         },
+          {
+            path: '/teams/:id/edit',
+            element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+          },
+          {
+            path: '/teams/:id/members',
+            element: <PrivateRoute><TeamMembersPage /></PrivateRoute>
+          },
     {
       path: '/',
       element: <PrivateRoute />,
