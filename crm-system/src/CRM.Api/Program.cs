@@ -2,6 +2,8 @@ using CRM.Api.Extensions;
 using CRMSys.Api.Middleware;
 using CRMSys.Application;
 using CRMSys.Infrastructure;
+using CRMSys.Infrastructure.TypeHandlers;
+using CRMSys.Domain.Entities;
 using Dapper;
 using EvolveDb;
 using Microsoft.OpenApi.Models;
@@ -13,6 +15,7 @@ using Shared.AuthZ.Extensions;
 using Shared.ExternalServices;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 // C?u h�nh log
 Log.Logger = new LoggerConfiguration()
@@ -91,6 +94,9 @@ var cfg = builder.Configuration;
 SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
 DefaultTypeMap.MatchNamesWithUnderscores = true;
 
+// Register custom type handlers
+SqlMapper.AddTypeHandler(new TeamRoleTypeHandler());
+
 // Add authentication from Shared.AuthN
 builder.Services.AddResJwtAuthentication(cfg);
 
@@ -130,6 +136,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 builder.Services.AddEndpointsApiExplorer();
 
