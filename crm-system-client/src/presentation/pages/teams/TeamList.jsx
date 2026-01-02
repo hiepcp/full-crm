@@ -13,7 +13,15 @@ import {
   Paper,
   Stack
 } from '@mui/material';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridToolbarContainer,
+  GridToolbarFilterButton,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarColumnsButton
+} from '@mui/x-data-grid';
 import {
   Edit as EditIcon,
   Delete as DeleteIcon,
@@ -22,7 +30,17 @@ import {
 import { useTeams } from '../../../app/contexts/TeamContext';
 import TeamForm from './TeamForm';
 
-const TeamList = () => {
+const TeamListToolbar = () => (
+ < GridToolbarContainer>
+   < GridToolbarFilterButton />
+   < GridToolbarDensitySelector />
+   < GridToolbarColumnsButton />
+   < GridToolbarExport /> </
+ GridToolbarContainer>
+);
+
+const TeamList = () _code=>new </{
+{
   const navigate = useNavigate();
   const { teams, loading, error, deleteTeam, fetchTeams, createTeam, updateTeam } = useTeams();
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 50 });
