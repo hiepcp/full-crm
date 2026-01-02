@@ -5,9 +5,9 @@ namespace CRMSys.Application.Dtos.Teams
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedOn { get; set; }
         public UserReference? CreatedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime? UpdatedOn { get; set; }
         public UserReference? UpdatedBy { get; set; }
         public int MemberCount { get; set; }
         public int DealCount { get; set; }

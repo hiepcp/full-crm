@@ -39,22 +39,26 @@ const MainRoutes = {
   path: '/',
   element: <Dashboard />,
        children: [
+        {
+          path: 'auth/callback',
+          element: <EmailOAuthCallbackPage />
+        },
          // NEW: Team Management (Phase 3: User Story 2)
          {
            path: '/teams',
-           element: <PrivateRoute><TeamListPage /></PrivateRoute>
+           element: <TeamListPage />
          },
          {
            path: '/teams/new',
-           element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+           element: <TeamFormPage />
          },
           {
             path: '/teams/:id/edit',
-            element: <PrivateRoute><TeamFormPage /></PrivateRoute>
+            element: <TeamFormPage />
           },
           {
             path: '/teams/:id/members',
-            element: <PrivateRoute><TeamMembersPage /></PrivateRoute>
+            element: <TeamMembersPage />
           },
     {
       path: '/',

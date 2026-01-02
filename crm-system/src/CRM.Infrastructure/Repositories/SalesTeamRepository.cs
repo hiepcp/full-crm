@@ -77,9 +77,9 @@ namespace CRMSys.Infrastructure.Repositories
             {
                 var dbField = orderBy.ToLower() switch
                 {
-                    "id" => "Id",
-                    "name" => "Name",
-                    "description" => "Description",
+                    "id" => "id",
+                    "name" => "name",
+                    "description" => "description",
                     "createdon" => "CreatedOn",
                     "updatedon" => "UpdatedOn",
                     _ => "CreatedOn"

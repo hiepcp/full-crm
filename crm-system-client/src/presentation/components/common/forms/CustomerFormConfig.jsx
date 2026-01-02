@@ -7,6 +7,7 @@ import {
   Notes as NotesIcon,
   Group as TeamIcon
 } from '@mui/icons-material';
+import { useTeams } from '../../../../app/contexts/TeamContext';
 
 /**
  * Validation functions for customer form fields
@@ -171,8 +172,6 @@ export const CustomerFormConfig = {
          }
        ]
      }
-      ]
-    }
   ],
 
   // Action buttons configuration

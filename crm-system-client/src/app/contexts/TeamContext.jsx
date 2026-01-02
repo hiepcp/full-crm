@@ -21,8 +21,10 @@ export const TeamProvider = ({ children }) => {
       setError(null);
       const response = await teamsApi.getTeams(params);
       setTeams(response.data.data.items);
+      return response; // Return the full response for pagination
     } catch (err) {
       setError(err.message);
+      return null;
     } finally {
       setLoading(false);
     }
