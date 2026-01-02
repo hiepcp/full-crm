@@ -23,7 +23,7 @@ public class NotificationBuilder : INotificationBuilder
 
         return new NotificationDto
         {
-            UserId = recipient.UserId,
+            UserEmail = recipient.Email,
             Type = $"{entityType.ToUpper()}_{context.EventType}",
             Title = title,
             Message = message,

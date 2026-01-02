@@ -23,7 +23,6 @@ namespace CRMSys.Domain.Entities
 
         public string Type { get; set; } = "Customer"; // ENUM: Customer, Prospect, Partner, Supplier, Other
         public long? OwnerId { get; set; }
-        public long? SalesTeamId { get; set; }
         public string? VatNumber { get; set; }
         public string Currency { get; set; } = "USD";
         public string? Country { get; set; }

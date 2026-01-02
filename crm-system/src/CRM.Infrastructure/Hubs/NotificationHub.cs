@@ -1,8 +1,6 @@
-using CRMSys.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
-using System.Security.Claims;
 
 namespace CRMSys.Infrastructure.Hubs;
 
@@ -13,12 +11,10 @@ namespace CRMSys.Infrastructure.Hubs;
 public class NotificationHub : Hub
 {
     private readonly ILogger<NotificationHub> _logger;
-    private readonly IUserService _userService;
 
-    public NotificationHub(ILogger<NotificationHub> logger, IUserService userService)
+    public NotificationHub(ILogger<NotificationHub> logger)
     {
         _logger = logger;
-        _userService = userService;
     }
 
     public override async Task OnConnectedAsync()
@@ -44,24 +40,13 @@ public class NotificationHub : Hub
                 return;
             }
 
-            // Lookup userId from database using email
-            var user = await _userService.GetByEmailAsync(userEmail);
-            if (user == null)
-            {
-                _logger.LogWarning(
-                    "SignalR client connected with unknown email. ConnectionId={ConnectionId}, Email={Email}", 
-                    Context.ConnectionId, userEmail);
-                await base.OnConnectedAsync();
-                return;
-            }
-
-            // Add connection to user-specific group using database userId
-            var groupName = $"user_{user.Id}";
+            // Add connection to user-specific group using email directly
+            var groupName = $"user_{userEmail}";
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             
             _logger.LogInformation(
-                "SignalR client connected and added to group. ConnectionId={ConnectionId}, UserId={UserId}, GroupName={GroupName}, Email={Email}", 
-                Context.ConnectionId, user.Id, groupName, userEmail);
+                "SignalR client connected and added to group. ConnectionId={ConnectionId}, GroupName={GroupName}, Email={Email}", 
+                Context.ConnectionId, groupName, userEmail);
         }
         catch (Exception ex)
         {
@@ -83,17 +68,13 @@ public class NotificationHub : Hub
             
             if (!string.IsNullOrEmpty(userEmail))
             {
-                // Lookup userId from database
-                var user = await _userService.GetByEmailAsync(userEmail);
-                if (user != null)
-                {
-                    var groupName = $"user_{user.Id}";
-                    await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-                    
-                    _logger.LogInformation(
-                        "SignalR client disconnected. ConnectionId={ConnectionId}, UserId={UserId}, GroupName={GroupName}, Email={Email}, Exception={Exception}", 
-                        Context.ConnectionId, user.Id, groupName, userEmail, exception?.Message);
-                }
+                // Remove connection from user-specific group using email directly
+                var groupName = $"user_{userEmail}";
+                await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+                
+                _logger.LogInformation(
+                    "SignalR client disconnected. ConnectionId={ConnectionId}, GroupName={GroupName}, Email={Email}, Exception={Exception}", 
+                    Context.ConnectionId, groupName, userEmail, exception?.Message);
             }
         }
         catch (Exception ex)

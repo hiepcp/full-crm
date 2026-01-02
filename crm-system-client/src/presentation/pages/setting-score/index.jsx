@@ -28,7 +28,6 @@ import {
 import leadScoreApi from '@infrastructure/api/leadScoreApi';
 import RuleDialog from './component/RuleDialog';
 import CustomSnackbar from '@presentation/components/CustomSnackbar';
-import { clearLeadScoreRulesCache } from '@presentation/components/common/forms/LeadFormConfig';
 
 const LeadScoreManagement = () => {
   const [rules, setRules] = useState([]);

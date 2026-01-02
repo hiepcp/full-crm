@@ -1,8 +1,7 @@
+using CRM.Api.Extensions;
 using CRMSys.Api.Middleware;
 using CRMSys.Application;
 using CRMSys.Infrastructure;
-using CRMSys.Infrastructure.TypeHandlers;
-using CRMSys.Domain.Entities;
 using Dapper;
 using EvolveDb;
 using Microsoft.OpenApi.Models;
@@ -14,7 +13,6 @@ using Shared.AuthZ.Extensions;
 using Shared.ExternalServices;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 // C?u h�nh log
 Log.Logger = new LoggerConfiguration()
@@ -93,11 +91,11 @@ var cfg = builder.Configuration;
 SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
 DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-// Register custom type handlers
-SqlMapper.AddTypeHandler(new TeamRoleTypeHandler());
-
 // Add authentication from Shared.AuthN
 builder.Services.AddResJwtAuthentication(cfg);
+
+// Configure JWT to accept token from query string for SignalR
+builder.Services.AddJwtBearerSignalR();
 
 // Add authentication from Shared.AuthZ
 builder.Services.AddResAuthZ();
@@ -108,8 +106,19 @@ builder.Services.AddInfrastructure(cfg);
 // Add memory cache
 builder.Services.AddMemoryCache();
 
-// Add SignalR for real-time notifications
-builder.Services.AddSignalR();
+// Add SignalR for real-time notifications with optimized settings
+builder.Services.AddSignalR(options =>
+{
+    // Enable detailed errors in development
+    //options.EnableDetailedErrors = builder.Environment.IsDevelopment();
+    
+    // Keep connections alive (important for WebSocket)
+    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+    
+    // Increase buffer size for better performance
+    options.MaximumReceiveMessageSize = 102400; // 100 KB
+});
 
 // Add Background Services
 builder.Services.AddHostedService<CRMSys.Infrastructure.BackgroundServices.DailyFollowUpReminderService>();
@@ -121,7 +130,6 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 builder.Services.AddEndpointsApiExplorer();
 
@@ -254,6 +262,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("Spa");
+
+// Enable WebSocket support for SignalR
+// MUST be called before UseAuthentication/UseAuthorization
+app.UseWebSockets();
 
 // ValidationExceptionMiddleware d? show l?i FluentValidation
 app.UseMiddleware<ValidationExceptionMiddleware>();

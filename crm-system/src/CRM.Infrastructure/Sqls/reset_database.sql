@@ -20,8 +20,6 @@ DROP TABLE IF EXISTS crm_deal_quotation;
 DROP TABLE IF EXISTS crm_activity_participant;
 DROP TABLE IF EXISTS crm_assignee;
 DROP TABLE IF EXISTS crm_sharepoint_files;
-DROP TABLE IF EXISTS crm_team_members;
-DROP TABLE IF EXISTS crm_sales_teams;
 
 -- Drop email template tables
 DROP TABLE IF EXISTS crm_email_template_variables;
@@ -308,7 +306,6 @@ CREATE TABLE IF NOT EXISTS crm_customer (
   PaymentTerms VARCHAR(100) NULL,
   DeliveryTerms VARCHAR(200) NULL,
   ContactPerson VARCHAR(255) NULL,
-  SalesTeamId BIGINT NULL,
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NULL,
   UpdatedOn DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -322,8 +319,7 @@ CREATE TABLE IF NOT EXISTS crm_customer (
   INDEX idx_crm_customer_country (Country),
   INDEX idx_crm_customer_industry (Industry),
   INDEX idx_crm_customer_createdOn (CreatedOn),
-  INDEX idx_crm_customer_updatedOn (UpdatedOn),
-  INDEX idx_crm_customer_sales_team_id (SalesTeamId)
+  INDEX idx_crm_customer_updatedOn (UpdatedOn)
 );
 
 -- 3b. Customer address table (supports multiple address types per customer)
@@ -352,41 +348,6 @@ CREATE TABLE IF NOT EXISTS crm_customer_address (
 
   FOREIGN KEY (CustomerId) REFERENCES crm_customer(Id) ON DELETE CASCADE
 );
-
--- 3c. Sales Teams tables
-CREATE TABLE IF NOT EXISTS crm_sales_teams (
-  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  description TEXT,
-  GroupMail VARCHAR(255) NOT NULL,
-  CreatedBy VARCHAR(255) NOT NULL,
-  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UpdatedBy VARCHAR(255),
-  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
-
-  INDEX idx_teams_name (name),
-  INDEX idx_teams_created_by (CreatedBy),
-  INDEX idx_teams_group_mail (GroupMail),
-  UNIQUE KEY uk_teams_name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS crm_team_members (
-  id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  TeamId BIGINT NOT NULL,
-  UserEmail VARCHAR(255) NOT NULL,
-  Role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
-  JoinedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
-  CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UpdatedBy VARCHAR(255),
-  UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
-
-  INDEX idx_members_team (TeamId),
-  INDEX idx_members_user (UserEmail),
-  UNIQUE KEY uk_members_team_user (TeamId, UserEmail),
-  CONSTRAINT fk_members_team
-    FOREIGN KEY (TeamId) REFERENCES crm_sales_teams(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 4. Contact table
 CREATE TABLE IF NOT EXISTS crm_contact (
@@ -433,7 +394,6 @@ CREATE TABLE IF NOT EXISTS crm_deal (
   CloseDate DATE NULL,
   ContactId BIGINT NULL,
   Note TEXT NULL,
-  SalesTeamId BIGINT NULL,
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NULL,
   UpdatedOn DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -448,12 +408,10 @@ CREATE TABLE IF NOT EXISTS crm_deal (
   INDEX idx_crm_deal_expectedRevenue (ExpectedRevenue),
   INDEX idx_crm_deal_createdOn (CreatedOn),
   INDEX idx_crm_deal_updatedOn (UpdatedOn),
-  INDEX idx_crm_deal_sales_team_id (SalesTeamId),
 
   FOREIGN KEY (CustomerId) REFERENCES crm_customer(Id) ON DELETE SET NULL,
   FOREIGN KEY (LeadId) REFERENCES crm_lead(Id) ON DELETE SET NULL,
-  FOREIGN KEY (ContactId) REFERENCES crm_contact(Id) ON DELETE SET NULL,
-  FOREIGN KEY (SalesTeamId) REFERENCES crm_sales_teams(id) ON DELETE SET NULL
+  FOREIGN KEY (ContactId) REFERENCES crm_contact(Id) ON DELETE SET NULL
 );
 
 -- 6. Quotation table
@@ -761,7 +719,7 @@ CREATE TABLE IF NOT EXISTS crm_pipeline_log (
 -- 15. Notifications table
 CREATE TABLE IF NOT EXISTS crm_notifications (
   Id CHAR(36) PRIMARY KEY,
-  UserId BIGINT NOT NULL,
+  UserEmail VARCHAR(255) NOT NULL COMMENT 'Email of user receiving notification',
   Type VARCHAR(50) NOT NULL COMMENT 'LEAD_CREATED, DEAL_STAGE_CHANGED, FOLLOW_UP_DUE, etc.',
   Title VARCHAR(200) NOT NULL,
   Message VARCHAR(500) NOT NULL,
@@ -783,14 +741,13 @@ CREATE TABLE IF NOT EXISTS crm_notifications (
   UpdatedAt DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   
   -- Indexes for performance
-  INDEX idx_notifications_userId_isRead_createdAt (UserId, IsRead, CreatedAt DESC),
+  INDEX idx_notifications_userEmail_isRead_createdAt (UserEmail, IsRead, CreatedAt DESC),
   INDEX idx_notifications_entityReference (EntityType, EntityId),
   INDEX idx_notifications_type (Type),
   INDEX idx_notifications_createdAt (CreatedAt),
-  
-  FOREIGN KEY (UserId) REFERENCES crm_user(Id) ON DELETE CASCADE
+  INDEX idx_notifications_userEmail (UserEmail)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci 
-COMMENT='All notifications for users - both event-driven and scheduled';
+COMMENT='All notifications for users - uses UserEmail instead of UserId for direct SignalR group mapping';
 
 SELECT '🏗️ All CRM tables created!' AS step2_complete;
 
@@ -1639,6 +1596,58 @@ SELECT CONCAT('Total records in reset database: ',
     (SELECT COUNT(*) FROM crm_notifications)
 ) AS final_summary;
 
+-- Insert sample notifications (historical)
+INSERT INTO crm_notifications (
+    Id, UserId, Type, Title, Message,
+    EntityType, EntityId, IsRead, ReadAt,
+    Metadata, CreatedAt, CreatedBy
+) VALUES
+-- Lead notifications
+(UUID(), 101, 'LEAD_ASSIGNED', 'New lead assigned to you', 
+ 'Lead "ILVA A/S" has been assigned to you by system',
+ 'lead', 1, 1, '2025-10-01 09:00:00',
+ '{"leadId":1,"leadName":"ILVA A/S","assignedBy":"system@crm.com"}',
+ '2025-10-01 08:30:00', 'system@crm.com'),
+
+(UUID(), 101, 'LEAD_STATUS_CHANGED', 'Lead status changed', 
+ 'Lead "Hugga Design" status changed from "New" to "Qualified"',
+ 'lead', 3, 1, '2025-10-02 17:00:00',
+ '{"leadId":3,"leadName":"Hugga Design","oldStatus":"New","newStatus":"Qualified"}',
+ '2025-09-25 10:30:00', 'sales@crm.com'),
+
+-- Deal notifications
+(UUID(), 101, 'DEAL_STAGE_CHANGED', 'Deal moved to Negotiation', 
+ 'Deal "ILVA A/S - Enterprise CRM Implementation" moved to Negotiation stage',
+ 'deal', 401, 0, NULL,
+ '{"dealId":401,"dealName":"ILVA A/S - Enterprise CRM Implementation","oldStage":"Qualification","newStage":"Negotiation"}',
+ '2025-10-02 16:50:00', 'sales@crm.com'),
+
+(UUID(), 102, 'DEAL_WON', 'Congratulations! Deal won 🎉', 
+ 'Deal "Scan Global Logistics - Logistics CRM Solution" has been closed won!',
+ 'deal', 405, 1, '2025-10-03 09:30:00',
+ '{"dealId":405,"dealName":"Scan Global Logistics - Logistics CRM Solution","amount":150000}',
+ '2025-10-02 11:15:00', 'sales@crm.com'),
+
+-- Follow-up reminders (examples)
+(UUID(), 103, 'FOLLOW_UP_DUE', 'Lead follow-up due today', 
+ 'Follow-up is scheduled today for lead "Paul Anthony Furnishings"',
+ 'lead', 4, 0, NULL,
+ '{"leadId":4,"leadName":"Paul Anthony Furnishings","followUpDate":"2025-10-15","role":"owner"}',
+ '2025-10-15 08:00:00', 'system@crm.com'),
+
+-- Activity notifications
+(UUID(), 101, 'ACTIVITY_ASSIGNED', 'New activity assigned', 
+ 'You have been assigned to activity "Meeting with ILVA team"',
+ 'activity', 1, 1, '2025-10-03 10:00:00',
+ '{"activityId":1,"activitySubject":"Meeting with ILVA team","activityType":"Meeting"}',
+ '2025-10-03 09:00:00', 'system@crm.com'),
+
+-- Mention notification
+(UUID(), 102, 'USER_MENTIONED', 'You were mentioned in a comment', 
+ 'Anders Rask mentioned you in a comment on Deal "Response Vietnam"',
+ 'deal', 402, 0, NULL,
+ '{"dealId":402,"dealName":"Deal with Response Vietnam Co., Ltd.","mentionedBy":"Anders Rask","commentId":123}',
+ '2025-10-03 14:30:00', 'anders.rask@coreone.dk');
 
 SELECT '✅ Notification tables seeded successfully!' AS status,
   (SELECT COUNT(*) FROM crm_notifications) AS total_notifications;

@@ -1,5 +1,4 @@
 using CRMSys.Application.Dtos.Request;
-using CRMSys.Application.Dtos.Teams;
 using CRMSys.Application.Interfaces;
 using CRMSys.Application.Interfaces.Services;
 using CRMSys.Application.Mappings;
@@ -78,7 +77,6 @@ namespace CRMSys.Application
                 services.AddScoped<IEmailTemplateService, EmailTemplateService>();
                 services.AddScoped<IAppointmentService, AppointmentService>();
                 services.AddScoped<ILeadScoreService, LeadScoreService>();
-                services.AddScoped<ISalesTeamService, SalesTeamService>();
 
                 // Notification services
                 services.AddScoped<INotificationService, NotificationService>();
@@ -148,9 +146,6 @@ namespace CRMSys.Application
                 services.AddScoped<IValidator<CreateEmailTemplateRequest>, CreateEmailTemplateRequestValidator>();
                 services.AddScoped<IValidator<UpdateEmailTemplateRequest>, UpdateEmailTemplateRequestValidator>();
                 services.AddScoped<IValidator<ManualProgressAdjustmentRequest>, ManualProgressAdjustmentRequestValidator>();
-                services.AddScoped<IValidator<CreateTeamRequest>, CreateTeamRequestValidator>();
-                services.AddScoped<IValidator<UpdateTeamRequest>, UpdateTeamRequestValidator>();
-                services.AddScoped<IValidator<TeamMemberRequest>, TeamMemberRequestValidator>();
 
                 return services;
             }

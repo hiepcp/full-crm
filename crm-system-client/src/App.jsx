@@ -3,7 +3,6 @@ import { RouterProvider } from 'react-router-dom';
 import { RoleProfileProvider } from '@app/contexts/RoleProfileContext';
 import { EmailConnectionProvider } from '@app/contexts/EmailConnectionContext';
 import { NotificationProvider } from '@app/contexts/NotificationContext';
-import { TeamProvider } from '@app/contexts/TeamContext';
 
 // project import
 import router from '@app/routes';
@@ -23,9 +22,7 @@ export default function App() {
             <RoleProfileProvider>
               <EmailConnectionProvider>
                 <NotificationProvider>
-                  <TeamProvider>
-                    <RouterProvider router={router} />
-                  </TeamProvider>
+                  <RouterProvider router={router} />
                 </NotificationProvider>
               </EmailConnectionProvider>
             </RoleProfileProvider>

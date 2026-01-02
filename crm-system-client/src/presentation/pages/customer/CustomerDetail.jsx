@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { RestAllCRMRepository } from '@infrastructure/repositories/RestAllCRMRepository';
 import { GetCRMCustTableEntityByAccountNumUseCase } from '@application/usecases/all-crms';
+import CustomerDashboard from './CustomerDashboard';
 import {
   Box,
   Typography,
@@ -55,6 +56,7 @@ import {
 import ActivityFeed from '../../components/common/ActivityFeed';
 import CustomerAddressForm from '../../components/customerAddress/CustomerAddressForm';
 import CreateContact from '../contact/components/CreateContact';
+import CustomerActivitySection from '../../components/customer/CustomerActivitySection';
 import customerAddressesApi from '@infrastructure/api/customerAddressesApi';
 import customersApi from '@infrastructure/api/customersApi';
 import contactsApi from '@infrastructure/api/contactsApi';
@@ -102,6 +104,7 @@ const CustomerDetail = () => {
   const [leadsExpanded, setLeadsExpanded] = useState(true);
   const [contactsExpanded, setContactsExpanded] = useState(true);
   const [recentActivitiesExpanded, setRecentActivitiesExpanded] = useState(true);
+  const [activitiesTableExpanded, setActivitiesTableExpanded] = useState(false);
   const [recentActivitiesPage, setRecentActivitiesPage] = useState(1);
   const recentActivitiesPerPage = 5;
 
@@ -120,8 +123,10 @@ const CustomerDetail = () => {
   const [deals, setDeals] = useState([]);
   const [contacts, setContacts] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [leads, setLeads] = useState([]);
   const [addressesLoading, setAddressesLoading] = useState(false);
   const [dealsLoading, setDealsLoading] = useState(false);
+  const [leadsLoading, setLeadsLoading] = useState(false);
   const [contactsLoading, setContactsLoading] = useState(false);
   const [activitiesLoading, setActivitiesLoading] = useState(false);
   const [addressFormOpen, setAddressFormOpen] = useState(false);
@@ -295,11 +300,26 @@ const CustomerDetail = () => {
       }
     };
 
+    const loadLeads = async () => {
+      if (!customerId) return;
+      try {
+        setLeadsLoading(true);
+        const response = await customersApi.getLeadsByCustomer(customerId);
+        setLeads(response?.data?.data || []);
+      } catch (error) {
+        console.error('Error loading leads:', error);
+        setLeads([]);
+      } finally {
+        setLeadsLoading(false);
+      }
+    };
+
     if (customerId) {
       loadAddresses();
       loadDeals();
       loadContacts();
       loadActivities();
+      loadLeads();
     }
   }, [customerId]);
 
@@ -563,10 +583,29 @@ const CustomerDetail = () => {
               </IconButton>
             </Box>
           </Box>
+
+          {/* Tabs */}
+          <Tabs 
+            value={currentTab} 
+            onChange={handleTabChange}
+            sx={{ 
+              borderTop: `1px solid ${theme.palette.grey[200]}`,
+              mt: 2,
+              '& .MuiTab-root': {
+                textTransform: 'none',
+                fontWeight: 500,
+                fontSize: '0.95rem'
+              }
+            }}
+          >
+            <Tab label="Overview" />
+            <Tab label="Dashboard" />
+          </Tabs>
         </Box>
       </Box>
 
-      {/* Two Column Layout */}
+      {/* Tab Content - Overview */}
+      {currentTab === 0 && (
       <Box sx={{
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
@@ -1367,6 +1406,14 @@ const CustomerDetail = () => {
             )}
           />
 
+          {/* Customer Activities Table Section */}
+          <CustomerActivitySection
+            customerId={customerId}
+            customerName={customer?.name}
+            expanded={activitiesTableExpanded}
+            onExpandChange={setActivitiesTableExpanded}
+          />
+
           {/* Deals Section */}
           <Card sx={{ mt: 2, mb: 2 }}>
             <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
@@ -1811,6 +1858,20 @@ const CustomerDetail = () => {
           </Card>
         </Box>
       </Box>
+      )}
+
+      {/* Dashboard Tab */}
+      {currentTab === 1 && (
+        <Box sx={{ p: { xs: 1, sm: 2 } }}>
+          <CustomerDashboard
+            customer={customer}
+            deals={deals}
+            leads={leads}
+            activities={activities}
+            contacts={contacts}
+          />
+        </Box>
+      )}
 
       <CustomerAddressForm
         open={addressFormOpen}

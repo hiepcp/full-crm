@@ -18,39 +18,22 @@ public class NotificationController : ControllerBase
 {
     private readonly INotificationService _notificationService;
     private readonly ILogger<NotificationController> _logger;
-    private readonly IUserService _userService;
 
     /// <summary>
     /// Constructor
     /// </summary>
     public NotificationController(
         INotificationService notificationService,
-        ILogger<NotificationController> logger,
-        IUserService userService)
+        ILogger<NotificationController> logger)
     {
         _notificationService = notificationService;
         _logger = logger;
-        _userService = userService;
     }
 
-    private long GetCurrentUserId()
+    private string GetCurrentUserEmail()
     {
         var userEmail = HttpContext.Items["UserEmail"]?.ToString() ?? "system";
-        try
-        {
-            var user = _userService.GetByEmailAsync(userEmail).Result;
-            if (user == null)
-            {
-                _logger.LogWarning($"User not found for email {userEmail}");
-                throw new InvalidOperationException($"User not found for email {userEmail}");
-            }
-            return user.Id;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning($"Failed to get user {userEmail}, {ex}");
-            throw;
-        }
+        return userEmail;
     }
 
     /// <summary>
@@ -63,8 +46,8 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();
-            var notifications = await _notificationService.GetUserNotificationsAsync(userId, skip, take);
+            var userEmail = GetCurrentUserEmail();
+            var notifications = await _notificationService.GetUserNotificationsAsync(userEmail, skip, take);
 
             return Ok(ApiResponse<List<NotificationDto>>.Ok(
                 notifications,
@@ -85,8 +68,8 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();
-            var count = await _notificationService.GetUnreadCountAsync(userId);
+            var userEmail = GetCurrentUserEmail();
+            var count = await _notificationService.GetUnreadCountAsync(userEmail);
 
             return Ok(ApiResponse<int>.Ok(count, $"Unread count: {count}"));
         }
@@ -105,8 +88,8 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();
-            await _notificationService.MarkAsReadAsync(id, userId);
+            var userEmail = GetCurrentUserEmail();
+            await _notificationService.MarkAsReadAsync(id, userEmail);
 
             return Ok(ApiResponse<bool>.Ok(true, "Notification marked as read"));
         }
@@ -125,8 +108,8 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();
-            await _notificationService.MarkAllAsReadAsync(userId);
+            var userEmail = GetCurrentUserEmail();
+            await _notificationService.MarkAllAsReadAsync(userEmail);
 
             return Ok(ApiResponse<bool>.Ok(true, "All notifications marked as read"));
         }
@@ -145,8 +128,8 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();
-            var success = await _notificationService.DeleteAsync(id, userId);
+            var userEmail = GetCurrentUserEmail();
+            var success = await _notificationService.DeleteAsync(id, userEmail);
 
             if (!success)
             {
@@ -170,11 +153,10 @@ public class NotificationController : ControllerBase
     {
         try
         {
-            var userId = GetCurrentUserId();
-            var userEmail = User?.Claims.FirstOrDefault(c => c.Type == "email")?.Value ?? "system@crm.com";
+            var userEmail = GetCurrentUserEmail();
             var notification = new NotificationDto
             {
-                UserId = userId,
+                UserEmail = userEmail,
                 Type = "TEST_NOTIFICATION",
                 Title = "Test Notification",
                 Message = "This is a test notification from the CRM system",
@@ -202,8 +184,7 @@ public class NotificationController : ControllerBase
         {
             _logger.LogInformation("Manual trigger for daily follow-up reminders");
 
-            var userId = GetCurrentUserId();
-            var userEmail = HttpContext.Items["UserEmail"]?.ToString() ?? "system";
+            var userEmail = GetCurrentUserEmail();
 
             // Import necessary types
             using var scope = HttpContext.RequestServices.CreateScope();
@@ -225,7 +206,7 @@ public class NotificationController : ControllerBase
                 {
                     var notification = new NotificationDto
                     {
-                        UserId = assignment.UserId,
+                        UserEmail = assignment.UserEmail,
                         Type = "LEAD_FOLLOW_UP_DUE",
                         Title = "Lead follow-up due today",
                         Message = $"Follow-up is scheduled today for lead '{leadName}'",

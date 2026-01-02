@@ -16,7 +16,6 @@ namespace CRMSys.Application.Dtos.Request
         // === Customer Details ===
         public string? Type { get; set; }
         public long? OwnerId { get; set; }
-        public long? SalesTeamId { get; set; }
         public string? VatNumber { get; set; }
         public string? Currency { get; set; }
         public string? Country { get; set; }

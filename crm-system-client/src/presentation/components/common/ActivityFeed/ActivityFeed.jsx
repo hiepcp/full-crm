@@ -471,7 +471,7 @@ const ActivityFeed = ({
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
       list = list.filter((activity) => {
-        const user = activity.createdBy && getUserById ? getUserById(activity.createdBy) : null;
+        const user = activity.created_by && getUserById ? getUserById(activity.created_by) : null;
 
         // Search in subject
         if (activity.subject?.toLowerCase().includes(query)) return true;
@@ -646,7 +646,7 @@ const ActivityFeed = ({
   };
 
   return (
-    <Card>
+    <Card sx={{ mb: 2 }}>
       <CardContent sx={{ p: { xs: 1.5, sm: 2 } }}>
         {/* Header */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: activityFeedExpanded ? 2 : 0 }}>

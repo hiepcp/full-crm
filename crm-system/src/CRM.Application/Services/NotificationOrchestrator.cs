@@ -73,15 +73,15 @@ public class NotificationOrchestrator : INotificationOrchestrator
                     successCount++;
                     
                     _logger.LogDebug(
-                        "Notification sent to user {UserId} for {EntityType} {EntityId}",
-                        notification.UserId, entityType, entityId);
+                        "Notification sent to user {UserEmail} for {EntityType} {EntityId}",
+                        notification.UserEmail, entityType, entityId);
                 }
                 catch (Exception ex)
                 {
                     failureCount++;
                     _logger.LogError(ex,
-                        "Failed to send notification to user {UserId} for {EntityType} {EntityId}",
-                        notification.UserId, entityType, entityId);
+                        "Failed to send notification to user {UserEmail} for {EntityType} {EntityId}",
+                        notification.UserEmail, entityType, entityId);
                 }
             }
 

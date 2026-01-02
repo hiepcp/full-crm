@@ -57,7 +57,6 @@ public static class DependencyInjection
         // Notification repositories
         services.AddScoped<INotificationRepository, NotificationRepository>();
         services.AddScoped<INotificationRecipientRepository, NotificationRecipientRepository>();
-        services.AddScoped<ISalesTeamRepository, SalesTeamRepository>();
 
         // Notification push service (SignalR)
         services.AddScoped<CRMSys.Application.Interfaces.Services.INotificationPushService, 

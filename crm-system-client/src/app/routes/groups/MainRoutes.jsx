@@ -1,11 +1,13 @@
 import React, { lazy } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 
 // project import
 import Loadable from '@presentation/components/Loadable';
 import Dashboard from '@presentation/layouts/Dashboard';
 import RouteResolver from '@app/routes/RouteResolver';
 import RouteGuard from '@app/routes/guards/RouteGuard';
+
+const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
 
 // Detail Pages - lazy loaded
 const CustomerDetailPage = Loadable(lazy(() => import('@presentation/pages/customer/CustomerDetail')));
@@ -26,21 +28,17 @@ const GoalHierarchyView = Loadable(lazy(() => import('@presentation/pages/goals/
 const GoalAnalytics = Loadable(lazy(() => import('@presentation/pages/goals/GoalAnalytics')));
 const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/GoalDetailPage')));
 
-// Team Pages - lazy loaded (NEW - Phase 3: User Story 2)
-const TeamsManagementPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamsManagement')));
-
-const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
   path: '/',
   element: <Dashboard />,
-       children: [
-        {
-          path: 'auth/callback',
-          element: <EmailOAuthCallbackPage />
-        },
+  children: [
+    // OAuth callback should be accessible without authentication
+    {
+      path: 'auth/callback',
+      element: <EmailOAuthCallbackPage />
+    },
     {
       path: '/',
       element: <PrivateRoute />,
@@ -104,11 +102,6 @@ const MainRoutes = {
           // NEW: Goal Detail Page (Phase 8)
           path: 'goals/:id',
           element: <RouteGuard element={<GoalDetailPage />} menuId="goals" />
-        },
-        {
-          // NEW: Team Management (Phase 3: User Story 2) - Unified view with teams and members
-          path: 'teams',
-          element: <RouteGuard element={<TeamsManagementPage />} menuId="teams" />
         },
         {
           // RouteResolver sẽ tự động kiểm tra quyền và render đúng component theo menu

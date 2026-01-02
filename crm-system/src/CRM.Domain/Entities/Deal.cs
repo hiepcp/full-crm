@@ -13,7 +13,6 @@ namespace CRMSys.Domain.Entities
         public long? CustomerId { get; set; }
         public long? OwnerId { get; set; }
         public long? LeadId { get; set; }
-        public long? SalesTeamId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
 

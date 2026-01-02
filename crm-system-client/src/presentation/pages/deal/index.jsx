@@ -12,8 +12,6 @@ import dealsApi from '@infrastructure/api/dealsApi';
 import { createActivity } from '@presentation/data';
 
 const Deals = () => {
-  const [stageFilter, setStageFilter] = useState('all');
-  //const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
   const [selectedDeal, setSelectedDeal] = useState(null);
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false);
@@ -35,17 +33,18 @@ const Deals = () => {
     fetchData,
   } = useDealsData({ initialFilterColumn: 'company' });
 
-  // Initial + subsequent loads when filters/grid state change
-  useEffect(() => {
-    fetchData({ stage: stageFilter });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paginationModel, sortModel, filterModel, stageFilter]);
+  // // Initial + subsequent loads when filters/grid state change
+  // useEffect(() => {
+  //   fetchData({ stage: stageFilter });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [paginationModel, sortModel, filterModel, stageFilter]);
 
   // removed duplicate effect that also called fetchData
 
   // React to grid state changes (page, size, sort, filter)
   useEffect(() => {
-    fetchData({ stage: stageFilter });
+    if(activeTab !== 0) return;
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paginationModel, sortModel, filterModel]);
 
@@ -57,7 +56,7 @@ const Deals = () => {
       return;
     }
     if (activeTab === 0) {
-      fetchData({ stage: stageFilter });
+      fetchData();
     }
   }, [activeTab]);
 
@@ -98,17 +97,6 @@ const Deals = () => {
       customer: null // We'll load customers on demand or keep them null for now
     }));
   }, [deals]);
-
-  // Filter deals based on selected filters
-  const filteredDeals = useMemo(() => {
-    let deals = allDeals;
-
-    if (stageFilter !== 'all') {
-      deals = deals.filter(deal => deal.stage === stageFilter);
-    }
-
-    return deals;
-  }, [stageFilter, allDeals]);
 
   const handleCreateDeal = async (dealData) => {
     try {
@@ -154,7 +142,7 @@ const Deals = () => {
 
       // Step 4: Refresh the deals list (force reload + go to first page)
       setPaginationModel((prev) => ({ ...prev, page: 0 }));
-      fetchData({ stage: stageFilter, __force: true });
+      fetchData({ __force: true });
 
       // Step 5: Switch to list tab
       setActiveTab(0);

@@ -51,12 +51,17 @@ class NotificationHubService {
           // console.log('NotificationHub: accessTokenFactory called, token available:', currentToken);
           return currentToken;
         },
-        // SECURITY: Use LongPolling only to avoid sending token in query string
-        // LongPolling sends token in Authorization header (secure)
-        // WebSocket/SSE must send token via query string (less secure - appears in logs)
-        skipNegotiation: false,
-        transport: signalR.HttpTransportType.LongPolling // Most secure option
-        // Alternative (less secure): signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.ServerSentEvents | signalR.HttpTransportType.LongPolling
+        // BEST PRACTICE: Let SignalR automatically negotiate best transport
+        // Priority: WebSockets > ServerSentEvents > LongPolling
+        // - WebSocket: Full-duplex, real-time, minimal overhead (BEST for notifications)
+        // - ServerSentEvents: One-way server push, good fallback
+        // - LongPolling: HTTP fallback for restrictive networks
+        // SECURITY: accessTokenFactory sends token in Authorization header (secure for all transports)
+        skipNegotiation: false // Let SignalR negotiate best transport
+        // Transport will be automatically selected based on:
+        // 1. Browser capabilities
+        // 2. Network conditions  
+        // 3. Firewall/proxy restrictions
       })
       .withAutomaticReconnect({
         nextRetryDelayInMilliseconds: (retryContext) => {

@@ -74,12 +74,14 @@ const Leads = () => {
 
   // React to grid state changes (page, size, sort, filter) for Active Leads
   useEffect(() => {
+    if(activeTab !== 0) return;
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paginationModel, sortModel, filterModel]);
 
   // React to grid state changes (page, size, sort, filter) for Draft Leads
   useEffect(() => {
+    if(activeTab !== 1) return;
     fetchDraftData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draftPaginationModel, draftSortModel, draftFilterModel]);

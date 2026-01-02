@@ -68,11 +68,21 @@ const CustomerActivityList = ({
   selectedDeals = [],
   onDealsChange,
   // DataGrid mode
-  DataGridComponent
+  DataGridComponent,
+  // Disable customer filter (for use in customer detail page)
+  disableCustomerFilter = false,
+  hideAdvancedFiltersToggle = false
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [timeFilter, setTimeFilter] = useState('any');
+
+  // When disableCustomerFilter is true, use props directly (shared state with parent)
+  // When false, use local state for independent filtering
+  const effectiveSelectedLeads = selectedLeads;
+  const effectiveSelectedDeals = selectedDeals;
+  const effectiveOnLeadsChange = onLeadsChange;
+  const effectiveOnDealsChange = onDealsChange;
 
   // Get activity category
   const getActivityCategory = (activity) => {
@@ -203,6 +213,7 @@ const CustomerActivityList = ({
                   filterSelectedOptions
                   getOptionLabel={(option) => option.label || option.name}
                   isOptionEqualToValue={(option, value) => option.accountNum === value.accountNum}
+                  disabled={disableCustomerFilter}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -235,8 +246,8 @@ const CustomerActivityList = ({
                   <Autocomplete
                     multiple
                     options={leadsData}
-                    value={selectedLeads}
-                    onChange={(event, newValue) => onLeadsChange?.(newValue)}
+                    value={effectiveSelectedLeads}
+                    onChange={(event, newValue) => effectiveOnLeadsChange?.(newValue)}
                     loading={leadsLoading}
                     filterSelectedOptions
                     getOptionLabel={(option) => option.title || option.name || `Lead #${option.id}`}
@@ -276,8 +287,8 @@ const CustomerActivityList = ({
                   <Autocomplete
                     multiple
                     options={dealsData}
-                    value={selectedDeals}
-                    onChange={(event, newValue) => onDealsChange?.(newValue)}
+                    value={effectiveSelectedDeals}
+                    onChange={(event, newValue) => effectiveOnDealsChange?.(newValue)}
                     loading={dealsLoading}
                     filterSelectedOptions
                     getOptionLabel={(option) => option.title || option.name || `Deal #${option.id}`}

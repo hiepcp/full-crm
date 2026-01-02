@@ -32,7 +32,7 @@ import {
 import NumberField from '../NumberField';
 import { Close as CloseIcon, ExpandMore as ExpandMoreIcon, Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { ContactFormConfig } from './ContactFormConfig';
-import { CustomerFormConfig, CustomerFormConfigWrapper } from './CustomerFormConfig';
+import { CustomerFormConfig } from './CustomerFormConfig';
 
 /**
  * BaseForm - Presentational (Dumb) Component
@@ -69,7 +69,6 @@ const BaseForm = ({
   const [dialogState, setDialogState] = useState({}); // Track dialog states for different fields
   const [dialogKey, setDialogKey] = useState(0); // Force dialog re-render
   const formRef = useRef(null);
-  const customerConfig = CustomerFormConfigWrapper();
 
   const deriveFn = config?.deriveFormData;
 
@@ -1124,7 +1123,7 @@ const BaseForm = ({
           pb: 1
         }}>
           <Typography variant="subtitle1" component="div" sx={{ fontWeight: 600 }}>
-            {customerConfig.title}
+            {CustomerFormConfig.title}
           </Typography>
           <IconButton
             onClick={() => handleCloseDialog('customerDialog')}
@@ -1137,8 +1136,8 @@ const BaseForm = ({
 
         <DialogContent sx={{ pt: 1 }}>
           <BaseForm
-            config={customerConfig}
-            initialData={formData.new_customer_data || customerConfig.initialData}
+            config={CustomerFormConfig}
+            initialData={formData.new_customer_data || CustomerFormConfig.initialData}
             onSubmit={(customerData) => handleDialogSubmit('customerDialog', customerData)}
             onCancel={() => handleCloseDialog('customerDialog')}
             loading={loading}

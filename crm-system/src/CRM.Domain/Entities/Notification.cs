@@ -6,7 +6,7 @@ namespace CRMSys.Domain.Entities;
 public class Notification
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public long UserId { get; set; }
+    public string UserEmail { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;

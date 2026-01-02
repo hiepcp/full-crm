@@ -11,13 +11,13 @@ public interface INotificationService
     Task<NotificationDto> CreateAndSendAsync(NotificationDto notification);
     
     // Query notifications
-    Task<List<NotificationDto>> GetUserNotificationsAsync(long userId, int skip = 0, int take = 50);
-    Task<int> GetUnreadCountAsync(long userId);
+    Task<List<NotificationDto>> GetUserNotificationsAsync(string userEmail, int skip = 0, int take = 50);
+    Task<int> GetUnreadCountAsync(string userEmail);
     
     // Mark as read
-    Task MarkAsReadAsync(string notificationId, long userId);
-    Task MarkAllAsReadAsync(long userId);
+    Task MarkAsReadAsync(string notificationId, string userEmail);
+    Task MarkAllAsReadAsync(string userEmail);
     
     // Delete
-    Task<bool> DeleteAsync(string notificationId, long userId);
+    Task<bool> DeleteAsync(string notificationId, string userEmail);
 }

@@ -22,13 +22,13 @@ public class SignalRNotificationPushService : INotificationPushService
         _logger = logger;
     }
 
-    public async Task SendToUserAsync(long userId, NotificationDto notification)
+    public async Task SendToUserAsync(string userEmail, NotificationDto notification)
     {
-        var groupName = $"user_{userId}";
+        var groupName = $"user_{userEmail}";
         
         _logger.LogInformation(
-            "SignalRPush: Sending notification to group '{GroupName}' for UserId={UserId}. NotificationId={NotificationId}, Title={Title}",
-            groupName, userId, notification.Id, notification.Title);
+            "SignalRPush: Sending notification to group '{GroupName}' for UserEmail={UserEmail}. NotificationId={NotificationId}, Title={Title}",
+            groupName, userEmail, notification.Id, notification.Title);
 
         await _hubContext.Clients
             .Group(groupName)
@@ -39,9 +39,9 @@ public class SignalRNotificationPushService : INotificationPushService
             groupName);
     }
 
-    public async Task SendUnreadCountUpdateAsync(long userId, int unreadCount)
+    public async Task SendUnreadCountUpdateAsync(string userEmail, int unreadCount)
     {
-        var groupName = $"user_{userId}";
+        var groupName = $"user_{userEmail}";
         
         _logger.LogInformation(
             "SignalRPush: Sending unread count update to group '{GroupName}'. Count={Count}",

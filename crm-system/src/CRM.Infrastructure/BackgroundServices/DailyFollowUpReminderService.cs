@@ -63,19 +63,19 @@ public class DailyFollowUpReminderService : BackgroundService
     private TimeSpan CalculateDelayUntil8AM()
     {
         // TEST MODE: Run in 1 minute
-        return TimeSpan.FromMinutes(1);
+        //return TimeSpan.FromMinutes(1);
 
         // PRODUCTION MODE: (commented out for testing)
-        //var now = DateTime.Now;
-        //var next8AM = DateTime.Today.AddHours(8);
+        var now = DateTime.Now;
+        var next8AM = DateTime.Today.AddHours(8);
 
-        //// If it's already past 8 AM today, schedule for tomorrow
-        //if (now.Hour >= 8)
-        //{
-        //    next8AM = next8AM.AddDays(1);
-        //}
+        // If it's already past 8 AM today, schedule for tomorrow
+        if (now.Hour >= 8)
+        {
+            next8AM = next8AM.AddDays(1);
+        }
 
-        //return next8AM - now;
+        return next8AM - now;
     }
 
     private async Task ProcessDailyFollowUpRemindersAsync()
@@ -134,7 +134,7 @@ public class DailyFollowUpReminderService : BackgroundService
             foreach (var assignment in assignees)
             {
                 await SendFollowUpNotificationAsync(
-                    userId: assignment.UserId,
+                    userEmail: assignment.UserEmail,
                     entityType: "lead",
                     entityId: lead.Id,
                     entityName: leadName,
@@ -183,7 +183,7 @@ public class DailyFollowUpReminderService : BackgroundService
     */
 
     private async Task SendFollowUpNotificationAsync(
-        long userId,
+        string userEmail,
         string entityType,
         long entityId,
         string entityName,
@@ -197,7 +197,7 @@ public class DailyFollowUpReminderService : BackgroundService
 
             var notification = new NotificationDto
             {
-                UserId = userId,
+                UserEmail = userEmail,
                 Type = $"{entityType.ToUpper()}_FOLLOW_UP_DUE",
                 Title = $"{char.ToUpper(entityType[0])}{entityType.Substring(1)} follow-up due today",
                 Message = $"Follow-up is scheduled today for {entityType} '{entityName}'",
@@ -219,14 +219,14 @@ public class DailyFollowUpReminderService : BackgroundService
             await notificationService.CreateAndSendAsync(notification);
 
             _logger.LogDebug(
-                "Sent follow-up notification for {EntityType} {EntityId} to User {UserId}",
-                entityType, entityId, userId);
+                "Sent follow-up notification for {EntityType} {EntityId} to User {UserEmail}",
+                entityType, entityId, userEmail);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex,
-                "Failed to send follow-up notification for {EntityType} {EntityId} to User {UserId}",
-                entityType, entityId, userId);
+                "Failed to send follow-up notification for {EntityType} {EntityId} to User {UserEmail}",
+                entityType, entityId, userEmail);
         }
     }
 }

@@ -30,14 +30,14 @@ public class NotificationService : INotificationService
         try
         {
             _logger.LogInformation(
-                "CreateAndSendAsync: Starting to create notification for UserId={UserId}, Type={Type}",
-                dto.UserId, dto.Type);
+                "CreateAndSendAsync: Starting to create notification for UserEmail={UserEmail}, Type={Type}",
+                dto.UserEmail, dto.Type);
 
             // Create entity
             var notification = new Notification
             {
                 Id = Guid.NewGuid().ToString(),
-                UserId = dto.UserId,
+                UserEmail = dto.UserEmail,
                 Type = dto.Type,
                 Title = dto.Title,
                 Message = dto.Message,
@@ -57,79 +57,79 @@ public class NotificationService : INotificationService
             var saved = await _notificationRepo.CreateAsync(notification);
 
             _logger.LogInformation(
-                "CreateAndSendAsync: Notification saved. Now sending via SignalR to UserId={UserId}",
-                dto.UserId);
+                "CreateAndSendAsync: Notification saved. Now sending via SignalR to UserEmail={UserEmail}",
+                dto.UserEmail);
 
             // Send via SignalR
             var resultDto = MapToDto(saved);
-            await _pushService.SendToUserAsync(dto.UserId, resultDto);
+            await _pushService.SendToUserAsync(dto.UserEmail, resultDto);
 
-            _logger.LogInformation("Notification sent to user {UserId}: {Title}", dto.UserId, dto.Title);
+            _logger.LogInformation("Notification sent to user {UserEmail}: {Title}", dto.UserEmail, dto.Title);
 
             return resultDto;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to create and send notification for user {UserId}", dto.UserId);
+            _logger.LogError(ex, "Failed to create and send notification for user {UserEmail}", dto.UserEmail);
             throw;
         }
     }
 
-    public async Task<List<NotificationDto>> GetUserNotificationsAsync(long userId, int skip = 0, int take = 50)
+    public async Task<List<NotificationDto>> GetUserNotificationsAsync(string userEmail, int skip = 0, int take = 50)
     {
-        var notifications = await _notificationRepo.GetByUserIdAsync(userId, skip, take);
+        var notifications = await _notificationRepo.GetByUserEmailAsync(userEmail, skip, take);
         return notifications.Select(MapToDto).ToList();
     }
 
-    public async Task<int> GetUnreadCountAsync(long userId)
+    public async Task<int> GetUnreadCountAsync(string userEmail)
     {
-        return await _notificationRepo.GetUnreadCountAsync(userId);
+        return await _notificationRepo.GetUnreadCountAsync(userEmail);
     }
 
-    public async Task MarkAsReadAsync(string notificationId, long userId)
+    public async Task MarkAsReadAsync(string notificationId, string userEmail)
     {
-        var success = await _notificationRepo.MarkAsReadAsync(notificationId, userId);
+        var success = await _notificationRepo.MarkAsReadAsync(notificationId, userEmail);
         if (success)
         {
             // Notify client to update unread count
-            var unreadCount = await GetUnreadCountAsync(userId);
-            await _pushService.SendUnreadCountUpdateAsync(userId, unreadCount);
+            var unreadCount = await GetUnreadCountAsync(userEmail);
+            await _pushService.SendUnreadCountUpdateAsync(userEmail, unreadCount);
         }
     }
 
-    public async Task MarkAllAsReadAsync(long userId)
+    public async Task MarkAllAsReadAsync(string userEmail)
     {
-        await _notificationRepo.MarkAllAsReadAsync(userId);
+        await _notificationRepo.MarkAllAsReadAsync(userEmail);
         
         // Notify client
-        await _pushService.SendUnreadCountUpdateAsync(userId, 0);
+        await _pushService.SendUnreadCountUpdateAsync(userEmail, 0);
     }
 
-    public async Task<bool> DeleteAsync(string notificationId, long userId)
+    public async Task<bool> DeleteAsync(string notificationId, string userEmail)
     {
         try
         {
             var notification = await _notificationRepo.GetByIdAsync(notificationId);
             
             // Verify the notification belongs to the user
-            if (notification == null || notification.UserId != userId)
+            if (notification == null || notification.UserEmail != userEmail)
             {
-                _logger.LogWarning("Notification {Id} not found or doesn't belong to user {UserId}", 
-                    notificationId, userId);
+                _logger.LogWarning("Notification {Id} not found or doesn't belong to user {UserEmail}", 
+                    notificationId, userEmail);
                 return false;
             }
 
-            var success = await _notificationRepo.DeleteAsync(notificationId, userId);
+            var success = await _notificationRepo.DeleteAsync(notificationId, userEmail);
             
             if (success)
             {
-                _logger.LogInformation("Notification {Id} deleted by user {UserId}", notificationId, userId);
+                _logger.LogInformation("Notification {Id} deleted by user {UserEmail}", notificationId, userEmail);
                 
                 // Update unread count if it was unread
                 if (!notification.IsRead)
                 {
-                    var unreadCount = await GetUnreadCountAsync(userId);
-                    await _pushService.SendUnreadCountUpdateAsync(userId, unreadCount);
+                    var unreadCount = await GetUnreadCountAsync(userEmail);
+                    await _pushService.SendUnreadCountUpdateAsync(userEmail, unreadCount);
                 }
             }
             
@@ -147,7 +147,7 @@ public class NotificationService : INotificationService
         return new NotificationDto
         {
             Id = entity.Id,
-            UserId = entity.UserId,
+            UserEmail = entity.UserEmail,
             Type = entity.Type,
             Title = entity.Title,
             Message = entity.Message,

@@ -267,7 +267,6 @@ const CalendarMyPage = () => {
             {/* Calendar */}
             <Box sx={{ 
               '& .fc': { 
-                height: 'calc(100vh - 420px)',
                 minHeight: '600px'
               },
               '& .fc-button': {

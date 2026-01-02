@@ -103,7 +103,6 @@ export const createLead = async ({
         city: customer.city || null,
         country: customer.country || null,
         notes: customer.notes || null,
-        salesTeamId: customer.salesTeamId || null,
       };
       const createdCustomerResp = await customersApi.create(customerPayload);
       customerId = createdCustomerResp?.data?.data?.id || createdCustomerResp?.data?.data?.customerId || null;
@@ -820,7 +819,6 @@ export const createDeal = async ({
       customerId: customerId || null,
       contactId: contactId || null,
       ownerId: deal.ownerId ? parseInt(deal.ownerId, 10) : null,
-      salesTeamId: deal.salesTeamId ?? deal.teamId ?? null,
     };
 
     const response = await dealsApi.create(dealPayload);
@@ -853,7 +851,6 @@ export const updateDeal = async ({
         city: customer.city || null,
         country: customer.country || null,
         notes: customer.notes || null,
-        salesTeamId: customer.salesTeamId || null,
       };
       const createdCustomerResp = await customersApi.create(customerPayload);
       customerId = createdCustomerResp?.data?.data?.id || createdCustomerResp?.data?.data?.customerId || null;
@@ -890,7 +887,6 @@ export const updateDeal = async ({
       customerId: customerId || null,
       contactId: contactId || null,
       ownerId: deal.ownerId ? parseInt(deal.ownerId, 10) : null,
-      salesTeamId: deal.salesTeamId ?? deal.teamId ?? null,
     };
 
     const response = await dealsApi.update(dealId, dealPayload);

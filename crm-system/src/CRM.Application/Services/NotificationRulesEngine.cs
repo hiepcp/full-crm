@@ -127,13 +127,14 @@ public class NotificationRulesEngine : INotificationRulesEngine
     private List<NotificationRecipient> DeduplicateAndAggregate(
         List<AssigneeDto> assignees)
     {
-        var recipientDict = new Dictionary<long, NotificationRecipient>();
+        // Use Email as key for deduplication (Email is UNIQUE in crm_user table)
+        var recipientDict = new Dictionary<string, NotificationRecipient>();
 
         foreach (var assignee in assignees)
         {
-            if (!recipientDict.ContainsKey(assignee.UserId))
+            if (!recipientDict.ContainsKey(assignee.Email))
             {
-                recipientDict[assignee.UserId] = new NotificationRecipient
+                recipientDict[assignee.Email] = new NotificationRecipient
                 {
                     UserId = assignee.UserId,
                     Email = assignee.Email,
@@ -142,7 +143,7 @@ public class NotificationRulesEngine : INotificationRulesEngine
                 };
             }
 
-            var recipient = recipientDict[assignee.UserId];
+            var recipient = recipientDict[assignee.Email];
             
             // Add role: "activity_owner", "deal_collaborator", etc.
             recipient.Roles.Add($"{assignee.EntityType}_{assignee.Role}");

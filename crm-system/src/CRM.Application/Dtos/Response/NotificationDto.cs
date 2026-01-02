@@ -6,7 +6,7 @@ namespace CRMSys.Application.Dtos.Response;
 public class NotificationDto
 {
     public string Id { get; set; } = string.Empty;
-    public long UserId { get; set; }
+    public string UserEmail { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;

@@ -8,10 +8,10 @@ namespace CRMSys.Application.Interfaces.Repositories;
 public interface INotificationRepository
 {
     Task<Notification> CreateAsync(Notification notification);
-    Task<List<Notification>> GetByUserIdAsync(long userId, int skip, int take);
-    Task<int> GetUnreadCountAsync(long userId);
+    Task<List<Notification>> GetByUserEmailAsync(string userEmail, int skip, int take);
+    Task<int> GetUnreadCountAsync(string userEmail);
     Task<Notification?> GetByIdAsync(string id);
-    Task<bool> MarkAsReadAsync(string id, long userId);
-    Task<int> MarkAllAsReadAsync(long userId);
-    Task<bool> DeleteAsync(string id, long userId);
+    Task<bool> MarkAsReadAsync(string id, string userEmail);
+    Task<int> MarkAllAsReadAsync(string userEmail);
+    Task<bool> DeleteAsync(string id, string userEmail);
 }

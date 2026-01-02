@@ -359,7 +359,7 @@ namespace CRMSys.Application.Services
             var type = typeof(TEntity);
 
             // Always set UpdatedBy and UpdatedDate
-            var updatedDateProp = type.GetProperty("UpdatedDate");
+            var updatedDateProp = type.GetProperty("UpdatedOn");
             var updatedByProp = type.GetProperty("UpdatedBy");
 
             updatedDateProp?.SetValue(entity, now);
@@ -368,7 +368,7 @@ namespace CRMSys.Application.Services
             // Set CreatedBy and CreatedDate only on create
             if (isCreate)
             {
-                var createdDateProp = type.GetProperty("CreatedDate");
+                var createdDateProp = type.GetProperty("CreatedOn");
                 var createdByProp = type.GetProperty("CreatedBy");
 
                 createdDateProp?.SetValue(entity, now);

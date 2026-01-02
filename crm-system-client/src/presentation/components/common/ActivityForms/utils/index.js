@@ -4,4 +4,3 @@ export { constructActivityData } from './activityHelpers';
 
 
 
-

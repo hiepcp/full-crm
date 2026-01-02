@@ -141,15 +141,6 @@ export const ASSIGNEE_ROLES = [
   { value: 'follower', label: '👀 Follower' }
 ];
 
-/**
- * Danh sách vai trò của Team Member
- */
-export const TEAM_ROLES = [
-  { value: 'TeamLead', label: 'Team Lead' },
-  { value: 'Member', label: 'Member' },
-  { value: 'Observer', label: 'Observer' }
-];
-
 export const PAYMENT_TERMS = [
   { value: 'prepaid', label: 'Prepaid' },
   { value: 'cash_in_advance', label: 'Cash In Advance' },
