@@ -21,13 +21,15 @@ import {
   Close as CloseIcon,
   People as PeopleIcon,
   Description as DescriptionIcon,
-  CheckCircle as CheckCircleIcon
+  CheckCircle as CheckCircleIcon,
+  Email as EmailIcon
 } from '@mui/icons-material';
 
 const TeamForm = ({ open = false, onClose, onSave, team }) => {
   const [formData, setFormData] = useState({
     name: '',
-    description: ''
+    description: '',
+    groupMail: ''
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,10 +38,11 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
     if (team) {
       setFormData({
         name: team.name || '',
-        description: team.description || ''
+        description: team.description || '',
+        groupMail: team.groupMail || ''
       });
     } else {
-      setFormData({ name: '', description: '' });
+      setFormData({ name: '', description: '', groupMail: '' });
     }
     setErrors({});
   }, [team, open]);
@@ -50,9 +53,20 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
       newErrors.name = 'Team name is required';
     } else if (formData.name.length > 255) {
       newErrors.name = 'Team name must be 255 characters or less';
-    } else if (formData.description && formData.description.length > 2000) {
+    }
+
+    if (!formData.groupMail.trim()) {
+      newErrors.groupMail = 'Group email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.groupMail)) {
+      newErrors.groupMail = 'Please enter a valid email address';
+    } else if (formData.groupMail.length > 255) {
+      newErrors.groupMail = 'Group email must be 255 characters or less';
+    }
+
+    if (formData.description && formData.description.length > 2000) {
       newErrors.description = 'Description must be 2000 characters or less';
     }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -77,7 +91,8 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
     try {
       await onSave({
         name: formData.name.trim(),
-        description: formData.description.trim() || null
+        description: formData.description.trim() || null,
+        groupMail: formData.groupMail.trim()
       });
     } finally {
       setIsSubmitting(false);
@@ -85,7 +100,7 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
   };
 
   const handleCancel = () => {
-    setFormData({ name: '', description: '' });
+    setFormData({ name: '', description: '', groupMail: '' });
     setErrors({});
     onClose();
   };
@@ -163,6 +178,41 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
                     startAdornment: (
                       <InputAdornment position="start">
                         <PeopleIcon sx={{ color: 'action.active' }} />
+                      </InputAdornment>
+                    )
+                  }}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: 1.5
+                    }
+                  }}
+                />
+              </Grid>
+
+              {/* Group Email */}
+              <Grid size={12}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ mb: 1, fontWeight: 600, color: 'text.primary' }}
+                >
+                  Group Email <span style={{ color: 'error.main' }}>*</span>
+                </Typography>
+                <TextField
+                  required
+                  fullWidth
+                  type="email"
+                  placeholder="Enter team email (e.g., sales.team@company.com)"
+                  name="groupMail"
+                  value={formData.groupMail}
+                  onChange={handleChange}
+                  error={!!errors.groupMail}
+                  helperText={errors.groupMail || `${formData.groupMail.length}/255 characters`}
+                  disabled={isSubmitting}
+                  inputProps={{ maxLength: 255 }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailIcon sx={{ color: 'action.active' }} />
                       </InputAdornment>
                     )
                   }}
@@ -258,7 +308,7 @@ const TeamForm = ({ open = false, onClose, onSave, team }) => {
           onClick={handleSubmit}
           variant="contained"
           color="primary"
-          disabled={isSubmitting || !formData.name.trim()}
+          disabled={isSubmitting || !formData.name.trim() || !formData.groupMail.trim()}
           startIcon={isSubmitting ? null : <CheckCircleIcon />}
           sx={{ minWidth: 120 }}
         >

@@ -148,8 +148,8 @@ const TeamSection = ({ deal, team, loading, onRefresh }) => {
                           alt={member.user?.displayName || member.userEmail}
                           sx={{ width: 32, height: 32, bgcolor: 'primary.light' }}
                         >
-                          {member.user?.displayName
-                            ? member.user.displayName.charAt(0).toUpperCase()
+                          {member.userEmail
+                            ? member.userEmail.charAt(0).toUpperCase()
                             : member.userEmail.charAt(0).toUpperCase()}
                         </Avatar>
                         <Box sx={{ flex: 1 }}>

@@ -358,6 +358,7 @@ CREATE TABLE IF NOT EXISTS crm_sales_teams (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description TEXT,
+  GroupMail VARCHAR(255) NOT NULL,
   CreatedBy VARCHAR(255) NOT NULL,
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UpdatedBy VARCHAR(255),
@@ -365,6 +366,7 @@ CREATE TABLE IF NOT EXISTS crm_sales_teams (
 
   INDEX idx_teams_name (name),
   INDEX idx_teams_created_by (CreatedBy),
+  INDEX idx_teams_group_mail (GroupMail),
   UNIQUE KEY uk_teams_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

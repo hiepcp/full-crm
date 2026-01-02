@@ -4,5 +4,6 @@ namespace CRMSys.Application.Dtos.Teams
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public string? GroupMail { get; set; }
     }
 }

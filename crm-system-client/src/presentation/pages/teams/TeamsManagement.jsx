@@ -434,6 +434,17 @@ const TeamsManagement = () => {
       )
     },
     {
+      field: 'groupMail',
+      headerName: 'Group Email',
+      flex: 1,
+      minWidth: 200,
+      renderCell: (params) => (
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          {params.value}
+        </Typography>
+      )
+    },
+    {
       field: 'memberCount',
       headerName: 'Members',
       width: 100,
@@ -455,15 +466,6 @@ const TeamsManagement = () => {
       align: 'center',
       type: 'actions',
       getActions: (params) => [
-        <GridActionsCellItem
-          icon={<VisibilityIcon />}
-          label="View"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleViewTeam(params.row);
-          }}
-          showInMenu={false}
-        />,
         <GridActionsCellItem
           icon={<EditIcon />}
           label="Edit"

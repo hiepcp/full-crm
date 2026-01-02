@@ -70,7 +70,7 @@ namespace CRMSys.Infrastructure.Repositories
         {
             var allowedFields = new HashSet<string>
             {
-                "id", "name", "description", "createdon", "updatedon"
+                "id", "name", "description", "groupmail", "createdon", "updatedon"
             };
 
             if (allowedFields.Any(x => x.Equals(orderBy, StringComparison.OrdinalIgnoreCase)))
@@ -80,6 +80,7 @@ namespace CRMSys.Infrastructure.Repositories
                     "id" => "id",
                     "name" => "name",
                     "description" => "description",
+                    "groupmail" => "GroupMail",
                     "createdon" => "CreatedOn",
                     "updatedon" => "UpdatedOn",
                     _ => "CreatedOn"
@@ -204,8 +205,8 @@ namespace CRMSys.Infrastructure.Repositories
         public async Task<long> AddAsync(SalesTeam entity, CancellationToken ct = default)
         {
             const string sql = @"
-                INSERT INTO crm_sales_teams (name, description, CreatedBy, CreatedOn, UpdatedBy, UpdatedOn)
-                VALUES (@Name, @Description, @CreatedBy, @CreatedOn, @UpdatedBy, @UpdatedOn);
+                INSERT INTO crm_sales_teams (name, description, GroupMail, CreatedBy, CreatedOn, UpdatedBy, UpdatedOn)
+                VALUES (@Name, @Description, @GroupMail, @CreatedBy, @CreatedOn, @UpdatedBy, @UpdatedOn);
                 SELECT LAST_INSERT_ID()";
 
             return await Connection.ExecuteScalarAsync<long>(sql, entity, Transaction);
@@ -217,6 +218,7 @@ namespace CRMSys.Infrastructure.Repositories
                 UPDATE crm_sales_teams
                 SET Name = @Name,
                     Description = @Description,
+                    GroupMail = @GroupMail,
                     UpdatedBy = @UpdatedBy,
                     UpdatedOn = @UpdatedOn
                 WHERE Id = @Id";
@@ -226,6 +228,7 @@ namespace CRMSys.Infrastructure.Repositories
                 entity.Id,
                 entity.Name,
                 entity.Description,
+                entity.GroupMail,
                 entity.UpdatedBy,
                 entity.UpdatedOn
             }, Transaction);

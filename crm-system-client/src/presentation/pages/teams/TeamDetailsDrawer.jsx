@@ -245,12 +245,11 @@ const TeamDetailsDrawer = ({ open, onClose, teamId, onEdit, onDelete }) => {
                     >
                       <ListItemAvatar>
                         <Avatar sx={{ bgcolor: 'primary.main' }}>
-                          {member.userName?.charAt(0).toUpperCase() || 'U'}
+                          {member.user.email?.charAt(0).toUpperCase() || 'U'}
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
-                        primary={member.userName || 'Unknown'}
-                        secondary={member.userEmail || ''}
+                        primary={member.user.email || ''}
                         primaryTypographyProps={{
                           variant: 'body2',
                           fontWeight: 600

@@ -15,6 +15,11 @@ namespace CRMSys.Application.Validators
                 .MaximumLength(2000).WithMessage("Description must be 2000 characters or less")
                 .When(x => !string.IsNullOrEmpty(x.Description));
 
+            RuleFor(x => x.GroupMail)
+                .EmailAddress().WithMessage("Group email must be a valid email address")
+                .MaximumLength(255).WithMessage("Group email must not exceed 255 characters")
+                .When(x => !string.IsNullOrEmpty(x.GroupMail));
+
             RuleFor(x => x)
                 .Must(HaveAtLeastOneField)
                 .WithMessage("At least one field must be provided for update");
@@ -22,7 +27,9 @@ namespace CRMSys.Application.Validators
 
         private bool HaveAtLeastOneField(UpdateTeamRequest request)
         {
-            return !string.IsNullOrEmpty(request.Name) || !string.IsNullOrEmpty(request.Description);
+            return !string.IsNullOrEmpty(request.Name) ||
+                   !string.IsNullOrEmpty(request.Description) ||
+                   !string.IsNullOrEmpty(request.GroupMail);
         }
     }
 }

@@ -60,6 +60,7 @@ namespace CRMSys.Application.Services
             {
                 Name = request.Name,
                 Description = request.Description,
+                GroupMail = request.GroupMail,
                 CreatedBy = userEmail,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedBy = userEmail,
@@ -81,6 +82,7 @@ namespace CRMSys.Application.Services
 
             existing.Name = request.Name ?? existing.Name;
             existing.Description = request.Description ?? existing.Description;
+            existing.GroupMail = request.GroupMail ?? existing.GroupMail;
             existing.UpdatedBy = userEmail;
             existing.UpdatedOn = DateTime.UtcNow;
 
@@ -207,6 +209,7 @@ namespace CRMSys.Application.Services
                 Id = team.Id,
                 Name = team.Name,
                 Description = team.Description,
+                GroupMail = team.GroupMail,
                 CreatedOn = team.CreatedOn,
                 CreatedBy = new UserReference { Id = 1, Email = team.CreatedBy, DisplayName = team.CreatedBy.Split('@')[0] },
                 UpdatedOn = team.UpdatedOn,
