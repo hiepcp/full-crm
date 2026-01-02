@@ -56,9 +56,9 @@ Represents a user's membership in a sales team. Each membership includes a role 
 
 **Validation Rules**:
 - TeamId must reference an existing team
-- UserId must reference an existing active user
+- UserEmail must reference an existing active user
 - Role must be one of: TeamLead, Member, Observer
-- Unique constraint on (TeamId, UserId) - a user cannot be added to the same team twice
+- Unique constraint on (TeamId, UserEmail) - a user cannot be added to the same team twice
 - A user can belong to multiple different teams (FR-019)
 
 **Relationships**:
@@ -112,22 +112,22 @@ CREATE TABLE crm_sales_teams (
 ```sql
 CREATE TABLE crm_team_members (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  team_id BIGINT NOT NULL,
-  user_email VARCHAR(255) NOT NULL,
+  TeamId BIGINT NOT NULL,
+  UserEmail VARCHAR(255) NOT NULL,
   role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
-  joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  JoinedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UpdatedBy VARCHAR(255),
   UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
 
-  INDEX idx_members_team (team_id),
-  INDEX idx_members_user (user_email),
-  UNIQUE KEY uk_members_team_user (team_id, user_email),
+  INDEX idx_members_team (TeamId),
+  INDEX idx_members_user (UserEmail),
+  UNIQUE KEY uk_members_team_user (TeamId, UserEmail),
   CONSTRAINT fk_members_team
-    FOREIGN KEY (team_id) REFERENCES crm_sales_teams(id) ON DELETE CASCADE,
+    FOREIGN KEY (TeamId) REFERENCES crm_sales_teams(id) ON DELETE CASCADE,
   CONSTRAINT fk_members_user
-    FOREIGN KEY (user_email) REFERENCES crm_user(email) ON DELETE CASCADE
+    FOREIGN KEY (UserEmail) REFERENCES crm_user(email) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
@@ -140,23 +140,23 @@ CREATE TABLE crm_team_members (
 To support optional team assignment to deals and customers, add nullable foreign keys to existing tables.
 
 ```sql
--- Add sales_team_id to crm_deal table
+-- Add SalesTeamId to crm_deal table
 ALTER TABLE crm_deal
-ADD COLUMN sales_team_id BIGINT NULL,
-ADD INDEX idx_deals_team (sales_team_id),
+ADD COLUMN SalesTeamId BIGINT NULL,
+ADD INDEX idx_deals_team (SalesTeamId),
 ADD CONSTRAINT fk_deals_team
-FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
+FOREIGN KEY (SalesTeamId) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 
--- Add sales_team_id to crm_customer table
+-- Add SalesTeamId to crm_customer table
 ALTER TABLE crm_customer
-ADD COLUMN sales_team_id BIGINT NULL,
-ADD INDEX idx_customers_team (sales_team_id),
+ADD COLUMN SalesTeamId BIGINT NULL,
+ADD INDEX idx_customers_team (SalesTeamId),
 ADD CONSTRAINT fk_customers_team
-FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
+FOREIGN KEY (SalesTeamId) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 ```
 
 **Migration Notes**:
-- Existing deals and customers will have `sales_team_id = NULL` (backward compatible)
+- Existing deals and customers will have `SalesTeamId = NULL` (backward compatible)
 - ON DELETE SET NULL ensures team deletion doesn't break deal/customer records (FR-016)
 - Indexes added for performance when filtering by team
 
@@ -224,7 +224,7 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 | UserEmail required | Database NOT NULL constraint |
 | Role required | Database NOT NULL constraint, ENUM type |
 | Role valid values | Database ENUM ('TeamLead', 'Member', 'Observer') |
-| Unique team membership | Database UNIQUE (team_id, user_email) |
+| Unique team membership | Database UNIQUE (TeamId, UserEmail) |
 | User not in same team twice | Database UNIQUE constraint |
 | Team exists | Foreign key constraint (ON DELETE CASCADE) |
 | User exists | Foreign key constraint (ON DELETE CASCADE) |
@@ -241,7 +241,7 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 
 **Constraints**:
 - Cannot delete team if it has members (prevent cascade deletion, FR-005)
-- Team deletion sets sales_team_id to NULL on related deals/customers (FR-016)
+- Team deletion sets SalesTeamId to NULL on related deals/customers (FR-016)
 
 ### TeamMember Lifecycle
 
@@ -268,11 +268,11 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 | crm_sales_teams | uk_teams_name (name) | Unique name lookup, validation |
 | crm_sales_teams | idx_teams_CreatedBy (CreatedBy) | Query teams by creator |
 | crm_team_members | PRIMARY KEY (id) | Primary key |
-| crm_team_members | uk_members_team_user (team_id, user_email) | Unique membership lookup |
-| crm_team_members | idx_members_team (team_id) | Query members by team |
-| crm_team_members | idx_members_user (user_email) | Query teams by user |
-| crm_deal | idx_deals_team (sales_team_id) | Filter deals by team |
-| crm_customer | idx_customers_team (sales_team_id) | Filter customers by team |
+| crm_team_members | uk_members_team_user (TeamId, UserEmail) | Unique membership lookup |
+| crm_team_members | idx_members_team (TeamId) | Query members by team |
+| crm_team_members | idx_members_user (UserEmail) | Query teams by user |
+| crm_deal | idx_deals_team (SalesTeamId) | Filter deals by team |
+| crm_customer | idx_customers_team (SalesTeamId) | Filter customers by team |
 
 **Query Optimization**:
 - Team name lookup: Uses `uk_teams_name` for uniqueness validation
@@ -299,7 +299,7 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 ### Business Rules
 
 1. **Team Name Uniqueness** (FR-002): Enforced by database unique constraint
-2. **Duplicate Membership Prevention** (FR-008): Enforced by unique constraint on (team_id, user_email)
+2. **Duplicate Membership Prevention** (FR-008): Enforced by unique constraint on (TeamId, UserEmail)
 3. **Team Deletion Constraint** (FR-005): Application-level validation before deletion
 4. **Optional Team Assignment** (FR-011, FR-012): Nullable foreign keys on crm_deal/crm_customer
 
@@ -317,7 +317,7 @@ FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL;
 
 ### TeamMember Records
 
-| id | team_id | user_email | role | joined_at | CreatedBy | CreatedOn | UpdatedBy | UpdatedOn |
+| id | TeamId | UserEmail | role | JoinedAt | CreatedBy | CreatedOn | UpdatedBy | UpdatedOn |
 |-----|---------|------------|------|-----------|------------|------------|------------|------------|
 | 1 | 1 | alice@crm.local | TeamLead | 2025-01-15 09:05:00 | manager@crm.local | 2025-01-15 09:05:00 | NULL | NULL |
 | 2 | 1 | bob@crm.local | Member | 2025-01-16 10:20:00 | manager@crm.local | 2025-01-16 10:20:00 | NULL | NULL |

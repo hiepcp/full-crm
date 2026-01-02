@@ -9,7 +9,9 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
+  Paper,
+  Stack
 } from '@mui/material';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import {
@@ -151,67 +153,108 @@ const TeamList = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h5" component="h1">
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h5" component="h1" sx={{ fontWeight: 600 }}>
           Sales Teams
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleCreateTeam}
-          sx={{ mt: 2 }}
-        >
-          Create Team
-        </Button>
+        <Typography variant="body2" color="text.secondary">
+          Manage team structure, members, and roles
+        </Typography>
       </Box>
 
-      <Box sx={{ mb: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
-        <TextField
-          placeholder="Search teams..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleSearch();
+      <Paper
+        elevation={0}
+        sx={{
+          border: '1px solid',
+          borderColor: 'divider',
+          borderRadius: 2,
+          overflow: 'hidden'
+        }}
+      >
+        <Box
+          sx={{
+            p: 2,
+            borderBottom: '1px solid',
+            borderColor: 'divider',
+            bgcolor: 'background.default'
+          }}
+        >
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={2}
+            alignItems={{ xs: 'stretch', sm: 'center' }}
+            justifyContent="space-between"
+          >
+            <GridToolbarContainer>
+              <GridToolbar>
+                <TextField
+                  placeholder="Search teams..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
+                  sx={{ width: { xs: '100%', sm: 300 } }}
+                  size="small"
+                />
+                <Button
+                  variant="outlined"
+                  onClick={handleSearch}
+                  disabled={!search}
+                >
+                  Search
+                </Button>
+              </GridToolbar>
+            </GridToolbarContainer>
+
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={handleCreateTeam}
+              sx={{ alignSelf: { xs: 'flex-start', sm: 'center' } }}
+            >
+              Create Team
+            </Button>
+          </Stack>
+
+          {error && (
+            <Box sx={{ mt: 2 }}>
+              <Typography color="error">{error}</Typography>
+            </Box>
+          )}
+        </Box>
+
+        <DataGrid
+          rows={teams}
+          columns={columns}
+          loading={loading}
+          pageSize={pagination.pageSize}
+          rowsPerPageOptions={[25, 50, 100]}
+          page={pagination.page}
+          onPageChange={(newPage) => setPagination({ ...pagination, page: newPage })}
+          onPageSizeChange={(newPageSize) => setPagination({ ...pagination, pageSize: newPageSize })}
+          pagination
+          autoHeight
+          disableColumnSelector
+          sx={{
+            border: 'none',
+            '& .MuiDataGrid-columnHeaders': {
+              bgcolor: 'background.default',
+              borderBottom: '1px solid',
+              borderColor: 'divider',
+              fontWeight: 600
+            },
+            '& .MuiDataGrid-cell': {
+              fontSize: '0.9rem'
+            },
+            '& .MuiDataGrid-row:hover': {
+              bgcolor: 'action.hover'
             }
           }}
-          sx={{ width: 300 }}
-          size="small"
         />
-        <Button
-          variant="outlined"
-          onClick={handleSearch}
-          disabled={!search}
-        >
-          Search
-        </Button>
-      </Box>
-
-      {error && (
-        <Box sx={{ mb: 2 }}>
-          <Typography color="error">{error}</Typography>
-        </Box>
-      )}
-
-      <DataGrid
-        rows={teams}
-        columns={columns}
-        loading={loading}
-        paginationModel={paginationModel}
-        onPaginationModelChange={setPaginationModel}
-        pageSizeOptions={[25, 50, 100]}
-        rowCount={rowCount}
-        paginationMode="server"
-        pagination
-        autoHeight
-        disableColumnSelector
-        disableRowSelectionOnClick
-        sx={{
-          '& .MuiDataGrid-cell': {
-            fontSize: '0.9rem'
-          }
-        }}
-      />
+      </Paper>
 
       {deleteDialogOpen && teamToDelete && (
         <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>

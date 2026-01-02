@@ -221,8 +221,8 @@ crm_sales_teams
 crm_team_members
 
 # Existing tables to add foreign keys:
-crm_deal      (add sales_team_id)
-crm_customer  (add sales_team_id)
+crm_deal      (add SalesTeamId)
+crm_customer  (add SalesTeamId)
 ```
 
 **Structure Decision**: Web application structure with React frontend and .NET 8 backend APIs. Follows existing Clean Architecture pattern across three microservices:

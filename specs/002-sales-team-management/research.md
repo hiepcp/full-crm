@@ -27,7 +27,7 @@ The sales team management feature will allow users to create and manage sales te
 
 **Alternatives Considered**:
 1. **Single table with JSON array**: Would make querying team membership complex, violates normalization
-2. **Denormalized team_id on users**: Doesn't support multiple team membership
+2. **Denormalized TeamId on users**: Doesn't support multiple team membership
 3. **Role-based access control tables**: Over-engineering for current requirements
 
 **Database Schema**:
@@ -45,17 +45,17 @@ CREATE TABLE crm_sales_teams (
 
 CREATE TABLE crm_team_members (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  team_id BIGINT NOT NULL,
-  user_email VARCHAR(255) NOT NULL,
+  TeamId BIGINT NOT NULL,
+  UserEmail VARCHAR(255) NOT NULL,
   role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
-  joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  JoinedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UpdatedBy VARCHAR(255),
   UpdatedOn DATETIME ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (team_id) REFERENCES crm_sales_teams(id) ON DELETE CASCADE,
-  FOREIGN KEY (user_email) REFERENCES crm_user(email) ON DELETE CASCADE,
-  UNIQUE KEY uk_members_team_user (team_id, user_email)
+  FOREIGN KEY (TeamId) REFERENCES crm_sales_teams(id) ON DELETE CASCADE,
+  FOREIGN KEY (UserEmail) REFERENCES crm_user(email) ON DELETE CASCADE,
+  UNIQUE KEY uk_members_team_user (TeamId, UserEmail)
 );
 ```
 
@@ -157,7 +157,7 @@ DELETE /teams/{id}/members/{userId}  # Remove member from team
 
 **Question**: How should teams be linked to deals and customers?
 
-**Decision**: Add nullable `sales_team_id` foreign key to `deals` and `customers` tables.
+**Decision**: Add nullable `SalesTeamId` foreign key to `deals` and `customers` tables.
 
 **Rationale**:
 - Maintains backward compatibility (nullable field per spec assumption)
@@ -172,24 +172,24 @@ DELETE /teams/{id}/members/{userId}  # Remove member from team
 
 **Database Migration**:
 ```sql
--- Add team_id to crm_deal table
+-- Add SalesTeamId to crm_deal table
 ALTER TABLE crm_deal
-ADD COLUMN sales_team_id INT NULL,
+ADD COLUMN SalesTeamId INT NULL,
 ADD CONSTRAINT fk_deals_team
-FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL,
-ADD INDEX idx_deals_team (sales_team_id);
+FOREIGN KEY (SalesTeamId) REFERENCES crm_sales_teams(id) ON DELETE SET NULL,
+ADD INDEX idx_deals_team (SalesTeamId);
 
--- Add team_id to crm_customer table
+-- Add SalesTeamId to crm_customer table
 ALTER TABLE crm_customer
-ADD COLUMN sales_team_id INT NULL,
+ADD COLUMN SalesTeamId INT NULL,
 ADD CONSTRAINT fk_customers_team
-FOREIGN KEY (sales_team_id) REFERENCES crm_sales_teams(id) ON DELETE SET NULL,
-ADD INDEX idx_customers_team (sales_team_id);
+FOREIGN KEY (SalesTeamId) REFERENCES crm_sales_teams(id) ON DELETE SET NULL,
+ADD INDEX idx_customers_team (SalesTeamId);
 ```
 
 **Edge Case Handling**:
-- Team deletion sets team_id to NULL on linked deals/customers (FR-016)
-- Existing deals/customers have NULL team_id (backward compatible)
+- Team deletion sets SalesTeamId to NULL on linked deals/customers (FR-016)
+- Existing deals/customers have NULL SalesTeamId (backward compatible)
 - Team assignment is optional in forms (as per spec)
 
 ---
@@ -243,10 +243,10 @@ ADD INDEX idx_customers_team (sales_team_id);
 
 2. **Database Indexing**:
     - Index on `crm_sales_teams.name` for uniqueness checks and search
-    - Index on `crm_team_members.team_id` for fast member lookups
-    - Index on `crm_team_members.user_email` for "find user's teams" queries
-    - Index on `crm_deal.sales_team_id` for team-based deal filtering
-    - Index on `crm_customer.sales_team_id` for team-based customer filtering
+    - Index on `crm_team_members.TeamId` for fast member lookups
+    - Index on `crm_team_members.UserEmail` for "find user's teams" queries
+    - Index on `crm_deal.SalesTeamId` for team-based deal filtering
+    - Index on `crm_customer.SalesTeamId` for team-based customer filtering
 
 3. **Frontend Caching**:
    - Cache team list in `TeamContext` for dropdown selectors
@@ -284,10 +284,10 @@ ADD INDEX idx_customers_team (sales_team_id);
 
 ### Edge Cases (from spec)
 1. **Team with members deletion**: Prevent deletion, show error (FR-005, Edge Case 1)
-2. **Team deletion with linked deals/customers**: Set team_id to NULL (FR-016, Edge Case 2)
+2. **Team deletion with linked deals/customers**: Set SalesTeamId to NULL (FR-016, Edge Case 2)
 3. **User removed from system**: Retain team member record, mark user as inactive (Edge Case 3)
 4. **Invalid user assignment**: Show error that user doesn't exist (FR-020, Edge Case 4)
-5. **No team selected**: Allow save with NULL team_id (optional field) (Edge Case 5)
+5. **No team selected**: Allow save with NULL SalesTeamId (optional field) (Edge Case 5)
 
 ### Failure Handling
 - **Validation Errors**: Return 400 with error details (FluentValidation)
