@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import dayjs from 'dayjs';
 import {
   Box,
   Typography,
@@ -81,6 +82,8 @@ const LeadDetail = React.memo(() => {
 
   const [timeFilter, setTimeFilter] = useState('any');
   const [activityFilter, setActivityFilter] = useState('all');
+  const [customStart, setCustomStart] = useState(null);
+  const [customEnd, setCustomEnd] = useState(null);
 
   // Normalize activity to a category based on source/type
   const getActivityCategory = (activity) => {

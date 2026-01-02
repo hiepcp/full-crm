@@ -9,6 +9,7 @@ import {
   AttachMoney as MoneyIcon,
   Event as EventIcon,
   Notes as NotesIcon,
+  Group as TeamIcon,
 } from '@mui/icons-material';
 import { DEAL_STAGES, DEAL_SOURCES_CREATE } from '../../../../utils/constants';
 import React from 'react';
@@ -17,6 +18,7 @@ import { CustomerFormConfig } from './CustomerFormConfig';
 import { useCustomers, getCustomerOptions } from '@presentation/hooks/useCustomers';
 import { useContacts, getContactOptions } from '@presentation/hooks/useContacts';
 import { useUsers, getUserOptions } from '@presentation/hooks/useUsers';
+import { useTeams } from '@presentation/hooks/useTeams';
 
 /**
  * Deal Form Configuration
@@ -43,6 +45,7 @@ export const DealFormConfig = {
     customerId: '',
     contactId: '',
     ownerId: '',
+    teamId: '',
     customerSelection: 'create_new',
     contactSelection: '',
   },
@@ -173,19 +176,28 @@ export const DealFormConfig = {
             value: 'Closed Won'
           }
         },
-        {
-          name: 'note',
-          label: 'Additional Notes',
-          type: 'textarea',
-          required: false,
-          rows: 3,
-          placeholder: 'Add any additional notes about this deal...',
-          icon: NotesIcon,
-          grid: { xs: 12, sm: 12, md: 12, lg: 12 }
-        }
-      ]
-    }
-  ],
+         {
+           name: 'note',
+           label: 'Additional Notes',
+           type: 'textarea',
+           required: false,
+           rows: 3,
+           placeholder: 'Add any additional notes about this deal...',
+           icon: NotesIcon,
+           grid: { xs: 12, sm: 12, md: 12, lg: 12 }
+         },
+         {
+           name: 'teamId',
+           label: 'Team',
+           type: 'autocomplete',
+           required: false,
+           icon: TeamIcon,
+           helperText: 'Assign team to this deal (optional)',
+           grid: { xs: 12, sm: 12, md: 12, lg: 6 }
+         }
+       ]
+     }
+   ],
 
   // Action buttons configuration
   actions: {
@@ -237,6 +249,7 @@ const createCustomerFromDialogData = (customerData) => {
     city: customerData.city,
     country: customerData.country,
     notes: customerData.notes,
+    salesTeamId: customerData.teamId ? parseInt(customerData.teamId) : null,
     createdOn: new Date().toISOString(),
     updatedOn: new Date().toISOString(),
     createdBy: 'current_user@crm.com',
@@ -276,6 +289,7 @@ export const transformDealData = (formData) => {
     ownerId: formData.ownerId ? parseInt(formData.ownerId) : null,
     customerId: customer ? customer.id : (formData.customerSelection !== 'create_new' ? formData.customerSelection : null),
     contactId: contact ? contact.id : (formData.contactSelection !== 'create_new' ? formData.contactSelection : null),
+    salesTeamId: formData.teamId ? parseInt(formData.teamId) : null,
   };
 
   return {
@@ -293,6 +307,7 @@ export const DealFormConfigWrapper = () => {
   const { customers, loading: customersLoading, error: customersError } = useCustomers();
   const { contacts, loading: contactsLoading, error: contactsError } = useContacts();
   const { users, loading: usersLoading, error: usersError } = useUsers();
+  const { teams, loading: teamsLoading, error: teamsError } = useTeams();
 
   const config = {
     ...DealFormConfig,
@@ -411,6 +426,32 @@ export const DealFormConfigWrapper = () => {
               ];
 
               return allOptions;
+            }
+          };
+        }
+
+        if (field.name === 'teamId') {
+          return {
+            ...field,
+            options: (formData) => {
+              if (teamsLoading) {
+                return [
+                  { value: '', label: 'Loading teams...', disabled: true }
+                ];
+              }
+
+              if (teamsError) {
+                return [
+                  { value: '', label: 'Failed to load teams', disabled: true }
+                ];
+              }
+
+              const teamOptions = teams.map(team => ({
+                value: team.id.toString(),
+                label: team.name
+              }));
+
+              return teamOptions;
             }
           };
         }
