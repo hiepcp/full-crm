@@ -1,6 +1,8 @@
 using CRMSys.Api.Middleware;
 using CRMSys.Application;
 using CRMSys.Infrastructure;
+using CRMSys.Infrastructure.TypeHandlers;
+using CRMSys.Domain.Entities;
 using Dapper;
 using EvolveDb;
 using Microsoft.OpenApi.Models;
@@ -90,6 +92,9 @@ var cfg = builder.Configuration;
 // Set Dapper dialect (MySQL)
 SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
 DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+// Register custom type handlers
+SqlMapper.AddTypeHandler(new TeamRoleTypeHandler());
 
 // Add authentication from Shared.AuthN
 builder.Services.AddResJwtAuthentication(cfg);

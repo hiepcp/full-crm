@@ -27,9 +27,7 @@ const GoalAnalytics = Loadable(lazy(() => import('@presentation/pages/goals/Goal
 const GoalDetailPage = Loadable(lazy(() => import('@presentation/pages/goals/GoalDetailPage')));
 
 // Team Pages - lazy loaded (NEW - Phase 3: User Story 2)
-const TeamListPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamList')));
-const TeamFormPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamFormPage')));
-const TeamMembersPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamMembers')));
+const TeamsManagementPage = Loadable(lazy(() => import('@presentation/pages/teams/TeamsManagement')));
 
 const PrivateRoute = Loadable(lazy(() => import('@app/routes/guards/PrivateRoute')));
 
@@ -43,23 +41,6 @@ const MainRoutes = {
           path: 'auth/callback',
           element: <EmailOAuthCallbackPage />
         },
-         // NEW: Team Management (Phase 3: User Story 2)
-         {
-           path: '/teams',
-           element: <TeamListPage />
-         },
-         {
-           path: '/teams/new',
-           element: <TeamFormPage />
-         },
-          {
-            path: '/teams/:id/edit',
-            element: <TeamFormPage />
-          },
-          {
-            path: '/teams/:id/members',
-            element: <TeamMembersPage />
-          },
     {
       path: '/',
       element: <PrivateRoute />,
@@ -123,6 +104,11 @@ const MainRoutes = {
           // NEW: Goal Detail Page (Phase 8)
           path: 'goals/:id',
           element: <RouteGuard element={<GoalDetailPage />} menuId="goals" />
+        },
+        {
+          // NEW: Team Management (Phase 3: User Story 2) - Unified view with teams and members
+          path: 'teams',
+          element: <RouteGuard element={<TeamsManagementPage />} menuId="teams" />
         },
         {
           // RouteResolver sẽ tự động kiểm tra quyền và render đúng component theo menu

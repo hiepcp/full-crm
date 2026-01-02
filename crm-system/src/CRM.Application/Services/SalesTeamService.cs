@@ -21,7 +21,15 @@ namespace CRMSys.Application.Services
         {
             var result = await _repository.QueryAsync(query, ct);
 
-            var items = result.Items.Select(MapToTeamResponseWithoutCounts).ToList();
+            var items = new List<TeamResponse>();
+            foreach (var team in result.Items)
+            {
+                var memberCount = await _repository.GetMemberCountAsync(team.Id, ct);
+                var dealCount = await _repository.GetDealCountAsync(team.Id, ct);
+                var customerCount = await _repository.GetCustomerCountAsync(team.Id, ct);
+
+                items.Add(MapToTeamResponse(team, memberCount, dealCount, customerCount));
+            }
 
             return new PagedResult<TeamResponse>
             {
@@ -165,10 +173,14 @@ namespace CRMSys.Application.Services
                 return false;
             }
 
+            Log.Information("Before update: TeamId={TeamId}, Email={Email}, OldRole={OldRole}, NewRole={NewRole}",
+                teamId, userEmail, member.Role, request.Role);
+
             member.Role = request.Role;
             var success = await _repository.UpdateMemberRoleAsync(teamId, userEmail, member, ct);
 
-            Log.Information("Team member role updated: TeamId {TeamId}, UserEmail {UserEmail}, NewRole {Role}", teamId, userEmail, request.Role);
+            Log.Information("Team member role updated: TeamId {TeamId}, UserEmail {UserEmail}, NewRole {Role}, Success={Success}",
+                teamId, userEmail, request.Role, success);
 
             return success;
         }
@@ -202,23 +214,6 @@ namespace CRMSys.Application.Services
                 MemberCount = memberCount ?? 0,
                 DealCount = dealCount ?? 0,
                 CustomerCount = customerCount ?? 0
-            };
-        }
-
-        private TeamResponse MapToTeamResponseWithoutCounts(SalesTeam team)
-        {
-            return new TeamResponse
-            {
-                Id = team.Id,
-                Name = team.Name,
-                Description = team.Description,
-                CreatedOn = team.CreatedOn,
-                CreatedBy = new UserReference { Id = 1, Email = team.CreatedBy, DisplayName = team.CreatedBy.Split('@')[0] },
-                UpdatedOn = team.UpdatedOn,
-                UpdatedBy = !string.IsNullOrEmpty(team.UpdatedBy) ? new UserReference { Id = 1, Email = team.UpdatedBy, DisplayName = team.UpdatedBy.Split('@')[0] } : null,
-                MemberCount = 0,
-                DealCount = 0,
-                CustomerCount = 0
             };
         }
 

@@ -165,10 +165,14 @@ namespace CRMSys.Infrastructure.Repositories
         {
             const string sql = @"
                 UPDATE crm_team_members
-                SET role = @Role
+                SET Role = @Role, UpdatedOn = NOW()
                 WHERE TeamId = @TeamId AND UserEmail = @UserEmail";
 
-            var rowsAffected = await Connection.ExecuteAsync(sql, new { teamId = teamId, UserEmail = userEmail, Role = member.Role }, Transaction);
+            var rowsAffected = await Connection.ExecuteAsync(sql, new {
+                TeamId = teamId,
+                UserEmail = userEmail,
+                Role = member.Role.ToString() // Explicitly convert to string
+            }, Transaction);
             return rowsAffected > 0;
         }
 

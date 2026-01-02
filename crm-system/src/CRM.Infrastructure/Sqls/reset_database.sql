@@ -365,15 +365,14 @@ CREATE TABLE IF NOT EXISTS crm_sales_teams (
 
   INDEX idx_teams_name (name),
   INDEX idx_teams_created_by (CreatedBy),
-  UNIQUE KEY uk_teams_name (name),
-  -- Removed FK to crm_user (email) by request
+  UNIQUE KEY uk_teams_name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS crm_team_members (
   id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   TeamId BIGINT NOT NULL,
   UserEmail VARCHAR(255) NOT NULL,
-  role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
+  Role ENUM('TeamLead', 'Member', 'Observer') NOT NULL DEFAULT 'Member',
   JoinedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CreatedBy VARCHAR(255) NOT NULL DEFAULT 'system',
   CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
